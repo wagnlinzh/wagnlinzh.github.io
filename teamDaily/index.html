@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <!-- Title -->
+    
+    <title>
+        Team-Daily | wanglinzhizhi.me
+    </title>
+    
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+    
+    <!-- Meta & INfo -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="wanglinzhizhi">
+    <meta name="description" content="游走在上下文无关文法间">
+    <meta name="keywords" content="null">
+    
+    <!--iOS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+    
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="wanglinzhizhi.me">
+    
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://yichewx.com">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Team-Daily | wanglinzhizhi.me">
+    <meta property="og:description" content="游走在上下文无关文法间">
+    
+     <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+        
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+    
+    <!-- Import CSS -->
+    <link rel="stylesheet" href="/css/material.min.css">
+    <link rel="stylesheet" href="/css/style.min.css">
+    <!-- Config CSS -->
+
+
+<!-- Other Styles -->
+<style>
+	body, html{
+		font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+	}
+	
+    a{
+        color: #00838F
+    }
+    
+    .mdl-card__media,
+    #search-label,
+    #search-form-label:after,
+    #scheme-Paradox .hot_tags-count,
+    #scheme-Paradox .sidebar_archives-count,
+    #scheme-Paradox .sidebar-colored .sidebar-header,
+    #scheme-Paradox .sidebar-colored .sidebar-badge{
+        background-color: #0097A7 !important
+    }
+    
+	/* Sidebar User Drop Down Menu Text Color */
+	#scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+    #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus{
+        color: #0097A7 !important
+    }
+    
+    #post_entry-right-info,
+    .sidebar-colored .sidebar-nav li:hover > a,
+    .sidebar-colored .sidebar-nav li:hover > a i,
+    .sidebar-colored .sidebar-nav li > a:hover,
+    .sidebar-colored .sidebar-nav li > a:hover i,
+    .sidebar-colored .sidebar-nav li > a:focus i,
+    .sidebar-colored .sidebar-nav > .open > a,
+    .sidebar-colored .sidebar-nav > .open > a:hover,
+    .sidebar-colored .sidebar-nav > .open > a:focus,
+    #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a{
+        color: #0097A7 !important
+    }
+    
+    .toTop{
+        background: #757575 !important
+    }
+		
+	.material-layout .material-post>.material-nav,
+	.material-layout .material-index>.material-nav,
+	.material-nav a{
+		color: #757575;
+	}
+		
+	#scheme-Paradox .MD-burger-layer {
+		background-color: #757575;
+	}
+
+	#scheme-Paradox #post-toc-trigger-btn{
+		color: #757575;
+	}
+	
+	.post-toc a:hover{
+		color: #00838F;
+		text-decoration: underline;
+	}
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+        body{
+            background-color: #F5F5F5
+        }
+		
+		/* blog_info bottom background */
+        #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+            background-color: #fff;
+        }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+        .fade {
+            transition: all 800ms linear;
+            -webkit-transform: translate3d(0,0,0);
+            -moz-transform: translate3d(0,0,0);
+            -ms-transform: translate3d(0,0,0);
+            -o-transform: translate3d(0,0,0);
+            transform: translate3d(0,0,0);
+            opacity: 1;
+        }
+
+        .fade.out{
+            opacity: 0;
+        }
+    </style>
+
+	<script src="/js/jquery.min.js"></script>
+	
+	<link rel="stylesheet" href="/css/highlight/atom-one-dark.css">
+	
+	<!-- UC Browser Compatible-->
+	<script>
+		var agent = navigator.userAgent.toLowerCase();
+		if(agent.indexOf('ucbrowser')>0) {
+			document.write('<link rel="stylesheet" href="/css/uc.css">');
+		   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+		}
+	</script>
+    
+    <!-- Custom Head -->
+    
+</head>
+	
+	
+
+    <body id="scheme-Paradox">
+
+		
+        <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+				
+			
+			
+            <!-- Main Container -->
+            <main class="material-layout__content" id="main">
+				
+                <!-- Top Anchor -->
+                <div id="top"></div>
+				
+				
+                <!-- Hamburger Button -->
+                <button class="MD-burger-icon sidebar-toggle">
+                    <span class="MD-burger-layer"></span>
+                </button>
+				
+				
+                <!-- Post TOC -->
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+		
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+	<!-- Paradox Post Header -->
+	
+		
+			<!-- Random Thumbnail -->
+			<div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+				<script>
+    
+    var randomNum;
+    randomNum = Math.floor(Math.random() * 5 + 1);
+    
+    $(".post_thumbnail-random").css('background-image', 'url(' + '/img/random/' + randomNum + '.png' + ')');
+    
+</script>
+
+		
+	
+        <p class="article-headline-p">
+            Team-Daily
+        </p>
+    </div>
+
+	
+
+				
+				
+					<!-- Paradox Post Info -->
+					<div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+    
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>wanglinzhizhi</strong>
+        <span>Nov 30, 2016</span>
+    </div>
+    
+    <div class="section-spacer"></div>
+	
+    <!-- Favorite -->
+<!--
+    <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+        <i class="material-icons" role="presentation">favorite</i>
+        <span class="visuallyhidden">favorites</span>
+    </button>
+-->
+    
+    <!-- Tags (bookmark) -->
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        
+    </ul>
+    
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+    
+    
+    
+    
+    <!-- Share Twitter -->
+    <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Team-Daily&url=http://yichewx.com//teamDaily/index.html&via=wanglinzhizhi" target="_blank">
+        <li class="mdl-menu__item">
+            分享到 Twitter
+        </li>
+    </a>
+    
+    <!-- Share Google+ -->
+    <a class="post_share-link" href="https://plus.google.com/share?url=http://yichewx.com//teamDaily/index.html" target="_blank">
+        <li class="mdl-menu__item">
+            分享到 Google+
+        </li>
+    </a>
+    
+    <!-- Share Weibo -->
+    <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Team-Daily&url=http://yichewx.com//teamDaily/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <li class="mdl-menu__item">
+            分享到微博
+        </li>
+    </a>
+</ul>
+</div>
+				
+
+                <!-- Post Content -->
+                <div id="post-content" class="markdown-Github mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+	
+		<p><img src="./img/36.jpg" alt=""></p>
+<p><img src="./img/35.jpg" alt=""></p>
+<p><img src="./img/34.jpg" alt=""></p>
+<p><img src="./img/37.jpg" alt=""></p>
+<p><img src="./img/38.jpg" alt=""></p>
+<p><img src="./img/39.jpg" alt=""></p>
+<p><img src="./img/40.jpg" alt=""></p>
+<p><img src="./img/41.jpg" alt=""></p>
+<p><img src="./img/42.jpg" alt=""></p>
+<p><img src="./img/43.jpg" alt=""></p>
+<p><img src="./img/44.jpg" alt=""></p>
+<p><img src="./img/45.jpg" alt=""></p>
+<p><img src="./img/46.jpg" alt=""></p>
+<p><img src="./img/47.jpg" alt=""></p>
+<p><img src="./img/48.jpg" alt=""></p>
+<p><img src="./img/70.jpg" alt=""></p>
+<p><img src="./img/71.jpg" alt=""></p>
+<p><img src="./img/72.jpg" alt=""></p>
+<p><img src="./img/73.jpg" alt=""></p>
+<p><img src="./img/74.jpg" alt=""></p>
+<p><img src="./img/75.jpg" alt=""></p>
+<p><img src="./img/76.jpg" alt=""></p>
+<p><img src="./img/77.jpg" alt=""></p>
+<p><img src="./img/84.jpg" alt=""></p>
+<p><img src="./img/85.jpg" alt=""></p>
+<p><img src="./img/86.jpg" alt=""></p>
+<p><img src="./img/87.jpg" alt=""></p>
+<p><img src="./img/88.jpg" alt=""></p>
+<p><img src="./img/1.jpg" alt=""></p>
+<p><img src="./img/2.jpg" alt=""></p>
+<p><img src="./img/3.jpg" alt=""></p>
+<p><img src="./img/4.jpg" alt=""></p>
+<p><img src="./img/5.jpg" alt=""></p>
+<p><img src="./img/6.jpg" alt=""></p>
+<p><img src="./img/7.jpg" alt=""></p>
+<p><img src="./img/8.jpg" alt=""></p>
+<p><img src="./img/9.jpg" alt=""></p>
+<p><img src="./img/10.jpg" alt=""></p>
+<p><img src="./img/11.jpg" alt=""></p>
+<p><img src="./img/12.jpg" alt=""></p>
+<p><img src="./img/13.jpg" alt=""></p>
+<p><img src="./img/14.jpg" alt=""></p>
+<p><img src="./img/15.jpg" alt=""></p>
+<p><img src="./img/16.jpg" alt=""></p>
+<p><img src="./img/17.jpg" alt=""></p>
+<p><img src="./img/18.jpg" alt=""></p>
+<p><img src="./img/19.jpg" alt=""></p>
+<p><img src="./img/20.jpg" alt=""></p>
+<p><img src="./img/21.jpg" alt=""></p>
+<p><img src="./img/22.jpg" alt=""></p>
+<p><img src="./img/23.jpg" alt=""></p>
+<p><img src="./img/24.jpg" alt=""></p>
+<p><img src="./img/25.jpg" alt=""></p>
+<p><img src="./img/26.jpg" alt=""></p>
+<p><img src="./img/27.jpg" alt=""></p>
+<p><img src="./img/28.jpg" alt=""></p>
+<p><img src="./img/29.jpg" alt=""></p>
+<p><img src="./img/30.jpg" alt=""></p>
+<p><img src="./img/31.jpg" alt=""></p>
+<p><img src="./img/32.jpg" alt=""></p>
+<p><img src="./img/33.jpg" alt=""></p>
+<p><img src="./img/49.jpg" alt=""></p>
+<p><img src="./img/50.jpg" alt=""></p>
+<p><img src="./img/51.jpg" alt=""></p>
+<p><img src="./img/52.jpg" alt=""></p>
+<p><img src="./img/53.jpg" alt=""></p>
+<p><img src="./img/54.jpg" alt=""></p>
+<p><img src="./img/55.jpg" alt=""></p>
+<p><img src="./img/56.jpg" alt=""></p>
+<p><img src="./img/57.jpg" alt=""></p>
+<p><img src="./img/58.jpg" alt=""></p>
+<p><img src="./img/59.jpg" alt=""></p>
+<p><img src="./img/60.jpg" alt=""></p>
+<p><img src="./img/61.jpg" alt=""></p>
+<p><img src="./img/62.jpg" alt=""></p>
+<p><img src="./img/63.jpg" alt=""></p>
+<p><img src="./img/64.jpg" alt=""></p>
+<p><img src="./img/65.jpg" alt=""></p>
+<p><img src="./img/66.jpg" alt=""></p>
+<p><img src="./img/67.jpg" alt=""></p>
+<p><img src="./img/68.jpg" alt=""></p>
+<p><img src="./img/69.jpg" alt=""></p>
+<p><img src="./img/78.jpg" alt=""></p>
+<p><img src="./img/79.jpg" alt=""></p>
+<p><img src="./img/80.jpg" alt=""></p>
+<p><img src="./img/81.jpg" alt=""></p>
+<p><img src="./img/82.jpg" alt=""></p>
+<p><img src="./img/83.jpg" alt=""></p>
+<p><img src="./img/89.jpg" alt=""></p>
+<p><img src="./img/90.jpg" alt=""></p>
+<p><img src="./img/91.jpg" alt=""></p>
+<p><img src="./img/92.jpg" alt=""></p>
+<h2 id="Part2"><a href="#Part2" class="headerlink" title="Part2"></a>Part2</h2><p><img src="./img/100.jpg" alt=""></p>
+<p><img src="./img/101.jpg" alt=""></p>
+<p><img src="./img/102.jpg" alt=""></p>
+<p><img src="./img/103.jpg" alt=""></p>
+<p><img src="./img/104.jpg" alt=""></p>
+<p><img src="./img/105.jpg" alt=""></p>
+<p><img src="./img/106.jpg" alt=""></p>
+<p><img src="./img/107.jpg" alt=""></p>
+<p><img src="./img/108.jpg" alt=""></p>
+<p><img src="./img/109.jpg" alt=""></p>
+<p><img src="./img/110.jpg" alt=""></p>
+<p><img src="./img/111.jpg" alt=""></p>
+<p><img src="./img/112.jpg" alt=""></p>
+<p><img src="./img/113.jpg" alt=""></p>
+<p><img src="./img/114.jpg" alt=""></p>
+<p><img src="./img/115.jpg" alt=""></p>
+<p><img src="./img/116.jpg" alt=""></p>
+<p><img src="./img/117.jpg" alt=""></p>
+<p><img src="./img/118.jpg" alt=""></p>
+<p><img src="./img/119.jpg" alt=""></p>
+<p><img src="./img/120.jpg" alt=""></p>
+<p><img src="./img/121.jpg" alt=""></p>
+<p><img src="./img/122.jpg" alt=""></p>
+<p><img src="./img/123.jpg" alt=""></p>
+<p><img src="./img/124.jpg" alt=""></p>
+<p><img src="./img/125.jpg" alt=""></p>
+<p><img src="./img/126.jpg" alt=""></p>
+<p><img src="./img/127.jpg" alt=""></p>
+<p><img src="./img/128.jpg" alt=""></p>
+<p><img src="./img/129.jpg" alt=""></p>
+<p><img src="./img/130.jpg" alt=""></p>
+<p><img src="./img/131.jpg" alt=""></p>
+<p><img src="./img/132.jpg" alt=""></p>
+<p><img src="./img/133.jpg" alt=""></p>
+<p><img src="./img/134.jpg" alt=""></p>
+<p><img src="./img/135.jpg" alt=""></p>
+<p><img src="./img/136.jpg" alt=""></p>
+<p><img src="./img/137.jpg" alt=""></p>
+<p><img src="./img/138.jpg" alt=""></p>
+<p><img src="./img/139.jpg" alt=""></p>
+<h2 id="part3"><a href="#part3" class="headerlink" title="part3"></a>part3</h2><p><img src="./img/200.jpg" alt=""></p>
+<p><img src="./img/201.jpg" alt=""></p>
+<p><img src="./img/202.jpg" alt=""></p>
+<p><img src="./img/203.jpg" alt=""></p>
+<p><img src="./img/204.jpg" alt=""></p>
+<p><img src="./img/205.jpg" alt=""></p>
+<p><img src="./img/206.jpg" alt=""></p>
+<p><img src="./img/207.jpg" alt=""></p>
+<p><img src="./img/208.jpg" alt=""></p>
+<p><img src="./img/209.jpg" alt=""></p>
+<p><img src="./img/210.jpg" alt=""></p>
+<p><img src="./img/211.jpg" alt=""></p>
+<p><img src="./img/212.jpg" alt=""></p>
+<p><img src="./img/213.jpg" alt=""></p>
+<p><img src="./img/214.jpg" alt=""></p>
+<p><img src="./img/215.jpg" alt=""></p>
+<p><img src="./img/216.jpg" alt=""></p>
+<p><img src="./img/217.jpg" alt=""></p>
+<p><img src="./img/218.jpg" alt=""></p>
+<p><img src="./img/219.jpg" alt=""></p>
+<p><img src="./img/220.jpg" alt=""></p>
+<p><img src="./img/221.jpg" alt=""></p>
+<p><img src="./img/222.jpg" alt=""></p>
+<p><img src="./img/223.jpg" alt=""></p>
+<p><img src="./img/224.jpg" alt=""></p>
+<p><img src="./img/225.jpg" alt=""></p>
+<p><img src="./img/226.jpg" alt=""></p>
+<p><img src="./img/227.jpg" alt=""></p>
+<p><img src="./img/228.jpg" alt=""></p>
+<p><img src="./img/229.jpg" alt=""></p>
+<p><img src="./img/230.jpg" alt=""></p>
+<p><img src="./img/231.jpg" alt=""></p>
+<p><img src="./img/232.jpg" alt=""></p>
+<p><img src="./img/233.jpg" alt=""></p>
+<p><img src="./img/234.jpg" alt=""></p>
+<p><img src="./img/235.jpg" alt=""></p>
+<p><img src="./img/236.jpg" alt=""></p>
+<p><img src="./img/237.jpg" alt=""></p>
+<p><img src="./img/238.jpg" alt=""></p>
+<p><img src="./img/239.jpg" alt=""></p>
+<p><img src="./img/240.jpg" alt=""></p>
+<p><img src="./img/241.jpg" alt=""></p>
+<p><img src="./img/242.jpg" alt=""></p>
+<p><img src="./img/243.jpg" alt=""></p>
+<p><img src="./img/244.jpg" alt=""></p>
+<p><img src="./img/245.jpg" alt=""></p>
+<p><img src="./img/246.jpg" alt=""></p>
+<p><img src="./img/247.jpg" alt=""></p>
+<p><img src="./img/248.jpg" alt=""></p>
+<p><img src="./img/249.jpg" alt=""></p>
+<p><img src="./img/250.jpg" alt=""></p>
+<p><img src="./img/251.jpg" alt=""></p>
+<p><img src="./img/252.jpg" alt=""></p>
+
+	
+	
+	
+	
+</div>
+				
+				
+
+                <!-- Post Comments -->
+                
+                    
+    <!-- 使用多说评论 -->
+    <link rel="stylesheet" href="/css/duoshuo.min.css">
+<style>
+    #ds-thread #ds-reset .ds-post-button{
+        background-color: #0097A7 !important;
+    }
+    #ds-wrapper #ds-reset .ds-icons-32{
+        background-color: #0097A7 !important;
+    }
+    #ds-reset .ds-highlight {
+        color: #0097A7 !important;
+    }
+</style>
+<div id="comments">
+    <!-- 多说评论框 start -->
+        <div class="ds-thread" 
+            data-thread-key="teamDaily/index.html" 
+            data-url="http://yichewx.com/teamDaily/index.html"
+            data-title="Team-Daily"></div>
+    <!-- 多说评论框 end -->
+</div>
+
+
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    
+    <!-- Prev Nav -->
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+</nav>
+        </div>
+    </div>
+
+				
+				
+					<!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay "></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored  sidebar-fixed-left" role="navigation">
+	<div id="sidebar-main">
+	    <!-- Sidebar Header -->
+		<div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+    <i class="material-icons">clear_all</i>
+    <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="wanglinzhizhi's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        wanglinzhizhi@hotmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+		<!-- Sidebar Navigation  -->
+		<ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+			
+                <li>
+                    <a href="#" target="_blank" title="Email Me">
+						<i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    <li id="sidebar-first-li">
+        <a href="/" target="_self">
+            <i class="material-icons sidebar-material-icons">home</i>
+             主页
+        </a>
+    </li>
+
+    <!-- I'm Feeling Lucky -->
+<!--
+    <li class="dropdown">
+        <a href="" target="_self">
+            <i class="material-icons sidebar-material-icons">explore</i>
+             sidebar.imlucky
+        </a>
+    </li>
+-->
+
+	
+    <!-- Archives  -->
+    <li class="dropdown">
+        <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+            <i class="material-icons sidebar-material-icons">inbox</i>
+             归档
+            <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+            <a class="sidebar_archives-link" href="/archives/2016/12/">December 2016<span class="sidebar_archives-count">64</span></a>
+        </ul>
+    </li>
+
+    <!-- Divider -->
+    <li class="divider"></li>
+
+
+    <!-- Pages  -->
+	
+		<li>
+			<a href="/tags" title="Tags">
+				Tags
+			</a>
+		</li>
+	
+		<li>
+			<a href="/gallery" title="Gallery">
+				Gallery
+			</a>
+		</li>
+	
+		<li>
+			<a href="/about" title="About">
+				About
+			</a>
+		</li>
+	
+
+    <!-- Article Numebr  -->
+    <li>
+        <a href="/archives">
+             文章总数
+             <span class="sidebar-badge">64</span>
+        </a>
+    </li>
+</ul>
+
+		<!-- Sidebar Divider -->
+		<div class="sidebar-divider"></div>
+
+		<!-- Sidebar Footer -->
+		<!-- 
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持。 :) 
+-->
+
+<!-- Theme Material -->
+<a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
+	<div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+		主题 - Material
+		<span class="sidebar-badge badge-circle">i</span>
+	</div>
+</a>
+
+<!-- Help & Support -->
+<!--
+<a href="mailto:hiviosey@gmail.com" class="sidebar-footer-text-a">
+    <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+		sidebar.help
+		<span class="mdl-button__ripple-container">
+			<span class="mdl-ripple"></span>
+		</span>
+	</div>
+</a>
+-->
+
+<!-- Feedback -->
+<!--
+<a href="https://github.com/viosey/hexo-theme-material/issues" target="_blank" class="sidebar-footer-text-a">
+    <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+         sidebar.feedback
+                    <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></div>
+</a>
+-->
+
+<!-- Abount Theme -->
+<!--
+<a href="https://blog.viosey.com/index.php/Material.html" target="_blank" class="sidebar-footer-text-a">
+    <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+         sidebar.about_theme
+        <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></div>
+</a>-->
+
+	</div>
+    
+    <!-- Sidebar Sponsor -->
+    
+
+
+</aside>
+
+				
+				
+				
+				
+				<!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+	
+	
+		<!-- Paradox Footer Left Section -->
+		<div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+    
+    
+    <!-- Facebook -->
+    
+    
+    
+    <!-- Google + -->
+    
+    
+    
+    <!-- Weibo -->
+    
+    
+    
+    <!-- Instagram -->
+    
+    
+    
+    <!-- Tumblr -->
+    
+    
+    
+    <!-- Github -->
+    
+    <a href="https://github.com/wagnlinzh" target="view_window"><button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-github.png);">
+        <span class="visuallyhidden">Github</span>
+    </button></a>
+    
+</div>
+
+
+		<!--Copyright-->
+		<div id="copyright">Copyright&nbsp;©&nbsp;<script type="text/javascript">var fd = new Date();document.write(fd.getFullYear());</script>&nbsp;wanglinzhizhi.me</div>
+
+		<!-- Paradox Footer Right Section -->
+
+		<!-- 
+		I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+		It will not impact the appearance and can give developers a lot of support :)
+
+		很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+		它不会影响美观并可以给开发者很大的支持。 :) 
+		-->
+
+		<div class="mdl-mini-footer--right-section">
+			<div>
+				<div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+				<div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+			</div>
+		</div>
+	
+    
+</footer>
+                
+				<!-- Import File -->
+<script src="/js/highlight.min.js"></script>
+<script src="/js/js.min.js"></script>
+<script src="/js/nprogress.js"></script>
+
+<script type="text/javascript">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    
+    $('#nprogress .bar').css({
+        'background': '#FF4081'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #FF4081, 0 0 15px #FF4081'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#FF4081',
+        'border-left-color': '#FF4081'
+    });
+    
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+	<script src="/js/smoothscroll.js"></script>
+
+
+
+
+
+
+
+    <!-- 多说公共 js 代码 start -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"null"};
+        (function() {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';ds.async = true;
+            ds.src = 'https://static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0] 
+             || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+    </script>
+    <!-- 多说公共 js 代码 end -->
+
+
+
+
+<!-- Swiftye -->
+
+
+<!-- Local Search-->
+
+	<script>
+	var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var str='<ul class=\"search-result-list\">';                
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length <= 0) {
+                    return;
+                }
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        str += "<li><a href='"+ data_url +"' class='search-result-title' target='_blank'>"+ data_title;
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out characters
+                            var start = first_occur - 6;
+                            var end = first_occur + 6;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 10;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substr(start, end); 
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<em class=\"search-keyword\">"+keyword+"</em>");
+                            })
+                            str += "<p class=\"search-result\">" + match_content +"...</p>" +"</a>";
+                        }
+                    }
+                })
+                $resultContent.innerHTML = str;
+            })
+        }
+    })
+}
+</script>
+
+	<script>
+        var inputArea = document.querySelector("#search");
+        var getSearchFile = function(){
+            var path = "search.xml";
+            searchFunc(path, 'search', 'local-search-result');
+        }
+
+        inputArea.onfocus = function(){ getSearchFile() }
+	</script>
+
+
+<!-- Window Load-->
+<script>
+    $(window).load(function() {
+        // Post_Toc parent position fixed
+        $(".post-toc-wrap").parent(".mdl-menu__container").css("position", "fixed");
+    });
+</script>
+
+<!-- MathJax Load-->
+
+            </main>
+        </div>
+		
+    </body>
+		
+	
+</html>
