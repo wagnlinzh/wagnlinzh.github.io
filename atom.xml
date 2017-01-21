@@ -16,34 +16,225 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>UC 浏览器的部分私有Meta 属性</title>
-    <link href="http://yichewx.com/2016/12/13/cc/UC%20%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E9%83%A8%E5%88%86%E7%A7%81%E6%9C%89Meta%20%E5%B1%9E%E6%80%A7/"/>
-    <id>http://yichewx.com/2016/12/13/cc/UC 浏览器的部分私有Meta 属性/</id>
+    <title>QQ浏览器X5内核问题汇总</title>
+    <link href="http://yichewx.com/2016/12/13/cc/QQ%E6%B5%8F%E8%A7%88%E5%99%A8X5%E5%86%85%E6%A0%B8%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/"/>
+    <id>http://yichewx.com/2016/12/13/cc/QQ浏览器X5内核问题汇总/</id>
     <published>2016-12-13T01:49:30.000Z</published>
     <updated>2016-12-13T01:49:30.000Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="UC-浏览器的部分私有Meta-属性"><a href="#UC-浏览器的部分私有Meta-属性" class="headerlink" title="UC 浏览器的部分私有Meta 属性"></a>UC 浏览器的部分私有Meta 属性</h2><p>1 设置屏幕方向为横屏还是竖屏</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"></div><div class="line">&lt;meta name=&quot;screen-orientation&quot; content=&quot;portrait|landscape&quot;&gt;</div></pre></td></tr></table></figure>
-<p>2 设置是否全屏，yes表示强制浏览器全屏</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;meta name=&quot;full-screen&quot; content=&quot;yes&quot;&gt;</div></pre></td></tr></table></figure>
-<p>3 缩放不出滚动条<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;meta name=&quot;viewport&quot; content=&quot;uc-fitscreen=no|yes&quot;/&gt;</div></pre></td></tr></table></figure></p>
-<p>设置no后用户缩放与标准浏览器缩放一直，设置为yes后，用户缩放金放到图片和文字，不出现横向滚动条。</p>
-<p>4  排版</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;meta name=&quot;layoutmode&quot; content=&quot;fitscreen|standard&quot; /&gt;</div></pre></td></tr></table></figure>
-<p>fitscreen模式简化页面处理，适合页面阅读节省流量，standard模式和标准浏览器一致；一旦设置layoutmode meta后，用户使用浏览器提供的的排版模式选项将会无效。</p>
-<p>5强制图片显示</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;meta name=&quot;imagemode&quot; content=&quot;force&quot;/&gt;</div></pre></td></tr></table></figure>
-<p>UC浏览器为了节省流量，为用户提供了无图模式，但是如果页面的图片是必不可少的，如验证码的，需要强制浏览器显示图片，可以设置imagemode， 不影响子页面。通过META设置图片加载方式会作用于整个页面，如果希望对单个图片进行设置，那么可以使用这个</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;img src=&quot;...&quot; show=&quot;force&quot;&gt;</div></pre></td></tr></table></figure>
-<p>6 应用模式</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;meta name=&quot;browsermode&quot; content=&quot;application&quot;/&gt;</div></pre></td></tr></table></figure>
-<p>使用了application这种应用模式后，页面讲默认全屏，禁止长按菜单，禁止收拾，标准排版，以及强制图片显示。</p>
-<p>by  雪松</p>
+    <content type="html"><![CDATA[<h2 id="QQ浏览器X5内核问题汇总"><a href="#QQ浏览器X5内核问题汇总" class="headerlink" title="QQ浏览器X5内核问题汇总"></a>QQ浏览器X5内核问题汇总</h2><p>23 September 2015</p>
+<p>重要更新，X5内核即将更新为Blink内核，到时候下面的这些问题将全部被修复。</p>
+<p>X5内核开发团队也给开发者们提供了不少指引，推荐关注： <a href="http://x5.tencent.com/guide?id=2001" target="_blank" rel="external">http://x5.tencent.com/guide?id=2001</a></p>
+<p>@2016-04-05</p>
+<p><br><br><br><br><br></p>
+<p>## </p>
+<p>常常被人问及微信中使用的X5内核的问题，其实我也不是很清楚，只知道它是基于android 4.2的webkit，版本号是webkit 534。今天正好从X5团队拿到了一份问题汇总，梳理下发出来，给各位开发者以参考——不排除明天会删除这篇文章的可能。</p>
+<p><br></p>
+<p>1.Android WebView常见问题及解决方案汇总：</p>
+<p><a href="http://blog.csdn.net/t12x3456/article/details/13769731" target="_blank" rel="external">http://blog.csdn.net/t12x3456/article/details/13769731</a></p>
+<p><br></p>
+<p>2.请问各位碰到过X5浏览器内，局部滑动使用iscroll卡顿的问题么？</p>
+<p>回答：是使用 iscroll.js 这个JS去滚动么？如果只是为了产生滚动，建议使用 overflow 属性来，目前有一种滚动优化在线上版本效率不是太好，通过JS去改变CSS的属性产生滚动</p>
+<p><br></p>
+<p>3.调用：<code>-webkit-filter: blur(10px);filter: blur(10px);</code>在Android下 背景图没有blur掉，只是被单纯的放大而已</p>
+<p>回答：<code>-webkit-filter</code>目前还不支持，可以先用图片替换的方式 后续版本会支持这个属性</p>
+<p><br></p>
+<p>4.shadowBlur是阴影效果吧，我们是想实现图片毛玻璃</p>
+<p>回答： <a href="http://blog.csdn.net/jia20003/article/details/9195915" target="_blank" rel="external">http://blog.csdn.net/jia20003/article/details/9195915</a> 这个有用么</p>
+<p><br></p>
+<p>5.LBS相关，定位频繁失败</p>
+<p>第一步，首先确认定位失败是个别站点原因还是所有站点定位都失败。如果是所有站点定位都不成功，很有可能是内核问题，转内核相关同学跟进调查定位逻辑是否有缺陷；如果是某个站点才会出现的问题，继续第二步排查，从站点源码着手。</p>
+<p>第二步，找到站点请求定位的js代码段，检查获取定位信息函数的options字段，很有可能是 options 中 timeout 字段设置的超时太短导致，建议前端开发将该字段时间设置长一些（建议10s以上）或者不设置该字段。如果js没有设置 timeout 字段的情况下仍然定位不成功，则转内核同学调查内核流程。</p>
+<p>ps：H5获取LBS信息的js接口</p>
+<p>回答：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">navigator.geolocation.getCurrentPosition(showPosition,showError,&#123;  </div><div class="line">    enableHighAccuracy:false，</div><div class="line">    timeout:10*1000,</div><div class="line">    maximumAge:0</div><div class="line">&#125;);</div><div class="line"></div><div class="line">navigator.geolocation.watchPosition(watchPosition,showError,options);</div></pre></td></tr></table></figure>
+<p>showPosition：定位成功时回调；<br>showError：定位出错时回调；<br>options：可选的地理定位请求特征<br>enableHightAccuracy：可选，是否开启高精度模式，参数默认值为 false<br>timeout：可选，单位为ms，浏览器需要在该时间段内完成定位，否则定位失败，默认值为 - - infinity，无穷大。如果该值设置较小，会有很高的定位失败率。<br>maximumAge：可选，单位ms，重新计算位置的时间间隔。默认为0，即每次时时计算位置信息。</p>
+<p><br></p>
+<p>6.打开视频播放，后退视频仍然在播放</p>
+<p>回答：部分机型，浏览页面时打开视频播放，点击返回，页面上的视频仍然在播放。解决办法是捕获后退事件，主动调用 onHideCustomView() 方法，并且在该方法里将 onShowCustomView 里关联的view解除关联</p>
+<p><br></p>
+<p>7.请问一下微信浏览器的cookie清理机制是怎么样的？</p>
+<p>回答：X5内核是不会清除的。</p>
+<p><br></p>
+<p>8.打开WWW页面，缩放显示的问题</p>
+<p>回答： 使用webview打开www页面，如果页面被放大显示，确定websettings有没有设置，<code>webSettings.setUseWideViewPort（true</code>），默认为false，www页面不会被缩放显示的。手机QQ浏览器默认为true，显示www页面更美观</p>
+<p><br></p>
+<p>9.关于滚动时候动画的问题</p>
+<p>回答：</p>
+<p>页面滑动过程中动画不会被触发 页面滑动过程中动画会被停止 这个是X5内核为了做滚动优化而做的限制</p>
+<p><br></p>
+<p>10.关于connection type定义的问题</p>
+<p>回答：X5执行的标准比较老，NetworkInfo_API</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">enum ConnectionType &#123;  </div><div class="line">UNKNOWN = 0,  </div><div class="line">ETHERNET = 1,  </div><div class="line">WIFI = 2,  </div><div class="line">CELL_2G = 3,  </div><div class="line">CELL_3G = 4,  </div><div class="line">CELL_4G = 5,  </div><div class="line">NONE = 6,  </div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p><br></p>
+<p>11.出现网络正常，但是页面打不开的情况</p>
+<p>回答：关于设置里面的云加速试下是否可以打开。</p>
+<p><br></p>
+<p>12.js阻塞和css阻塞的不同</p>
+<p>回答：css是阻塞渲染过程，js阻塞解析过程！对于用户来说，没什么区别，都是空白的 js的执行时，如果js中有读写css的属性的代码，并且下载队列中有待加载的css，js执行会被阻塞掉。</p>
+<p><br></p>
+<p>13.cookie的4k限制</p>
+<p>回答：浏览器端cookie的数量可能会超过4k，有http请求时，内核只取前4k的cookie数据！</p>
+<p><br></p>
+<p>14.Js Defer与把js放到html底部的区别</p>
+<p>回答：js defer：先加载，ondownload 后执行。和js放到html底部类似。不同的就是html预扫描到会先加载</p>
+<p><br></p>
+<p>15.首屏显示后，为什么又会重排版</p>
+<p>回答：浏览器的排版宽度受上层ui设置的webview宽度影响。如果webview没设置或者是设置成0，浏览器内核会用默认的排版宽度320px进行排版。此时若webview的宽度值被正常设置，计算出来的排版宽度不是320px（一般是360px），这样浏览器就要用360px宽度，对页面进行重排。</p>
+<p><br></p>
+<p>16.canvas的数量是不是有限制</p>
+<p>回答：</p>
+<ul>
+<li>小于1G的内存， canvas的内存不能超过100M</li>
+<li>1G到2G的内存， canvas的内存不能超过300M</li>
+<li>大于2G的内存 canvas的内存不能超过500M</li>
+<li>为了防止内存占用过多，硬件加速的CANVAS最多支持5个</li>
+</ul>
+<p>小于等于1G内存手机，由于内存没办法精确统计，当达到75M以上，CANVAS数量最多支持20个</p>
+<p>上面说的canvas内存，仅仅是说canvas 长宽计算出来的内存，不包括canavs使用的图片等资源内存</p>
+<p><br></p>
+<p>17.x5浏览器CSS3有些不支持,同样的样式，在chrome里能起到效果，在X5就没用。并且js性能也差的多,微信还内置X5，用起来太不爽</p>
+<p>回答：是否方便具体说下是什么样的性能问题和css样式缺陷影响到您？我们这边可以跟进查看下原因。</p>
+<p>X5内核也在不断改进，您的反馈可以帮助我们进一步优化。</p>
+<p>chrome在标准的支持和性能优化方面确实目前走在业界前面，不过android系统的碎片化，android系统webview更是碎片化严重。</p>
+<p>android系统上的web开发可能也需要考虑到不同rom的兼容情况。X5内核致力于为开发者提供统一的web体验，并通过不断的优化，来向业界标准对齐。</p>
+<p>目前我们也在做基于chromium内核的研究工作，后续在标准的支持和性能上会有进一步提高。</p>
+<p><br></p>
+<p>18.请问下x5中js调用android怎么实现？</p>
+<p>回答：跟系统内核下一样，都借助 addjavainterface 实现</p>
+<p><br></p>
+<p>19.请问一下，android手机微信上用的x5支持webgl吗？</p>
+<p>回答：android手机中微信上的X5都是支持webgl的，不过部分机型上还有兼容性问题，由于兼容性问题，webgl之前我们是采用软绘的方式支持,目前切换到了硬绘，但整体来说还是会有兼容性和性能问题,后续这块还会持续更新</p>
+<p><br></p>
+<p>20.如果在某个设备第一次打开应用的时候 没有网络，x5内核可以启动吗？单网络恢复后还要再次认证，还是 不用在认证？</p>
+<p>回答：第一次打开应用是不会拉起X5的 在第二次打开之后 不管有无网络都可以拉起</p>
+<p><br></p>
+<p>21.如果我不安装浏览器，安装微信，x5能调用起来吗?</p>
+<p>回答：不能，只能安装QQ浏览器才能调用</p>
+<p><br></p>
+<p>22.web audio api是否已经支持？</p>
+<p>回答：暂时还不支持</p>
+<p><br></p>
+<p>23.什么时候支持html5的onunload和onbeforeunload事件</p>
+<p>回答：现在是支持html5的 onunload 和 onbeforeunload 事件的</p>
+<p><br></p>
+<p>24.要用X5的内核，必须要用QQ浏览器么？</p>
+<p>回答：目前 SDK 版本是这样的，我们正在预研的版本，手机如果安装了微信或手Q ，其它 app 可以不依赖 QQ浏览器 而共享 x5 内核。</p>
+<p><br></p>
+<p>25.关于svg问题。</p>
+<p>回答：关于SVG的问题：</p>
+<p>关于svg模糊的问题，有2种情况：</p>
+<p>直接访问一个.svg url的页面或者object，embed加入的svg， 出现模糊的问题</p>
+<p>此问题已解决， qq浏览器5.8上已经修复， tbs下个版本也会修复 svg用作background-image, 模糊这个问题是我们目前渲染机制导致不能兼容非标准写法： 在用svg作为background-image的时候， 需要指定background-size， 不然会模糊</p>
+<p>关于svg支持情况： 在5.3之前的qq浏览器不支持svg， 我们会在后台把svg转成一张jpeg图片， 供浏览器显示，5.4及以上版本支持svg，如果遇到被转成图片的问题，需要升级浏览器版本。</p>
+<p><br></p>
+<p>26.请问flexbox近期会支持吗？</p>
+<p>回答：flexbox我们正在做开发支持</p>
+<p><br></p>
+<p>27.x5内核 目前是独立运行的 还是需要安装ＱＱ浏览器？</p>
+<p>回答：sdk是需要QQ浏览器的，微信手Q里的是不需要的</p>
+<p><br></p>
+<p>28.现在X5内核怎么调试？在微信或者手q或者qq浏览器中调试页面</p>
+<p>回答：现在的微信手Q里面的X5还无法通过inspector调试 后期我们会把带有inspector调试的版本挂在开发者后台下载区 敬请期待</p>
+<p><br></p>
+<p>29.请问x5支持webgl的所有接口吗？能在所有版本的android机（4.0+)和ios机(5.0+)上运行webgl吗？</p>
+<p>回答：webgl目前是支持的，不过部分机型上还有兼容性问题</p>
+<p><br></p>
+<p>30.X5上支持哪些扩展？支持多少个纹理单元？</p>
+<p>回答：X5上只能支持：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">WEBGL_lose_context  </div><div class="line">EXT_texture_filter_anisotropic  </div><div class="line">OES_texture_float  </div><div class="line">OES_standard_derivatives  </div><div class="line">OES_vertex_array_object  </div><div class="line">WEBGL_debug_renderer_info  </div><div class="line">WEBGL_debug_shaders  </div><div class="line">WEBKIT_WEBGL_compressed_texture_s3tc</div></pre></td></tr></table></figure>
+<p>而且这些是必须手机GPU有对应的扩展指令才行的。</p>
+<p>关于纹理单元。我们这边没有限制</p>
+<p>上面的扩展，也都是基本每一个对应opengl的一个扩展</p>
+<p>支持多少纹理单元，也是从opengl查询得到的。</p>
+<p>主要应该是看手机GPU支持到啥程度，我们是做个对接。</p>
+<p><br></p>
+<p>31.x5的文件分片功能解决了吗，<code>blob = file.webkitSlice(start, stop)</code>,这样分片出来的blob用不了啊。</p>
+<p>回答：分片问题这边已经定位处理，浏览器会在5.8版本修复</p>
+<p><br></p>
+<p>32.手机qq浏览器是否有调试工具呢？</p>
+<p>回答：有的，Inspector。</p>
+<p><br></p>
+<p>33.请问现在微信调用的手机QQ浏览器支持websocket 吗？</p>
+<p>回答：支持websocket ，暂不支持wss，不支持webrtc</p>
+<p><br></p>
+<p>34.有计划支持webRTC吗？</p>
+<p>回答：这个我们后续会评估的。</p>
+<p><br></p>
+<p>35.我是HTML5游戏开发者，制作中的H5游戏需要有音乐音效。但是我在android机器上使用QQ浏览器出现了如下问题：</p>
+<p>循环播放BGM时，如果同时播放音效，BGM会被强行暂停 多个音效同时播放时，会出现明显的无法忍受的延迟和播放失败 这个问题在同一台机器的微信上同样存在，但是同一台机器的chrome没有这个问题。</p>
+<p>我能想到的最合理的解释是：X5内核同一时间只能播放一个音频通道。</p>
+<p>希望官方能解答我的疑惑和遇到的问题，谢谢。</p>
+<p>PS：</p>
+<ul>
+<li>使用的H5音频库 : SoundJS</li>
+<li>使用的音频格式 : mp3</li>
+<li>使用的Android机型：三星 Note3</li>
+</ul>
+<p>回答：播放音效需要获取声音输出焦点，目前只支持同时播放一个音效 您提的需求我们会讨论评估后期是否能有方案现</p>
+<p><br></p>
+<p>36.播放音效时，为啥会把我后台的BGM播放给暂停掉？</p>
+<p>回答：播放声音时当前音频需要获取 audiofocus ，系统在audiofocus丢失时会通知其它音频播放软件，这个暂停应该是播放软件自身的行为，我们本身并没有暂停后台音频，只是向系统申请了 audiofocus</p>
+<p><br></p>
+<p>37.300ms延迟是指什么？click 和 touch ?</p>
+<p>回答：touch 点击之后，到 click 事件被触发，click 事件有延迟，touch 不存在，用 touchstart 事件替代 click 事件就OK</p>
+<p><br></p>
+<p>38.现在微信内置的浏览器能支持flexbox么，现在有没有什么好办法能够替代呢？做好的网页一放到微信上，大量的flex的页面</p>
+<p>回答：你好flexbox正在开发支持，flexbox在android4.1到4.3系统内核上，也有类似问题，页面是需要兼容的</p>
+<p><br></p>
+<p>39.有没有什么x5内核的论坛或者wiki之类的？可以参考下。</p>
+<p>回答：<a href="http://bbs.browser.qq.com/" target="_blank" rel="external">http://bbs.browser.qq.com/</a> <a href="http://x5.tencent.com/" target="_blank" rel="external">http://x5.tencent.com/</a> 这两个论坛可以关注下</p>
+<p>另外有我们的公众账号 有问题可以随时交流</p>
+<p><br></p>
+<p>40.X5公众号叫什么？</p>
+<p>回答：腾讯X5浏览服务</p>
+<p><br></p>
+<p>41.手q上面的内核应该也是x5的吧？这样直接在手q上面的效果和在微信里面应该是一样的？</p>
+<p>回答：是的手Q微信内的webview都是X5。</p>
+<p><br></p>
+<p>42.x5不支持font-face吗？</p>
+<p>回答：支持</p>
+<p><br></p>
+<p>43.x5 支持flex吗？有兼容性文档吗？</p>
+<p>回答：不支持.<a href="http://1.h5support.sinaapp.com/incoming/cow.html" target="_blank" rel="external">http://1.h5support.sinaapp.com/incoming/cow.html</a></p>
+<p>这个页面是参考caniuse的测试用例得到的测试结果，5.7是对应qq浏览器5.7版本，可以对比下和系统浏览器4.1~.4.4的支持度。有需要的同学可以先参考下，相关的文档建设我们也在逐步完……</p>
+<p><br></p>
+<p>44.iscroll+lazyload在x5浏览器里面卡顿很严重，有人碰到过类似问题么，小米手机 列表内元素200个左右。</p>
+<p>回答：iscroll本身对内核要求比较高，较新的blink版本支持才比较好。可以对比测试下android 4.x 的系统浏览器看看。建议还是在前端做些优化，避免较长的元素，并减少动画效果。<a href="http://www.cnblogs.com/vbluebirdv/archive/2012/11/18/2776300.html" target="_blank" rel="external">http://www.cnblogs.com/vbluebirdv/archive/2012/11/18/2776300.html</a> 可以参考网上一些iscroll调优的文章</p>
+<p><br></p>
+<p>45.微信里面缓存问题，在安卓下和 ios下，刷新机制是不是不一样？</p>
+<p>回答：ios因为有刷新功能，点击之后请求到的都是最新的文件，安卓下，不管怎样请求都不会更新文件</p>
+<p><br></p>
+<p>46.现在微信里面没有假如这个啊？为什么IOS QQ浏览器不识别这个？</p>
+<p>回答：ios内核不是X5， ios 浏览器后续版本也会支持 <a href="http://open.mb.qq.com/doc?id=1201" target="_blank" rel="external">http://open.mb.qq.com/doc?id=1201</a> 目前ios 浏览器仅支持 x5-page-mode</p>
+<p><br></p>
+<p>47.现在白鹭游戏引擎是不是内置在x5里面了？</p>
+<p>回答：内置了白鹭引擎runtime</p>
+<p><br></p>
+<p>48.x5内核不支持 canvas 的 background 属性吗？</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;!doctype html&gt;  </div><div class="line">&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;  </div><div class="line">&lt;head&gt;  </div><div class="line">&lt;meta charset=&quot;utf-8&quot;&gt;  </div><div class="line">&lt;title&gt;canvas test&lt;/title&gt;  </div><div class="line">    &lt;!--&lt;meta HTTP-EQUIV=&quot;pragma&quot; CONTENT=&quot;no-cache&quot;&gt;--&gt;</div><div class="line">    &lt;!--&lt;meta HTTP-EQUIV=&quot;Cache-Control&quot; CONTENT=&quot;no-store, must-revalidate&quot;&gt;--&gt;</div><div class="line">&lt;/head&gt;</div><div class="line"></div><div class="line">&lt;body&gt;  </div><div class="line">&lt;div&gt;  </div><div class="line">    &lt;canvas id=&quot;testCanvas&quot; width=&quot;500&quot; height=&quot;300&quot; style=&quot;background: #00FF00;&quot;&gt;&lt;/canvas&gt;</div><div class="line"></div><div class="line">&lt;!--&lt;canvas id=&quot;testCanvas&quot; width=&quot;1136&quot; height=&quot;640&quot; style=&quot;background:#000&quot;&gt;&lt;/canvas&gt; --&gt;  </div><div class="line">&lt;/div&gt;  </div><div class="line">&lt;/body&gt;  </div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<p>背景颜色显示不出来</p>
+<p>回答：这个是做了优化，当canvas下盖了背景，就没有去绘制背景图片，当初是因为一些手机的GPu在绘制这块，如果存在这种情况绘制非常慢</p>
+<p><br></p>
+<p>49.qq浏览器有没有准备支持asm.js的计划？</p>
+<p>回答：我们也正在筹备相关工作，会对市面上各种游戏引擎进行全面评测并设计合理的架构方案整合。预计下半年可以推出，敬请期待</p>
+<p><br></p>
+<p>50.X5不支持<code>canvas.toDataUrl()</code>的image/jpeg参数，还是转成了默认的png格式请问有什么替换方法吗？</p>
+<p>回答：当前确实还不支持…我们在修复</p>
+<p><br></p>
+<p>51.问一下 ios版的微信里面是用的系统自带的UIWebView还是用的qq浏览器的内核？</p>
+<p>回答：ios版微信里面用的是系统自带的</p>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><a href="https://www.qianduan.net/author/shenfei/" target="_blank" rel="external">神飞</a>爱好前端设计与开发，崇尚一目了然的设计。现居深圳/广州，就职于腾讯微信设计团队。</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;UC-浏览器的部分私有Meta-属性&quot;&gt;&lt;a href=&quot;#UC-浏览器的部分私有Meta-属性&quot; class=&quot;headerlink&quot; title=&quot;UC 浏览器的部分私有Meta 属性&quot;&gt;&lt;/a&gt;UC 浏览器的部分私有Meta 属性&lt;/h2&gt;&lt;p&gt;1 设置屏幕
+      &lt;h2 id=&quot;QQ浏览器X5内核问题汇总&quot;&gt;&lt;a href=&quot;#QQ浏览器X5内核问题汇总&quot; class=&quot;headerlink&quot; title=&quot;QQ浏览器X5内核问题汇总&quot;&gt;&lt;/a&gt;QQ浏览器X5内核问题汇总&lt;/h2&gt;&lt;p&gt;23 September 2015&lt;/p&gt;
+&lt;p&gt;重
     
     </summary>
     
@@ -372,84 +563,6 @@
     
     
       <category term="CSS3" scheme="http://yichewx.com/tags/CSS3/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>你眼中的数据结构是什么样的？</title>
-    <link href="http://yichewx.com/2016/12/13/%E4%BD%A0%E7%9C%BC%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%EF%BC%9F/"/>
-    <id>http://yichewx.com/2016/12/13/你眼中的数据结构是什么样的？/</id>
-    <published>2016-12-13T01:49:30.000Z</published>
-    <updated>2016-12-13T01:49:30.000Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="你眼中的数据结构是什么样的？"><a href="#你眼中的数据结构是什么样的？" class="headerlink" title="你眼中的数据结构是什么样的？"></a>你眼中的数据结构是什么样的？</h3><p>​<br> 斯蒂芬·沃尔夫勒姆（数学软件 <code>Mathematica</code> 和计算型知识引擎 <code>Wolfram Alpha</code> 的发明者）在他的《新科学》一书中说道：</p>
-<p>  三个世纪以前，人们发现建立在数学方程基础上的规律能够用于对自然界的描述，伴随着这种新观念，科学发生了转变。在此书中我的目的是将要用简单的电脑程序来表达更为一般类型的规律，并在此种规律基础上建立一种新的科学，从而启动另一场科学变革。</p>
-<ul>
-<li><p>你理解的数据结构是什么？</p>
-</li>
-<li><p>你对学习数据结构有兴趣吗？</p>
-</li>
-<li><p>数据结构是一门值得研究的科学吗？</p>
-</li>
-<li><p>你学习数据解构的目标是什么?</p>
-</li>
-</ul>
-<p>人工智能是现在很火的一个话题，德·加里斯在他的《智能简史》一书中说道：</p>
-<p>  不远的将来，人工智能机器的智能将是人类的万亿个万亿倍，它们面对我们，并不像我们面对狗，而是如同我们面对蚊子、跳蚤甚至岩石，当它们消灭我们的时候，如同我们将蚊子拍死，将臭虫冲进下水道，谁会在消灭跳蚤的时候觉得这样太残忍了呢？！这也许是人类逃脱不了的宿命。</p>
-<p>你认为这样的情况会出现吗？</p>
-<p>数据结构的未来又是什么样的？</p>
-<p> 相关链接：</p>
-<ul>
-<li><a href="http://www.guokr.com/article/439770/?page=4%20%E2%80%9C%E2%80%9D" target="_blank" rel="external">果壳网对 Wolfram 的专访</a></li>
-<li><a href="http://v.youku.com/v_show/id_XNTkwNzI5OTIw.html" target="_blank" rel="external">6 分钟演示 15 种排序算法</a></li>
-<li><a href="http://v.youku.com/v_show/id_XMTQ0MTM5Njg0.html" target="_blank" rel="external">MIT学生普拉纳夫在TED上关于虚拟现实的演讲</a></li>
-</ul>
-<hr>
-<p>这是某论坛讨论里面看到的一个问题，</p>
-<p>​    //todo 放了好久了，再不写就烂尾。</p>
-<p>简单的说，几个关键词：<strong>原子性</strong>,  <strong>手术刀</strong>, <strong>自由</strong></p>
-<p>晚安,地球</p>
-<p>by wanglinzhizhi</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;你眼中的数据结构是什么样的？&quot;&gt;&lt;a href=&quot;#你眼中的数据结构是什么样的？&quot; class=&quot;headerlink&quot; title=&quot;你眼中的数据结构是什么样的？&quot;&gt;&lt;/a&gt;你眼中的数据结构是什么样的？&lt;/h3&gt;&lt;p&gt;​&lt;br&gt; 斯蒂芬·沃尔夫勒姆（数学软件 &lt;
-    
-    </summary>
-    
-      <category term="算法" scheme="http://yichewx.com/categories/%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="算法" scheme="http://yichewx.com/tags/%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>关于html 结构的划分的办法</title>
-    <link href="http://yichewx.com/2016/12/13/%E5%85%B3%E4%BA%8Ehtml%20%E7%BB%93%E6%9E%84%E7%9A%84%E5%88%92%E5%88%86%E7%9A%84%E5%8A%9E%E6%B3%95/"/>
-    <id>http://yichewx.com/2016/12/13/关于html 结构的划分的办法/</id>
-    <published>2016-12-13T01:49:30.000Z</published>
-    <updated>2016-12-13T01:49:30.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="关于html-结构的划分的办法"><a href="#关于html-结构的划分的办法" class="headerlink" title="关于html 结构的划分的办法"></a>关于html 结构的划分的办法</h2><ul>
-<li>同级元素的z-index 相同</li>
-<li>同级元素的可以设置同样的背景色/border 等方式加以区分. 背景色和border 值在 test阶段之后删除 </li>
-</ul>
-<p><img src="/images/cj.png" alt=""></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;关于html-结构的划分的办法&quot;&gt;&lt;a href=&quot;#关于html-结构的划分的办法&quot; class=&quot;headerlink&quot; title=&quot;关于html 结构的划分的办法&quot;&gt;&lt;/a&gt;关于html 结构的划分的办法&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;同级元素的z-index
-    
-    </summary>
-    
-      <category term="web" scheme="http://yichewx.com/categories/web/"/>
-    
-    
-      <category term="html" scheme="http://yichewx.com/tags/html/"/>
     
   </entry>
   
@@ -952,6 +1065,84 @@
     
       <category term="文学" scheme="http://yichewx.com/categories/%E6%96%87%E5%AD%A6/"/>
     
+    
+  </entry>
+  
+  <entry>
+    <title>你眼中的数据结构是什么样的？</title>
+    <link href="http://yichewx.com/2016/12/13/%E4%BD%A0%E7%9C%BC%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%EF%BC%9F/"/>
+    <id>http://yichewx.com/2016/12/13/你眼中的数据结构是什么样的？/</id>
+    <published>2016-12-13T01:49:30.000Z</published>
+    <updated>2016-12-13T01:49:30.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="你眼中的数据结构是什么样的？"><a href="#你眼中的数据结构是什么样的？" class="headerlink" title="你眼中的数据结构是什么样的？"></a>你眼中的数据结构是什么样的？</h3><p>​<br> 斯蒂芬·沃尔夫勒姆（数学软件 <code>Mathematica</code> 和计算型知识引擎 <code>Wolfram Alpha</code> 的发明者）在他的《新科学》一书中说道：</p>
+<p>  三个世纪以前，人们发现建立在数学方程基础上的规律能够用于对自然界的描述，伴随着这种新观念，科学发生了转变。在此书中我的目的是将要用简单的电脑程序来表达更为一般类型的规律，并在此种规律基础上建立一种新的科学，从而启动另一场科学变革。</p>
+<ul>
+<li><p>你理解的数据结构是什么？</p>
+</li>
+<li><p>你对学习数据结构有兴趣吗？</p>
+</li>
+<li><p>数据结构是一门值得研究的科学吗？</p>
+</li>
+<li><p>你学习数据解构的目标是什么?</p>
+</li>
+</ul>
+<p>人工智能是现在很火的一个话题，德·加里斯在他的《智能简史》一书中说道：</p>
+<p>  不远的将来，人工智能机器的智能将是人类的万亿个万亿倍，它们面对我们，并不像我们面对狗，而是如同我们面对蚊子、跳蚤甚至岩石，当它们消灭我们的时候，如同我们将蚊子拍死，将臭虫冲进下水道，谁会在消灭跳蚤的时候觉得这样太残忍了呢？！这也许是人类逃脱不了的宿命。</p>
+<p>你认为这样的情况会出现吗？</p>
+<p>数据结构的未来又是什么样的？</p>
+<p> 相关链接：</p>
+<ul>
+<li><a href="http://www.guokr.com/article/439770/?page=4%20%E2%80%9C%E2%80%9D" target="_blank" rel="external">果壳网对 Wolfram 的专访</a></li>
+<li><a href="http://v.youku.com/v_show/id_XNTkwNzI5OTIw.html" target="_blank" rel="external">6 分钟演示 15 种排序算法</a></li>
+<li><a href="http://v.youku.com/v_show/id_XMTQ0MTM5Njg0.html" target="_blank" rel="external">MIT学生普拉纳夫在TED上关于虚拟现实的演讲</a></li>
+</ul>
+<hr>
+<p>这是某论坛讨论里面看到的一个问题，</p>
+<p>​    //todo 放了好久了，再不写就烂尾。</p>
+<p>简单的说，几个关键词：<strong>原子性</strong>,  <strong>手术刀</strong>, <strong>自由</strong></p>
+<p>晚安,地球</p>
+<p>by wanglinzhizhi</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;你眼中的数据结构是什么样的？&quot;&gt;&lt;a href=&quot;#你眼中的数据结构是什么样的？&quot; class=&quot;headerlink&quot; title=&quot;你眼中的数据结构是什么样的？&quot;&gt;&lt;/a&gt;你眼中的数据结构是什么样的？&lt;/h3&gt;&lt;p&gt;​&lt;br&gt; 斯蒂芬·沃尔夫勒姆（数学软件 &lt;
+    
+    </summary>
+    
+      <category term="算法" scheme="http://yichewx.com/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="算法" scheme="http://yichewx.com/tags/%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>关于html 结构的划分的办法</title>
+    <link href="http://yichewx.com/2016/12/13/%E5%85%B3%E4%BA%8Ehtml%20%E7%BB%93%E6%9E%84%E7%9A%84%E5%88%92%E5%88%86%E7%9A%84%E5%8A%9E%E6%B3%95/"/>
+    <id>http://yichewx.com/2016/12/13/关于html 结构的划分的办法/</id>
+    <published>2016-12-13T01:49:30.000Z</published>
+    <updated>2016-12-13T01:49:30.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="关于html-结构的划分的办法"><a href="#关于html-结构的划分的办法" class="headerlink" title="关于html 结构的划分的办法"></a>关于html 结构的划分的办法</h2><ul>
+<li>同级元素的z-index 相同</li>
+<li>同级元素的可以设置同样的背景色/border 等方式加以区分. 背景色和border 值在 test阶段之后删除 </li>
+</ul>
+<p><img src="/images/cj.png" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;关于html-结构的划分的办法&quot;&gt;&lt;a href=&quot;#关于html-结构的划分的办法&quot; class=&quot;headerlink&quot; title=&quot;关于html 结构的划分的办法&quot;&gt;&lt;/a&gt;关于html 结构的划分的办法&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;同级元素的z-index
+    
+    </summary>
+    
+      <category term="web" scheme="http://yichewx.com/categories/web/"/>
+    
+    
+      <category term="html" scheme="http://yichewx.com/tags/html/"/>
     
   </entry>
   
