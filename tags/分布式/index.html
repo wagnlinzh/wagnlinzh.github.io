@@ -38,7 +38,7 @@
     <meta name="apple-mobile-web-app-title" content="wanglinzhizhi">
     
     <!-- The Open Graph protocol -->
-    <meta property="og:url" content="http://yichewx.com">
+    <meta property="og:url" content="http://www.wanglinzhizhi.me">
     <meta property="og:type" content="blog">
     <meta property="og:title" content="标签: 分布式 | wanglinzhizhi">
     <meta property="og:description" content="游走在上下文无关文法间">
@@ -213,7 +213,7 @@
 	
 				
 		<!-- Post Title -->
-		<p class="article-headline-p"><a href="/2016/12/13/现在有一个分布式集群，需要做到强一致性、强可用性、比较强的读写实时性，QPS最大值要求2w+，数据库、业务层、缓存应该如何设计？/">现在有一个分布式集群，需要做到强一致性、强可用性、比较强的读写实时性，QPS最大值要求2w+，数据库、业务层、缓存应该如何设计？</a></p>
+		<p class="article-headline-p"><a href="/2017/01/21/现在有一个分布式集群，需要做到强一致性、强可用性、比较强的读写实时性，QPS最大值要求2w+，数据库、业务层、缓存应该如何设计？/">现在有一个分布式集群，需要做到强一致性、强可用性、比较强的读写实时性，QPS最大值要求2w+，数据库、业务层、缓存应该如何设计？</a></p>
 	</div>
 
     <!-- Post Excerpt -->
@@ -223,7 +223,7 @@
         
         &nbsp;&nbsp;&nbsp;
         <span>
-            <a href="/2016/12/13/现在有一个分布式集群，需要做到强一致性、强可用性、比较强的读写实时性，QPS最大值要求2w+，数据库、业务层、缓存应该如何设计？/" target="_self">继续阅读</a>
+            <a href="/2017/01/21/现在有一个分布式集群，需要做到强一致性、强可用性、比较强的读写实时性，QPS最大值要求2w+，数据库、业务层、缓存应该如何设计？/" target="_self">继续阅读</a>
         </span>
     </div>
     <!-- Post_entry Info-->
@@ -235,7 +235,7 @@
             </div>
             <div>
                 <strong>wanglinzhizhi</strong>
-                <span>Dec 13, 2016</span>
+                <span>Jan 21, 2017</span>
             </div>
         </div>
         <div id="post_entry-right-info">
@@ -355,7 +355,7 @@
         </a>
         <ul class="dropdown-menu">
             <li>
-            <a class="sidebar_archives-link" href="/archives/2016/12/">December 2016<span class="sidebar_archives-count">64</span></a>
+            <a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">71</span></a>
         </ul>
     </li>
 
@@ -388,7 +388,7 @@
     <li>
         <a href="/archives">
              文章总数
-             <span class="sidebar-badge">64</span>
+             <span class="sidebar-badge">71</span>
         </a>
     </li>
 </ul>
@@ -550,6 +550,91 @@ It will not impact the appearance and can give developers a lot of support :)
 	<script src="/js/smoothscroll.js"></script>
 
 
+
+    <!-- Leancloud -->
+	<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+	<script>
+		AV.initialize("EObBAbqpQfNFLuV5SjbVgoxq-gzGzoHsz", "qPdmjfSU3DDmPPH9ui0cUW4z");
+	</script>
+    <script>
+	function showTime(Counter) {
+		var query = new AV.Query(Counter);
+		$(".leancloud-views_num").each(function() {
+			var url = $(this).attr("id").trim();
+			query.equalTo("url", url);
+			query.find({
+				success: function(results) {
+					if (results.length == 0) {
+						var content = '0 ' + $(document.getElementById(url)).text();
+						$(document.getElementById(url)).text(content);
+						return;
+					}
+					for (var i = 0; i < results.length; i++) {
+						var object = results[i];
+						var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
+						$(document.getElementById(url)).text(content);
+					}
+				},
+				error: function(object, error) {
+					console.log("Error: " + error.code + " " + error.message);
+				}
+			});
+
+		});
+	}
+
+	function addCount(Counter) {
+		var Counter = AV.Object.extend("Counter");
+		url = $(".leancloud-views_num").attr('id').trim();
+		title = $(".leancloud-views_num").attr('data-flag-title').trim();
+		var query = new AV.Query(Counter);
+		query.equalTo("url", url);
+		query.find({
+			success: function(results) {
+				if (results.length > 0) {
+					var counter = results[0];
+					counter.fetchWhenSave(true);
+					counter.increment("time");
+					counter.save(null, {
+						success: function(counter) {
+							var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
+							$(document.getElementById(url)).text(content);
+						},
+						error: function(counter, error) {
+							console.log('Failed to save Visitor num, with error message: ' + error.message);
+						}
+					});
+				} else {
+					var newcounter = new Counter();
+					newcounter.set("title", title);
+					newcounter.set("url", url);
+					newcounter.set("time", 1);
+					newcounter.save(null, {
+						success: function(newcounter) {
+							console.log("newcounter.get('time')="+newcounter.get('time'));
+							var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
+							$(document.getElementById(url)).text(content);
+						},
+						error: function(newcounter, error) {
+							console.log('Failed to create');
+						}
+					});
+				}
+			},
+			error: function(error) {
+				console.log('Error:' + error.code + " " + error.message);
+			}
+		});
+	}
+	$(function() {
+		var Counter = AV.Object.extend("Counter");
+		if ($('.leancloud-views_num').length == 1) {
+			addCount(Counter);
+		} else if ($('.post-title-link').length > 1) {
+			showTime(Counter);
+		}
+	}); 
+</script>
 
 
 

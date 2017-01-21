@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <!-- Title -->
+    
+    <title>
+        深入理解学习Git工作流 | wanglinzhizhi
+    </title>
+    
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+    
+    <!-- Meta & INfo -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="wanglinzhizhi">
+    <meta name="description" content="游走在上下文无关文法间">
+    <meta name="keywords" content="null">
+    
+    <!--iOS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+    
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="wanglinzhizhi">
+    
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://www.wanglinzhizhi.me">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="深入理解学习Git工作流 | wanglinzhizhi">
+    <meta property="og:description" content="游走在上下文无关文法间">
+    
+     <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+        
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+    
+    <!-- Import CSS -->
+    <link rel="stylesheet" href="/css/material.min.css">
+    <link rel="stylesheet" href="/css/style.min.css">
+    <!-- Config CSS -->
+
+
+<!-- Other Styles -->
+<style>
+	body, html{
+		font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+	}
+	
+    a{
+        color: #00838F
+    }
+    
+    .mdl-card__media,
+    #search-label,
+    #search-form-label:after,
+    #scheme-Paradox .hot_tags-count,
+    #scheme-Paradox .sidebar_archives-count,
+    #scheme-Paradox .sidebar-colored .sidebar-header,
+    #scheme-Paradox .sidebar-colored .sidebar-badge{
+        background-color: #0097A7 !important
+    }
+    
+	/* Sidebar User Drop Down Menu Text Color */
+	#scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+    #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus{
+        color: #0097A7 !important
+    }
+    
+    #post_entry-right-info,
+    .sidebar-colored .sidebar-nav li:hover > a,
+    .sidebar-colored .sidebar-nav li:hover > a i,
+    .sidebar-colored .sidebar-nav li > a:hover,
+    .sidebar-colored .sidebar-nav li > a:hover i,
+    .sidebar-colored .sidebar-nav li > a:focus i,
+    .sidebar-colored .sidebar-nav > .open > a,
+    .sidebar-colored .sidebar-nav > .open > a:hover,
+    .sidebar-colored .sidebar-nav > .open > a:focus,
+    #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a{
+        color: #0097A7 !important
+    }
+    
+    .toTop{
+        background: #757575 !important
+    }
+		
+	.material-layout .material-post>.material-nav,
+	.material-layout .material-index>.material-nav,
+	.material-nav a{
+		color: #757575;
+	}
+		
+	#scheme-Paradox .MD-burger-layer {
+		background-color: #757575;
+	}
+
+	#scheme-Paradox #post-toc-trigger-btn{
+		color: #757575;
+	}
+	
+	.post-toc a:hover{
+		color: #00838F;
+		text-decoration: underline;
+	}
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+        body{
+            background-color: #F5F5F5
+        }
+		
+		/* blog_info bottom background */
+        #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+            background-color: #fff;
+        }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+        .fade {
+            transition: all 800ms linear;
+            -webkit-transform: translate3d(0,0,0);
+            -moz-transform: translate3d(0,0,0);
+            -ms-transform: translate3d(0,0,0);
+            -o-transform: translate3d(0,0,0);
+            transform: translate3d(0,0,0);
+            opacity: 1;
+        }
+
+        .fade.out{
+            opacity: 0;
+        }
+    </style>
+
+	<script src="/js/jquery.min.js"></script>
+	
+	<link rel="stylesheet" href="/css/highlight/atom-one-dark.css">
+	
+	<!-- UC Browser Compatible-->
+	<script>
+		var agent = navigator.userAgent.toLowerCase();
+		if(agent.indexOf('ucbrowser')>0) {
+			document.write('<link rel="stylesheet" href="/css/uc.css">');
+		   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+		}
+	</script>
+    
+    <!-- Custom Head -->
+    
+</head>
+	
+	
+
+    <body id="scheme-Paradox">
+
+		
+        <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+				
+			
+			
+            <!-- Main Container -->
+            <main class="material-layout__content" id="main">
+				
+                <!-- Top Anchor -->
+                <div id="top"></div>
+				
+				
+                <!-- Hamburger Button -->
+                <button class="MD-burger-icon sidebar-toggle">
+                    <span class="MD-burger-layer"></span>
+                </button>
+				
+				
+                <!-- Post TOC -->
+
+    
+	<!-- Back Button -->
+<!--
+	<div class="material-back" id="backhome-div" tabindex="0">
+		<a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" href="#" onclick="window.history.back();return false;" target="_self" role="button" data-upgraded=",MaterialButton,MaterialRipple">
+			<i class="material-icons" role="presentation">arrow_back</i>
+			<span class="mdl-button__ripple-container">
+				<span class="mdl-ripple"></span>
+			</span>
+		</a>
+	</div>			
+-->
+	<!-- Left aligned menu below button -->
+	<button id="post-toc-trigger-btn"
+			class="mdl-button mdl-js-button mdl-button--icon">
+	  <i class="material-icons">format_list_numbered</i>
+	</button>
+
+	<ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
+		for="post-toc-trigger-btn">
+			
+			<ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#深入理解学习Git工作流（git-workflow"><span class="post-toc-number">1.</span> <span class="post-toc-text">深入理解学习Git工作流（git-workflow-</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#一、译序"><span class="post-toc-number">2.</span> <span class="post-toc-text">一、译序</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#二、Git工作流指南"><span class="post-toc-number">3.</span> <span class="post-toc-text">二、Git工作流指南</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-1-集中式工作流"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">2.1 集中式工作流</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-1-1-工作方式"><span class="post-toc-number">3.1.1.</span> <span class="post-toc-text">2.1.1 工作方式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-1-2-冲突解决"><span class="post-toc-number">3.1.2.</span> <span class="post-toc-text">2.1.2 冲突解决</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-1-3-示例"><span class="post-toc-number">3.1.3.</span> <span class="post-toc-text">2.1.3 示例</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#有人先初始化好中央仓库"><span class="post-toc-number">3.1.3.1.</span> <span class="post-toc-text">有人先初始化好中央仓库</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#所有人克隆中央仓库"><span class="post-toc-number">3.1.3.2.</span> <span class="post-toc-text">所有人克隆中央仓库</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#小明开发功能"><span class="post-toc-number">3.1.3.3.</span> <span class="post-toc-text">小明开发功能</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#小红开发功能"><span class="post-toc-number">3.1.3.4.</span> <span class="post-toc-text">小红开发功能</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#小明发布功能"><span class="post-toc-number">3.1.3.5.</span> <span class="post-toc-text">小明发布功能</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#小红试着发布功能"><span class="post-toc-number">3.1.3.6.</span> <span class="post-toc-text">小红试着发布功能</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#小红在小明的提交之上rebase"><span class="post-toc-number">3.1.3.7.</span> <span class="post-toc-text">小红在小明的提交之上rebase</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#小红解决合并冲突"><span class="post-toc-number">3.1.3.8.</span> <span class="post-toc-text">小红解决合并冲突</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#小红成功发布功能"><span class="post-toc-number">3.1.3.9.</span> <span class="post-toc-text">小红成功发布功能</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-2-功能分支工作流"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">2.2 功能分支工作流</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-2-1-工作方式"><span class="post-toc-number">3.2.1.</span> <span class="post-toc-text">2.2.1 工作方式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-2-2-Pull-Requests"><span class="post-toc-number">3.2.2.</span> <span class="post-toc-text">2.2.2 Pull Requests</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-2-3-示例"><span class="post-toc-number">3.2.3.</span> <span class="post-toc-text">2.2.3 示例</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#小红开始开发一个新功能"><span class="post-toc-number">3.2.3.1.</span> <span class="post-toc-text">小红开始开发一个新功能</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#小红要去吃个午饭"><span class="post-toc-number">3.2.3.2.</span> <span class="post-toc-text">小红要去吃个午饭</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#小红完成功能开发"><span class="post-toc-number">3.2.3.3.</span> <span class="post-toc-text">小红完成功能开发</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#小黑收到Pull-Request"><span class="post-toc-number">3.2.3.4.</span> <span class="post-toc-text">小黑收到Pull Request</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#小红再做修改"><span class="post-toc-number">3.2.3.5.</span> <span class="post-toc-text">小红再做修改</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#小红发布她的功能"><span class="post-toc-number">3.2.3.6.</span> <span class="post-toc-text">小红发布她的功能</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#与此同时，小明在做和小红一样的事"><span class="post-toc-number">3.2.3.7.</span> <span class="post-toc-text">与此同时，小明在做和小红一样的事</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-3-Gitflow工作流"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">2.3 Gitflow工作流</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-3-1-工作方式"><span class="post-toc-number">3.3.1.</span> <span class="post-toc-text">2.3.1 工作方式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-3-2-历史分支"><span class="post-toc-number">3.3.2.</span> <span class="post-toc-text">2.3.2 历史分支</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-3-3-功能分支"><span class="post-toc-number">3.3.3.</span> <span class="post-toc-text">2.3.3 功能分支</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-3-4-发布分支"><span class="post-toc-number">3.3.4.</span> <span class="post-toc-text">2.3.4 发布分支</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-3-5-维护分支"><span class="post-toc-number">3.3.5.</span> <span class="post-toc-text">2.3.5 维护分支</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-3-6-示例"><span class="post-toc-number">3.3.6.</span> <span class="post-toc-text">2.3.6 示例</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#创建开发分支"><span class="post-toc-number">3.3.6.1.</span> <span class="post-toc-text">创建开发分支</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#小红和小明开始开发新功能"><span class="post-toc-number">3.3.6.2.</span> <span class="post-toc-text">小红和小明开始开发新功能</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#小红完成功能开发-1"><span class="post-toc-number">3.3.6.3.</span> <span class="post-toc-text">小红完成功能开发</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#小红开始准备发布"><span class="post-toc-number">3.3.6.4.</span> <span class="post-toc-text">小红开始准备发布</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#小红完成发布"><span class="post-toc-number">3.3.6.5.</span> <span class="post-toc-text">小红完成发布</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#最终用户发现Bug"><span class="post-toc-number">3.3.6.6.</span> <span class="post-toc-text">最终用户发现Bug</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-4-Forking工作流"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">2.4 Forking工作流</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-4-1-工作方式"><span class="post-toc-number">3.4.1.</span> <span class="post-toc-text">2.4.1 工作方式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-4-2-正式仓库"><span class="post-toc-number">3.4.2.</span> <span class="post-toc-text">2.4.2 正式仓库</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-4-3-Forking工作流的分支使用方式"><span class="post-toc-number">3.4.3.</span> <span class="post-toc-text">2.4.3 Forking工作流的分支使用方式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-4-4-示例"><span class="post-toc-number">3.4.4.</span> <span class="post-toc-text">2.4.4 示例</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#项目维护者初始化正式仓库"><span class="post-toc-number">3.4.4.1.</span> <span class="post-toc-text">项目维护者初始化正式仓库</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#开发者fork正式仓库"><span class="post-toc-number">3.4.4.2.</span> <span class="post-toc-text">开发者fork正式仓库</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#开发者克隆自己fork出来的仓库"><span class="post-toc-number">3.4.4.3.</span> <span class="post-toc-text">开发者克隆自己fork出来的仓库</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#开发者开发自己的功能"><span class="post-toc-number">3.4.4.4.</span> <span class="post-toc-text">开发者开发自己的功能</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#开发者发布自己的功能"><span class="post-toc-number">3.4.4.5.</span> <span class="post-toc-text">开发者发布自己的功能</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#项目维护者集成开发者的功能"><span class="post-toc-number">3.4.4.6.</span> <span class="post-toc-text">项目维护者集成开发者的功能</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#开发者和正式仓库做同步"><span class="post-toc-number">3.4.4.7.</span> <span class="post-toc-text">开发者和正式仓库做同步</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-5-Pull-Requests"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">2.5 Pull Requests</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-5-1-解析Pull-Request"><span class="post-toc-number">3.5.1.</span> <span class="post-toc-text">2.5.1 解析Pull Request</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-5-2-工作方式"><span class="post-toc-number">3.5.2.</span> <span class="post-toc-text">2.5.2 工作方式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-5-3-在功能分支工作流中使用Pull-Request"><span class="post-toc-number">3.5.3.</span> <span class="post-toc-text">2.5.3 在功能分支工作流中使用Pull Request</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-5-4-在Gitflow工作流中使用Pull-Request"><span class="post-toc-number">3.5.4.</span> <span class="post-toc-text">2.5.4 在Gitflow工作流中使用Pull Request</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-5-5-在Forking工作流中使用Pull-Request"><span class="post-toc-number">3.5.5.</span> <span class="post-toc-text">2.5.5 在Forking工作流中使用Pull Request</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-5-6-示例"><span class="post-toc-number">3.5.6.</span> <span class="post-toc-text">2.5.6 示例</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#小红fork正式项目"><span class="post-toc-number">3.5.6.1.</span> <span class="post-toc-text">小红fork正式项目</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#小红克隆她的Bitbucket仓库"><span class="post-toc-number">3.5.6.2.</span> <span class="post-toc-text">小红克隆她的Bitbucket仓库</span></a></li></ol></li></ol></li></ol></li></ol>
+		
+<!--			<li class="mdl-menu__item">Some Action</li>-->
+	</ul>
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+		
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+	<!-- Paradox Post Header -->
+	
+		
+			<!-- Random Thumbnail -->
+			<div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+				<script>
+    
+    var randomNum;
+    randomNum = Math.floor(Math.random() * 5 + 1);
+    
+    $(".post_thumbnail-random").css('background-image', 'url(' + '/img/random/' + randomNum + '.png' + ')');
+    
+</script>
+
+		
+	
+        <p class="article-headline-p">
+            深入理解学习Git工作流
+        </p>
+    </div>
+
+	
+
+				
+				
+					<!-- Paradox Post Info -->
+					<div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+    
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>wanglinzhizhi</strong>
+        <span>Jan 21, 2017</span>
+    </div>
+    
+    <div class="section-spacer"></div>
+	
+    <!-- Favorite -->
+<!--
+    <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+        <i class="material-icons" role="presentation">favorite</i>
+        <span class="visuallyhidden">favorites</span>
+    </button>
+-->
+    
+    <!-- Tags (bookmark) -->
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/Git/">Git</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/Gitflow/">Gitflow</a>
+    </ul>
+    
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+    
+    <!-- Leancloud Views -->
+    <a class="post_share-link" href="#">
+        <li class="mdl-menu__item">
+            <span id="/2017/01/21/GitFlow/" class="leancloud-views_num" data-flag-title="深入理解学习Git工作流">
+     &nbsp;浏览量
+</span>
+        </li>
+    </a>
+    
+    
+    
+    
+    <!-- Share Twitter -->
+    <a class="post_share-link" href="https://twitter.com/intent/tweet?text=深入理解学习Git工作流&url=http://www.wanglinzhizhi.me//2017/01/21/GitFlow/index.html&via=wanglinzhizhi" target="_blank">
+        <li class="mdl-menu__item">
+            分享到 Twitter
+        </li>
+    </a>
+    
+    <!-- Share Google+ -->
+    <a class="post_share-link" href="https://plus.google.com/share?url=http://www.wanglinzhizhi.me//2017/01/21/GitFlow/index.html" target="_blank">
+        <li class="mdl-menu__item">
+            分享到 Google+
+        </li>
+    </a>
+    
+    <!-- Share Weibo -->
+    <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=深入理解学习Git工作流&url=http://www.wanglinzhizhi.me//2017/01/21/GitFlow/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <li class="mdl-menu__item">
+            分享到微博
+        </li>
+    </a>
+</ul>
+</div>
+				
+
+                <!-- Post Content -->
+                <div id="post-content" class="markdown-Github mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+	
+		<h1 id="深入理解学习Git工作流（git-workflow"><a href="#深入理解学习Git工作流（git-workflow" class="headerlink" title="深入理解学习Git工作流（git-workflow-"></a><a href="https://segmentfault.com/t/%E5%B7%A5%E4%BD%9C%E6%B5%81/blogs" target="_blank" rel="external">深入理解学习Git工作流（git-workflow-</a></h1><p><a href="https://segmentfault.com/u/xirong" target="_blank" rel="external"><strong>xirong</strong></a> 2015年06月18日发布</p>
+<ul>
+<li>推荐 <strong>28</strong> 推荐</li>
+<li>已收藏 <strong>223</strong> 收藏，<strong>13.9k</strong> 浏览</li>
+</ul>
+<p>个人在学习git工作流的过程中，从原有的 SVN 模式很难完全理解git的协作模式，直到有一天我看到了下面的文章，好多遗留在心中的困惑迎刃而解，于是我将这部分资料进行整理放到了github上，欢迎star查看最新更新内容， <a href="https://github.com/xirong/my-git/blob/master/git-workflow-tutorial.md" target="_blank" rel="external">https://github.com/xirong/my-git/blob/master/git-workflow-tutorial.md</a></p>
+<ul>
+<li>我们以使用SVN的工作流来使用git有什么不妥？</li>
+<li>git 方便的branch在哪里，团队多人如何协作？冲突了怎么办？如何进行发布控制？</li>
+<li>经典的master-发布、develop-主开发、hotfix-不过修复如何避免代码不经过验证上线？</li>
+<li>如何在github上面与他人一起协作，star-fork-pull request是怎样的流程？</li>
+</ul>
+<p>我个人很感激这篇文章，所以进行了整理，希望能帮到更多的人。整篇文章由 <a href="https://github.com/xirong" target="_blank" rel="external">xirong</a> 整理自 <a href="https://github.com/oldratlee" target="_blank" rel="external">oldratlee</a> 的github，方便统一的学习回顾，在此感谢下面两位的贡献。</p>
+<p>原文链接：<a href="https://www.atlassian.com/git/workflows" target="_blank" rel="external">Git Workflows and Tutorials</a></p>
+<p>简体中文：由 <a href="https://github.com/oldratlee" target="_blank" rel="external">oldratlee</a> 翻译在 github 上 <a href="https://github.com/oldratlee/translations/tree/master/git-workflows-and-tutorials" target="_blank" rel="external">git-workflows-and-tutorials</a></p>
+<p><br><br><br><br><br></p>
+<h1 id="一、译序"><a href="#一、译序" class="headerlink" title="一、译序"></a>一、译序</h1><p>工作流其实不是一个初级主题，背后的本质问题其实是有效的项目流程管理和高效的开发协同约定，不仅是<code>Git</code>或<code>SVN</code>等<a href="http://zh.wikipedia.org/wiki/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6" target="_blank" rel="external"><code>VCS</code></a>或<a href="http://zh.wikipedia.org/wiki/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86" target="_blank" rel="external"><code>SCM</code></a>工具的使用。</p>
+<p>这篇指南以大家在<code>SVN</code>中已经广为熟悉使用的集中式工作流作为起点，循序渐进地演进到其它高效的分布式工作流，还介绍了如何配合使用便利的<code>Pull Request</code>功能，体系地讲解了各种工作流的应用。</p>
+<p>行文中实践原则和操作示例并重，对于<code>Git</code>的资深玩家可以梳理思考提升，而新接触的同学，也可以跟着step-by-step操作来操练学习并在实际工作中上手使用。</p>
+<p>关于<code>Git</code>工作流主题，网上体系的中文资料不多，主要是零散的操作说明，希望这篇文章能让你更深入理解并在工作中灵活有效地使用起来。</p>
+<p><strong>PS</strong>：</p>
+<p>文中<code>Pull Request</code>的介绍用的是<code>Bitbucket</code>代码托管服务，由于和<code>GitHub</code>基本一样，如果你用的是<code>GitHub</code>（我自己也主要使用<code>GitHub</code>托管代码），不影响理解和操作。</p>
+<p><strong>PPS</strong>：</p>
+<p>本指南循序渐进地讲解工作流，如果<code>Git</code>用的不多，可以从前面的讲的工作流开始操练。操作过程去感受指南的讲解：解决什么问题、如何解决问题，这样理解就深了，也方便活用。</p>
+<p><code>Gitflow</code>工作流是经典模型，体现了工作流的经验和精髓。随着项目过程复杂化，会感受到这个工作流中深思熟虑和威力！</p>
+<p><code>Forking</code>工作流是协作的（<code>GitHub</code>风格）可以先看看<code>Github</code>的Help：<a href="https://help.github.com/articles/fork-a-repo/" target="_blank" rel="external">Fork A Repo</a>和<a href="https://help.github.com/articles/using-pull-requests/" target="_blank" rel="external">Using pull requests</a> 。照着操作，给一个<code>Github</code>项目贡献你的提交，有操作经验再看指南容易意会。指南中给了<a href="https://github.com/oldratlee/translations/blob/master/git-workflows-and-tutorials/workflow-forking.md#%E5%BC%80%E5%8F%91%E8%80%85fork%E6%AD%A3%E5%BC%8F%E4%BB%93%E5%BA%93" target="_blank" rel="external">自己实现<code>Fork</code>的方法</a>：<code>Fork</code>就是服务端的克隆。在指南的操练中使用代码托管服务（如<code>GitHub</code>、<code>Bitbucket</code>），可以点一下按钮就让开发者完成仓库的<code>fork</code>操作。</p>
+<p>:see_no_evil: <a href="http://weibo.com/oldratlee" target="_blank" rel="external">自己</a>理解粗浅，翻译中不足和不对之处，欢迎建议（<a href="https://github.com/oldratlee/translations/issues" target="_blank" rel="external">提交Issue</a>）和指正（<a href="https://github.com/oldratlee/translations/fork" target="_blank" rel="external">Fork后提交代码</a>）！</p>
+<p><br><br><br><br><br><br></p>
+<h1 id="二、Git工作流指南"><a href="#二、Git工作流指南" class="headerlink" title="二、Git工作流指南"></a>二、<code>Git</code>工作流指南</h1><p>:point_right: 工作流有各式各样的用法，但也正因此使得在实际工作中如何上手使用变得很头大。这篇指南通过总览公司团队中最常用的几种<code>Git</code>工作流让大家可以上手使用。</p>
+<p>在阅读的过程中请记住，本文中的几种工作流是作为方案指导而不是条例规定。在展示了各种工作流可能的用法后，你可以从不同的工作流中挑选或揉合出一个满足你自己需求的工作流。</p>
+<p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git_workflow.png&amp;objectId=1190000002918123&amp;token=cac153a6001ea7c6e95edf20a43a45d6" alt=""></p>
+<p><br><br><br><br><br></p>
+<h2 id="2-1-集中式工作流"><a href="#2-1-集中式工作流" class="headerlink" title="2.1 集中式工作流"></a>2.1 集中式工作流</h2><p>如果你的开发团队成员已经很熟悉<code>Subversion</code>，集中式工作流让你无需去适应一个全新流程就可以体验<code>Git</code>带来的收益。这个工作流也可以作为向更<code>Git</code>风格工作流迁移的友好过渡。</p>
+<p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-svn.png&amp;objectId=1190000002918123&amp;token=18dea553725e6476043e5f15aaa01357" alt=""></p>
+<p>转到分布式版本控制系统看起来像个令人生畏的任务，但不改变已用的工作流你也可以用上<code>Git</code>带来的收益。团队可以用和<code>Subversion</code>完全不变的方式来开发项目。</p>
+<p>但使用<code>Git</code>加强开发的工作流，<code>Git</code>有相比<code>SVN</code>的几个优势。<br>首先，每个开发可以有属于自己的整个工程的本地拷贝。隔离的环境让各个开发者的工作和项目的其他部分修改独立开来 ——</p>
+<p>即自由地提交到自己的本地仓库，先完全忽略上游的开发，直到方便的时候再把修改反馈上去。</p>
+<p>其次，<code>Git</code>提供了强壮的分支和合并模型。不像<code>SVN</code>，<code>Git</code>的分支设计成可以做为一种用来在仓库之间集成代码和分享修改的『失败安全』的机制。</p>
+<p><br><br><br><br></p>
+<h3 id="2-1-1-工作方式"><a href="#2-1-1-工作方式" class="headerlink" title="2.1.1 工作方式"></a>2.1.1 工作方式</h3><p>像<code>Subversion</code>一样，集中式工作流以中央仓库作为项目所有修改的单点实体。相比<code>SVN</code>缺省的开发分支<code>trunk</code>，<code>Git</code>叫做<code>master</code>，所有修改提交到这个分支上。本工作流只用到<code>master</code>这一个分支。</p>
+<p>开发者开始先克隆中央仓库。在自己的项目拷贝中像<code>SVN</code>一样的编辑文件和提交修改；但修改是存在本地的，和中央仓库是完全隔离的。开发者可以把和上游的同步延后到一个方便时间点。</p>
+<p>要发布修改到正式项目中，开发者要把本地<code>master</code>分支的修改『推』到中央仓库中。这相当于<code>svn commit</code>操作，但<code>push</code>操作会把所有还不在中央仓库的本地提交都推上去。</p>
+<p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-svn-push-local.png&amp;objectId=1190000002918123&amp;token=cb6d4428bd989a9db24ea68b29588a67" alt=""></p>
+<p><br><br><br><br><br></p>
+<h3 id="2-1-2-冲突解决"><a href="#2-1-2-冲突解决" class="headerlink" title="2.1.2 冲突解决"></a>2.1.2 冲突解决</h3><p>中央仓库代表了正式项目，所以提交历史应该被尊重且是稳定不变的。如果开发者本地的提交历史和中央仓库有分歧，<code>Git</code>会拒绝<code>push</code>提交否则会覆盖已经在中央库的正式提交。</p>
+<p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-svn-managingconflicts.png&amp;objectId=1190000002918123&amp;token=11e5c3cc6f6a74ffd97f1fb369580006" alt=""></p>
+<p>在开发者提交自己功能修改到中央库前，需要先<code>fetch</code>在中央库的新增提交，<code>rebase</code>自己提交到中央库提交历史之上。</p>
+<p>这样做的意思是在说，『我要把自己的修改加到别人已经完成的修改上。』最终的结果是一个完美的线性历史，就像以前的<code>SVN</code>的工作流中一样。</p>
+<p>如果本地修改和上游提交有冲突，<code>Git</code>会暂停<code>rebase</code>过程，给你手动解决冲突的机会。<code>Git</code>解决合并冲突，用和生成提交一样的<a href="https://www.atlassian.com/git/tutorial/git-basics#!status" target="_blank" rel="external"><code>git status</code></a>和<a href="https://www.atlassian.com/git/tutorial/git-basics#!add" target="_blank" rel="external"><code>git add</code></a>命令，很一致方便。还有一点，如果解决冲突时遇到麻烦，<code>Git</code>可以很简单中止整个<code>rebase</code>操作，重来一次（或者让别人来帮助解决）。</p>
+<p><br><br><br><br><br></p>
+<h3 id="2-1-3-示例"><a href="#2-1-3-示例" class="headerlink" title="2.1.3 示例"></a>2.1.3 示例</h3><p>让我们一起逐步分解来看看一个常见的小团队如何用这个工作流来协作的。有两个开发者小明和小红，看他们是如何开发自己的功能并提交到中央仓库上的。</p>
+<h4 id="有人先初始化好中央仓库"><a href="#有人先初始化好中央仓库" class="headerlink" title="有人先初始化好中央仓库"></a>有人先初始化好中央仓库</h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-svn-initialize.png&amp;objectId=1190000002918123&amp;token=87ea7a312eea3ac60744ef5997f686c7" alt=""></p>
+<p>第一步，有人在服务器上创建好中央仓库。如果是新项目，你可以初始化一个空仓库；否则你要导入已有的<code>Git</code>或<code>SVN</code>仓库。</p>
+<p>中央仓库应该是个裸仓库（<code>bare repository</code>），即没有工作目录（<code>working directory</code>）的仓库。可以用下面的命令创建：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">ssh user@host</div><div class="line">git init --bare /path/to/repo.git</div></pre></td></tr></table></figure>
+<p>确保写上有效的<code>user</code>（<code>SSH</code>的用户名），<code>host</code>（服务器的域名或IP地址），<code>/path/to/repo.git</code>（你想存放仓库的位置）。</p>
+<p>注意，为了表示是一个裸仓库，按照约定加上<code>.git</code>扩展名到仓库名上。</p>
+<h4 id="所有人克隆中央仓库"><a href="#所有人克隆中央仓库" class="headerlink" title="所有人克隆中央仓库"></a>所有人克隆中央仓库</h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-svn-clone.png&amp;objectId=1190000002918123&amp;token=74230960454bff61cc38e28016dde2c4" alt=""></p>
+<p>下一步，各个开发者创建整个项目的本地拷贝。通过<a href="https://www.atlassian.com/git/tutorial/git-basics#!clone" target="_blank" rel="external"><code>git clone</code></a>命令完成：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git clone ssh://user@host/path/to/repo.git</div></pre></td></tr></table></figure>
+<p>基于你后续会持续和克隆的仓库做交互的假设，克隆仓库时<code>Git</code>会自动添加远程别名<code>origin</code>指回『父』仓库。</p>
+<p><br><br><br><br><br><br></p>
+<h4 id="小明开发功能"><a href="#小明开发功能" class="headerlink" title="小明开发功能"></a>小明开发功能</h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-svn-1.png&amp;objectId=1190000002918123&amp;token=318dfc4b7192333b4d04457a8dd58de3" alt=""></p>
+<p>在小明的本地仓库中，他使用标准的<code>Git</code>过程开发功能：编辑、暂存（<code>Stage</code>）和提交。</p>
+<p>如果你不熟悉暂存区（<code>Staging Area</code>），这里说明一下：<strong>暂存区</strong>的用来准备一个提交，但可以不用把工作目录中所有的修改内容都包含进来。</p>
+<p>这样你可以创建一个高度聚焦的提交，尽管你本地修改很多内容。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git status # 查看本地仓库的修改状态</div><div class="line">git add # 暂存文件</div><div class="line">git commit # 提交文件</div></pre></td></tr></table></figure>
+<p>请记住，因为这些命令生成的是本地提交，小明可以按自己需求反复操作多次，而不用担心中央仓库上有了什么操作。</p>
+<p>对需要多个更简单更原子分块的大功能，这个做法是很有用的。</p>
+<p><br><br><br><br><br><br></p>
+<h4 id="小红开发功能"><a href="#小红开发功能" class="headerlink" title="小红开发功能"></a>小红开发功能</h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-svn-2.png&amp;objectId=1190000002918123&amp;token=28e354bf920e3b90fa6894ea290a1a00" alt=""></p>
+<p>与此同时，小红在自己的本地仓库中用相同的编辑、暂存和提交过程开发功能。和小明一样，她也不关心中央仓库有没有新提交；<br>当然更不关心小明在他的本地仓库中的操作，因为所有本地仓库都是私有的。</p>
+<p><br><br><br><br><br><br></p>
+<h4 id="小明发布功能"><a href="#小明发布功能" class="headerlink" title="小明发布功能"></a>小明发布功能</h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-svn-3.png&amp;objectId=1190000002918123&amp;token=093a21ecc0bdbebb13f61585151f72a7" alt=""></p>
+<p>一旦小明完成了他的功能开发，会发布他的本地提交到中央仓库中，这样其它团队成员可以看到他的修改。他可以用下面的<a href="https://www.atlassian.com/git/tutorial/remote-repositories#!push" target="_blank" rel="external"><code>git push</code>命令</a>：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git push origin master</div></pre></td></tr></table></figure>
+<p>注意，<code>origin</code>是在小明克隆仓库时<code>Git</code>创建的远程中央仓库别名。<code>master</code>参数告诉<code>Git</code>推送的分支。<br>由于中央仓库自从小明克隆以来还没有被更新过，所以<code>push</code>操作不会有冲突，成功完成。</p>
+<p><br><br><br><br><br><br><br></p>
+<h4 id="小红试着发布功能"><a href="#小红试着发布功能" class="headerlink" title="小红试着发布功能"></a>小红试着发布功能</h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-svn-4.png&amp;objectId=1190000002918123&amp;token=ece2216852baad8d0831038362b6e3f9" alt=""></p>
+<p>一起来看看在小明发布修改后，小红<code>push</code>修改会怎么样？她使用完全一样的<code>push</code>命令：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git push origin master</div></pre></td></tr></table></figure>
+<p>但她的本地历史已经和中央仓库有分岐了，<code>Git</code>拒绝操作并给出下面很长的出错消息：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">error: failed to push some refs to &apos;/path/to/repo.git&apos;</div><div class="line">hint: Updates were rejected because the tip of your current branch is behind</div><div class="line">hint: its remote counterpart. Merge the remote changes (e.g. &apos;git pull&apos;)</div><div class="line">hint: before pushing again.</div><div class="line">hint: See the &apos;Note about fast-forwards&apos; in &apos;git push --help&apos; for details.</div></pre></td></tr></table></figure>
+<p>这避免了小红覆写正式的提交。她要先<code>pull</code>小明的更新到她的本地仓库合并上她的本地修改后，再重试。</p>
+<p><br><br><br><br><br></p>
+<h4 id="小红在小明的提交之上rebase"><a href="#小红在小明的提交之上rebase" class="headerlink" title="小红在小明的提交之上rebase"></a>小红在小明的提交之上<code>rebase</code></h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-svn-5.png&amp;objectId=1190000002918123&amp;token=6430522a0e2cec6438cabb09e09b6354" alt=""></p>
+<p>小红用<a href="https://www.atlassian.com/git/tutorial/remote-repositories#!pull" target="_blank" rel="external"><code>git pull</code></a>合并上游的修改到自己的仓库中。<br>这条命令类似<code>svn update</code>——拉取所有上游提交命令到小红的本地仓库，并尝试和她的本地修改合并：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git pull --rebase origin master</div></pre></td></tr></table></figure>
+<p><code>--rebase</code>选项告诉<code>Git</code>把小红的提交移到同步了中央仓库修改后的<code>master</code>分支的顶部，如下图所示：</p>
+<p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-svn-6.png&amp;objectId=1190000002918123&amp;token=9bd72f11e19f3c1a2c9491dbff73a334" alt=""></p>
+<p>如果你忘加了这个选项，<code>pull</code>操作仍然可以完成，但每次<code>pull</code>操作要同步中央仓库中别人修改时，提交历史会以一个多余的<strong>『合并提交』</strong>结尾。</p>
+<p>对于集中式工作流，最好是使用<code>rebase</code>而不是生成一个合并提交。</p>
+<p><br><br><br><br><br></p>
+<h4 id="小红解决合并冲突"><a href="#小红解决合并冲突" class="headerlink" title="小红解决合并冲突"></a>小红解决合并冲突</h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-svn-7.png&amp;objectId=1190000002918123&amp;token=85acfc687d7ede96bdf596021e147a2c" alt=""></p>
+<p><code>rebase</code>操作过程是把本地提交一次一个地迁移到更新了的中央仓库<code>master</code>分支之上。<br>这意味着可能要解决在迁移某个提交时出现的合并冲突，而不是解决包含了所有提交的大型合并时所出现的冲突。</p>
+<p>这样的方式让你尽可能保持每个提交的聚焦和项目历史的整洁。反过来，简化了哪里引入<code>Bug</code>的分析，如果有必要，回滚修改也可以做到对项目影响最小。</p>
+<p>如果小红和小明的功能是相关的，不大可能在<code>rebase</code>过程中有冲突。如果有，<code>Git</code>在合并有冲突的提交处暂停<code>rebase</code>过程，输出下面的信息并带上相关的指令：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">CONFLICT (content): Merge conflict in &lt;some-file&gt;</div></pre></td></tr></table></figure>
+<p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-svn-8.png&amp;objectId=1190000002918123&amp;token=e9fff79b5189565698de39b45d42551d" alt=""></p>
+<p><code>Git</code>很赞的一点是，任何人可以解决他自己的冲突。在这个例子中，小红可以简单的运行<a href="https://www.atlassian.com/git/tutorial/git-basics#!status" target="_blank" rel="external"><code>git status</code></a>命令来查看哪里有问题。</p>
+<p>冲突文件列在<code>Unmerged paths</code>（未合并路径）一节中：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># Unmerged paths:</div><div class="line"># (use &quot;git reset HEAD &lt;some-file&gt;...&quot; to unstage)</div><div class="line"># (use &quot;git add/rm &lt;some-file&gt;...&quot; as appropriate to mark resolution)</div><div class="line">#</div><div class="line"># both modified: &lt;some-file&gt;</div></pre></td></tr></table></figure>
+<p>接着小红编辑这些文件。修改完成后，用老套路暂存这些文件，并让<a href="https://www.atlassian.com/git/tutorial/rewriting-git-history#!rebase" target="_blank" rel="external"><code>git rebase</code></a>完成剩下的事：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git add &lt;some-file&gt;</div><div class="line">git rebase --continue</div></pre></td></tr></table></figure>
+<p>要做的就这些了。<code>Git</code>会继续一个一个地合并后面的提交，如其它的提交有冲突就重复这个过程。</p>
+<p>如果你碰到了冲突，但发现搞不定，不要惊慌。只要执行下面这条命令，就可以回到你执行<a href="https://www.atlassian.com/git/tutorial/remote-repositories#!pull" target="_blank" rel="external"><code>git pull --rebase</code></a>命令前的样子：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git rebase --abort</div></pre></td></tr></table></figure>
+<p><br><br><br><br><br><br><br></p>
+<h4 id="小红成功发布功能"><a href="#小红成功发布功能" class="headerlink" title="小红成功发布功能"></a>小红成功发布功能</h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-svn-9.png&amp;objectId=1190000002918123&amp;token=9a2d1f5f27647dac4ad8d929832e93f6" alt=""></p>
+<p>小红完成和中央仓库的同步后，就能成功发布她的修改了：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git push origin master</div></pre></td></tr></table></figure>
+<p>如你所见，仅使用几个<code>Git</code>命令我们就可以模拟出传统<code>Subversion</code>开发环境。对于要从<code>SVN</code>迁移过来的团队来说这太好了，但没有发挥出<code>Git</code>分布式本质的优势。</p>
+<p>如果你的团队适应了集中式工作流，但想要更流畅的协作效果，绝对值得探索一下 <code>功能分支工作流</code> 的收益。<br>通过为一个功能分配一个专门的分支，能够做到一个新增功能集成到正式项目之前对新功能进行深入讨论。</p>
+<p><br><br><br><br><br><br></p>
+<h2 id="2-2-功能分支工作流"><a href="#2-2-功能分支工作流" class="headerlink" title="2.2 功能分支工作流"></a>2.2 功能分支工作流</h2><p>功能分支工作流以集中式工作流为基础，不同的是为各个新功能分配一个专门的分支来开发。这样可以在把新功能集成到正式项目前，用<code>Pull Requests</code>的方式讨论变更。</p>
+<p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-feature_branch.png&amp;objectId=1190000002918123&amp;token=13adfff0197f20b88a1b3896610ebfb9" alt=""></p>
+<p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-feature-branch-1.png&amp;objectId=1190000002918123&amp;token=7b6b5ef4d971842877613c04afd454f6" alt=""></p>
+<p>一旦你玩转了<a href="undefined">集中式工作流</a>，在开发过程中可以很简单地加上功能分支，用来鼓励开发者之间协作和简化交流。</p>
+<p>功能分支工作流背后的核心思路是所有的功能开发应该在一个专门的分支，而不是在<code>master</code>分支上。<br>这个隔离可以方便多个开发者在各自的功能上开发而不会弄乱主干代码。<br>另外，也保证了<code>master</code>分支的代码一定不会是有问题的，极大有利于集成环境。</p>
+<p>功能开发隔离也让<a href="undefined"><code>pull requests</code>工作流</a>成功可能，<br><code>pull requests</code>工作流能为每个分支发起一个讨论，在分支合入正式项目之前，给其它开发者有表示赞同的机会。<br>另外，如果你在功能开发中有问题卡住了，可以开一个<code>pull requests</code>来向同学们征求建议。</p>
+<p>这些做法的重点就是，<code>pull requests</code>让团队成员之间互相评论工作变成非常方便！</p>
+<p><br><br><br><br><br><br><br></p>
+<h3 id="2-2-1-工作方式"><a href="#2-2-1-工作方式" class="headerlink" title="2.2.1 工作方式"></a>2.2.1 工作方式</h3><p>功能分支工作流仍然用中央仓库，并且<code>master</code>分支还是代表了正式项目的历史。</p>
+<p>但不是直接提交本地历史到各自的本地<code>master</code>分支，开发者每次在开始新功能前先创建一个新分支。</p>
+<p>功能分支应该有个有描述性的名字，比如<code>animated-menu-items</code>或<code>issue-#1061</code>，这样可以让分支有个清楚且高聚焦的用途。</p>
+<p>在<code>master</code>分支和功能分支之间，<code>Git</code>是没有技术上的区别，所以开发者可以用和集中式工作流中完全一样的方式编辑、暂存和提交修改到功能分支上。</p>
+<p>另外，功能分支也可以（且应该）<code>push</code>到中央仓库中。这样不修改正式代码就可以和其它开发者分享提交的功能。</p>
+<p>由于<code>master</code>仅有的一个『特殊』分支，在中央仓库上存多个功能分支不会有任何问题。当然，这样做也可以很方便地备份各自的本地提交。</p>
+<p><br><br><br><br><br><br></p>
+<h3 id="2-2-2-Pull-Requests"><a href="#2-2-2-Pull-Requests" class="headerlink" title="2.2.2 Pull Requests"></a>2.2.2 <code>Pull Requests</code></h3><p>功能分支除了可以隔离功能的开发，也使得通过<a href="undefined"><code>Pull Requests</code></a>讨论变更成为可能。<br>一旦某个开发完成一个功能，不是立即合并到<code>master</code>，而是<code>push</code>到中央仓库的功能分支上并发起一个<code>Pull Request</code>请求去合并修改到<code>master</code>。</p>
+<p>在修改成为主干代码前，这让其它的开发者有机会先去<code>Review</code>变更。</p>
+<p><code>Code Review</code>是<code>Pull Requests</code>的一个重要的收益，但<code>Pull Requests</code>目的是讨论代码一个通用方式。<br>你可以把<code>Pull Requests</code>作为专门给某个分支的讨论。这意味着可以在更早的开发过程中就可以进行<code>Code Review</code>。</p>
+<p>比如，一个开发者开发功能需要帮助时，要做的就是发起一个<code>Pull Request</code>，相关的人就会自动收到通知，在相关的提交旁边能看到需要帮助解决的问题。</p>
+<p>一旦<code>Pull Request</code>被接受了，发布功能要做的就和集中式工作流就很像了。</p>
+<p>首先，确定本地的<code>master</code>分支和上游的<code>master</code>分支是同步的。然后合并功能分支到本地<code>master</code>分支并<code>push</code>已经更新的本地<code>master</code>分支到中央仓库。</p>
+<p>仓库管理的产品解决方案像<a href="http://bitbucket.org/" target="_blank" rel="external"><code>Bitbucket</code></a>或<a href="http://www.atlassian.com/stash" target="_blank" rel="external"><code>Stash</code></a>，可以良好地支持<code>Pull Requests</code>。可以看看<code>Stash</code>的<a href="https://confluence.atlassian.com/display/STASH/Using+pull+requests+in+Stash" target="_blank" rel="external"><code>Pull Requests</code>文档</a>。</p>
+<p><br><br><br><br><br><br></p>
+<h3 id="2-2-3-示例"><a href="#2-2-3-示例" class="headerlink" title="2.2.3 示例"></a>2.2.3 示例</h3><p>下面的示例演示了如何把<code>Pull Requests</code>作为<code>Code Review</code>的方式，但注意<code>Pull Requests</code>可以用于很多其它的目的。</p>
+<p><br><br><br><br><br></p>
+<h4 id="小红开始开发一个新功能"><a href="#小红开始开发一个新功能" class="headerlink" title="小红开始开发一个新功能"></a>小红开始开发一个新功能</h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-feature-branch-2.png&amp;objectId=1190000002918123&amp;token=5fdc09357dca8116668ea17617ccefde" alt=""></p>
+<p>在开始开发功能前，小红需要一个独立的分支。使用下面的命令<a href="https://www.atlassian.com/git/tutorial/git-branches#!checkout" target="_blank" rel="external">新建一个分支</a>：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git checkout -b marys-feature master</div></pre></td></tr></table></figure>
+<p>这个命令检出一个基于<code>master</code>名为<code>marys-feature</code>的分支，<code>Git</code>的<code>-b</code>选项表示如果分支还不存在则新建分支。</p>
+<p>这个新分支上，小红按老套路编辑、暂存和提交修改，按需要提交以实现功能：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git status</div><div class="line">git add &lt;some-file&gt;</div><div class="line">git commit</div></pre></td></tr></table></figure>
+<p><br><br><br><br><br></p>
+<h4 id="小红要去吃个午饭"><a href="#小红要去吃个午饭" class="headerlink" title="小红要去吃个午饭"></a>小红要去吃个午饭</h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-feature-branch-3.png&amp;objectId=1190000002918123&amp;token=4f934833032d75e4930ec888537d22f4" alt=""></p>
+<p>早上小红为新功能添加一些提交。<br>去吃午饭前，<code>push</code>功能分支到中央仓库是很好的做法，这样可以方便地备份，如果和其它开发协作，也让他们可以看到小红的提交。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git push -u origin marys-feature</div></pre></td></tr></table></figure>
+<p>这条命令<code>push</code> <code>marys-feature</code>分支到中央仓库（<code>origin</code>），<code>-u</code>选项设置本地分支去跟踪远程对应的分支。</p>
+<p>设置好跟踪的分支后，小红就可以使用<code>git push</code>命令省去指定推送分支的参数。</p>
+<p><br><br><br><br><br><br></p>
+<h4 id="小红完成功能开发"><a href="#小红完成功能开发" class="headerlink" title="小红完成功能开发"></a>小红完成功能开发</h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-feature-branch-4.png&amp;objectId=1190000002918123&amp;token=a3906c9f4d1fbcfc7e8d1e63534702bf" alt=""></p>
+<p>小红吃完午饭回来，完成整个功能的开发。<a href="https://www.atlassian.com/git/tutorial/git-branches#!merge" target="_blank" rel="external">在合并到<code>master</code>之前</a>，<br>她发起一个<code>Pull Request</code>让团队的其它人知道功能已经完成。但首先，她要确认中央仓库中已经有她最近的提交：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git push</div></pre></td></tr></table></figure>
+<p>然后，在她的<code>Git</code> <code>GUI</code>客户端中发起<code>Pull Request</code>，请求合并<code>marys-feature</code>到<code>master</code>，团队成员会自动收到通知。</p>
+<p><code>Pull Request</code>很酷的是可以在相关的提交旁边显示评注，所以你可以很对某个变更集提问。</p>
+<p><br><br><br><br><br><br></p>
+<h4 id="小黑收到Pull-Request"><a href="#小黑收到Pull-Request" class="headerlink" title="小黑收到Pull Request"></a>小黑收到<code>Pull Request</code></h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-feature-branch-5.png&amp;objectId=1190000002918123&amp;token=620d388c72d0f57f55d12dd71e08fd8d" alt=""></p>
+<p>小黑收到了<code>Pull Request</code>后会查看<code>marys-feature</code>的修改。决定在合并到正式项目前是否要做些修改，且通过<code>Pull Request</code>和小红来回地讨论。</p>
+<p><br><br><br><br><br><br></p>
+<h4 id="小红再做修改"><a href="#小红再做修改" class="headerlink" title="小红再做修改"></a>小红再做修改</h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-feature-branch-6.png&amp;objectId=1190000002918123&amp;token=d79bd474403568ec4f3db346586c2717" alt=""></p>
+<p>要再做修改，小红用和功能第一个迭代完全一样的过程。编辑、暂存、提交并<code>push</code>更新到中央仓库。小红这些活动都会显示在<code>Pull Request</code>上，小黑可以断续做评注。</p>
+<p>如果小黑有需要，也可以把<code>marys-feature</code>分支拉到本地，自己来修改，他加的提交也会一样显示在<code>Pull Request</code>上。</p>
+<p><br><br><br><br><br><br></p>
+<h4 id="小红发布她的功能"><a href="#小红发布她的功能" class="headerlink" title="小红发布她的功能"></a>小红发布她的功能</h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-feature-branch-7.png&amp;objectId=1190000002918123&amp;token=dd10ce3ea0b8e482c76cc46243af07f9" alt=""></p>
+<p>一旦小黑可以的接受<code>Pull Request</code>，就可以合并功能到稳定项目代码中（可以由小黑或是小红来做这个操作）：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git checkout master</div><div class="line">git pull</div><div class="line">git pull origin marys-feature</div><div class="line">git push</div></pre></td></tr></table></figure>
+<p>无论谁来做合并，首先要检出<code>master</code>分支并确认是它是最新的。然后执行<code>git pull origin marys-feature</code>合并<code>marys-feature</code>分支到和已经和远程一致的本地<code>master</code>分支。</p>
+<p>你可以使用简单<code>git merge marys-feature</code>命令，但前面的命令可以保证总是最新的新功能分支。</p>
+<p>无论谁来做合并，首先要检出<code>master</code>分支并确认是它是最新的。然后执行<code>git pull origin marys-feature</code>合并<code>marys-feature</code>分支到和已经和远程一致的本地<code>master</code>分支。<br>你可以使用简单<code>git merge marys-feature</code>命令，但前面的命令可以保证总是最新的新功能分支。<br>最后更新的<code>master</code>分支要重新<code>push</code>回到<code>origin</code>。</p>
+<p>这个过程常常会生成一个合并提交。有些开发者喜欢有合并提交，因为它像一个新功能和原来代码基线的连通符。但如果你偏爱线性的提交历史，可以在执行合并时<code>rebase</code>新功能到<code>master</code>分支的顶部，这样生成一个快进（<code>fast-forward</code>）的合并。</p>
+<p>一些<code>GUI</code>客户端可以只要点一下『接受』按钮执行好上面的命令来自动化<code>Pull Request</code>接受过程。<br>如果你的不能这样，至少在功能合并到<code>master</code>分支后能自动关闭<code>Pull Request</code>。</p>
+<h4 id="与此同时，小明在做和小红一样的事"><a href="#与此同时，小明在做和小红一样的事" class="headerlink" title="与此同时，小明在做和小红一样的事"></a>与此同时，小明在做和小红一样的事</h4><p>当小红和小黑在<code>marys-feature</code>上工作并讨论她的<code>Pull Request</code>的时候，小明在自己的功能分支上做完全一样的事。</p>
+<p>通过隔离功能到独立的分支上，每个人都可以自主的工作，当然必要的时候在开发者之间分享变更还是比较繁琐的。</p>
+<p>到了这里，但愿你发现了<code>功能分支</code>可以很直接地在 <code>集中式工作流</code> 的仅有的<code>master</code>分支上完成多功能的开发。<br>另外，功能分支还使用了<code>Pull Request</code>，使得可以在你的版本控制<code>GUI</code>客户端中讨论某个提交。</p>
+<p>功能分支工作流是开发项目异常灵活的方式。问题是，有时候太灵活了。对于大型团队，常常需要给不同分支分配一个更具体的角色。</p>
+<p><code>Gitflow</code>工作流是管理功能开发、发布准备和维护的常用模式。</p>
+<p><br><br><br><br><br><br></p>
+<h2 id="2-3-Gitflow工作流"><a href="#2-3-Gitflow工作流" class="headerlink" title="2.3 Gitflow工作流"></a>2.3 <code>Gitflow</code>工作流</h2><p><code>Gitflow</code>工作流通过为功能开发、发布准备和维护分配独立的分支，让发布迭代过程更流畅。严格的分支模型也为大型项目提供了一些非常必要的结构。</p>
+<p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflows-gitflow.png&amp;objectId=1190000002918123&amp;token=ee270ee95a574ec7c0b3161043b94ea0" alt=""></p>
+<p>这节介绍的<a href="http://nvie.com/posts/a-successful-git-branching-model/" target="_blank" rel="external"><code>Gitflow</code>工作流</a>借鉴自在<a href="http://nvie.com/" target="_blank" rel="external">nvie</a>的<em>Vincent Driessen</em>。</p>
+<p><code>Gitflow</code>工作流定义了一个围绕<code>项目发布</code>的严格分支模型。虽然比<a href="undefined">功能分支工作流</a>复杂几分，但提供了用于一个健壮的用于管理大型项目的框架。</p>
+<p><code>Gitflow</code>工作流没有用超出功能分支工作流的概念和命令，而是为不同的分支分配一个很明确的角色，并定义分支之间如何和什么时候进行交互。</p>
+<p>除了使用功能分支，在做准备、维护和记录发布也使用各自的分支。</p>
+<p>当然你可以用上功能分支工作流所有的好处：<code>Pull Requests</code>、隔离实验性开发和更高效的协作。</p>
+<p><br><br><br><br><br><br></p>
+<h3 id="2-3-1-工作方式"><a href="#2-3-1-工作方式" class="headerlink" title="2.3.1 工作方式"></a>2.3.1 工作方式</h3><p><code>Gitflow</code>工作流仍然用中央仓库作为所有开发者的交互中心。和其它的工作流一样，开发者在本地工作并<code>push</code>分支到要中央仓库中。</p>
+<p><br><br><br><br><br><br></p>
+<h3 id="2-3-2-历史分支"><a href="#2-3-2-历史分支" class="headerlink" title="2.3.2 历史分支"></a>2.3.2 历史分支</h3><p>相对使用仅有的一个<code>master</code>分支，<code>Gitflow</code>工作流使用2个分支来记录项目的历史。<code>master</code>分支存储了正式发布的历史，而<code>develop</code>分支作为功能的集成分支。</p>
+<p>这样也方便<code>master</code>分支上的所有提交分配一个版本号。</p>
+<p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-release-cycle-1historical.png&amp;objectId=1190000002918123&amp;token=0f431c7f8666865a1a457fc8b6a09546" alt=""></p>
+<p>剩下要说明的问题围绕着这2个分支的区别展开。</p>
+<p><br><br><br><br><br><br></p>
+<h3 id="2-3-3-功能分支"><a href="#2-3-3-功能分支" class="headerlink" title="2.3.3 功能分支"></a>2.3.3 功能分支</h3><p>每个新功能位于一个自己的分支，这样可以<a href="https://www.atlassian.com/git/tutorial/remote-repositories#!push" target="_blank" rel="external"><code>push</code>到中央仓库以备份和协作</a>。</p>
+<p>但功能分支不是从<code>master</code>分支上拉出新分支，而是使用<code>develop</code>分支作为父分支。当新功能完成时，<a href="https://www.atlassian.com/git/tutorial/git-branches#!merge" target="_blank" rel="external">合并回<code>develop</code>分支</a>。</p>
+<p>每个新功能位于一个自己的分支，这样可以<a href="https://www.atlassian.com/git/tutorial/remote-repositories#!push" target="_blank" rel="external"><code>push</code>到中央仓库以备份和协作</a>。<br>但功能分支不是从<code>master</code>分支上拉出新分支，而是使用<code>develop</code>分支作为父分支。当新功能完成时，<a href="https://www.atlassian.com/git/tutorial/git-branches#!merge" target="_blank" rel="external">合并回<code>develop</code>分支</a>。<br>新功能提交应该从不直接与<code>master</code>分支交互。</p>
+<p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-release-cycle-2feature.png&amp;objectId=1190000002918123&amp;token=f9d5cd653f83e6d43376e02b5c8d4143" alt=""></p>
+<p>注意，从各种含义和目的上来看，功能分支加上<code>develop</code>分支就是功能分支工作流的用法。但<code>Gitflow</code>工作流没有在这里止步。</p>
+<p><br><br><br><br><br><br></p>
+<h3 id="2-3-4-发布分支"><a href="#2-3-4-发布分支" class="headerlink" title="2.3.4 发布分支"></a>2.3.4 发布分支</h3><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-release-cycle-3release.png&amp;objectId=1190000002918123&amp;token=3b4ab43d3ac79525702f4334b5413557" alt=""></p>
+<p>一旦<code>develop</code>分支上有了做一次发布（或者说快到了既定的发布日）的足够功能，就从<code>develop</code>分支上<code>fork</code>一个发布分支。</p>
+<p>新建的分支用于开始发布循环，所以从这个时间点开始之后新的功能不能再加到这个分支上——<br>这个分支只应该做<code>Bug</code>修复、文档生成和其它面向发布任务。</p>
+<p>一旦对外发布的工作都完成了，发布分支合并到<code>master</code>分支并分配一个版本号打好<code>Tag</code>。</p>
+<p>另外，这些从新建发布分支以来的做的修改要合并回<code>develop</code>分支。</p>
+<p>使用一个用于发布准备的专门分支，使得一个团队可以在完善当前的发布版本的同时，另一个团队可以继续开发下个版本的功能。</p>
+<p>这也打造定义良好的开发阶段（比如，可以很轻松地说，『这周我们要做准备发布版本4.0』，并且在仓库的目录结构中可以实际看到）。</p>
+<p>常用的分支约定：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">用于新建发布分支的分支: develop</div><div class="line">用于合并的分支: master</div><div class="line">分支命名: release-* 或 release/*</div></pre></td></tr></table></figure>
+<h3 id="2-3-5-维护分支"><a href="#2-3-5-维护分支" class="headerlink" title="2.3.5 维护分支"></a>2.3.5 维护分支</h3><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-release-cycle-4maintenance.png&amp;objectId=1190000002918123&amp;token=0e0a4f43571b068d4b141e11b4bff4de" alt=""></p>
+<p>维护分支或说是热修复（<code>hotfix</code>）分支用于生成快速给产品发布版本（<code>production releases</code>）打补丁，这是唯一可以直接从<code>master</code>分支<code>fork</code>出来的分支。</p>
+<p>修复完成，修改应该马上合并回<code>master</code>分支和<code>develop</code>分支（当前的发布分支），<code>master</code>分支应该用新的版本号打好<code>Tag</code>。</p>
+<p>为<code>Bug</code>修复使用专门分支，让团队可以处理掉问题而不用打断其它工作或是等待下一个发布循环。<br>你可以把维护分支想成是一个直接在<code>master</code>分支上处理的临时发布。</p>
+<p><br><br><br><br><br><br><br></p>
+<h3 id="2-3-6-示例"><a href="#2-3-6-示例" class="headerlink" title="2.3.6 示例"></a>2.3.6 示例</h3><p>下面的示例演示本工作流如何用于管理单个发布循环。假设你已经创建了一个中央仓库。</p>
+<h4 id="创建开发分支"><a href="#创建开发分支" class="headerlink" title="创建开发分支"></a>创建开发分支</h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-release-cycle-5createdev.png&amp;objectId=1190000002918123&amp;token=0d727e83af80cdc3b5061361c8c47141" alt=""></p>
+<p>第一步为<code>master</code>分支配套一个<code>develop</code>分支。简单来做可以<a href="https://www.atlassian.com/git/tutorial/git-branches#!branch" target="_blank" rel="external">本地创建一个空的<code>develop</code>分支</a>，<code>push</code>到服务器上：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git branch develop</div><div class="line">git push -u origin develop</div></pre></td></tr></table></figure>
+<p>以后这个分支将会包含了项目的全部历史，而<code>master</code>分支将只包含了部分历史。其它开发者这时应该<a href="https://www.atlassian.com/git/tutorial/git-basics#!clone" target="_blank" rel="external">克隆中央仓库</a>，建好<code>develop</code>分支的跟踪分支：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git clone ssh://user@host/path/to/repo.git</div><div class="line">git checkout -b develop origin/develop</div></pre></td></tr></table></figure>
+<p>现在每个开发都有了这些历史分支的本地拷贝。</p>
+<p><br><br><br></p>
+<h4 id="小红和小明开始开发新功能"><a href="#小红和小明开始开发新功能" class="headerlink" title="小红和小明开始开发新功能"></a>小红和小明开始开发新功能</h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-release-cycle-6maryjohnbeginnew.png&amp;objectId=1190000002918123&amp;token=a9c571a2d28cb8b09e250efbb716b5e7" alt=""></p>
+<p>这个示例中，小红和小明开始各自的功能开发。他们需要为各自的功能创建相应的分支。新分支不是基于<code>master</code>分支，而是应该<a href="https://www.atlassian.com/git/tutorial/git-branches#!checkout" target="_blank" rel="external">基于<code>develop</code>分支</a>：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git checkout -b some-feature develop</div></pre></td></tr></table></figure>
+<p>他们用老套路添加提交到各自功能分支上：编辑、暂存、提交：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git status</div><div class="line">git add &lt;some-file&gt;</div><div class="line">git commit</div></pre></td></tr></table></figure>
+<p><br><br><br><br></p>
+<h4 id="小红完成功能开发-1"><a href="#小红完成功能开发-1" class="headerlink" title="小红完成功能开发"></a>小红完成功能开发</h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-release-cycle-7maryfinishes.png&amp;objectId=1190000002918123&amp;token=6334dcdb5bbc763352524ff8ebce1272" alt=""></p>
+<p>添加了提交后，小红觉得她的功能OK了。如果团队使用<code>Pull Requests</code>，这时候可以发起一个用于合并到<code>develop</code>分支。<br>否则她可以直接合并到她本地的<code>develop</code>分支后<code>push</code>到中央仓库：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git pull origin develop</div><div class="line">git checkout develop</div><div class="line">git merge some-feature</div><div class="line">git push</div><div class="line">git branch -d some-feature</div></pre></td></tr></table></figure>
+<p>第一条命令在合并功能前确保<code>develop</code>分支是最新的。注意，功能决不应该直接合并到<code>master</code>分支。<br>冲突解决方法和<a href="undefined">集中式工作流</a>一样。</p>
+<p><br><br><br><br></p>
+<h4 id="小红开始准备发布"><a href="#小红开始准备发布" class="headerlink" title="小红开始准备发布"></a>小红开始准备发布</h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-release-cycle-8maryprepsrelease.png&amp;objectId=1190000002918123&amp;token=3d2d488b25945d09bb417e489a552894" alt=""></p>
+<p>这个时候小明正在实现他的功能，小红开始准备她的第一个项目正式发布。</p>
+<p>像功能开发一样，她用一个新的分支来做发布准备。这一步也确定了发布的版本号：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git checkout -b release-0.1 develop</div></pre></td></tr></table></figure>
+<p>这个分支是清理发布、执行所有测试、更新文档和其它为下个发布做准备操作的地方，像是一个专门用于改善发布的功能分支。</p>
+<p>只要小红创建这个分支并<code>push</code>到中央仓库，这个发布就是功能冻结的。任何不在<code>develop</code>分支中的新功能都推到下个发布循环中。</p>
+<p><br><br><br><br></p>
+<h4 id="小红完成发布"><a href="#小红完成发布" class="headerlink" title="小红完成发布"></a>小红完成发布</h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-release-cycle-9maryfinishes.png&amp;objectId=1190000002918123&amp;token=7be55b4e28cefa367a5775ea46b357ca" alt=""></p>
+<p>一旦准备好了对外发布，小红合并修改到<code>master</code>分支和<code>develop</code>分支上，删除发布分支。合并回<code>develop</code>分支很重要，因为在发布分支中已经提交的更新需要在后面的新功能中也要是可用的。<br>另外，如果小红的团队要求<code>Code Review</code>，这是一个发起<code>Pull Request</code>的理想时机。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git checkout master</div><div class="line">git merge release-0.1</div><div class="line">git push</div><div class="line">git checkout develop</div><div class="line">git merge release-0.1</div><div class="line">git push</div><div class="line">git branch -d release-0.1</div></pre></td></tr></table></figure>
+<p>发布分支是作为功能开发（<code>develop</code>分支）和对外发布（<code>master</code>分支）间的缓冲。只要有合并到<code>master</code>分支，就应该打好<code>Tag</code>以方便跟踪。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git tag -a 0.1 -m &quot;Initial public release&quot; master</div><div class="line">git push --tags</div></pre></td></tr></table></figure>
+<p><code>Git</code>有提供各种勾子（<code>hook</code>），即仓库有事件发生时触发执行的脚本。<br>可以配置一个勾子，在你<code>push</code>中央仓库的<code>master</code>分支时，自动构建好对外发布。</p>
+<p><br><br><br><br></p>
+<h4 id="最终用户发现Bug"><a href="#最终用户发现Bug" class="headerlink" title="最终用户发现Bug"></a>最终用户发现<code>Bug</code></h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-gitflow-enduserbug.png&amp;objectId=1190000002918123&amp;token=09a92134b7303b6506c624e17e7e767b" alt=""></p>
+<p>对外发布后，小红回去和小明一起做下个发布的新功能开发，直到有最终用户开了一个<code>Ticket</code>抱怨当前版本的一个<code>Bug</code>。<br>为了处理<code>Bug</code>，小红（或小明）从<code>master</code>分支上拉出了一个维护分支，提交修改以解决问题，然后直接合并回<code>master</code>分支：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git checkout -b issue-#001 master</div><div class="line"># Fix the bug</div><div class="line">git checkout master</div><div class="line">git merge issue-#001</div><div class="line">git push</div></pre></td></tr></table></figure>
+<p>就像发布分支，维护分支中新加这些重要修改需要包含到<code>develop</code>分支中，所以小红要执行一个合并操作。然后就可以安全地<a href="https://www.atlassian.com/git/tutorial/git-branches#!branch" target="_blank" rel="external">删除这个分支</a>了：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git checkout develop</div><div class="line">git merge issue-#001</div><div class="line">git push</div><div class="line">git branch -d issue-#001</div></pre></td></tr></table></figure>
+<p>到了这里，但愿你对<a href="undefined">集中式工作流</a>、<a href="undefined">功能分支工作流</a>和<code>Gitflow</code>工作流已经感觉很舒适了。<br>你应该也牢固的掌握了本地仓库的潜能，<code>push</code>/<code>pull</code>模式和<code>Git</code>健壮的分支和合并模型。</p>
+<p>记住，这里演示的工作流只是可能用法的例子，而不是在实际工作中使用<code>Git</code>不可违逆的条例。<br>所以不要畏惧按自己需要对工作流的用法做取舍。不变的目标就是让<code>Git</code>为你所用。</p>
+<p><br><br><br><br><br></p>
+<h2 id="2-4-Forking工作流"><a href="#2-4-Forking工作流" class="headerlink" title="2.4 Forking工作流"></a>2.4 <code>Forking</code>工作流</h2><p><code>Forking</code>工作流是分布式工作流，充分利用了<code>Git</code>在分支和克隆上的优势。可以安全可靠地管理大团队的开发者（<code>developer</code>），并能接受不信任贡献者（<code>contributor</code>）的提交。</p>
+<p><code>Forking</code>工作流和前面讨论的几种工作流有根本的不同，这种工作流不是使用单个服务端仓库作为『中央』代码基线，而让各个开发者都有一个服务端仓库。这意味着各个代码贡献者有2个<code>Git</code>仓库而不是1个：一个本地私有的，另一个服务端公开的。</p>
+<p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflows-forking.png&amp;objectId=1190000002918123&amp;token=556ec96e04a6af9aa60d8ec1c999ba30" alt=""></p>
+<p><code>Forking</code>工作流的一个主要优势是，贡献的代码可以被集成，而不需要所有人都能<code>push</code>代码到仅有的中央仓库中。</p>
+<p>开发者<code>push</code>到自己的服务端仓库，而只有项目维护者才能<code>push</code>到正式仓库。</p>
+<p>这样项目维护者可以接受任何开发者的提交，但无需给他正式代码库的写权限。</p>
+<p>效果就是一个分布式的工作流，能为大型、自发性的团队（包括了不受信的第三方）提供灵活的方式来安全的协作。</p>
+<p>也让这个工作流成为开源项目的理想工作流。</p>
+<h3 id="2-4-1-工作方式"><a href="#2-4-1-工作方式" class="headerlink" title="2.4.1 工作方式"></a>2.4.1 工作方式</h3><p>和其它的<code>Git</code>工作流一样，<code>Forking</code>工作流要先有一个公开的正式仓库存储在服务器上。</p>
+<p>但一个新的开发者想要在项目上工作时，不是直接从正式仓库克隆，而是<code>fork</code>正式项目在服务器上创建一个拷贝。</p>
+<p>这个仓库拷贝作为他个人公开仓库 ——<br>其它开发者不允许<code>push</code>到这个仓库，但可以<code>pull</code>到修改（后面我们很快就会看这点很重要）。</p>
+<p>在创建了自己服务端拷贝之后，和之前的工作流一样，开发者执行<a href="https://www.atlassian.com/git/tutorial/git-basics#!clone" target="_blank" rel="external"><code>git clone</code>命令</a>克隆仓库到本地机器上，作为私有的开发环境。</p>
+<p>要提交本地修改时，<code>push</code>提交到自己公开仓库中 —— 而不是正式仓库中。<br>然后，给正式仓库发起一个<code>pull request</code>，让项目维护者知道有更新已经准备好可以集成了。<br>对于贡献的代码，<code>pull request</code>也可以很方便地作为一个讨论的地方。</p>
+<p>为了集成功能到正式代码库，维护者<code>pull</code>贡献者的变更到自己的本地仓库中，检查变更以确保不会让项目出错，</p>
+<p><a href="https://www.atlassian.com/git/tutorial/git-branches#!merge" target="_blank" rel="external">合并变更到自己本地的<code>master</code>分支</a>，<br>然后<a href="https://www.atlassian.com/git/tutorial/remote-repositories#!push" target="_blank" rel="external"><code>push</code></a><code>master</code>分支到服务器的正式仓库中。</p>
+<p>到此，贡献的提交成为了项目的一部分，其它的开发者应该执行<code>pull</code>操作与正式仓库同步自己本地仓库。</p>
+<p><br><br><br><br><br><br><br><br></p>
+<h3 id="2-4-2-正式仓库"><a href="#2-4-2-正式仓库" class="headerlink" title="2.4.2 正式仓库"></a>2.4.2 正式仓库</h3><p>在<code>Forking</code>工作流中，『官方』仓库的叫法只是一个约定，理解这点很重要。<br>从技术上来看，各个开发者仓库和正式仓库在<code>Git</code>看来没有任何区别。<br>事实上，让正式仓库之所以正式的唯一原因是它是项目维护者的公开仓库。</p>
+<p><br><br><br><br><br></p>
+<h3 id="2-4-3-Forking工作流的分支使用方式"><a href="#2-4-3-Forking工作流的分支使用方式" class="headerlink" title="2.4.3 Forking工作流的分支使用方式"></a>2.4.3 <code>Forking</code>工作流的分支使用方式</h3><p>所有的个人公开仓库实际上只是为了方便和其它的开发者共享分支。<br>各个开发者应该用分支隔离各个功能，就像在<a href="undefined">功能分支工作流</a>和<a href="undefined"><code>Gitflow</code>工作流</a>一样。</p>
+<p>唯一的区别是这些分支被共享了。在<code>Forking</code>工作流中这些分支会被<code>pull</code>到另一个开发者的本地仓库中，而在功能分支工作流和<code>Gitflow</code>工作流中是直接被<code>push</code>到正式仓库中。</p>
+<p><br><br><br><br><br></p>
+<h3 id="2-4-4-示例"><a href="#2-4-4-示例" class="headerlink" title="2.4.4 示例"></a>2.4.4 示例</h3><h4 id="项目维护者初始化正式仓库"><a href="#项目维护者初始化正式仓库" class="headerlink" title="项目维护者初始化正式仓库"></a>项目维护者初始化正式仓库</h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflows-forking-1.png&amp;objectId=1190000002918123&amp;token=c77bc3f94131272bbd62318025782253" alt=""></p>
+<p>和任何使用<code>Git</code>项目一样，第一步是创建在服务器上一个正式仓库，让所有团队成员都可以访问到。</p>
+<p>通常这个仓库也会作为项目维护者的公开仓库。</p>
+<p><a href="https://www.atlassian.com/git/tutorial/git-basics#!init" target="_blank" rel="external">公开仓库应该是裸仓库</a>，不管是不是正式代码库。</p>
+<p>所以项目维护者会运行像下面的命令来搭建正式仓库：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">ssh user@host</div><div class="line">git init --bare /path/to/repo.git</div></pre></td></tr></table></figure>
+<p><code>Bitbucket</code>和<code>Stash</code>提供了一个方便的<code>GUI</code>客户端以完成上面命令行做的事。<br>这个搭建中央仓库的过程和前面提到的工作流完全一样。<br>如果有现存的代码库，维护者也要<code>push</code>到这个仓库中。</p>
+<p><br><br><br><br><br><br></p>
+<h4 id="开发者fork正式仓库"><a href="#开发者fork正式仓库" class="headerlink" title="开发者fork正式仓库"></a>开发者<code>fork</code>正式仓库</h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflows-forking-2.png&amp;objectId=1190000002918123&amp;token=eed10ddbe6eb3f0908588591db17d242" alt=""></p>
+<p>其它所有的开发需要<code>fork</code>正式仓库。<br>可以用<code>git clone</code>命令<a href="https://confluence.atlassian.com/display/BITBUCKET/Set+up+SSH+for+Git" target="_blank" rel="external">用<code>SSH</code>协议连通到服务器</a>，<br>拷贝仓库到服务器另一个位置 —— 是的，<code>fork</code>操作基本上就只是一个服务端的克隆。<br><code>Bitbucket</code>和<code>Stash</code>上可以点一下按钮就让开发者完成仓库的<code>fork</code>操作。</p>
+<p>这一步完成后，每个开发都在服务端有一个自己的仓库。和正式仓库一样，这些仓库应该是裸仓库。</p>
+<p><br><br><br><br><br><br><br></p>
+<h4 id="开发者克隆自己fork出来的仓库"><a href="#开发者克隆自己fork出来的仓库" class="headerlink" title="开发者克隆自己fork出来的仓库"></a>开发者克隆自己<code>fork</code>出来的仓库</h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflows-forking-3.png&amp;objectId=1190000002918123&amp;token=84d8a88dafdd7564a5e0eb6b7bf619fe" alt=""></p>
+<p>下一步，各个开发者要克隆自己的公开仓库，用熟悉的<code>git clone</code>命令。</p>
+<p>在这个示例中，假定用<code>Bitbucket</code>托管了仓库。记住，如果这样的话各个开发者需要有各自的<code>Bitbucket</code>账号，</p>
+<p>使用下面命令克隆服务端自己的仓库：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git clone https://user@bitbucket.org/user/repo.git</div></pre></td></tr></table></figure>
+<p>相比前面介绍的工作流只用了一个<code>origin</code>远程别名指向中央仓库，<code>Forking</code>工作流需要2个远程别名 ——<br>一个指向正式仓库，另一个指向开发者自己的服务端仓库。别名的名字可以任意命名，常见的约定是使用<code>origin</code>作为远程克隆的仓库的别名<br>（这个别名会在运行<code>git clone</code>自动创建），<code>upstream</code>（上游）作为正式仓库的别名。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git remote add upstream https://bitbucket.org/maintainer/repo</div></pre></td></tr></table></figure>
+<p>需要自己用上面的命令创建<code>upstream</code>别名。这样可以简单地保持本地仓库和正式仓库的同步更新。<br>注意，如果上游仓库需要认证（比如不是开源的），你需要提供用户：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git remote add upstream https://user@bitbucket.org/maintainer/repo.git</div></pre></td></tr></table></figure>
+<p>这时在克隆和<code>pull</code>正式仓库时，需要提供用户的密码。</p>
+<h4 id="开发者开发自己的功能"><a href="#开发者开发自己的功能" class="headerlink" title="开发者开发自己的功能"></a>开发者开发自己的功能</h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflows-forking-4.png&amp;objectId=1190000002918123&amp;token=c6966e41d7f459fd41e619b2d8dc7f78" alt=""></p>
+<p>在刚克隆的本地仓库中，开发者可以像其它工作流一样的编辑代码、<a href="https://www.atlassian.com/git/tutorial/git-basics#!commit" target="_blank" rel="external">提交修改</a>和<a href="https://www.atlassian.com/git/tutorial/git-branches#!branch" target="_blank" rel="external">新建分支</a>：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git checkout -b some-feature</div><div class="line"># Edit some code</div><div class="line">git commit -a -m &quot;Add first draft of some feature&quot;</div></pre></td></tr></table></figure>
+<p>所有的修改都是私有的直到<code>push</code>到自己公开仓库中。如果正式项目已经往前走了，可以用<a href="https://www.atlassian.com/git/tutorial/remote-repositories#!pull" target="_blank" rel="external"><code>git pull</code>命令</a>获得新的提交：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git pull upstream master</div></pre></td></tr></table></figure>
+<p>由于开发者应该都在专门的功能分支上工作，<code>pull</code>操作结果会都是<a href="https://www.atlassian.com/git/tutorial/git-branches#!merge" target="_blank" rel="external">快进合并</a>。</p>
+<p><br><br><br><br><br><br><br></p>
+<h4 id="开发者发布自己的功能"><a href="#开发者发布自己的功能" class="headerlink" title="开发者发布自己的功能"></a>开发者发布自己的功能</h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflows-forking-5.png&amp;objectId=1190000002918123&amp;token=85f5a0317c7e84e0af40e413fb35feb7" alt=""></p>
+<p>一旦开发者准备好了分享新功能，需要做二件事。<br>首先，通过<code>push</code>他的贡献代码到自己的公开仓库中，让其它的开发者都可以访问到。<br>他的<code>origin</code>远程别名应该已经有了，所以要做的就是：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git push origin feature-branch</div></pre></td></tr></table></figure>
+<p>这里和之前的工作流的差异是，<code>origin</code>远程别名指向开发者自己的服务端仓库，而不是正式仓库。</p>
+<p>第二件事，开发者要通知项目维护者，想要合并他的新功能到正式库中。<br><code>Bitbucket</code>和<code>Stash</code>提供了<a href="https://confluence.atlassian.com/display/STASH/Using+pull+requests+in+Stash" target="_blank" rel="external"><code>Pull Request</code></a>按钮，弹出表单让你指定哪个分支要合并到正式仓库。<br>一般你会想集成你的功能分支到上游远程仓库的<code>master</code>分支中。</p>
+<p><br><br><br><br><br><br><br><br></p>
+<h4 id="项目维护者集成开发者的功能"><a href="#项目维护者集成开发者的功能" class="headerlink" title="项目维护者集成开发者的功能"></a>项目维护者集成开发者的功能</h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflows-forking-6.png&amp;objectId=1190000002918123&amp;token=e404227ded2a9af588e5f19b0ce43471" alt=""></p>
+<p>当项目维护者收到<code>pull request</code>，他要做的是决定是否集成它到正式代码库中。有二种方式来做：</p>
+<ol>
+<li>直接在<code>pull request</code>中查看代码</li>
+<li><code>pull</code>代码到他自己的本地仓库，再手动合并</li>
+</ol>
+<p>第一种做法更简单，维护者可以在<code>GUI</code>中查看变更的差异，做评注和执行合并。<br>但如果出现了合并冲突，需要第二种做法来解决。这种情况下，维护者需要从开发者的服务端仓库中<a href="https://www.atlassian.com/git/tutorial/remote-repositories#!fetch" target="_blank" rel="external"><code>fetch</code></a>功能分支，<br>合并到他本地的<code>master</code>分支，解决冲突：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git fetch https://bitbucket.org/user/repo feature-branch</div><div class="line"># 查看变更</div><div class="line">git checkout master</div><div class="line">git merge FETCH_HEAD</div></pre></td></tr></table></figure>
+<p>变更集成到本地的<code>master</code>分支后，维护者要<code>push</code>变更到服务器上的正式仓库，这样其它的开发者都能访问到：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git push origin master</div></pre></td></tr></table></figure>
+<p>注意，维护者的<code>origin</code>是指向他自己公开仓库的，即是项目的正式代码库。到此，开发者的贡献完全集成到了项目中。</p>
+<p><br><br><br><br><br><br></p>
+<h4 id="开发者和正式仓库做同步"><a href="#开发者和正式仓库做同步" class="headerlink" title="开发者和正式仓库做同步"></a>开发者和正式仓库做同步</h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflows-forking-7.png&amp;objectId=1190000002918123&amp;token=3e4105286ad5d431c50846ffbeb5ff3a" alt=""></p>
+<p>由于正式代码库往前走了，其它的开发需要和正式仓库做同步：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git pull upstream master</div></pre></td></tr></table></figure>
+<p>如果你之前是使用<code>SVN</code>，<code>Forking</code>工作流可能看起来像是一个激进的范式切换（paradigm shift）。<br>但不要害怕，这个工作流实际上就是在<a href="undefined">功能分支工作流</a>之上引入另一个抽象层。<br>不是直接通过单个中央仓库来分享分支，而是把贡献代码发布到开发者自己的服务端仓库中。</p>
+<p>示例中解释了，一个贡献如何从一个开发者流到正式的<code>master</code>分支中，但同样的方法可以把贡献集成到任一个仓库中。</p>
+<p>比如，如果团队的几个人协作实现一个功能，可以在开发之间用相同的方法分享变更，完全不涉及正式仓库。</p>
+<p>这使得<code>Forking</code>工作流对于松散组织的团队来说是个非常强大的工具。任一开发者可以方便地和另一开发者分享变更，任何分支都能有效地合并到正式代码库中。</p>
+<p><br><br><br><br><br><br><br><br></p>
+<h2 id="2-5-Pull-Requests"><a href="#2-5-Pull-Requests" class="headerlink" title="2.5 Pull Requests"></a>2.5 <code>Pull Requests</code></h2><p><code>Pull requests</code>是<code>Bitbucket</code>提供的让开发者更方便地进行协作的功能，提供了友好的<code>Web</code>界面可以在提议的修改合并到正式项目之前对修改进行讨论。</p>
+<p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/pull-request-bitbucket.png&amp;objectId=1190000002918123&amp;token=1e5b39390f3e7b7ecd997d85da47350f" alt=""></p>
+<p>开发者向团队成员通知功能开发已经完成，<code>Pull Requests</code>是最简单的用法。<br>开发者完成功能开发后，通过<code>Bitbucket</code>账号发起一个<code>Pull Request</code>。<br>这样让涉及这个功能的所有人知道要去做<code>Code Review</code>和合并到<code>master</code>分支。</p>
+<p>但是，<code>Pull Request</code>远不止一个简单的通知，而是为讨论提交的功能的一个专门论坛。<br>如果变更有任何问题，团队成员反馈在<code>Pull Request</code>中，甚至<code>push</code>新的提交微调功能。<br>所有的这些活动都直接跟踪在<code>Pull Request</code>中。</p>
+<p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/pull-request-overview.png&amp;objectId=1190000002918123&amp;token=a11eee54c054994945f6ca5aa279f566" alt=""></p>
+<p>相比其它的协作模型，这种分享提交的形式有助于打造一个更流畅的工作流。<br><code>SVN</code>和<code>Git</code>都能通过一个简单的脚本收到通知邮件；但是，讨论变更时，开发者通常只能去回复邮件。<br>这样做会变得杂乱，尤其还要涉及后面的几个提交时。</p>
+<p><code>Pull Requests</code>把所有相关功能整合到一个和<code>Bitbucket</code>仓库界面集成的用户友好<code>Web</code>界面中。</p>
+<p><br><br><br><br><br><br><br></p>
+<h3 id="2-5-1-解析Pull-Request"><a href="#2-5-1-解析Pull-Request" class="headerlink" title="2.5.1 解析Pull Request"></a>2.5.1 解析<code>Pull Request</code></h3><p>当要发起一个<code>Pull Request</code>，你所要做的就是请求（<code>Request</code>）另一个开发者（比如项目的维护者）<br>来<code>pull</code>你仓库中一个分支到他的仓库中。这意味着你要提供4个信息以发起<code>Pull Request</code>：<br>源仓库、源分支、目的仓库、目的分支。</p>
+<p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/pull-request-anatomy.png&amp;objectId=1190000002918123&amp;token=b19d6cc00e23a573f9092c185e1b2d38" alt=""></p>
+<p>这几值多数<code>Bitbucket</code>都会设置上合适的缺省值。但取决你用的协作工作流，你的团队可能会要指定不同的值。<br>上图显示了一个<code>Pull Request</code>请求合并一个功能分支到正式的<code>master</code>分支上，但可以有多种不同的<code>Pull Request</code>用法。</p>
+<p><br><br><br><br><br><br><br><br></p>
+<h3 id="2-5-2-工作方式"><a href="#2-5-2-工作方式" class="headerlink" title="2.5.2 工作方式"></a>2.5.2 工作方式</h3><p><code>Pull Request</code>可以和<a href="undefined">功能分支工作流</a>、<a href="undefined"><code>Gitflow</code>工作流</a>或<a href="undefined"><code>Forking</code>工作流</a>一起使用。<br>但一个<code>Pull Request</code>要求要么分支不同要么仓库不同，所以不能用于<a href="undefined">集中式工作流</a>。<br>在不同的工作流中使用<code>Pull Request</code>会有一些不同，但基本的过程是这样的：</p>
+<ol>
+<li>开发者在本地仓库中新建一个专门的分支开发功能。</li>
+<li>开发者<code>push</code>分支修改到公开的<code>Bitbucket</code>仓库中。</li>
+<li>开发者通过<code>Bitbucket</code>发起一个<code>Pull Request</code>。</li>
+<li>团队的其它成员<code>review</code> <code>code</code>，讨论并修改。</li>
+<li>项目维护者合并功能到官方仓库中并关闭<code>Pull Request</code>。</li>
+</ol>
+<p>本文后面内容说明，<code>Pull Request</code>在不同协作工作流中如何应用。</p>
+<p><br><br><br><br><br><br><br><br><br></p>
+<h3 id="2-5-3-在功能分支工作流中使用Pull-Request"><a href="#2-5-3-在功能分支工作流中使用Pull-Request" class="headerlink" title="2.5.3 在功能分支工作流中使用Pull Request"></a>2.5.3 在功能分支工作流中使用<code>Pull Request</code></h3><p>功能分支工作流用一个共享的<code>Bitbucket</code>仓库来管理协作，开发者在专门的分支上开发功能。<br>但不是立即合并到<code>master</code>分支上，而是在合并到主代码库之前开发者应该开一个<code>Pull Request</code>发起功能的讨论。</p>
+<p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/pull-request-feature-branch.png&amp;objectId=1190000002918123&amp;token=b870553274db5688d72b65c86d10d152" alt=""></p>
+<p>功能分支工作流只有一个公开的仓库，所以<code>Pull Request</code>的目的仓库和源仓库总是同一个。<br>通常开发者会指定他的功能分支作为源分支，<code>master</code>分支作为目的分支。</p>
+<p>收到<code>Pull Request</code>后，项目维护者要决定如何做。如果功能没问题，就简单地合并到<code>master</code>分支，关闭<code>Pull Request</code>。</p>
+<p>但如果提交的变更有问题，他可以在<code>Pull Request</code>中反馈。之后新加的提交也会评论之后接着显示出来。</p>
+<p>在功能还没有完全开发完的时候，也可能发起一个<code>Pull Request</code>。<br>比如开发者在实现某个需求时碰到了麻烦，他可以发一个包含正在进行中工作的<code>Pull Request</code>。<br>其它的开发者可以在<code>Pull Request</code>提供建议，或者甚至直接添加提交来解决问题。</p>
+<p><br><br><br><br><br><br><br><br></p>
+<h3 id="2-5-4-在Gitflow工作流中使用Pull-Request"><a href="#2-5-4-在Gitflow工作流中使用Pull-Request" class="headerlink" title="2.5.4 在Gitflow工作流中使用Pull Request"></a>2.5.4 在<code>Gitflow</code>工作流中使用<code>Pull Request</code></h3><p><code>Gitflow</code>工作流和功能分支工作流类似，但围绕项目发布定义一个严格的分支模型。<br>在<code>Gitflow</code>工作流中使用<code>Pull Request</code>让开发者在发布分支或是维护分支上工作时，<br>可以有个方便的地方对关于发布分支或是维护分支的问题进行交流。</p>
+<p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/gitflow-workflow-pull-request.png&amp;objectId=1190000002918123&amp;token=a7ff02253674d5a5ae3f6aab4efae1fd" alt=""></p>
+<p><code>Gitflow</code>工作流中<code>Pull Request</code>的使用过程和上一节中完全一致：<br>当一个功能、发布或是热修复分支需要<code>Review</code>时，开发者简单发起一个<code>Pull Request</code>，<br>团队的其它成员会通过<code>Bitbucket</code>收到通知。</p>
+<p>新功能一般合并到<code>develop</code>分支，而发布和热修复则要同时合并到<code>develop</code>分支和<code>master</code>分支上。<br><code>Pull Request</code>可能用做所有合并的正式管理。</p>
+<p><br><br><br><br><br><br><br><br></p>
+<h3 id="2-5-5-在Forking工作流中使用Pull-Request"><a href="#2-5-5-在Forking工作流中使用Pull-Request" class="headerlink" title="2.5.5 在Forking工作流中使用Pull Request"></a>2.5.5 在<code>Forking</code>工作流中使用<code>Pull Request</code></h3><p>在<code>Forking</code>工作流中，开发者<code>push</code>完成的功能到他自己的仓库中，而不是共享仓库。<br>然后，他发起一个<code>Pull Request</code>，让项目维护者知道他的功能已经可以<code>Review</code>了。</p>
+<p>在这个工作流，<code>Pull Request</code>的通知功能非常有用，<br>因为项目维护者不可能知道其它开发者在他们自己的仓库添加了提交。</p>
+<p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/pull-request-forking-workflow-1.png&amp;objectId=1190000002918123&amp;token=6082dacfd6345659739925c5b7f66658" alt=""></p>
+<p>由于各个开发有自己的公开仓库，<code>Pull Request</code>的源仓库和目标仓库不是同一个。<br>源仓库是开发者的公开仓库，源分支是包含了修改的分支。<br>如果开发者要合并修改到正式代码库中，那么目标仓库是正式仓库，目标分支是<code>master</code>分支。</p>
+<p><code>Pull Request</code>也可以用于正式项目之外的其它开发者之间的协作。<br>比如，如果一个开发者和一个团队成员一起开发一个功能，他们可以发起一个<code>Pull Request</code>，<br>用团队成员的<code>Bitbucket</code>仓库作为目标，而不是正式项目的仓库。<br>然后使用相同的功能分支作为源和目标分支。</p>
+<p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/pull-request-forking-workflow-2.png&amp;objectId=1190000002918123&amp;token=cc8bc697b102826f0fb79c078278c41a" alt=""></p>
+<p>2个开发者之间可以在<code>Pull Request</code>中讨论和开发功能。<br>完成开发后，他们可以发起另一个<code>Pull Request</code>，请求合并功能到正式的<code>master</code>分支。<br>在<code>Forking</code>工作流中，这样的灵活性让<code>Pull Request</code>成为一个强有力的协作工具。</p>
+<p><br><br><br><br><br><br><br></p>
+<h3 id="2-5-6-示例"><a href="#2-5-6-示例" class="headerlink" title="2.5.6 示例"></a>2.5.6 示例</h3><p>下面的示例演示了<code>Pull Request</code>如何在在<code>Forking</code>工作流中使用。<br>也同样适用于小团队的开发协作和第三方开发者向开源项目的贡献。</p>
+<p>在示例中，小红是个开发，小明是项目维护者。他们各自有一个公开的<code>Bitbucket</code>仓库，而小明的仓库包含了正式工程。</p>
+<p><br><br><br><br><br></p>
+<h4 id="小红fork正式项目"><a href="#小红fork正式项目" class="headerlink" title="小红fork正式项目"></a>小红<code>fork</code>正式项目</h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/pull-request-1.png&amp;objectId=1190000002918123&amp;token=b7627676e2c7b3a0eb8e5991c4c2b3af" alt=""></p>
+<p>小红先要<code>fork</code>小明的<code>Bitbucket</code>仓库，开始项目的开发。她登陆<code>Bitbucket</code>，浏览到小明的仓库页面，<br>点<code>Fork</code>按钮。</p>
+<p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/pull-request-2.png&amp;objectId=1190000002918123&amp;token=53cd207c8a838c38328c00d50807aeae" alt=""></p>
+<p>然后为<code>fork</code>出来的仓库填写名字和描述，这样小红就有了服务端的项目拷贝了。</p>
+<p><br><br><br><br><br></p>
+<h4 id="小红克隆她的Bitbucket仓库"><a href="#小红克隆她的Bitbucket仓库" class="headerlink" title="小红克隆她的Bitbucket仓库"></a>小红克隆她的<code>Bitbucket</code>仓库</h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/pull-request-3.png&amp;objectId=1190000002918123&amp;token=958414de4bfe3716ff3565934e78492f" alt=""></p>
+<p>下一步，小红克隆自己刚才<code>fork</code>出来的<code>Bitbucket</code>仓库，以在本机上准备出工作拷贝</p>
+
+	
+	
+	
+	
+</div>
+				
+				
+
+                <!-- Post Comments -->
+                
+                    
+
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    
+    <!-- Prev Nav -->
+    
+        <a href="/2017/01/21/Google Material UI 动画的贝叶斯曲线/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/01/21/JS基础算法/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+        </div>
+    </div>
+
+				
+				
+					<!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay "></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored  sidebar-fixed-left" role="navigation">
+	<div id="sidebar-main">
+	    <!-- Sidebar Header -->
+		<div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+    <i class="material-icons">clear_all</i>
+    <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="wanglinzhizhi's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        wanglinzhizhi@hotmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+		<!-- Sidebar Navigation  -->
+		<ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+			
+                <li>
+                    <a href="#" target="_blank" title="Email Me">
+						<i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    <li id="sidebar-first-li">
+        <a href="/" target="_self">
+            <i class="material-icons sidebar-material-icons">home</i>
+             主页
+        </a>
+    </li>
+
+    <!-- I'm Feeling Lucky -->
+<!--
+    <li class="dropdown">
+        <a href="" target="_self">
+            <i class="material-icons sidebar-material-icons">explore</i>
+             sidebar.imlucky
+        </a>
+    </li>
+-->
+
+	
+    <!-- Archives  -->
+    <li class="dropdown">
+        <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+            <i class="material-icons sidebar-material-icons">inbox</i>
+             归档
+            <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+            <a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">71</span></a>
+        </ul>
+    </li>
+
+    <!-- Divider -->
+    <li class="divider"></li>
+
+
+    <!-- Pages  -->
+	
+		<li>
+			<a href="/tags" title="Tags">
+				Tags
+			</a>
+		</li>
+	
+		<li>
+			<a href="/gallery" title="Gallery">
+				Gallery
+			</a>
+		</li>
+	
+		<li>
+			<a href="/about" title="About">
+				About
+			</a>
+		</li>
+	
+
+    <!-- Article Numebr  -->
+    <li>
+        <a href="/archives">
+             文章总数
+             <span class="sidebar-badge">71</span>
+        </a>
+    </li>
+</ul>
+
+		<!-- Sidebar Divider -->
+		<div class="sidebar-divider"></div>
+
+		<!-- Sidebar Footer -->
+		<!-- 
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持。 :) 
+-->
+
+<!-- Theme Material -->
+<a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
+	<div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+		主题 - Material
+		<span class="sidebar-badge badge-circle">i</span>
+	</div>
+</a>
+
+<!-- Help & Support -->
+<!--
+<a href="mailto:hiviosey@gmail.com" class="sidebar-footer-text-a">
+    <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+		sidebar.help
+		<span class="mdl-button__ripple-container">
+			<span class="mdl-ripple"></span>
+		</span>
+	</div>
+</a>
+-->
+
+<!-- Feedback -->
+<!--
+<a href="https://github.com/viosey/hexo-theme-material/issues" target="_blank" class="sidebar-footer-text-a">
+    <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+         sidebar.feedback
+                    <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></div>
+</a>
+-->
+
+<!-- Abount Theme -->
+<!--
+<a href="https://blog.viosey.com/index.php/Material.html" target="_blank" class="sidebar-footer-text-a">
+    <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+         sidebar.about_theme
+        <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></div>
+</a>-->
+
+	</div>
+    
+    <!-- Sidebar Sponsor -->
+    
+
+
+</aside>
+
+				
+				
+				
+					<!-- Footer Top Button -->
+					<div class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+				
+				
+				<!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+	
+	
+		<!-- Paradox Footer Left Section -->
+		<div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+    
+    
+    <!-- Facebook -->
+    
+    
+    
+    <!-- Google + -->
+    
+    
+    
+    <!-- Weibo -->
+    
+    
+    
+    <!-- Instagram -->
+    
+    
+    
+    <!-- Tumblr -->
+    
+    
+    
+    <!-- Github -->
+    
+    <a href="https://github.com/wagnlinzh" target="view_window"><button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-github.png);">
+        <span class="visuallyhidden">Github</span>
+    </button></a>
+    
+</div>
+
+
+		<!--Copyright-->
+		<div id="copyright">Copyright&nbsp;©&nbsp;<script type="text/javascript">var fd = new Date();document.write(fd.getFullYear());</script>&nbsp;wanglinzhizhi</div>
+
+		<!-- Paradox Footer Right Section -->
+
+		<!-- 
+		I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+		It will not impact the appearance and can give developers a lot of support :)
+
+		很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+		它不会影响美观并可以给开发者很大的支持。 :) 
+		-->
+
+		<div class="mdl-mini-footer--right-section">
+			<div>
+				<div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+				<div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+			</div>
+		</div>
+	
+    
+</footer>
+                
+				<!-- Import File -->
+<script src="/js/highlight.min.js"></script>
+<script src="/js/js.min.js"></script>
+<script src="/js/nprogress.js"></script>
+
+<script type="text/javascript">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    
+    $('#nprogress .bar').css({
+        'background': '#FF4081'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #FF4081, 0 0 15px #FF4081'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#FF4081',
+        'border-left-color': '#FF4081'
+    });
+    
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+	<script src="/js/smoothscroll.js"></script>
+
+
+
+    <!-- Leancloud -->
+	<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+	<script>
+		AV.initialize("EObBAbqpQfNFLuV5SjbVgoxq-gzGzoHsz", "qPdmjfSU3DDmPPH9ui0cUW4z");
+	</script>
+    <script>
+	function showTime(Counter) {
+		var query = new AV.Query(Counter);
+		$(".leancloud-views_num").each(function() {
+			var url = $(this).attr("id").trim();
+			query.equalTo("url", url);
+			query.find({
+				success: function(results) {
+					if (results.length == 0) {
+						var content = '0 ' + $(document.getElementById(url)).text();
+						$(document.getElementById(url)).text(content);
+						return;
+					}
+					for (var i = 0; i < results.length; i++) {
+						var object = results[i];
+						var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
+						$(document.getElementById(url)).text(content);
+					}
+				},
+				error: function(object, error) {
+					console.log("Error: " + error.code + " " + error.message);
+				}
+			});
+
+		});
+	}
+
+	function addCount(Counter) {
+		var Counter = AV.Object.extend("Counter");
+		url = $(".leancloud-views_num").attr('id').trim();
+		title = $(".leancloud-views_num").attr('data-flag-title').trim();
+		var query = new AV.Query(Counter);
+		query.equalTo("url", url);
+		query.find({
+			success: function(results) {
+				if (results.length > 0) {
+					var counter = results[0];
+					counter.fetchWhenSave(true);
+					counter.increment("time");
+					counter.save(null, {
+						success: function(counter) {
+							var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
+							$(document.getElementById(url)).text(content);
+						},
+						error: function(counter, error) {
+							console.log('Failed to save Visitor num, with error message: ' + error.message);
+						}
+					});
+				} else {
+					var newcounter = new Counter();
+					newcounter.set("title", title);
+					newcounter.set("url", url);
+					newcounter.set("time", 1);
+					newcounter.save(null, {
+						success: function(newcounter) {
+							console.log("newcounter.get('time')="+newcounter.get('time'));
+							var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
+							$(document.getElementById(url)).text(content);
+						},
+						error: function(newcounter, error) {
+							console.log('Failed to create');
+						}
+					});
+				}
+			},
+			error: function(error) {
+				console.log('Error:' + error.code + " " + error.message);
+			}
+		});
+	}
+	$(function() {
+		var Counter = AV.Object.extend("Counter");
+		if ($('.leancloud-views_num').length == 1) {
+			addCount(Counter);
+		} else if ($('.post-title-link').length > 1) {
+			showTime(Counter);
+		}
+	}); 
+</script>
+
+
+
+
+
+
+
+
+<!-- Swiftye -->
+
+
+<!-- Local Search-->
+
+	<script>
+	var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var str='<ul class=\"search-result-list\">';                
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length <= 0) {
+                    return;
+                }
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        str += "<li><a href='"+ data_url +"' class='search-result-title' target='_blank'>"+ data_title;
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out characters
+                            var start = first_occur - 6;
+                            var end = first_occur + 6;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 10;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substr(start, end); 
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<em class=\"search-keyword\">"+keyword+"</em>");
+                            })
+                            str += "<p class=\"search-result\">" + match_content +"...</p>" +"</a>";
+                        }
+                    }
+                })
+                $resultContent.innerHTML = str;
+            })
+        }
+    })
+}
+</script>
+
+	<script>
+        var inputArea = document.querySelector("#search");
+        var getSearchFile = function(){
+            var path = "search.xml";
+            searchFunc(path, 'search', 'local-search-result');
+        }
+
+        inputArea.onfocus = function(){ getSearchFile() }
+	</script>
+
+
+<!-- Window Load-->
+<script>
+    $(window).load(function() {
+        // Post_Toc parent position fixed
+        $(".post-toc-wrap").parent(".mdl-menu__container").css("position", "fixed");
+    });
+</script>
+
+<!-- MathJax Load-->
+
+            </main>
+        </div>
+		
+    </body>
+		
+	
+</html>
