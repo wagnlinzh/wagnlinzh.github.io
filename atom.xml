@@ -16,130 +16,253 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>关于safari 浏览器 input圆角的解决方案</title>
-    <link href="http://yichewx.com/2016/12/13/cc/apple%20safari%20input%20%E6%8C%89%E9%92%AE%E7%9A%84%E5%9C%86%E8%A7%92%E9%97%AE%E9%A2%98/"/>
-    <id>http://yichewx.com/2016/12/13/cc/apple safari input 按钮的圆角问题/</id>
+    <title>QQ浏览器X5内核问题汇总</title>
+    <link href="http://yichewx.com/2016/12/13/cc/QQ%E6%B5%8F%E8%A7%88%E5%99%A8X5%E5%86%85%E6%A0%B8%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/"/>
+    <id>http://yichewx.com/2016/12/13/cc/QQ浏览器X5内核问题汇总/</id>
     <published>2016-12-13T01:49:30.000Z</published>
     <updated>2016-12-13T01:49:30.000Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="关于safari-浏览器-input圆角的解决方案"><a href="#关于safari-浏览器-input圆角的解决方案" class="headerlink" title="关于safari 浏览器 input圆角的解决方案"></a>关于safari 浏览器 input圆角的解决方案</h2><p>去除iOS  safari 浏览器的input的圆角问题 去掉默认样式</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><div class="line"><span class="selector-tag">-webkit-appearance</span>: <span class="selector-tag">none</span>;</div></pre></td></tr></table></figure>
-<p>by wanglizhizhi</p>
+    <content type="html"><![CDATA[<h2 id="QQ浏览器X5内核问题汇总"><a href="#QQ浏览器X5内核问题汇总" class="headerlink" title="QQ浏览器X5内核问题汇总"></a>QQ浏览器X5内核问题汇总</h2><p>23 September 2015</p>
+<p>重要更新，X5内核即将更新为Blink内核，到时候下面的这些问题将全部被修复。</p>
+<p>X5内核开发团队也给开发者们提供了不少指引，推荐关注： <a href="http://x5.tencent.com/guide?id=2001" target="_blank" rel="external">http://x5.tencent.com/guide?id=2001</a></p>
+<p>@2016-04-05</p>
+<p><br><br><br><br><br></p>
+<p>## </p>
+<p>常常被人问及微信中使用的X5内核的问题，其实我也不是很清楚，只知道它是基于android 4.2的webkit，版本号是webkit 534。今天正好从X5团队拿到了一份问题汇总，梳理下发出来，给各位开发者以参考——不排除明天会删除这篇文章的可能。</p>
+<p><br></p>
+<p>1.Android WebView常见问题及解决方案汇总：</p>
+<p><a href="http://blog.csdn.net/t12x3456/article/details/13769731" target="_blank" rel="external">http://blog.csdn.net/t12x3456/article/details/13769731</a></p>
+<p><br></p>
+<p>2.请问各位碰到过X5浏览器内，局部滑动使用iscroll卡顿的问题么？</p>
+<p>回答：是使用 iscroll.js 这个JS去滚动么？如果只是为了产生滚动，建议使用 overflow 属性来，目前有一种滚动优化在线上版本效率不是太好，通过JS去改变CSS的属性产生滚动</p>
+<p><br></p>
+<p>3.调用：<code>-webkit-filter: blur(10px);filter: blur(10px);</code>在Android下 背景图没有blur掉，只是被单纯的放大而已</p>
+<p>回答：<code>-webkit-filter</code>目前还不支持，可以先用图片替换的方式 后续版本会支持这个属性</p>
+<p><br></p>
+<p>4.shadowBlur是阴影效果吧，我们是想实现图片毛玻璃</p>
+<p>回答： <a href="http://blog.csdn.net/jia20003/article/details/9195915" target="_blank" rel="external">http://blog.csdn.net/jia20003/article/details/9195915</a> 这个有用么</p>
+<p><br></p>
+<p>5.LBS相关，定位频繁失败</p>
+<p>第一步，首先确认定位失败是个别站点原因还是所有站点定位都失败。如果是所有站点定位都不成功，很有可能是内核问题，转内核相关同学跟进调查定位逻辑是否有缺陷；如果是某个站点才会出现的问题，继续第二步排查，从站点源码着手。</p>
+<p>第二步，找到站点请求定位的js代码段，检查获取定位信息函数的options字段，很有可能是 options 中 timeout 字段设置的超时太短导致，建议前端开发将该字段时间设置长一些（建议10s以上）或者不设置该字段。如果js没有设置 timeout 字段的情况下仍然定位不成功，则转内核同学调查内核流程。</p>
+<p>ps：H5获取LBS信息的js接口</p>
+<p>回答：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">navigator.geolocation.getCurrentPosition(showPosition,showError,&#123;  </div><div class="line">    enableHighAccuracy:false，</div><div class="line">    timeout:10*1000,</div><div class="line">    maximumAge:0</div><div class="line">&#125;);</div><div class="line"></div><div class="line">navigator.geolocation.watchPosition(watchPosition,showError,options);</div></pre></td></tr></table></figure>
+<p>showPosition：定位成功时回调；<br>showError：定位出错时回调；<br>options：可选的地理定位请求特征<br>enableHightAccuracy：可选，是否开启高精度模式，参数默认值为 false<br>timeout：可选，单位为ms，浏览器需要在该时间段内完成定位，否则定位失败，默认值为 - - infinity，无穷大。如果该值设置较小，会有很高的定位失败率。<br>maximumAge：可选，单位ms，重新计算位置的时间间隔。默认为0，即每次时时计算位置信息。</p>
+<p><br></p>
+<p>6.打开视频播放，后退视频仍然在播放</p>
+<p>回答：部分机型，浏览页面时打开视频播放，点击返回，页面上的视频仍然在播放。解决办法是捕获后退事件，主动调用 onHideCustomView() 方法，并且在该方法里将 onShowCustomView 里关联的view解除关联</p>
+<p><br></p>
+<p>7.请问一下微信浏览器的cookie清理机制是怎么样的？</p>
+<p>回答：X5内核是不会清除的。</p>
+<p><br></p>
+<p>8.打开WWW页面，缩放显示的问题</p>
+<p>回答： 使用webview打开www页面，如果页面被放大显示，确定websettings有没有设置，<code>webSettings.setUseWideViewPort（true</code>），默认为false，www页面不会被缩放显示的。手机QQ浏览器默认为true，显示www页面更美观</p>
+<p><br></p>
+<p>9.关于滚动时候动画的问题</p>
+<p>回答：</p>
+<p>页面滑动过程中动画不会被触发 页面滑动过程中动画会被停止 这个是X5内核为了做滚动优化而做的限制</p>
+<p><br></p>
+<p>10.关于connection type定义的问题</p>
+<p>回答：X5执行的标准比较老，NetworkInfo_API</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">enum ConnectionType &#123;  </div><div class="line">UNKNOWN = 0,  </div><div class="line">ETHERNET = 1,  </div><div class="line">WIFI = 2,  </div><div class="line">CELL_2G = 3,  </div><div class="line">CELL_3G = 4,  </div><div class="line">CELL_4G = 5,  </div><div class="line">NONE = 6,  </div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p><br></p>
+<p>11.出现网络正常，但是页面打不开的情况</p>
+<p>回答：关于设置里面的云加速试下是否可以打开。</p>
+<p><br></p>
+<p>12.js阻塞和css阻塞的不同</p>
+<p>回答：css是阻塞渲染过程，js阻塞解析过程！对于用户来说，没什么区别，都是空白的 js的执行时，如果js中有读写css的属性的代码，并且下载队列中有待加载的css，js执行会被阻塞掉。</p>
+<p><br></p>
+<p>13.cookie的4k限制</p>
+<p>回答：浏览器端cookie的数量可能会超过4k，有http请求时，内核只取前4k的cookie数据！</p>
+<p><br></p>
+<p>14.Js Defer与把js放到html底部的区别</p>
+<p>回答：js defer：先加载，ondownload 后执行。和js放到html底部类似。不同的就是html预扫描到会先加载</p>
+<p><br></p>
+<p>15.首屏显示后，为什么又会重排版</p>
+<p>回答：浏览器的排版宽度受上层ui设置的webview宽度影响。如果webview没设置或者是设置成0，浏览器内核会用默认的排版宽度320px进行排版。此时若webview的宽度值被正常设置，计算出来的排版宽度不是320px（一般是360px），这样浏览器就要用360px宽度，对页面进行重排。</p>
+<p><br></p>
+<p>16.canvas的数量是不是有限制</p>
+<p>回答：</p>
+<ul>
+<li>小于1G的内存， canvas的内存不能超过100M</li>
+<li>1G到2G的内存， canvas的内存不能超过300M</li>
+<li>大于2G的内存 canvas的内存不能超过500M</li>
+<li>为了防止内存占用过多，硬件加速的CANVAS最多支持5个</li>
+</ul>
+<p>小于等于1G内存手机，由于内存没办法精确统计，当达到75M以上，CANVAS数量最多支持20个</p>
+<p>上面说的canvas内存，仅仅是说canvas 长宽计算出来的内存，不包括canavs使用的图片等资源内存</p>
+<p><br></p>
+<p>17.x5浏览器CSS3有些不支持,同样的样式，在chrome里能起到效果，在X5就没用。并且js性能也差的多,微信还内置X5，用起来太不爽</p>
+<p>回答：是否方便具体说下是什么样的性能问题和css样式缺陷影响到您？我们这边可以跟进查看下原因。</p>
+<p>X5内核也在不断改进，您的反馈可以帮助我们进一步优化。</p>
+<p>chrome在标准的支持和性能优化方面确实目前走在业界前面，不过android系统的碎片化，android系统webview更是碎片化严重。</p>
+<p>android系统上的web开发可能也需要考虑到不同rom的兼容情况。X5内核致力于为开发者提供统一的web体验，并通过不断的优化，来向业界标准对齐。</p>
+<p>目前我们也在做基于chromium内核的研究工作，后续在标准的支持和性能上会有进一步提高。</p>
+<p><br></p>
+<p>18.请问下x5中js调用android怎么实现？</p>
+<p>回答：跟系统内核下一样，都借助 addjavainterface 实现</p>
+<p><br></p>
+<p>19.请问一下，android手机微信上用的x5支持webgl吗？</p>
+<p>回答：android手机中微信上的X5都是支持webgl的，不过部分机型上还有兼容性问题，由于兼容性问题，webgl之前我们是采用软绘的方式支持,目前切换到了硬绘，但整体来说还是会有兼容性和性能问题,后续这块还会持续更新</p>
+<p><br></p>
+<p>20.如果在某个设备第一次打开应用的时候 没有网络，x5内核可以启动吗？单网络恢复后还要再次认证，还是 不用在认证？</p>
+<p>回答：第一次打开应用是不会拉起X5的 在第二次打开之后 不管有无网络都可以拉起</p>
+<p><br></p>
+<p>21.如果我不安装浏览器，安装微信，x5能调用起来吗?</p>
+<p>回答：不能，只能安装QQ浏览器才能调用</p>
+<p><br></p>
+<p>22.web audio api是否已经支持？</p>
+<p>回答：暂时还不支持</p>
+<p><br></p>
+<p>23.什么时候支持html5的onunload和onbeforeunload事件</p>
+<p>回答：现在是支持html5的 onunload 和 onbeforeunload 事件的</p>
+<p><br></p>
+<p>24.要用X5的内核，必须要用QQ浏览器么？</p>
+<p>回答：目前 SDK 版本是这样的，我们正在预研的版本，手机如果安装了微信或手Q ，其它 app 可以不依赖 QQ浏览器 而共享 x5 内核。</p>
+<p><br></p>
+<p>25.关于svg问题。</p>
+<p>回答：关于SVG的问题：</p>
+<p>关于svg模糊的问题，有2种情况：</p>
+<p>直接访问一个.svg url的页面或者object，embed加入的svg， 出现模糊的问题</p>
+<p>此问题已解决， qq浏览器5.8上已经修复， tbs下个版本也会修复 svg用作background-image, 模糊这个问题是我们目前渲染机制导致不能兼容非标准写法： 在用svg作为background-image的时候， 需要指定background-size， 不然会模糊</p>
+<p>关于svg支持情况： 在5.3之前的qq浏览器不支持svg， 我们会在后台把svg转成一张jpeg图片， 供浏览器显示，5.4及以上版本支持svg，如果遇到被转成图片的问题，需要升级浏览器版本。</p>
+<p><br></p>
+<p>26.请问flexbox近期会支持吗？</p>
+<p>回答：flexbox我们正在做开发支持</p>
+<p><br></p>
+<p>27.x5内核 目前是独立运行的 还是需要安装ＱＱ浏览器？</p>
+<p>回答：sdk是需要QQ浏览器的，微信手Q里的是不需要的</p>
+<p><br></p>
+<p>28.现在X5内核怎么调试？在微信或者手q或者qq浏览器中调试页面</p>
+<p>回答：现在的微信手Q里面的X5还无法通过inspector调试 后期我们会把带有inspector调试的版本挂在开发者后台下载区 敬请期待</p>
+<p><br></p>
+<p>29.请问x5支持webgl的所有接口吗？能在所有版本的android机（4.0+)和ios机(5.0+)上运行webgl吗？</p>
+<p>回答：webgl目前是支持的，不过部分机型上还有兼容性问题</p>
+<p><br></p>
+<p>30.X5上支持哪些扩展？支持多少个纹理单元？</p>
+<p>回答：X5上只能支持：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">WEBGL_lose_context  </div><div class="line">EXT_texture_filter_anisotropic  </div><div class="line">OES_texture_float  </div><div class="line">OES_standard_derivatives  </div><div class="line">OES_vertex_array_object  </div><div class="line">WEBGL_debug_renderer_info  </div><div class="line">WEBGL_debug_shaders  </div><div class="line">WEBKIT_WEBGL_compressed_texture_s3tc</div></pre></td></tr></table></figure>
+<p>而且这些是必须手机GPU有对应的扩展指令才行的。</p>
+<p>关于纹理单元。我们这边没有限制</p>
+<p>上面的扩展，也都是基本每一个对应opengl的一个扩展</p>
+<p>支持多少纹理单元，也是从opengl查询得到的。</p>
+<p>主要应该是看手机GPU支持到啥程度，我们是做个对接。</p>
+<p><br></p>
+<p>31.x5的文件分片功能解决了吗，<code>blob = file.webkitSlice(start, stop)</code>,这样分片出来的blob用不了啊。</p>
+<p>回答：分片问题这边已经定位处理，浏览器会在5.8版本修复</p>
+<p><br></p>
+<p>32.手机qq浏览器是否有调试工具呢？</p>
+<p>回答：有的，Inspector。</p>
+<p><br></p>
+<p>33.请问现在微信调用的手机QQ浏览器支持websocket 吗？</p>
+<p>回答：支持websocket ，暂不支持wss，不支持webrtc</p>
+<p><br></p>
+<p>34.有计划支持webRTC吗？</p>
+<p>回答：这个我们后续会评估的。</p>
+<p><br></p>
+<p>35.我是HTML5游戏开发者，制作中的H5游戏需要有音乐音效。但是我在android机器上使用QQ浏览器出现了如下问题：</p>
+<p>循环播放BGM时，如果同时播放音效，BGM会被强行暂停 多个音效同时播放时，会出现明显的无法忍受的延迟和播放失败 这个问题在同一台机器的微信上同样存在，但是同一台机器的chrome没有这个问题。</p>
+<p>我能想到的最合理的解释是：X5内核同一时间只能播放一个音频通道。</p>
+<p>希望官方能解答我的疑惑和遇到的问题，谢谢。</p>
+<p>PS：</p>
+<ul>
+<li>使用的H5音频库 : SoundJS</li>
+<li>使用的音频格式 : mp3</li>
+<li>使用的Android机型：三星 Note3</li>
+</ul>
+<p>回答：播放音效需要获取声音输出焦点，目前只支持同时播放一个音效 您提的需求我们会讨论评估后期是否能有方案现</p>
+<p><br></p>
+<p>36.播放音效时，为啥会把我后台的BGM播放给暂停掉？</p>
+<p>回答：播放声音时当前音频需要获取 audiofocus ，系统在audiofocus丢失时会通知其它音频播放软件，这个暂停应该是播放软件自身的行为，我们本身并没有暂停后台音频，只是向系统申请了 audiofocus</p>
+<p><br></p>
+<p>37.300ms延迟是指什么？click 和 touch ?</p>
+<p>回答：touch 点击之后，到 click 事件被触发，click 事件有延迟，touch 不存在，用 touchstart 事件替代 click 事件就OK</p>
+<p><br></p>
+<p>38.现在微信内置的浏览器能支持flexbox么，现在有没有什么好办法能够替代呢？做好的网页一放到微信上，大量的flex的页面</p>
+<p>回答：你好flexbox正在开发支持，flexbox在android4.1到4.3系统内核上，也有类似问题，页面是需要兼容的</p>
+<p><br></p>
+<p>39.有没有什么x5内核的论坛或者wiki之类的？可以参考下。</p>
+<p>回答：<a href="http://bbs.browser.qq.com/" target="_blank" rel="external">http://bbs.browser.qq.com/</a> <a href="http://x5.tencent.com/" target="_blank" rel="external">http://x5.tencent.com/</a> 这两个论坛可以关注下</p>
+<p>另外有我们的公众账号 有问题可以随时交流</p>
+<p><br></p>
+<p>40.X5公众号叫什么？</p>
+<p>回答：腾讯X5浏览服务</p>
+<p><br></p>
+<p>41.手q上面的内核应该也是x5的吧？这样直接在手q上面的效果和在微信里面应该是一样的？</p>
+<p>回答：是的手Q微信内的webview都是X5。</p>
+<p><br></p>
+<p>42.x5不支持font-face吗？</p>
+<p>回答：支持</p>
+<p><br></p>
+<p>43.x5 支持flex吗？有兼容性文档吗？</p>
+<p>回答：不支持.<a href="http://1.h5support.sinaapp.com/incoming/cow.html" target="_blank" rel="external">http://1.h5support.sinaapp.com/incoming/cow.html</a></p>
+<p>这个页面是参考caniuse的测试用例得到的测试结果，5.7是对应qq浏览器5.7版本，可以对比下和系统浏览器4.1~.4.4的支持度。有需要的同学可以先参考下，相关的文档建设我们也在逐步完……</p>
+<p><br></p>
+<p>44.iscroll+lazyload在x5浏览器里面卡顿很严重，有人碰到过类似问题么，小米手机 列表内元素200个左右。</p>
+<p>回答：iscroll本身对内核要求比较高，较新的blink版本支持才比较好。可以对比测试下android 4.x 的系统浏览器看看。建议还是在前端做些优化，避免较长的元素，并减少动画效果。<a href="http://www.cnblogs.com/vbluebirdv/archive/2012/11/18/2776300.html" target="_blank" rel="external">http://www.cnblogs.com/vbluebirdv/archive/2012/11/18/2776300.html</a> 可以参考网上一些iscroll调优的文章</p>
+<p><br></p>
+<p>45.微信里面缓存问题，在安卓下和 ios下，刷新机制是不是不一样？</p>
+<p>回答：ios因为有刷新功能，点击之后请求到的都是最新的文件，安卓下，不管怎样请求都不会更新文件</p>
+<p><br></p>
+<p>46.现在微信里面没有假如这个啊？为什么IOS QQ浏览器不识别这个？</p>
+<p>回答：ios内核不是X5， ios 浏览器后续版本也会支持 <a href="http://open.mb.qq.com/doc?id=1201" target="_blank" rel="external">http://open.mb.qq.com/doc?id=1201</a> 目前ios 浏览器仅支持 x5-page-mode</p>
+<p><br></p>
+<p>47.现在白鹭游戏引擎是不是内置在x5里面了？</p>
+<p>回答：内置了白鹭引擎runtime</p>
+<p><br></p>
+<p>48.x5内核不支持 canvas 的 background 属性吗？</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;!doctype html&gt;  </div><div class="line">&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;  </div><div class="line">&lt;head&gt;  </div><div class="line">&lt;meta charset=&quot;utf-8&quot;&gt;  </div><div class="line">&lt;title&gt;canvas test&lt;/title&gt;  </div><div class="line">    &lt;!--&lt;meta HTTP-EQUIV=&quot;pragma&quot; CONTENT=&quot;no-cache&quot;&gt;--&gt;</div><div class="line">    &lt;!--&lt;meta HTTP-EQUIV=&quot;Cache-Control&quot; CONTENT=&quot;no-store, must-revalidate&quot;&gt;--&gt;</div><div class="line">&lt;/head&gt;</div><div class="line"></div><div class="line">&lt;body&gt;  </div><div class="line">&lt;div&gt;  </div><div class="line">    &lt;canvas id=&quot;testCanvas&quot; width=&quot;500&quot; height=&quot;300&quot; style=&quot;background: #00FF00;&quot;&gt;&lt;/canvas&gt;</div><div class="line"></div><div class="line">&lt;!--&lt;canvas id=&quot;testCanvas&quot; width=&quot;1136&quot; height=&quot;640&quot; style=&quot;background:#000&quot;&gt;&lt;/canvas&gt; --&gt;  </div><div class="line">&lt;/div&gt;  </div><div class="line">&lt;/body&gt;  </div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<p>背景颜色显示不出来</p>
+<p>回答：这个是做了优化，当canvas下盖了背景，就没有去绘制背景图片，当初是因为一些手机的GPu在绘制这块，如果存在这种情况绘制非常慢</p>
+<p><br></p>
+<p>49.qq浏览器有没有准备支持asm.js的计划？</p>
+<p>回答：我们也正在筹备相关工作，会对市面上各种游戏引擎进行全面评测并设计合理的架构方案整合。预计下半年可以推出，敬请期待</p>
+<p><br></p>
+<p>50.X5不支持<code>canvas.toDataUrl()</code>的image/jpeg参数，还是转成了默认的png格式请问有什么替换方法吗？</p>
+<p>回答：当前确实还不支持…我们在修复</p>
+<p><br></p>
+<p>51.问一下 ios版的微信里面是用的系统自带的UIWebView还是用的qq浏览器的内核？</p>
+<p>回答：ios版微信里面用的是系统自带的</p>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><a href="https://www.qianduan.net/author/shenfei/" target="_blank" rel="external">神飞</a>爱好前端设计与开发，崇尚一目了然的设计。现居深圳/广州，就职于腾讯微信设计团队。</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;关于safari-浏览器-input圆角的解决方案&quot;&gt;&lt;a href=&quot;#关于safari-浏览器-input圆角的解决方案&quot; class=&quot;headerlink&quot; title=&quot;关于safari 浏览器 input圆角的解决方案&quot;&gt;&lt;/a&gt;关于safari 浏览
+      &lt;h2 id=&quot;QQ浏览器X5内核问题汇总&quot;&gt;&lt;a href=&quot;#QQ浏览器X5内核问题汇总&quot; class=&quot;headerlink&quot; title=&quot;QQ浏览器X5内核问题汇总&quot;&gt;&lt;/a&gt;QQ浏览器X5内核问题汇总&lt;/h2&gt;&lt;p&gt;23 September 2015&lt;/p&gt;
+&lt;p&gt;重
     
     </summary>
     
-      <category term="CSS" scheme="http://yichewx.com/categories/CSS/"/>
+      <category term="Web前端" scheme="http://yichewx.com/categories/Web%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="CSS" scheme="http://yichewx.com/tags/CSS/"/>
+      <category term="Web前端" scheme="http://yichewx.com/tags/Web%E5%89%8D%E7%AB%AF/"/>
     
   </entry>
   
   <entry>
-    <title>Web前端: Ajax Notes</title>
-    <link href="http://yichewx.com/2016/12/13/Ajax%20Notes/"/>
-    <id>http://yichewx.com/2016/12/13/Ajax Notes/</id>
+    <title>-webkit-backface-visibility</title>
+    <link href="http://yichewx.com/2016/12/13/-webkit-backface-visibility/"/>
+    <id>http://yichewx.com/2016/12/13/-webkit-backface-visibility/</id>
     <published>2016-12-13T01:49:30.000Z</published>
     <updated>2016-12-13T01:49:30.000Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="Ajax-Notes"><a href="#Ajax-Notes" class="headerlink" title="Ajax Notes"></a>Ajax Notes</h2><p>HTML和CSS 来实现页面，表达信息</p>
-<p>运用XMLHttpRequest和web服务器进行数据的异步交换</p>
-<p>用javascript 操作DOM,实现动态局部刷新</p>
-<h2 id="XMLHttpRequest-对象创建"><a href="#XMLHttpRequest-对象创建" class="headerlink" title="XMLHttpRequest 对象创建"></a>XMLHttpRequest 对象创建</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">var request=new XMLHttpRequest();</div></pre></td></tr></table></figure>
-<h2 id="HTTP请求"><a href="#HTTP请求" class="headerlink" title="HTTP请求"></a>HTTP请求</h2><p>无状态协议</p>
-<p>Get请求:</p>
-<ul>
-<li>一般用于获取信息(一般用于查询信息)</li>
-</ul>
-<ul>
-<li>使用URL传递参数</li>
-</ul>
-<ul>
-<li>对所发送信息的数量也有限制,一般在2000个字符以内.</li>
-</ul>
-<p>Notes：GET请求是 幂等</p>
-<p>POST请求(相对安全):</p>
-<ul>
-<li>一般用于修改服务器上 的资源</li>
-</ul>
-<ul>
-<li>对所发送信息的数量无限制</li>
-</ul>
-<p>HTTP响应:</p>
-<ol>
-<li>数字和文字,状态码</li>
-<li>响应头.和请求头一样包含许多有用的信息,服务器类型,日期时间,内容类型和长度等</li>
-<li>响应体</li>
-</ol>
-<p>XMLHttpRequest发送请求</p>
-<ul>
-<li>open(method,url,async)</li>
-</ul>
-<ul>
-<li>sent(string)</li>
-</ul>
-<p><strong>demo</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">request.open(&quot;POST&quot;,&quot;create.php&quot;,true);</div><div class="line">request.setRequestHeader(&quot;Content-type&quot;,&quot;application/x-www-form-urlencoded&quot;);</div><div class="line">request.send(&quot;name=wanglinzhizhi&amp;sex=male&quot;);</div></pre></td></tr></table></figure>
-<p>Notes:request.setRequestHeader 这个必须要加,渲染方式</p>
-<h2 id="JSON的解析"><a href="#JSON的解析" class="headerlink" title="JSON的解析"></a>JSON的解析</h2><p>方法一 eval()方法</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">var jsondata=&apos;&#123;&quot;staff&quot;:[&#123;&quot;name&quot;:&quot;洪七&quot;,&quot;age&quot;:70&#125;,&#123;&quot;name&quot;:&quot;郭靖&quot;,&quot;age&quot;:30&#125;,&#123;&quot;name&quot;:&quot;黄蓉&quot;,&quot;age&quot;:35&#125;]&#125;&apos;;</div><div class="line">var jsonobj=eval(&apos;(&apos;+jsondata+&apos;)&apos;);</div><div class="line">alert(jsonobj.staff[0].name);</div></pre></td></tr></table></figure>
-<p>方法二(JSON.parse)</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">var jsondata=&apos;&#123;&quot;staff&quot;:[&#123;&quot;name&quot;:&quot;洪七&quot;,&quot;age&quot;:70&#125;,&#123;&quot;name&quot;:&quot;郭靖&quot;,&quot;age&quot;:30&#125;,&#123;&quot;name&quot;:&quot;黄蓉&quot;,&quot;age&quot;:35&#125;]&#125;&apos;;</div><div class="line">var jsonobj=JSON.parse(jsondata);</div><div class="line">alert(jsonobj.staff[0].name);</div></pre></td></tr></table></figure>
-<p>推荐使用第二种方法</p>
-<p>Note: <strong>无论何时使用eval时是非常危险的.</strong></p>
-<p>JSON校验</p>
-<p><a href="http://jsonlint.com/" target="_blank" rel="external">http://jsonlint.com/</a></p>
-<p>Notes:CND加速的jquery库</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;script src=&quot;http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js&quot;&gt;&lt;/script&gt;</div></pre></td></tr></table></figure>
-<p>// 使用了CDN加速,调用很快.</p>
-<h2 id="跨域问题"><a href="#跨域问题" class="headerlink" title="跨域问题"></a>跨域问题</h2><p>javascript出于安全方面的考虑，不允许跨域调用其他页面的对象。</p>
-<p>什么是跨域呢？简单地理解就是因为javascript同源策略的限制，a.com域名下的js无法操作b.com或是c.a.com域名下的对象。</p>
-<p>解决跨域问题的方法</p>
-<ol>
-<li><strong>代理</strong><br>通过在同域名下的web服务器端创建一个代理：<br>北京服务器(域名:www.beijing.com)<br>上海服务器(域名：www.shanghai.com)<br>比如在北京的web服务器的后台(www.beijing.com/proxy-shanghaiservice.php)来调用上海服务器(www.shanghai.com/services.php)的服务，然后再把访问结果返回给前端，这样前端调用北京同域名的服务就和调用上海的服务效果相同了。<br>​</li>
-<li><p><strong>JSONP(只支持GET请求)：</strong></p>
-<pre><code><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;script src=&quot;http://www.bbb.com/jsonp.js&quot;&gt;&lt;/script&gt;</div><div class="line">在www.aaa.com页面中</div><div class="line">&lt;script&gt;</div><div class="line">function jsonp(json)&#123;</div><div class="line">alert(json[&quot;name&quot;]);</div><div class="line">&#125;</div><div class="line">&lt;/script&gt;</div><div class="line">在www.bbb.com页面中:</div><div class="line">jsonp(&#123;&quot;name&quot;:&quot;洪七公&quot;,&apos;age&apos;:24&#125;);</div><div class="line">jsonp只能对get请求起作用,不能对post请求起作用(不支持post请求)</div></pre></td></tr></table></figure>
-</code></pre></li>
-</ol>
-<p>JSONP可用于解决主流浏览器的跨域数据访问的问题。<br>在www.aaa.com页面中：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;script&gt;</div><div class="line">truefunction jsonp(json)&#123;</div><div class="line">     alert(json[&quot;name&quot;]);</div><div class="line"> 	&#125;</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;script src=&quot;http;//www.bbb.com/jsonp.js&quot;&gt;&lt;/script&gt;</div></pre></td></tr></table></figure>
-<p>在www.bbb.com页面中：</p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">jsonp(&#123;&apos;name&apos;:&apos;xx&apos;,&apos;age&apos;:24&#125;)</div></pre></td></tr></table></figure>
-<p>这样就可以实现在www.aaa.com客户端访问获取www.bbb.com所在服务器中的文件或数据,从而实现跨域</p>
-<p><strong>3.XHR2</strong></p>
-<p>HTML5 提供的XMLHttpRequest Level2已经实现了跨域访问以及其他一些新功能:</p>
-<p>对于解决跨域问题,只需要对<strong>服务端</strong>做较小的改变, 客户端不需要做改变<br>    <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">header(&quot;Content-Type:application/json;charset=utf-8&quot;);</div><div class="line"></div><div class="line">header(&quot;Access-Control-Allow-Origin:*&quot;);</div><div class="line"></div><div class="line">header(&quot;Access-Control-Allow-Methods:POST,GET&quot;);</div></pre></td></tr></table></figure></p>
-<p>Notes:</p>
-<ol>
-<li>HTML5提供的XMLHttpRequest Level2已经实现了跨域访问以及其他的一些新功能</li>
-<li>IE10以下的版本都不支持</li>
-<li>在服务器端</li>
-</ol>
-<p><strong>总结:</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">跨域处理，三种方法：</div><div class="line">1、处理跨域方法一 代理</div><div class="line"></div><div class="line">2、处理跨域方式二——</div><div class="line"></div><div class="line">3、处理跨域的方法三——XHR2：</div><div class="line"></div><div class="line">header(&apos;Access-Control-Allow-Origin:*&apos;);</div><div class="line">header(&apos;Access-Control-Allow-Methods:POST,GET&apos;);</div></pre></td></tr></table></figure>
-<h2 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h2><p>JavaScript原生版实现demo,这里只给出了ajax需要部分的代码,后端的 json已经前端的样式等内容都未写出来(因为太多了…)</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"></div><div class="line">&lt;script&gt;</div><div class="line">true<span class="built_in">document</span>.getElementById(<span class="string">"search"</span>).onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">true<span class="keyword">var</span> request = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">truerequest.open(<span class="string">"GET"</span>, <span class="string">"serverjson.php?number="</span> + 	<span class="built_in">document</span>.getElementById(<span class="string">"keyword"</span>).value);</div><div class="line">truerequest.send();</div><div class="line"></div><div class="line">    request.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">true<span class="keyword">if</span> (request.readyState===<span class="number">4</span>) &#123;</div><div class="line">truetrue<span class="keyword">if</span> (request.status===<span class="number">200</span>) &#123;</div><div class="line">truetruetrue<span class="keyword">var</span> data = <span class="built_in">JSON</span>.parse(request.responseText);</div><div class="line">truetruetrue<span class="keyword">if</span> (data.success) &#123;</div><div class="line">truetruetruetrue<span class="built_in">document</span>.getElementById(<span class="string">"searchResult"</span>).innerHTML = data.msg;</div><div class="line">truetruetrue&#125; <span class="keyword">else</span> &#123;</div><div class="line">truetruetruetrue<span class="built_in">document</span>.getElementById(<span class="string">"searchResult"</span>).innerHTML = <span class="string">"出现错误："</span> + data.msg;</div><div class="line">truetruetrue&#125;</div><div class="line">truetrue&#125; <span class="keyword">else</span> &#123;</div><div class="line">truetruetruealert(<span class="string">"发生错误："</span> + request.status);</div><div class="line">truetrue&#125;</div><div class="line">true&#125;</div><div class="line">true&#125;</div><div class="line"></div><div class="line">true&#125;</div><div class="line"><span class="built_in">document</span>.getElementById(<span class="string">"save"</span>).onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">true<span class="keyword">var</span> request = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">truerequest.open(<span class="string">"POST"</span>, <span class="string">"serverjson.php"</span>);</div><div class="line">true<span class="keyword">var</span> data = <span class="string">"name="</span> + <span class="built_in">document</span>.getElementById(<span class="string">"staffName"</span>).value</div><div class="line">true                  + <span class="string">"&amp;number="</span> + <span class="built_in">document</span>.getElementById(<span class="string">"staffNumber"</span>).value</div><div class="line">true                  + <span class="string">"&amp;sex="</span> + <span class="built_in">document</span>.getElementById(<span class="string">"staffSex"</span>).value</div><div class="line">true                  + <span class="string">"&amp;job="</span> + <span class="built_in">document</span>.getElementById(<span class="string">"staffJob"</span>).value;</div><div class="line">truerequest.setRequestHeader(<span class="string">"Content-type"</span>,<span class="string">"application/x-www-form-urlencoded"</span>);</div><div class="line">truerequest.send(data);</div><div class="line">truerequest.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">truetrue<span class="keyword">if</span> (request.readyState===<span class="number">4</span>) &#123;</div><div class="line">truetruetrue<span class="keyword">if</span> (request.status===<span class="number">200</span>) &#123;</div><div class="line">truetruetruetrue<span class="keyword">var</span> data = <span class="built_in">JSON</span>.parse(request.responseText);</div><div class="line">truetruetruetrue<span class="keyword">if</span> (data.success) &#123;</div><div class="line">truetruetruetruetrue<span class="built_in">document</span>.getElementById(<span class="string">"createResult"</span>).innerHTML = data.msg;</div><div class="line">truetruetruetrue&#125; <span class="keyword">else</span> &#123;</div><div class="line">truetruetruetruetrue<span class="built_in">document</span>.getElementById(<span class="string">"createResult"</span>).innerHTML = <span class="string">"出现错误："</span> + data.msg;</div><div class="line">truetruetruetrue&#125;</div><div class="line">truetruetrue&#125; <span class="keyword">else</span> &#123;</div><div class="line">truetruetruetruealert(<span class="string">"发生错误："</span> + request.status);</div><div class="line">truetruetrue&#125;</div><div class="line">truetrue&#125;</div><div class="line">true&#125;</div><div class="line">&#125;</div><div class="line">&lt;<span class="regexp">/script&gt;</span></div></pre></td></tr></table></figure>
-<p>jQuery版的实现</p>
-<p>jQuery中封装了request.setRequestHeader(“Content-type”… 故不需要额外添加句代码</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">true&lt;script&gt;</div><div class="line">true$(document).ready(function()&#123;</div><div class="line">true$(&quot;#search&quot;).click(function()&#123;</div><div class="line">truetrue$.ajax(&#123;</div><div class="line">truetrue    type: &quot;GET&quot;, 	</div><div class="line">truetruetrueurl: &quot;http://127.0.0.1:8000/ajaxdemo/serverjsonp.php?number=&quot; + $(&quot;#keyword&quot;).val(),</div><div class="line">truetruetruedataType: &quot;jsonp&quot;,</div><div class="line">truetruetruejsonp: &quot;callback&quot;,</div><div class="line">truetruetruesuccess: function(data) &#123;</div><div class="line">truetruetruetrueif (data.success) &#123;</div><div class="line">truetruetruetruetrue$(&quot;#searchResult&quot;).html(data.msg);</div><div class="line">truetruetruetrue&#125; else &#123;</div><div class="line">truetruetruetruetrue$(&quot;#searchResult&quot;).html(&quot;出现错误：&quot; + data.msg);</div><div class="line">truetruetruetrue&#125;  </div><div class="line">truetruetrue&#125;,</div><div class="line">truetruetrueerror: function(jqXHR)&#123;     </div><div class="line">truetruetrue   alert(&quot;发生错误：&quot; + jqXHR.status);  </div><div class="line">truetruetrue&#125;,     </div><div class="line">truetrue&#125;);</div><div class="line">true&#125;);</div><div class="line"></div><div class="line">true$(&quot;#save&quot;).click(function()&#123;</div><div class="line">truetrue$.ajax(&#123;</div><div class="line">truetrue    type: &quot;POST&quot;, 	</div><div class="line">truetruetrueurl: &quot;http://127.0.0.1:8000/ajaxdemo/serverjsonp.php&quot;,</div><div class="line">truetruetruedata: &#123;</div><div class="line">truetruetruetruename: $(&quot;#staffName&quot;).val(),</div><div class="line">truetruetruetruenumber: $(&quot;#staffNumber&quot;).val(),</div><div class="line">truetruetruetruesex: $(&quot;#staffSex&quot;).val(),</div><div class="line">truetruetruetruejob: $(&quot;#staffJob&quot;).val()</div><div class="line">truetruetrue&#125;,</div><div class="line">truetruetruedataType: &quot;json&quot;,</div><div class="line">truetruetruesuccess: function(data)&#123;</div><div class="line">truetruetruetrueif (data.success) &#123;</div><div class="line">truetruetruetruetrue$(&quot;#createResult&quot;).html(data.msg);</div><div class="line">truetruetruetrue&#125; else &#123;</div><div class="line">truetruetruetruetrue$(&quot;#createResult&quot;).html(&quot;出现错误：&quot; + data.msg);</div><div class="line">truetruetruetrue&#125;  </div><div class="line">truetruetrue&#125;,</div><div class="line">truetruetrueerror: function(jqXHR)&#123;     </div><div class="line">truetruetrue   alert(&quot;发生错误：&quot; + jqXHR.status);  </div><div class="line">truetruetrue&#125;,     </div><div class="line">truetrue&#125;);</div><div class="line">true&#125;);</div><div class="line">&#125;);</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+    <content type="html"><![CDATA[<h2 id="webkit-backface-visibility"><a href="#webkit-backface-visibility" class="headerlink" title="-webkit-backface-visibility"></a>-webkit-backface-visibility</h2><figure class="highlight css"><table><tr><td class="code"><pre><div class="line"><span class="selector-tag">-webkit-backface-visibility</span><span class="selector-pseudo">:hidden</span></div></pre></td></tr></table></figure>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;Ajax-Notes&quot;&gt;&lt;a href=&quot;#Ajax-Notes&quot; class=&quot;headerlink&quot; title=&quot;Ajax Notes&quot;&gt;&lt;/a&gt;Ajax Notes&lt;/h2&gt;&lt;p&gt;HTML和CSS 来实现页面，表达信息&lt;/p&gt;
-&lt;p&gt;运用XMLHttpRe
+      &lt;h2 id=&quot;webkit-backface-visibility&quot;&gt;&lt;a href=&quot;#webkit-backface-visibility&quot; class=&quot;headerlink&quot; title=&quot;-webkit-backface-visibility&quot;&gt;&lt;/a&gt;-webkit
     
     </summary>
     
       <category term="web" scheme="http://yichewx.com/categories/web/"/>
     
-    
-      <category term="Ajax" scheme="http://yichewx.com/tags/Ajax/"/>
     
   </entry>
   
@@ -317,6 +440,33 @@
   </entry>
   
   <entry>
+    <title>Hello World</title>
+    <link href="http://yichewx.com/2016/12/13/hello-world/"/>
+    <id>http://yichewx.com/2016/12/13/hello-world/</id>
+    <published>2016-12-13T01:49:30.000Z</published>
+    <updated>2016-12-13T01:49:30.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>轻击的时候不显示默认的atived状态</title>
     <link href="http://yichewx.com/2016/12/13/highlight/"/>
     <id>http://yichewx.com/2016/12/13/highlight/</id>
@@ -361,33 +511,6 @@
     
     
       <category term="CSS" scheme="http://yichewx.com/tags/CSS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="http://yichewx.com/2016/12/13/hello-world/"/>
-    <id>http://yichewx.com/2016/12/13/hello-world/</id>
-    <published>2016-12-13T01:49:30.000Z</published>
-    <updated>2016-12-13T01:49:30.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
-    
-    </summary>
-    
     
   </entry>
   
@@ -1269,6 +1392,72 @@
   </entry>
   
   <entry>
+    <title>前后端分离的思考与实践（五） by阿里</title>
+    <link href="http://yichewx.com/2016/12/13/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E7%9A%84%E6%80%9D%E8%80%83%E4%B8%8E%E5%AE%9E%E8%B7%B5(5)/"/>
+    <id>http://yichewx.com/2016/12/13/前后端分离的思考与实践(5)/</id>
+    <published>2016-12-13T01:49:30.000Z</published>
+    <updated>2016-12-13T01:49:30.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前后端分离的思考与实践（五）"><a href="#前后端分离的思考与实践（五）" class="headerlink" title="前后端分离的思考与实践（五）"></a>前后端分离的思考与实践（五）</h2><h3 id="TOC"><a href="#TOC" class="headerlink" title="TOC"></a>TOC</h3><p><strong>基于前后端分离的多终端适配</strong></p>
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>近年来各站点基于 Web 的多终端适配进行得如火如荼，行业间也发展出依赖各种技术的解决方案。有如基于浏览器原生 CSS3 Media Query 的响应式设计、基于云端智能重排的「云适配」方案等。本文则主要探讨在前后端分离基础下的多终端适配方案。</p>
+<blockquote>
+<p><strong>关于前后端分离</strong></p>
+<p>关于前后端分离的方案，在<a href="http://ued.taobao.org/blog/2014/04/full-stack-development-with-nodejs/" target="_blank" rel="external"><img src="http://f.ydr.me/http://ued.taobao.org/blog/2014/04/full-stack-development-with-nodejs/" alt="f">《前后端分离的思考与实践（一）》</a>中有非常清晰的解释。我们在服务端接口和浏览器之间引入 NodeJS 作为渲染层，因为 NodeJS 层彻底与数据抽离，同时无需关心大量的业务逻辑，所以十分适合在这一层进行多终端的适配工作。</p>
+</blockquote>
+<h3 id="UA-探测"><a href="#UA-探测" class="headerlink" title="UA 探测"></a>UA 探测</h3><p>进行多终端适配首先要解决的是 UA 探测问题，对于一个过来的请求，我们需要知道这个设备的类型才能针对对它输出对应的内容。现在市面上已经有非常成熟的兼容大量设备的 User Agent 特征库和探测工具，<a href="https://wiki.mozilla.org/Compatibility/UADetectionLibraries" target="_blank" rel="external"><img src="http://f.ydr.me/https://wiki.mozilla.org/Compatibility/UADetectionLibraries" alt="f">这里有 Mozilla 整理的一个列表</a>。其中，既有运行在浏览器端的，也有运行在服务端代码层的，甚至有些工具提供了 Nginx/Apache 的模块，负责解析每个请求的 UA 信息。</p>
+<p>实际上我们推荐最后一种方式。基于前后端分离的方案决定了 UA 探测只能运行在服务器端，但如果把探测的代码和特征库耦合在业务代码里并不是一个足够友好的方案。我们把这个行为再往前挪，挂在 Nginx/Apache 上，它们负责解析每个请求的 UA 信息，再通过如 HTTP Header 的方式传递给业务代码。</p>
+<p>这样做有几点好处：</p>
+<ol>
+<li>我们的代码里面无需再去关注 UA 如何解析，直接从上层取出解析后的信息即可。</li>
+<li>如果在同一台服务器上有多个应用，则能够共同使用同一个 Nginx 解析后的 UA 信息，节省了不同应用间的解析损耗。</li>
+</ol>
+<p><img src="http://gtms03.alicdn.com/tps/i3/T1s8L7FFNcXXbvv3MO-968-509.png" alt="http://gtms03.alicdn.com/tps/i3/T1s8L7FFNcXXbvv3MO-968-509.png"></p>
+<p>来自天猫分享的基于 Nginx 的 UA 探测方案</p>
+<p>淘宝的 Tengine Web 服务器也提供了类似的模块 <a href="http://tengine.taobao.org/document/http_user_agent.html" target="_blank" rel="external"><img src="http://f.ydr.me/http://tengine.taobao.org/document/http_user_agent.html" alt="f">ngx_http_user_agent_module</a>。</p>
+<p>值得一提的是，选用 UA 探测工具时必须要考虑特征库的可维护性，因为市面上新增的设备类型越来越多，每个设备都会有独立的 User Agent，所以该特征库必须提供良好的更新和维护策略，以适应不断变化的设备。</p>
+<h3 id="建立在-MVC-模式中的几种适配方案"><a href="#建立在-MVC-模式中的几种适配方案" class="headerlink" title="建立在 MVC 模式中的几种适配方案"></a>建立在 MVC 模式中的几种适配方案</h3><p>取得 UA 信息后，我们就要考虑如果根据指定的 UA 进行终端适配了。即使在 NodeJS 层，虽然没有了大部分的业务逻辑，但我们依然把内部区分为 Model / Controller / View 三个模型。</p>
+<p><img src="http://gtms04.alicdn.com/tps/i4/T1oGP_FIlbXXc1sab4-200-220.png" alt="http://gtms04.alicdn.com/tps/i4/T1oGP_FIlbXXc1sab4-200-220.png"></p>
+<p>我们先利用上面的图，去解析一些已有的多终端适配方案。</p>
+<h3 id="建立在-Controller-上的适配方案"><a href="#建立在-Controller-上的适配方案" class="headerlink" title="建立在 Controller 上的适配方案"></a>建立在 Controller 上的适配方案</h3><p><img src="http://gtms03.alicdn.com/tps/i3/T1YkZcFMhXXXa36h6P-507-400.png" alt="http://gtms03.alicdn.com/tps/i3/T1YkZcFMhXXXa36h6P-507-400.png"></p>
+<p>这种方案应该是最简单粗暴的处理方法。通过路由（Router）将相同的 URL 统一传递到同一个控制层（Controller）。控制层再通过 UA 信息将数据和模型（Model）逻辑派发到对应的展现（View）进行渲染，渲染层则按预先的约定提供了适配几个终端的模板。</p>
+<p>这种方案的好处是，保持了数据和控制层的统一性，业务逻辑只需处理一次遍可以应用在所有终端上。但这种场景只适合如展示型页面等低交互型的应用，一旦业务比较复杂，各个终端的 Controller 可能有各自的处理逻辑，如果还是共用一个 Controller ，会导致 Controller 非常的臃肿而且难以维护，这无疑是一个错误的选择。</p>
+<h3 id="建立在-Router-上的适配方案"><a href="#建立在-Router-上的适配方案" class="headerlink" title="建立在 Router 上的适配方案"></a>建立在 Router 上的适配方案</h3><p>为了解决上面遇到的问题，我们可以在 Router 上就将设备区分，针对不同的终端分发到不同的 Controller 上：</p>
+<p><img src="http://gtms03.alicdn.com/tps/i3/T1UQr7FK8cXXXKYi.n-531-348.png" alt="http://gtms03.alicdn.com/tps/i3/T1UQr7FK8cXXXKYi.n-531-348.png"></p>
+<p>这也是最常见的方案之一，大多表现在针对不同终端使用各自独立的一套应用。如 PC 淘宝首页和 WAP 版的淘宝首页，不同设备访问 www.taobao.com ，服务器会通过 Router 的控制，重定向到 WAP 版的淘宝首页或者 PC 版的淘宝首页，它们各自是完全独立的两套应用。</p>
+<p>但这种方案无疑带来了数据和部分逻辑无法共用的问题，各种终端之间无法分享同一份数据和业务逻辑，产生大量重复性工作，效率低下。</p>
+<p>为了缓解这个问题，有人提出了优化后的方案：依然是在同一套应用里面，各个数据来源抽象成各个 Model，提供给不同终端的 Controller 组合使用：</p>
+<p><img src="http://gtms01.alicdn.com/tps/i1/T1pR_fFGxaXXXGaK2H-685-520.png" alt="http://gtms01.alicdn.com/tps/i1/T1pR_fFGxaXXXGaK2H-685-520.png"></p>
+<p>这个方案解决了前面数据无法共用的问题。在 Controller 上各个终端还是相互独立，但能共同使用同一批数据源，至少在数据上无需再针对终端类型开发独立的接口了。</p>
+<p>以上两种基于 Router 的方案，由于 Controller 的独立，各个终端可以为自己的页面实现不同的交互逻辑，保证了各终端自身足够的灵活度，这也是为什么大部分应用采用这种方案的主要原因。</p>
+<h3 id="建立在-View-层的适配方案"><a href="#建立在-View-层的适配方案" class="headerlink" title="建立在 View 层的适配方案"></a>建立在 View 层的适配方案</h3><p>这是淘宝下单页面使用的方案，不过区别是下单页将整体的渲染层放在了浏览器端，而不是 NodeJS 层。不过无论是浏览器还是 NodeJS，整体设计思路还是一致的：</p>
+<p><img src="http://gtms02.alicdn.com/tps/i2/T18IvnFMtXXXc.mb7O-1327-494.png" alt="http://gtms02.alicdn.com/tps/i2/T18IvnFMtXXXc.mb7O-1327-494.png"></p>
+<p>在这个方案里面，Router、Controller 和 Model 都无需关注设备信息，终端类型的判断完全交给展现层来处理。图中主要的模块是「View Factory」，Model 和 Controller 将数据和渲染逻辑传递过来之后，通过 View Factory 根据设备信息和其它状态（不仅仅是 UA 信息、也可以是网络环境、用户地区等等）从一堆预设好的组件（View Component）中抓取特定的组件，再组合成最终的页面。</p>
+<p>这种方案有几个优势：</p>
+<ol>
+<li>上层无需关注设备信息（UA），多终端的视频还是交由和最终展现最大关系的 View 层来处理；</li>
+<li>不仅仅是多终端适配，除了 UA 信息，各个 View Component 还可以根据用户状态决定自身输出何种模版，如低网速下默认隐藏图片、指定地区输出活动 Banner。</li>
+<li>每个 View Component 的不同模版间可以自行决定是否使用同一份数据、业务逻辑，提供十分灵活的实现方式。</li>
+</ol>
+<p>但明显的是，这个方案也是最复杂的，尤其是要考虑一些富交互的应用场景时，Router 和 Controller 也许无法保持这么纯粹。特别对于一些整体性比较强的业务，本身无法被拆分成组件，这种方案也许并不适用；而且对于一些简单的业务，使用这种架构可能不是最佳的选择。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>以上几种方案，都各自体现在 MVC 模型中的一个或多个部分，在业务上如果一个方案不满足需求，更可以采取多个方案同时采用的方式。或是可以理解为，业务上的复杂度和交互属性决定了该产品更适合采用哪种多终端适配方案。</p>
+<p>对比基于浏览器的响应式设计方案，因为绝大部分终端探测和渲染逻辑迁移到了服务端，所以在 NodeJS 层进行适配无疑带来了更好的性能和用户体验；另外，相对于一些所谓的「云适配」方案带来的转换质量问题，在基于前后端分离的「定制式」方案中也不会存在。前后端分离的适配方案在这些方面有着天然优势。</p>
+<p>最后，为了适应更灵活的强大的适配需求，基于前后端分离的适配方案将会面临更多挑战！</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前后端分离的思考与实践（五）&quot;&gt;&lt;a href=&quot;#前后端分离的思考与实践（五）&quot; class=&quot;headerlink&quot; title=&quot;前后端分离的思考与实践（五）&quot;&gt;&lt;/a&gt;前后端分离的思考与实践（五）&lt;/h2&gt;&lt;h3 id=&quot;TOC&quot;&gt;&lt;a href=&quot;#TO
+    
+    </summary>
+    
+      <category term="web架构" scheme="http://yichewx.com/categories/web%E6%9E%B6%E6%9E%84/"/>
+    
+    
+      <category term="架构" scheme="http://yichewx.com/tags/%E6%9E%B6%E6%9E%84/"/>
+    
+  </entry>
+  
+  <entry>
     <title>前后端分离的思考与实践 （三） by阿里</title>
     <link href="http://yichewx.com/2016/12/13/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E7%9A%84%E6%80%9D%E8%80%83%E4%B8%8E%E5%AE%9E%E8%B7%B5(3)/"/>
     <id>http://yichewx.com/2016/12/13/前后端分离的思考与实践(3)/</id>
@@ -1329,72 +1518,6 @@
     <summary type="html">
     
       &lt;h3 id=&quot;前后端分离的思考与实践（三）&quot;&gt;&lt;a href=&quot;#前后端分离的思考与实践（三）&quot; class=&quot;headerlink&quot; title=&quot;前后端分离的思考与实践（三）&quot;&gt;&lt;/a&gt;前后端分离的思考与实践（三）&lt;/h3&gt;&lt;h3 id=&quot;TOC&quot;&gt;&lt;a href=&quot;#TO
-    
-    </summary>
-    
-      <category term="web架构" scheme="http://yichewx.com/categories/web%E6%9E%B6%E6%9E%84/"/>
-    
-    
-      <category term="架构" scheme="http://yichewx.com/tags/%E6%9E%B6%E6%9E%84/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>前后端分离的思考与实践（五） by阿里</title>
-    <link href="http://yichewx.com/2016/12/13/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E7%9A%84%E6%80%9D%E8%80%83%E4%B8%8E%E5%AE%9E%E8%B7%B5(5)/"/>
-    <id>http://yichewx.com/2016/12/13/前后端分离的思考与实践(5)/</id>
-    <published>2016-12-13T01:49:30.000Z</published>
-    <updated>2016-12-13T01:49:30.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="前后端分离的思考与实践（五）"><a href="#前后端分离的思考与实践（五）" class="headerlink" title="前后端分离的思考与实践（五）"></a>前后端分离的思考与实践（五）</h2><h3 id="TOC"><a href="#TOC" class="headerlink" title="TOC"></a>TOC</h3><p><strong>基于前后端分离的多终端适配</strong></p>
-<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>近年来各站点基于 Web 的多终端适配进行得如火如荼，行业间也发展出依赖各种技术的解决方案。有如基于浏览器原生 CSS3 Media Query 的响应式设计、基于云端智能重排的「云适配」方案等。本文则主要探讨在前后端分离基础下的多终端适配方案。</p>
-<blockquote>
-<p><strong>关于前后端分离</strong></p>
-<p>关于前后端分离的方案，在<a href="http://ued.taobao.org/blog/2014/04/full-stack-development-with-nodejs/" target="_blank" rel="external"><img src="http://f.ydr.me/http://ued.taobao.org/blog/2014/04/full-stack-development-with-nodejs/" alt="f">《前后端分离的思考与实践（一）》</a>中有非常清晰的解释。我们在服务端接口和浏览器之间引入 NodeJS 作为渲染层，因为 NodeJS 层彻底与数据抽离，同时无需关心大量的业务逻辑，所以十分适合在这一层进行多终端的适配工作。</p>
-</blockquote>
-<h3 id="UA-探测"><a href="#UA-探测" class="headerlink" title="UA 探测"></a>UA 探测</h3><p>进行多终端适配首先要解决的是 UA 探测问题，对于一个过来的请求，我们需要知道这个设备的类型才能针对对它输出对应的内容。现在市面上已经有非常成熟的兼容大量设备的 User Agent 特征库和探测工具，<a href="https://wiki.mozilla.org/Compatibility/UADetectionLibraries" target="_blank" rel="external"><img src="http://f.ydr.me/https://wiki.mozilla.org/Compatibility/UADetectionLibraries" alt="f">这里有 Mozilla 整理的一个列表</a>。其中，既有运行在浏览器端的，也有运行在服务端代码层的，甚至有些工具提供了 Nginx/Apache 的模块，负责解析每个请求的 UA 信息。</p>
-<p>实际上我们推荐最后一种方式。基于前后端分离的方案决定了 UA 探测只能运行在服务器端，但如果把探测的代码和特征库耦合在业务代码里并不是一个足够友好的方案。我们把这个行为再往前挪，挂在 Nginx/Apache 上，它们负责解析每个请求的 UA 信息，再通过如 HTTP Header 的方式传递给业务代码。</p>
-<p>这样做有几点好处：</p>
-<ol>
-<li>我们的代码里面无需再去关注 UA 如何解析，直接从上层取出解析后的信息即可。</li>
-<li>如果在同一台服务器上有多个应用，则能够共同使用同一个 Nginx 解析后的 UA 信息，节省了不同应用间的解析损耗。</li>
-</ol>
-<p><img src="http://gtms03.alicdn.com/tps/i3/T1s8L7FFNcXXbvv3MO-968-509.png" alt="http://gtms03.alicdn.com/tps/i3/T1s8L7FFNcXXbvv3MO-968-509.png"></p>
-<p>来自天猫分享的基于 Nginx 的 UA 探测方案</p>
-<p>淘宝的 Tengine Web 服务器也提供了类似的模块 <a href="http://tengine.taobao.org/document/http_user_agent.html" target="_blank" rel="external"><img src="http://f.ydr.me/http://tengine.taobao.org/document/http_user_agent.html" alt="f">ngx_http_user_agent_module</a>。</p>
-<p>值得一提的是，选用 UA 探测工具时必须要考虑特征库的可维护性，因为市面上新增的设备类型越来越多，每个设备都会有独立的 User Agent，所以该特征库必须提供良好的更新和维护策略，以适应不断变化的设备。</p>
-<h3 id="建立在-MVC-模式中的几种适配方案"><a href="#建立在-MVC-模式中的几种适配方案" class="headerlink" title="建立在 MVC 模式中的几种适配方案"></a>建立在 MVC 模式中的几种适配方案</h3><p>取得 UA 信息后，我们就要考虑如果根据指定的 UA 进行终端适配了。即使在 NodeJS 层，虽然没有了大部分的业务逻辑，但我们依然把内部区分为 Model / Controller / View 三个模型。</p>
-<p><img src="http://gtms04.alicdn.com/tps/i4/T1oGP_FIlbXXc1sab4-200-220.png" alt="http://gtms04.alicdn.com/tps/i4/T1oGP_FIlbXXc1sab4-200-220.png"></p>
-<p>我们先利用上面的图，去解析一些已有的多终端适配方案。</p>
-<h3 id="建立在-Controller-上的适配方案"><a href="#建立在-Controller-上的适配方案" class="headerlink" title="建立在 Controller 上的适配方案"></a>建立在 Controller 上的适配方案</h3><p><img src="http://gtms03.alicdn.com/tps/i3/T1YkZcFMhXXXa36h6P-507-400.png" alt="http://gtms03.alicdn.com/tps/i3/T1YkZcFMhXXXa36h6P-507-400.png"></p>
-<p>这种方案应该是最简单粗暴的处理方法。通过路由（Router）将相同的 URL 统一传递到同一个控制层（Controller）。控制层再通过 UA 信息将数据和模型（Model）逻辑派发到对应的展现（View）进行渲染，渲染层则按预先的约定提供了适配几个终端的模板。</p>
-<p>这种方案的好处是，保持了数据和控制层的统一性，业务逻辑只需处理一次遍可以应用在所有终端上。但这种场景只适合如展示型页面等低交互型的应用，一旦业务比较复杂，各个终端的 Controller 可能有各自的处理逻辑，如果还是共用一个 Controller ，会导致 Controller 非常的臃肿而且难以维护，这无疑是一个错误的选择。</p>
-<h3 id="建立在-Router-上的适配方案"><a href="#建立在-Router-上的适配方案" class="headerlink" title="建立在 Router 上的适配方案"></a>建立在 Router 上的适配方案</h3><p>为了解决上面遇到的问题，我们可以在 Router 上就将设备区分，针对不同的终端分发到不同的 Controller 上：</p>
-<p><img src="http://gtms03.alicdn.com/tps/i3/T1UQr7FK8cXXXKYi.n-531-348.png" alt="http://gtms03.alicdn.com/tps/i3/T1UQr7FK8cXXXKYi.n-531-348.png"></p>
-<p>这也是最常见的方案之一，大多表现在针对不同终端使用各自独立的一套应用。如 PC 淘宝首页和 WAP 版的淘宝首页，不同设备访问 www.taobao.com ，服务器会通过 Router 的控制，重定向到 WAP 版的淘宝首页或者 PC 版的淘宝首页，它们各自是完全独立的两套应用。</p>
-<p>但这种方案无疑带来了数据和部分逻辑无法共用的问题，各种终端之间无法分享同一份数据和业务逻辑，产生大量重复性工作，效率低下。</p>
-<p>为了缓解这个问题，有人提出了优化后的方案：依然是在同一套应用里面，各个数据来源抽象成各个 Model，提供给不同终端的 Controller 组合使用：</p>
-<p><img src="http://gtms01.alicdn.com/tps/i1/T1pR_fFGxaXXXGaK2H-685-520.png" alt="http://gtms01.alicdn.com/tps/i1/T1pR_fFGxaXXXGaK2H-685-520.png"></p>
-<p>这个方案解决了前面数据无法共用的问题。在 Controller 上各个终端还是相互独立，但能共同使用同一批数据源，至少在数据上无需再针对终端类型开发独立的接口了。</p>
-<p>以上两种基于 Router 的方案，由于 Controller 的独立，各个终端可以为自己的页面实现不同的交互逻辑，保证了各终端自身足够的灵活度，这也是为什么大部分应用采用这种方案的主要原因。</p>
-<h3 id="建立在-View-层的适配方案"><a href="#建立在-View-层的适配方案" class="headerlink" title="建立在 View 层的适配方案"></a>建立在 View 层的适配方案</h3><p>这是淘宝下单页面使用的方案，不过区别是下单页将整体的渲染层放在了浏览器端，而不是 NodeJS 层。不过无论是浏览器还是 NodeJS，整体设计思路还是一致的：</p>
-<p><img src="http://gtms02.alicdn.com/tps/i2/T18IvnFMtXXXc.mb7O-1327-494.png" alt="http://gtms02.alicdn.com/tps/i2/T18IvnFMtXXXc.mb7O-1327-494.png"></p>
-<p>在这个方案里面，Router、Controller 和 Model 都无需关注设备信息，终端类型的判断完全交给展现层来处理。图中主要的模块是「View Factory」，Model 和 Controller 将数据和渲染逻辑传递过来之后，通过 View Factory 根据设备信息和其它状态（不仅仅是 UA 信息、也可以是网络环境、用户地区等等）从一堆预设好的组件（View Component）中抓取特定的组件，再组合成最终的页面。</p>
-<p>这种方案有几个优势：</p>
-<ol>
-<li>上层无需关注设备信息（UA），多终端的视频还是交由和最终展现最大关系的 View 层来处理；</li>
-<li>不仅仅是多终端适配，除了 UA 信息，各个 View Component 还可以根据用户状态决定自身输出何种模版，如低网速下默认隐藏图片、指定地区输出活动 Banner。</li>
-<li>每个 View Component 的不同模版间可以自行决定是否使用同一份数据、业务逻辑，提供十分灵活的实现方式。</li>
-</ol>
-<p>但明显的是，这个方案也是最复杂的，尤其是要考虑一些富交互的应用场景时，Router 和 Controller 也许无法保持这么纯粹。特别对于一些整体性比较强的业务，本身无法被拆分成组件，这种方案也许并不适用；而且对于一些简单的业务，使用这种架构可能不是最佳的选择。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>以上几种方案，都各自体现在 MVC 模型中的一个或多个部分，在业务上如果一个方案不满足需求，更可以采取多个方案同时采用的方式。或是可以理解为，业务上的复杂度和交互属性决定了该产品更适合采用哪种多终端适配方案。</p>
-<p>对比基于浏览器的响应式设计方案，因为绝大部分终端探测和渲染逻辑迁移到了服务端，所以在 NodeJS 层进行适配无疑带来了更好的性能和用户体验；另外，相对于一些所谓的「云适配」方案带来的转换质量问题，在基于前后端分离的「定制式」方案中也不会存在。前后端分离的适配方案在这些方面有着天然优势。</p>
-<p>最后，为了适应更灵活的强大的适配需求，基于前后端分离的适配方案将会面临更多挑战！</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;前后端分离的思考与实践（五）&quot;&gt;&lt;a href=&quot;#前后端分离的思考与实践（五）&quot; class=&quot;headerlink&quot; title=&quot;前后端分离的思考与实践（五）&quot;&gt;&lt;/a&gt;前后端分离的思考与实践（五）&lt;/h2&gt;&lt;h3 id=&quot;TOC&quot;&gt;&lt;a href=&quot;#TO
     
     </summary>
     
