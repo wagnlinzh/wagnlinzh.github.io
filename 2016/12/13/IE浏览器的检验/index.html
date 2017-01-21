@@ -4,7 +4,7 @@
     <!-- Title -->
     
     <title>
-        IE浏览器的检验 | wanglinzhizhi.me
+        IE浏览器的检验 | wanglinzhizhi
     </title>
     
     <!-- Favicons -->
@@ -35,12 +35,12 @@
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="wanglinzhizhi.me">
+    <meta name="apple-mobile-web-app-title" content="wanglinzhizhi">
     
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="http://yichewx.com">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="IE浏览器的检验 | wanglinzhizhi.me">
+    <meta property="og:title" content="IE浏览器的检验 | wanglinzhizhi">
     <meta property="og:description" content="游走在上下文无关文法间">
     
      <!--[if lte IE 9]>
@@ -331,7 +331,7 @@
                 <div id="post-content" class="markdown-Github mdl-color-text--grey-700 mdl-card__supporting-text fade out">
 	
 		<h2 id="IE浏览器的检验"><a href="#IE浏览器的检验" class="headerlink" title="IE浏览器的检验"></a>IE浏览器的检验</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">&lt;script&gt;</div><div class="line">          $(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line"></div><div class="line">          <span class="keyword">var</span> isIE78910=<span class="regexp">/mise/i</span>.test(navigator.userAgent.toLowerCase());</div><div class="line">          <span class="keyword">var</span> isIE11=<span class="regexp">/trident/i</span>.test(navigator.userAgent.toLowerCase());</div><div class="line">          <span class="keyword">var</span> isIE=(isIE78910 || isIE11);</div><div class="line">  </div><div class="line">          <span class="keyword">if</span>(isIE)&#123;</div><div class="line">             <span class="comment">//todo</span></div><div class="line">          &#125;</div><div class="line">          &#125;)();</div><div class="line">      &lt;/script&gt;</div></pre></td></tr></table></figure>
-<h2 id="IE8-以及以下的版本检测"><a href="#IE8-以及以下的版本检测" class="headerlink" title="IE8 以及以下的版本检测"></a>IE8 以及以下的版本检测</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> islowIE8=<span class="literal">false</span>;</div><div class="line"><span class="keyword">var</span> isIE=<span class="regexp">/mise/i</span>.test(navigator.userAgent.toLowerCase());</div><div class="line"><span class="keyword">if</span> (isIE) &#123;</div><div class="line">	<span class="keyword">var</span> ieVersion=<span class="regexp">/msie ([\d.]+)/</span>.navigator.userAgent.toLowerCase();</div><div class="line">	ieVersion = <span class="built_in">parseInt</span>(ieVersion);</div><div class="line">	islowIE8= (ieVersion&gt;<span class="number">8</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">if</span> (islowIE8)&#123; 	<span class="comment">//&lt;=ie8的情况</span></div><div class="line">	<span class="comment">//todo..</span></div><div class="line">&#125;<span class="keyword">else</span>&#123;		 	<span class="comment">//其他情况</span></div><div class="line">	<span class="comment">//todo..</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="IE8-以及以下的版本检测"><a href="#IE8-以及以下的版本检测" class="headerlink" title="IE8 以及以下的版本检测"></a>IE8 以及以下的版本检测</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> islowIE8=<span class="literal">false</span>;</div><div class="line"><span class="keyword">var</span> isIE=<span class="regexp">/mise/i</span>.test(navigator.userAgent.toLowerCase());</div><div class="line"><span class="keyword">if</span> (isIE) &#123;</div><div class="line">true<span class="keyword">var</span> ieVersion=<span class="regexp">/msie ([\d.]+)/</span>.navigator.userAgent.toLowerCase();</div><div class="line">trueieVersion = <span class="built_in">parseInt</span>(ieVersion);</div><div class="line">trueislowIE8= (ieVersion&gt;<span class="number">8</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">if</span> (islowIE8)&#123; 	<span class="comment">//&lt;=ie8的情况</span></div><div class="line">true<span class="comment">//todo..</span></div><div class="line">&#125;<span class="keyword">else</span>&#123;		 	<span class="comment">//其他情况</span></div><div class="line">true<span class="comment">//todo..</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
 	
 	
@@ -376,7 +376,7 @@
     
     <!-- Prev Nav -->
     
-        <a href="/2016/12/13/chrome远端调试/" id="post_nav-newer" class="prev-content">
+        <a href="/2016/12/13/HACK 主站样式/" id="post_nav-newer" class="prev-content">
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
                 <i class="material-icons">arrow_back</i>
             </button>
@@ -390,7 +390,7 @@
 
     <!-- Next Nav -->
     
-        <a href="/2016/12/13/input 表单相关/" id="post_nav-older" class="next-content">
+        <a href="/2016/12/13/JS基础算法/" id="post_nav-older" class="next-content">
             旧篇
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
@@ -624,7 +624,7 @@ It will not impact the appearance and can give developers a lot of support :)
 
 
 		<!--Copyright-->
-		<div id="copyright">Copyright&nbsp;©&nbsp;<script type="text/javascript">var fd = new Date();document.write(fd.getFullYear());</script>&nbsp;wanglinzhizhi.me</div>
+		<div id="copyright">Copyright&nbsp;©&nbsp;<script type="text/javascript">var fd = new Date();document.write(fd.getFullYear());</script>&nbsp;wanglinzhizhi</div>
 
 		<!-- Paradox Footer Right Section -->
 
