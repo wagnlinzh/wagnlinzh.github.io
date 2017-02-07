@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <!-- Title -->
+    
+    <title>
+        大数据时代 Notes | wanglinzhizhi
+    </title>
+    
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+    
+    <!-- Meta & INfo -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0D47A1">
+    <meta name="author" content="wanglinzhizhi">
+    <meta name="description" content="游走在上下文无关文法间">
+    <meta name="keywords" content="null">
+    
+    <!--iOS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+    
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="wanglinzhizhi">
+    
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://www.wanglinzhizhi.me">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="大数据时代 Notes | wanglinzhizhi">
+    <meta property="og:description" content="游走在上下文无关文法间">
+    
+     <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+        
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+    
+    <!-- Import CSS -->
+    <link rel="stylesheet" href="/css/material.min.css">
+    <link rel="stylesheet" href="/css/style.min.css">
+    <!-- Config CSS -->
+
+
+<!-- Other Styles -->
+<style>
+	body, html{
+		font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+	}
+	
+    a{
+        color: #2196F3
+    }
+    
+    .mdl-card__media,
+    #search-label,
+    #search-form-label:after,
+    #scheme-Paradox .hot_tags-count,
+    #scheme-Paradox .sidebar_archives-count,
+    #scheme-Paradox .sidebar-colored .sidebar-header,
+    #scheme-Paradox .sidebar-colored .sidebar-badge{
+        background-color: #1565C0 !important
+    }
+    
+	/* Sidebar User Drop Down Menu Text Color */
+	#scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+    #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus{
+        color: #1565C0 !important
+    }
+    
+    #post_entry-right-info,
+    .sidebar-colored .sidebar-nav li:hover > a,
+    .sidebar-colored .sidebar-nav li:hover > a i,
+    .sidebar-colored .sidebar-nav li > a:hover,
+    .sidebar-colored .sidebar-nav li > a:hover i,
+    .sidebar-colored .sidebar-nav li > a:focus i,
+    .sidebar-colored .sidebar-nav > .open > a,
+    .sidebar-colored .sidebar-nav > .open > a:hover,
+    .sidebar-colored .sidebar-nav > .open > a:focus,
+    #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a{
+        color: #1565C0 !important
+    }
+    
+    .toTop{
+        background: #757575 !important
+    }
+		
+	.material-layout .material-post>.material-nav,
+	.material-layout .material-index>.material-nav,
+	.material-nav a{
+		color: #757575;
+	}
+		
+	#scheme-Paradox .MD-burger-layer {
+		background-color: #757575;
+	}
+
+	#scheme-Paradox #post-toc-trigger-btn{
+		color: #757575;
+	}
+	
+	.post-toc a:hover{
+		color: #2196F3;
+		text-decoration: underline;
+	}
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+        body{
+            background-color: #F5F5F5
+        }
+		
+		/* blog_info bottom background */
+        #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+            background-color: #fff;
+        }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+        .fade {
+            transition: all 800ms linear;
+            -webkit-transform: translate3d(0,0,0);
+            -moz-transform: translate3d(0,0,0);
+            -ms-transform: translate3d(0,0,0);
+            -o-transform: translate3d(0,0,0);
+            transform: translate3d(0,0,0);
+            opacity: 1;
+        }
+
+        .fade.out{
+            opacity: 0;
+        }
+    </style>
+
+	<script src="/js/jquery.min.js"></script>
+	
+	<link rel="stylesheet" href="/css/highlight/atom-one-dark.css">
+	
+	<!-- UC Browser Compatible-->
+	<script>
+		var agent = navigator.userAgent.toLowerCase();
+		if(agent.indexOf('ucbrowser')>0) {
+			document.write('<link rel="stylesheet" href="/css/uc.css">');
+		   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+		}
+	</script>
+    
+    <!-- Custom Head -->
+    
+</head>
+	
+	
+
+    <body id="scheme-Paradox">
+
+		
+        <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+				
+			
+			
+            <!-- Main Container -->
+            <main class="material-layout__content" id="main">
+				
+                <!-- Top Anchor -->
+                <div id="top"></div>
+				
+				
+                <!-- Hamburger Button -->
+                <button class="MD-burger-icon sidebar-toggle">
+                    <span class="MD-burger-layer"></span>
+                </button>
+				
+				
+                <!-- Post TOC -->
+
+    
+	<!-- Back Button -->
+<!--
+	<div class="material-back" id="backhome-div" tabindex="0">
+		<a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" href="#" onclick="window.history.back();return false;" target="_self" role="button" data-upgraded=",MaterialButton,MaterialRipple">
+			<i class="material-icons" role="presentation">arrow_back</i>
+			<span class="mdl-button__ripple-container">
+				<span class="mdl-ripple"></span>
+			</span>
+		</a>
+	</div>			
+-->
+	<!-- Left aligned menu below button -->
+	<button id="post-toc-trigger-btn"
+			class="mdl-button mdl-js-button mdl-button--icon">
+	  <i class="material-icons">format_list_numbered</i>
+	</button>
+
+	<ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
+		for="post-toc-trigger-btn">
+			
+			<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#大数据时代"><span class="post-toc-number">1.</span> <span class="post-toc-text">大数据时代</span></a></li></ol>
+		
+<!--			<li class="mdl-menu__item">Some Action</li>-->
+	</ul>
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+		
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+	<!-- Paradox Post Header -->
+	
+		
+			<!-- Random Thumbnail -->
+			<div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+				<script>
+    
+    var randomNum;
+    randomNum = Math.floor(Math.random() * 5 + 1);
+    
+    $(".post_thumbnail-random").css('background-image', 'url(' + '/img/random/' + randomNum + '.png' + ')');
+    
+</script>
+
+		
+	
+        <p class="article-headline-p">
+            大数据时代 Notes
+        </p>
+    </div>
+
+	
+
+				
+				
+					<!-- Paradox Post Info -->
+					<div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+    
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/me.jpeg" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>wanglinzhizhi</strong>
+        <span>Jan 15, 2015</span>
+    </div>
+    
+    <div class="section-spacer"></div>
+	
+    <!-- Favorite -->
+<!--
+    <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+        <i class="material-icons" role="presentation">favorite</i>
+        <span class="visuallyhidden">favorites</span>
+    </button>
+-->
+    
+    <!-- Tags (bookmark) -->
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/计算机科学/">计算机科学</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/读书笔记/">读书笔记</a>
+    </ul>
+    
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+    
+    <!-- Leancloud Views -->
+    <a class="post_share-link" href="#">
+        <li class="mdl-menu__item">
+            <span id="/2015/01/15/2015-01-15-大数据时代  Notes/" class="leancloud-views_num" data-flag-title="大数据时代 Notes">
+     &nbsp;浏览量
+</span>
+        </li>
+    </a>
+    
+    
+    
+    
+    <!-- Share Twitter -->
+    <a class="post_share-link" href="https://twitter.com/intent/tweet?text=大数据时代 Notes&url=http://www.wanglinzhizhi.me//2015/01/15/2015-01-15-大数据时代  Notes/index.html&via=wanglinzhizhi" target="_blank">
+        <li class="mdl-menu__item">
+            分享到 Twitter
+        </li>
+    </a>
+    
+    <!-- Share Google+ -->
+    <a class="post_share-link" href="https://plus.google.com/share?url=http://www.wanglinzhizhi.me//2015/01/15/2015-01-15-大数据时代  Notes/index.html" target="_blank">
+        <li class="mdl-menu__item">
+            分享到 Google+
+        </li>
+    </a>
+    
+    <!-- Share Weibo -->
+    <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=大数据时代 Notes&url=http://www.wanglinzhizhi.me//2015/01/15/2015-01-15-大数据时代  Notes/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <li class="mdl-menu__item">
+            分享到微博
+        </li>
+    </a>
+</ul>
+</div>
+				
+
+                <!-- Post Content -->
+                <div id="post-content" class="markdown-Github mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+	
+		<h3 id="大数据时代"><a href="#大数据时代" class="headerlink" title="大数据时代"></a>大数据时代</h3><p>大数据，变革公共卫生</p>
+<p>2015-01-15</p>
+<p>是当今社会所独有的一种新型能力：以一种前所未有的方式，通过对海量数据进行分析，获得有巨大价值的产品和服务，或深刻的洞见</p>
+<p>大数据，变革商业</p>
+<p>2015-01-15</p>
+<p>埃齐奥尼创立了一个预测系统，它帮助虚拟的乘客节省了很多钱。这个预测系统建立在41天之内的12 000个价格样本基础之上，而这些数据都是从一个旅游网站上爬取过来的。这个预测系统并不能说明原因，只能推测会发生什么。也就是说，它不知道是哪些因素导致了机票价格的波动。机票降价是因为有很多没卖掉的座位、季节性原因，还是所谓的“周六晚上不出门”，它都不知道。这个系统只知道利用其他航班的数据来预测未来机票价格的走势。“买还是不买，这是一个问题。”埃齐奥尼沉思着。他给这个研究项目取了一个非常贴切的名字，叫“哈姆雷特”。</p>
+<p>大数据，变革思维</p>
+<p>2015-01-15</p>
+<p>信息总量的变化也导致了信息形态的变化——量变引发了质变。最先经历信息爆炸的学科，如天文学和基因学，创造出了“大数据”这个概念</p>
+<p>2015-01-15</p>
+<p>大数据并非一个确切的概念。最初，这个概念是指需要处理的信息量过大，已经超出了一般电脑处理数据时所能使用的内存量，因此工程师们必须改进处理数据的工具。这导致了新的处理技术的诞生，例如谷歌的MapReduce和开源Hadoop平台（最初源于雅虎）。这些技术使得人们可以处理的数据量大大增加。更重要的是，这些数据不再需要用传统的数据库表格整齐排列了。一些可以消除僵化的层次结构和一致性的技术也出现了。同时，因为互联网公司可以收集大量有价值的数据，而且有利用这些数据的强烈的利益驱动力，所以互联网公司就顺理成章地成为最新的处理技术的领头实践者。它们甚至超过了很多有几十年经验的线下公司，成为新技术的领衔使用者。</p>
+<p>2015-01-15</p>
+<p>最惊人的是，社会需要放弃它对因果关系的渴求，而仅需关注相关关系。也就是说只需要知道是什么，而不需要知道为什么。这就推翻了自古以来的惯例，而我们做决定和理解现实的最基本方式也将受到挑战。</p>
+<p>注: xia</p>
+<p>相关性而不是因果性</p>
+<p>大数据，开启重大的时代转型</p>
+<p>2015-01-15</p>
+<p>大数据开启了一次重大的时代转型。与其他新技术一样，大数据也必然要经历硅谷臭名昭著的技术成熟度曲线：经过新闻媒体和学术会议的大肆宣传之后，新技术趋势一下子跌到谷底，许多数据创业公司变得岌岌可危</p>
+<p>2015-01-15</p>
+<p>天文学，信息爆炸的起源</p>
+<p>2015-01-15</p>
+<p>天文学领域的变化在各个领域都在发生。2003年，人类第一次破译人体基因密码的时候，辛苦工作了十年才完成了三十亿对碱基对的排序。大约十年之后，世界范围内的基因仪每15分钟就可以完成同样的工作。在金融领域，美国股市每天的成交量高达70亿股，而其中三分之二的交易都是由建立在数学模型和算法之上的计算机程序自动完成的。这些程序运用海量数据来预测利益和降低风险。</p>
+<p>2015-01-15</p>
+<p>互联网公司更是要被数据淹没了。谷歌公司每天要处理超过24拍字节的数据，这意味着其每天的数据处理量是美国国家图书馆所有纸质出版物所含数据量的上千倍。Facebook这个创立时间不足十年的公司，每天更新的照片量超过1 000万张，每天人们在网站上点击“喜欢”（Like）按钮或者写评论大约有三十亿次，这就为Facebook公司挖掘用户喜好提供了大量的数据线索。与此同时，谷歌子公司YouTube每月接待多达8亿的访客，平均每一秒钟就会有一段长度在一小时以上的视频上传。Twitter上的信息量几乎每年翻一番，截止到2012年，每天都会发布超过4亿条微博。</p>
+<p>2015-01-15</p>
+<p>有趣的是，在2007年，所有数据中只有7%是存储在报纸、书籍、图片等媒介上的模拟数据，其余全部是数字数据</p>
+<p>2015-01-15</p>
+<p>这样大的数据量意味着什么？如果把这些数据全部记在书中，这些书可以覆盖整个美国52次。如果将之存储在只读光盘上，这些光盘可以堆成五堆，每一堆都可以伸到月球。公元前3世纪，埃及的托勒密二世竭力收集了当时所有的书写作品，所以伟大的亚历山大图书馆可以代表世界上所有的知识量。但当数字数据洪流席卷世界之后，每个地球人都可以获得大量数据信息，相当于当时亚历山大图书馆存储的数据总量的320倍之多。</p>
+<p>2015-01-15</p>
+<p>事情真的在快速发展。人类存储信息量的增长速度比世界经济的增长速度快4倍，而计算机数据处理能力的增长速度则比世界经济的增长速度快9倍。</p>
+<p>2015-01-15</p>
+<p>物理学和生物学都告诉我们，当我们改变规模时，事物的状态有时也会发生改变。</p>
+<p>2015-01-15</p>
+<p>我们就以纳米技术为例。纳米技术专注于把东西变小而不是变大。其原理就是当事物到达分子的级别时，它的物理性质就会发生改变。一旦你知道这些新的性质，你就可以用同样的原料来做以前无法做的事情。铜本来是用来导电的物质，但它一旦到达纳米级别就不能在磁场中导电了。银离子具有抗菌性，但当它以分子形式存在的时候，这种性质会消失。一旦到达纳米级别，金属可以变得柔软，陶土可以具有弹性。同样，当我们增加所利用的数据量时，我们就可以做很多在小数据量的基础上无法完成的事情。</p>
+<p>2015-01-15</p>
+<p>尽管规律相同，但是我们能够感受到的约束，很可能只对我们这样尺度的事物起作用</p>
+<p>2015-01-15</p>
+<p>对于人类来说，唯一一个最重要的物理定律便是万有引力定律。这个定律无时无刻不在控制着我们。但对于细小的昆虫来说，重力是无关紧要的。对它们而言，物理宇宙中有效的约束是表面张力，这个张力可以让它们在水上自由行走而不会掉下去。但人类对于表面张力毫不在意。</p>
+<p>预测，大数据的核心</p>
+<p>2015-01-15</p>
+<p>大数据的核心就是预测。它通常被视为人工智能的一部分，或者更确切地说，被视为一种机器学</p>
+<p>2015-01-15</p>
+<p>但是这种定义是有误导性的。大数据不是要教机器像人一样思考。相反，它是把数学算法运用到海量的数据上来预测事情发生的可能性</p>
+<p>2015-01-15</p>
+<p>这些预测系统之所以能够成功，关键在于它们是建立在海量数据的基础之上的</p>
+<p>2015-01-15</p>
+<p>不久的将来，世界许多现在单纯依靠人类判断力的领域都会被计算机系统所改变甚至取代。计算机系统可以发挥作用的领域远远不止驾驶和交友，还有更多更复杂的任务。</p>
+<p>大数据，大挑战</p>
+<p>2015-01-15</p>
+<p>第一个转变就是，在大数据时代，我们可以分析更多的数据，有时候甚至可以处理和某个特别现象相关的所有数据，而不再依赖于随机采样。</p>
+<p>2015-01-15</p>
+<p>第二个改变就是，研究数据如此之多，以至于我们不再热衷于追求精确度</p>
+<p>注: 海量数据 量取代数据的精确性</p>
+<p>如果数据的量与 人工相结合会不会更好？</p>
+<p>2015-01-15</p>
+<p>第三个转变因前两个转变而促成，即我们不再热衷于寻找因果关系</p>
+<p>2015-01-15</p>
+<p>寻找因果关系是人类长久以来的习惯。即使确定因果关系很困难而且用途不大，人类还是习惯性地寻找缘由。相反，在大数据时代，我们无须再紧盯事物之间的因果关系，而应该寻找事物之间的相关关系，这会给我们提供非常新颖且有价值的观点。相关关系也许不能准确地告知我们某件事情为何会发生，但是它会提醒我们这件事情正在发生。在许多情况下，这种提醒的帮助已经足够大</p>
+<p>2015-01-15</p>
+<p>大数据告诉我们“是什么”而不是“为什么”。在大数据时代，我们不必知道现象背后的原因，我们只要让数据自己发声。</p>
+<p>2015-01-15</p>
+<p>模拟时代的数据收集和分析极其耗时耗力，新问题的出现通常要求我们重新收集和分析数据</p>
+<p>2015-01-15</p>
+<p>数据化意味着我们要从一切太阳底下的事物中汲取信息，甚至包括很多我们以前认为和“信息”根本搭不上边的事</p>
+<p>2015-01-15</p>
+<p>大数据时代开启了一场寻宝游戏，而人们对于数据的看法以及对于由因果关系向相关关系转化时释放出的潜在价值的态度，正是主宰这场游戏的关键。新兴技术工具的使用使这一切成为可能。宝贝不止一件，每个数据集内部都隐藏着某些未被发掘的价值。这场发掘和利用数据价值的竞赛正开始在全球上演。</p>
+<p>2015-01-15</p>
+<p>我们大部分的习俗和惯例都建立在一个预设好的立场上，那就是我们用来进行决策的信息必须是少量、精确并且至关重要的。但是，当数据量变大、数据处理速度加快，而且数据变得不那么精确时，之前的那些预设立场就不复存在了</p>
+<p>2015-01-15</p>
+<p>在了解和监视人类的行为方面，社会已经有了数千年的经验。但是，如何来监管一个算法系统呢？在信息化时代的早期，有一些政策专家就看到了信息化给人们的隐私权带来的威胁，社会也已经建立起了庞大的规则体系来保障个人的信息安全。但是在大数据时代，这些规则都成了无用的马其诺防线。人们自愿在网络上分享信息，而这种分享的能力成为了网络服务的一个中心特征，而不再是一个需要规避的薄弱点了。</p>
+<p>2015-01-15</p>
+<p>我们而言，危险不再是隐私的泄露，而是被预知的可能性——这些能预测我们可能生病、拖欠还款和犯罪的算法会让我们无法购买保险、无法贷款、甚至在实施犯罪前就被预先逮捕。显然，统计把大数据放在了首位，但即便如此，个人意志是否应该凌驾于大数据之上呢？就像出版印刷行业的发展推动国家立法保护言论自由（在此之前没有出台类似法律的必要，因为没有太多的言论需要保护），大数据时代也需要新的规章制度来保卫权势面前的个人权利。</p>
+<p>让数据“发声”</p>
+<p>2015-01-15</p>
+<p>首先，要分析与某事物相关的所有数据，而不是依靠分析少量的数据样本。</p>
+<p>其次，我们乐于接受数据的纷繁复杂，而不再追求精确性。</p>
+<p>最后，我们的思想发生了转变，不再探求难以捉摸的因果关系，转而关注事物的相关关系。</p>
+<p>小数据时代的随机采样，最少的数据获得最多的信息</p>
+<p>2015-01-20</p>
+<p>小数据时代的随机采样，最少的数据获得最多的信息</p>
+<p>2015-01-20</p>
+<p>实际上，“人口普查”这个词来源于拉丁语的“censere”，意思就是推测、估算。</p>
+<p>2015-01-20</p>
+<p>百多年前，一个名叫约翰·格朗特（John Graunt）的英国缝纫用品商提出了一个很有新意的方法。他采用了一个新方法推算出鼠疫时期伦敦的人口数，这种方法就是后来的统计学。</p>
+<p>2015-01-20</p>
+<p>样本分析法一直都有较大的漏洞，因此无论是进行人口普查还是其他大数据类的任务，人们还是一直使用一一清点这种“野蛮”的方法。</p>
+<p>2015-01-20</p>
+<p>耗时8年才完成数据汇总。因此，他们获得的很多数据都是过时的。</p>
+<p>2015-01-20</p>
+<p>事实证明，问题的关键是选择样本时的随机性。</p>
+<p>2015-01-20</p>
+<p>采样分析的精确性随着采样随机性的增加而大幅提高，但与样本数量的增加关系不大。</p>
+<p>2015-01-20</p>
+<p>当样本数量达到了某个值之后，我们从新个体身上得到的信息会越来越少，就如同经济学中的边际效应递减一样。</p>
+<p>2015-01-20</p>
+<p>认为样本选择的随机性比样本数量更重要，这种观点是非常有见地的。这种观点为我们开辟了一条收集信息的新道路。通过收集随机样本，我们可以用较少的花费做出高精准度的推断</p>
+<p>2015-01-20</p>
+<p>随机采样取得了巨大的成功，成为现代社会、现代测量领域的主心骨。但这只是一条捷径，是在不可收集和分析全部数据的情况下的选择，它本身存在许多固有的缺陷。</p>
+<p>注: 存在性问题 未证明</p>
+<p>2015-01-20</p>
+<p>而且，一旦采样过程中存在任何偏见，在细分领域所做的预测就会大错特错</p>
+<p>2015-01-20</p>
+<p>因此，当人们想了解更深层次的细分领域的情况时，随机采样的方法就不可取了。在宏观领域起作用的方法在微观领域失去了作用。</p>
+<p>2015-01-20</p>
+<p>只研究样本而不是整体，有利有弊：能更快更容易地发现问题，但不能回答事先未考虑到的问题。</p>
+<p>2015-01-20</p>
+<p>史蒂夫·乔布斯的医生们能够基于乔布斯的特定基因组成，按所需效果用药。如果癌症病变导致药物失效，医生可以及时更换另一种药，也就是乔布斯所说的，“从一片睡莲叶跳到另一片上。”乔布斯开玩笑说：“我要么是第一个通过这种方式战胜癌症的人，要么就是最后一个因为这种方式死于癌症的人。</p>
+<p>全数据模式，样本=总体</p>
+<p>2015-01-20</p>
+<p>全数据模式，样本=总体</p>
+
+	
+	
+	
+	
+</div>
+				
+				
+
+                <!-- Post Comments -->
+                
+                    
+
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    
+    <!-- Prev Nav -->
+    
+        <a href="/2015/03/20/2015-03-20-随笔：每一个不善沟通的孩子都有强大的帮助别人沟通的内在力量/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+</nav>
+        </div>
+    </div>
+
+				
+				
+					<!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay "></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored  sidebar-fixed-left" role="navigation">
+	<div id="sidebar-main">
+	    <!-- Sidebar Header -->
+		<div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+    <i class="material-icons">clear_all</i>
+    <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/me.jpeg" alt="wanglinzhizhi's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        wanglinzhizhi@hotmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+		<!-- Sidebar Navigation  -->
+		<ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+			
+                <li>
+                    <a href="#" target="_blank" title="Email Me">
+						<i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    <li id="sidebar-first-li">
+        <a href="/" target="_self">
+            <i class="material-icons sidebar-material-icons">home</i>
+             主页
+        </a>
+    </li>
+
+    <!-- I'm Feeling Lucky -->
+<!--
+    <li class="dropdown">
+        <a href="" target="_self">
+            <i class="material-icons sidebar-material-icons">explore</i>
+             sidebar.imlucky
+        </a>
+    </li>
+-->
+
+	
+    <!-- Archives  -->
+    <li class="dropdown">
+        <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+            <i class="material-icons sidebar-material-icons">inbox</i>
+             归档
+            <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+            <a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">74</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/02/">February 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/01/">January 2016<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/12/">December 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/08/">August 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/06/">June 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/04/">April 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/03/">March 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/01/">January 2015<span class="sidebar_archives-count">1</span></a>
+        </ul>
+    </li>
+
+    <!-- Divider -->
+    <li class="divider"></li>
+
+
+    <!-- Pages  -->
+	
+		<li>
+			<a href="/tags" title="Tags">
+				Tags
+			</a>
+		</li>
+	
+		<li>
+			<a href="/gallery" title="Gallery">
+				Gallery
+			</a>
+		</li>
+	
+		<li>
+			<a href="/about" title="About">
+				About
+			</a>
+		</li>
+	
+
+    <!-- Article Numebr  -->
+    <li>
+        <a href="/archives">
+             文章总数
+             <span class="sidebar-badge">92</span>
+        </a>
+    </li>
+</ul>
+
+		<!-- Sidebar Divider -->
+		<div class="sidebar-divider"></div>
+
+		<!-- Sidebar Footer -->
+		<!-- 
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持。 :) 
+-->
+
+<!-- Theme Material -->
+<a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
+	<div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+		主题 - Material
+		<span class="sidebar-badge badge-circle">i</span>
+	</div>
+</a>
+
+<!-- Help & Support -->
+<!--
+<a href="mailto:hiviosey@gmail.com" class="sidebar-footer-text-a">
+    <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+		sidebar.help
+		<span class="mdl-button__ripple-container">
+			<span class="mdl-ripple"></span>
+		</span>
+	</div>
+</a>
+-->
+
+<!-- Feedback -->
+<!--
+<a href="https://github.com/viosey/hexo-theme-material/issues" target="_blank" class="sidebar-footer-text-a">
+    <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+         sidebar.feedback
+                    <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></div>
+</a>
+-->
+
+<!-- Abount Theme -->
+<!--
+<a href="https://blog.viosey.com/index.php/Material.html" target="_blank" class="sidebar-footer-text-a">
+    <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+         sidebar.about_theme
+        <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></div>
+</a>-->
+
+	</div>
+    
+    <!-- Sidebar Sponsor -->
+    
+
+
+</aside>
+
+				
+				
+				
+					<!-- Footer Top Button -->
+					<div class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+				
+				
+				<!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+	
+	
+		<!-- Paradox Footer Left Section -->
+		<div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+    
+    
+    <!-- Facebook -->
+    
+    
+    
+    <!-- Google + -->
+    
+    
+    
+    <!-- Weibo -->
+    
+    
+    
+    <!-- Instagram -->
+    
+    
+    
+    <!-- Tumblr -->
+    
+    
+    
+    <!-- Github -->
+    
+    <a href="https://github.com/wagnlinzh" target="view_window"><button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-github.png);">
+        <span class="visuallyhidden">Github</span>
+    </button></a>
+    
+</div>
+
+
+		<!--Copyright-->
+		<div id="copyright">Copyright&nbsp;©&nbsp;<script type="text/javascript">var fd = new Date();document.write(fd.getFullYear());</script>&nbsp;wanglinzhizhi</div>
+
+		<!-- Paradox Footer Right Section -->
+
+		<!-- 
+		I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+		It will not impact the appearance and can give developers a lot of support :)
+
+		很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+		它不会影响美观并可以给开发者很大的支持。 :) 
+		-->
+
+		<div class="mdl-mini-footer--right-section">
+			<div>
+				<div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+				<div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+			</div>
+		</div>
+	
+    
+</footer>
+                
+				<!-- Import File -->
+<script src="/js/highlight.min.js"></script>
+<script src="/js/js.min.js"></script>
+<script src="/js/nprogress.js"></script>
+
+<script type="text/javascript">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    
+    $('#nprogress .bar').css({
+        'background': '#2196F3'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #2196F3, 0 0 15px #2196F3'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#2196F3',
+        'border-left-color': '#2196F3'
+    });
+    
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+	<script src="/js/smoothscroll.js"></script>
+
+
+
+    <!-- Leancloud -->
+	<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+	<script>
+		AV.initialize("EObBAbqpQfNFLuV5SjbVgoxq-gzGzoHsz", "qPdmjfSU3DDmPPH9ui0cUW4z");
+	</script>
+    <script>
+	function showTime(Counter) {
+		var query = new AV.Query(Counter);
+		$(".leancloud-views_num").each(function() {
+			var url = $(this).attr("id").trim();
+			query.equalTo("url", url);
+			query.find({
+				success: function(results) {
+					if (results.length == 0) {
+						var content = '0 ' + $(document.getElementById(url)).text();
+						$(document.getElementById(url)).text(content);
+						return;
+					}
+					for (var i = 0; i < results.length; i++) {
+						var object = results[i];
+						var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
+						$(document.getElementById(url)).text(content);
+					}
+				},
+				error: function(object, error) {
+					console.log("Error: " + error.code + " " + error.message);
+				}
+			});
+
+		});
+	}
+
+	function addCount(Counter) {
+		var Counter = AV.Object.extend("Counter");
+		url = $(".leancloud-views_num").attr('id').trim();
+		title = $(".leancloud-views_num").attr('data-flag-title').trim();
+		var query = new AV.Query(Counter);
+		query.equalTo("url", url);
+		query.find({
+			success: function(results) {
+				if (results.length > 0) {
+					var counter = results[0];
+					counter.fetchWhenSave(true);
+					counter.increment("time");
+					counter.save(null, {
+						success: function(counter) {
+							var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
+							$(document.getElementById(url)).text(content);
+						},
+						error: function(counter, error) {
+							console.log('Failed to save Visitor num, with error message: ' + error.message);
+						}
+					});
+				} else {
+					var newcounter = new Counter();
+					newcounter.set("title", title);
+					newcounter.set("url", url);
+					newcounter.set("time", 1);
+					newcounter.save(null, {
+						success: function(newcounter) {
+							console.log("newcounter.get('time')="+newcounter.get('time'));
+							var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
+							$(document.getElementById(url)).text(content);
+						},
+						error: function(newcounter, error) {
+							console.log('Failed to create');
+						}
+					});
+				}
+			},
+			error: function(error) {
+				console.log('Error:' + error.code + " " + error.message);
+			}
+		});
+	}
+	$(function() {
+		var Counter = AV.Object.extend("Counter");
+		if ($('.leancloud-views_num').length == 1) {
+			addCount(Counter);
+		} else if ($('.post-title-link').length > 1) {
+			showTime(Counter);
+		}
+	}); 
+</script>
+
+
+
+
+
+
+
+
+<!-- Swiftye -->
+
+
+<!-- Local Search-->
+
+	<script>
+	var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var str='<ul class=\"search-result-list\">';                
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length <= 0) {
+                    return;
+                }
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        str += "<li><a href='"+ data_url +"' class='search-result-title' target='_blank'>"+ data_title;
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out characters
+                            var start = first_occur - 6;
+                            var end = first_occur + 6;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 10;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substr(start, end); 
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<em class=\"search-keyword\">"+keyword+"</em>");
+                            })
+                            str += "<p class=\"search-result\">" + match_content +"...</p>" +"</a>";
+                        }
+                    }
+                })
+                $resultContent.innerHTML = str;
+            })
+        }
+    })
+}
+</script>
+
+	<script>
+        var inputArea = document.querySelector("#search");
+        var getSearchFile = function(){
+            var path = "search.xml";
+            searchFunc(path, 'search', 'local-search-result');
+        }
+
+        inputArea.onfocus = function(){ getSearchFile() }
+	</script>
+
+
+<!-- Window Load-->
+<script>
+    $(window).load(function() {
+        // Post_Toc parent position fixed
+        $(".post-toc-wrap").parent(".mdl-menu__container").css("position", "fixed");
+    });
+</script>
+
+<!-- MathJax Load-->
+
+            </main>
+        </div>
+		
+    </body>
+		
+	
+</html>

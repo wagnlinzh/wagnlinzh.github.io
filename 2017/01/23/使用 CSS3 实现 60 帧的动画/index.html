@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <!-- Title -->
+    
+    <title>
+        使用 CSS3实现60帧 的动画 | wanglinzhizhi
+    </title>
+    
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+    
+    <!-- Meta & INfo -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0D47A1">
+    <meta name="author" content="wanglinzhizhi">
+    <meta name="description" content="游走在上下文无关文法间">
+    <meta name="keywords" content="null">
+    
+    <!--iOS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+    
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="wanglinzhizhi">
+    
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://www.wanglinzhizhi.me">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="使用 CSS3实现60帧 的动画 | wanglinzhizhi">
+    <meta property="og:description" content="游走在上下文无关文法间">
+    
+     <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+        
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+    
+    <!-- Import CSS -->
+    <link rel="stylesheet" href="/css/material.min.css">
+    <link rel="stylesheet" href="/css/style.min.css">
+    <!-- Config CSS -->
+
+
+<!-- Other Styles -->
+<style>
+	body, html{
+		font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+	}
+	
+    a{
+        color: #2196F3
+    }
+    
+    .mdl-card__media,
+    #search-label,
+    #search-form-label:after,
+    #scheme-Paradox .hot_tags-count,
+    #scheme-Paradox .sidebar_archives-count,
+    #scheme-Paradox .sidebar-colored .sidebar-header,
+    #scheme-Paradox .sidebar-colored .sidebar-badge{
+        background-color: #1565C0 !important
+    }
+    
+	/* Sidebar User Drop Down Menu Text Color */
+	#scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+    #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus{
+        color: #1565C0 !important
+    }
+    
+    #post_entry-right-info,
+    .sidebar-colored .sidebar-nav li:hover > a,
+    .sidebar-colored .sidebar-nav li:hover > a i,
+    .sidebar-colored .sidebar-nav li > a:hover,
+    .sidebar-colored .sidebar-nav li > a:hover i,
+    .sidebar-colored .sidebar-nav li > a:focus i,
+    .sidebar-colored .sidebar-nav > .open > a,
+    .sidebar-colored .sidebar-nav > .open > a:hover,
+    .sidebar-colored .sidebar-nav > .open > a:focus,
+    #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a{
+        color: #1565C0 !important
+    }
+    
+    .toTop{
+        background: #757575 !important
+    }
+		
+	.material-layout .material-post>.material-nav,
+	.material-layout .material-index>.material-nav,
+	.material-nav a{
+		color: #757575;
+	}
+		
+	#scheme-Paradox .MD-burger-layer {
+		background-color: #757575;
+	}
+
+	#scheme-Paradox #post-toc-trigger-btn{
+		color: #757575;
+	}
+	
+	.post-toc a:hover{
+		color: #2196F3;
+		text-decoration: underline;
+	}
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+        body{
+            background-color: #F5F5F5
+        }
+		
+		/* blog_info bottom background */
+        #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+            background-color: #fff;
+        }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+        .fade {
+            transition: all 800ms linear;
+            -webkit-transform: translate3d(0,0,0);
+            -moz-transform: translate3d(0,0,0);
+            -ms-transform: translate3d(0,0,0);
+            -o-transform: translate3d(0,0,0);
+            transform: translate3d(0,0,0);
+            opacity: 1;
+        }
+
+        .fade.out{
+            opacity: 0;
+        }
+    </style>
+
+	<script src="/js/jquery.min.js"></script>
+	
+	<link rel="stylesheet" href="/css/highlight/atom-one-dark.css">
+	
+	<!-- UC Browser Compatible-->
+	<script>
+		var agent = navigator.userAgent.toLowerCase();
+		if(agent.indexOf('ucbrowser')>0) {
+			document.write('<link rel="stylesheet" href="/css/uc.css">');
+		   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+		}
+	</script>
+    
+    <!-- Custom Head -->
+    
+</head>
+	
+	
+
+    <body id="scheme-Paradox">
+
+		
+        <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+				
+			
+			
+            <!-- Main Container -->
+            <main class="material-layout__content" id="main">
+				
+                <!-- Top Anchor -->
+                <div id="top"></div>
+				
+				
+                <!-- Hamburger Button -->
+                <button class="MD-burger-icon sidebar-toggle">
+                    <span class="MD-burger-layer"></span>
+                </button>
+				
+				
+                <!-- Post TOC -->
+
+    
+	<!-- Back Button -->
+<!--
+	<div class="material-back" id="backhome-div" tabindex="0">
+		<a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" href="#" onclick="window.history.back();return false;" target="_self" role="button" data-upgraded=",MaterialButton,MaterialRipple">
+			<i class="material-icons" role="presentation">arrow_back</i>
+			<span class="mdl-button__ripple-container">
+				<span class="mdl-ripple"></span>
+			</span>
+		</a>
+	</div>			
+-->
+	<!-- Left aligned menu below button -->
+	<button id="post-toc-trigger-btn"
+			class="mdl-button mdl-js-button mdl-button--icon">
+	  <i class="material-icons">format_list_numbered</i>
+	</button>
+
+	<ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
+		for="post-toc-trigger-btn">
+			
+			<ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#如丝般顺滑：使用-CSS3-实现-60-帧的动画"><span class="post-toc-number">1.</span> <span class="post-toc-text">如丝般顺滑：使用 CSS3 实现 60 帧的动画</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#了解时间轴"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">了解时间轴</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-样式"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">1. 样式</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-布局"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">2. 布局</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-渲染"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">3. 渲染</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-合成"><span class="post-toc-number">1.1.4.</span> <span class="post-toc-text">4. 合成</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#如何达到-60-帧每秒"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">如何达到 60 帧每秒</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#错误做法"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">错误做法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用-Transform"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">使用 Transform</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用-GPU-执行动画"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">使用 GPU 执行动画</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#如丝般顺滑的-60-帧-FPS"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">如丝般顺滑的 60 帧 FPS</span></a></li></ol></li></ol>
+		
+<!--			<li class="mdl-menu__item">Some Action</li>-->
+	</ul>
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+		
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+	<!-- Paradox Post Header -->
+	
+		
+			<!-- Random Thumbnail -->
+			<div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+				<script>
+    
+    var randomNum;
+    randomNum = Math.floor(Math.random() * 5 + 1);
+    
+    $(".post_thumbnail-random").css('background-image', 'url(' + '/img/random/' + randomNum + '.png' + ')');
+    
+</script>
+
+		
+	
+        <p class="article-headline-p">
+            使用 CSS3实现60帧 的动画
+        </p>
+    </div>
+
+	
+
+				
+				
+					<!-- Paradox Post Info -->
+					<div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+    
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/me.jpeg" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>wanglinzhizhi</strong>
+        <span>Jan 23, 2017</span>
+    </div>
+    
+    <div class="section-spacer"></div>
+	
+    <!-- Favorite -->
+<!--
+    <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+        <i class="material-icons" role="presentation">favorite</i>
+        <span class="visuallyhidden">favorites</span>
+    </button>
+-->
+    
+    <!-- Tags (bookmark) -->
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/CSS3/">CSS3</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/移动-Web/">移动 Web</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/算法/">算法</a>
+    </ul>
+    
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+    
+    <!-- Leancloud Views -->
+    <a class="post_share-link" href="#">
+        <li class="mdl-menu__item">
+            <span id="/2017/01/23/使用 CSS3 实现 60 帧的动画/" class="leancloud-views_num" data-flag-title="使用 CSS3实现60帧 的动画">
+     &nbsp;浏览量
+</span>
+        </li>
+    </a>
+    
+    
+    
+    
+    <!-- Share Twitter -->
+    <a class="post_share-link" href="https://twitter.com/intent/tweet?text=使用 CSS3实现60帧 的动画&url=http://www.wanglinzhizhi.me//2017/01/23/使用 CSS3 实现 60 帧的动画/index.html&via=wanglinzhizhi" target="_blank">
+        <li class="mdl-menu__item">
+            分享到 Twitter
+        </li>
+    </a>
+    
+    <!-- Share Google+ -->
+    <a class="post_share-link" href="https://plus.google.com/share?url=http://www.wanglinzhizhi.me//2017/01/23/使用 CSS3 实现 60 帧的动画/index.html" target="_blank">
+        <li class="mdl-menu__item">
+            分享到 Google+
+        </li>
+    </a>
+    
+    <!-- Share Weibo -->
+    <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=使用 CSS3实现60帧 的动画&url=http://www.wanglinzhizhi.me//2017/01/23/使用 CSS3 实现 60 帧的动画/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <li class="mdl-menu__item">
+            分享到微博
+        </li>
+    </a>
+</ul>
+</div>
+				
+
+                <!-- Post Content -->
+                <div id="post-content" class="markdown-Github mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+	
+		<h2 id="如丝般顺滑：使用-CSS3-实现-60-帧的动画"><a href="#如丝般顺滑：使用-CSS3-实现-60-帧的动画" class="headerlink" title="如丝般顺滑：使用 CSS3 实现 60 帧的动画"></a>如丝般顺滑：使用 CSS3 实现 60 帧的动画</h2><p><em>2016-08-17</em> <em>yanni4night</em> <a href="http://mp.weixin.qq.com/s?__biz=MzA4NjE3MDg4OQ==&amp;mid=2650963599&amp;idx=1&amp;sn=bb28e6cf0e3146252313d22fe42cb885&amp;scene=0##" target="_blank" rel="external">奇舞周刊</a></p>
+<p>编者按：本文由yanni4night在众成翻译平台上翻译，英文原文：<a href="https://medium.com/outsystems-experts/how-to-achieve-60-fps-animations-with-css3-db7b98610108#.vfuqpb6vu" target="_blank" rel="external">https://medium.com/outsystems-experts/how-to-achieve-60-fps-animations-with-css3-db7b98610108#.vfuqpb6vu</a></p>
+<p>在移动端上实现动画很简单。</p>
+<p>在移动端上正确地实现动画也比较简单…如果你采纳我们的建议的话。</p>
+<p>虽然现在每个人都会使用 CSS3 实现动画，但许多人用的都不够恰当。很多应加以考虑的最佳实践常常被忽略，因为仍然有人不明白这些最佳实践的真正意义。</p>
+<p>如今有这么多的设备规范，如果还不有针对性地优化你的代码，糟糕的用户体验将让你死无葬身之地。</p>
+<p>记住：虽然市场上始终有一些高端的旗舰机在挑战性能极限，但你面对的仍将是和这些性能怪兽相比只是玩具一样的低端设备。</p>
+<p>我们想帮助你正确地驾驭 CSS3。首先先要了解几件事。</p>
+<h3 id="了解时间轴"><a href="#了解时间轴" class="headerlink" title="了解时间轴"></a>了解时间轴</h3><p>当渲染和处理 HTML 元素时，浏览器做了什么？这个时间轴叫做关键渲染路径。</p>
+<p><img src="/images/60pfs/1.png" alt="img"></p>
+<p>想达到流畅的动画效果我们需要关注修改属性对合成（Composite）阶段的影响，而不是其它阶段。</p>
+<h4 id="1-样式"><a href="#1-样式" class="headerlink" title="1. 样式"></a>1. 样式</h4><p><img src="/images/60pfs/2.png" alt="img"><br>浏览器开始计算应用于元素的样式 —— 重计算样式。</p>
+<h4 id="2-布局"><a href="#2-布局" class="headerlink" title="2. 布局"></a>2. 布局</h4><p><img src="/images/60pfs/3.png" alt="img"></p>
+<p>下一步，浏览器开始为每个元素生成形状和位置 —— 布局。这是浏览器设置页面属性的地方，如 width 和 height，以及 margin 或者 left、top、right、bottom。</p>
+<h4 id="3-渲染"><a href="#3-渲染" class="headerlink" title="3. 渲染"></a>3. 渲染</h4><p><img src="/images/60pfs/4.png" alt="img"></p>
+<p>浏览器开始向层中填充像素。要使用的属性有 box-shadow，border-radius，color，background-color 等等。</p>
+<h4 id="4-合成"><a href="#4-合成" class="headerlink" title="4. 合成"></a>4. 合成</h4><p>这就是你动手脚的地方了，因为浏览器开始把所有层画到屏幕上。</p>
+<p><img src="/images/60pfs/5.png" alt="img"></p>
+<p>现代浏览器能够通过使用 transform 和 opacity 完美运行 4 种样式。</p>
+<ul>
+<li>位置 — transform: translateX(<em>n</em>) translateY(<em>n</em>) translateZ(<em>n</em>);</li>
+<li>缩放 — transform: scale(<em>n</em>);</li>
+<li>旋转 — transform: rotate(<em>n</em> deg);</li>
+<li>透明 — opacity: <em>n</em>;</li>
+</ul>
+<h3 id="如何达到-60-帧每秒"><a href="#如何达到-60-帧每秒" class="headerlink" title="如何达到 60 帧每秒"></a>如何达到 60 帧每秒</h3><p>想法有了，让我们撸起袖子开始干活吧。</p>
+<p>我们从 HTML 开始，创建一个非常简单的结构，并把类名 app-menu 的元素放入类名 layout 的元素中。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"layout"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">”app-menu”</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">”header”</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><img src="/images/60pfs/6.gif" alt="img"></p>
+<h3 id="错误做法"><a href="#错误做法" class="headerlink" title="错误做法"></a>错误做法</h3><figure class="highlight css"><table><tr><td class="code"><pre><div class="line"><span class="selector-class">.app-menu</span> &#123;</div><div class="line">  <span class="attribute">left</span>: -<span class="number">300px</span>;</div><div class="line">  <span class="attribute">transition</span>: left <span class="number">300ms</span> linear;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.app-menu-open</span> <span class="selector-class">.app-menu</span> &#123;</div><div class="line">  <span class="attribute">left</span>: <span class="number">0px</span>;</div><div class="line">  <span class="attribute">transition</span>: left <span class="number">300ms</span> linear;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>看到我们更改的这些属性了吗？你应该避免在 transitions 中使用left、top、right、bottom 属性。它们的更新让浏览器每次都要创建布局，影响所有它们的子元素，进而难以实现流畅的动画。</p>
+<p>结果是这样的：</p>
+<p><img src="/images/60pfs/7.gif" alt="img"><br>这个动画一点也不流畅。我们通过<a href="undefined">开发者工具</a>检查背后到底发生了什么，请看：</p>
+<p><img src="/images/60pfs/8.png" alt="img"></p>
+<p>能够清晰地看到 FPS 非常不规则，性能也就比较糟糕。</p>
+<h3 id="使用-Transform"><a href="#使用-Transform" class="headerlink" title="使用 Transform"></a>使用 Transform</h3><figure class="highlight css"><table><tr><td class="code"><pre><div class="line"><span class="selector-class">.app-menu</span> &#123;</div><div class="line">  <span class="attribute">-webkit-transform</span>: <span class="built_in">translateX</span>(-100%);</div><div class="line">  <span class="attribute">transform</span>: <span class="built_in">translateX</span>(-100%);</div><div class="line">  <span class="attribute">transition</span>: transform <span class="number">300ms</span> linear;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="selector-class">.app-menu-open</span> <span class="selector-class">.app-menu</span> &#123;</div><div class="line">  <span class="attribute">-webkit-transform</span>: none;</div><div class="line">  <span class="attribute">transform</span>: none;</div><div class="line">  <span class="attribute">transition</span>: transform <span class="number">300ms</span> linear;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>transform 属性会影响合成阶段。在这里浏览器被告知层马上要被渲染，做好准备执行动画，因此动画渲染时卡顿更少。</p>
+<p><img src="/images/60fps/9.gif" alt="img"></p>
+<p>时间轴：</p>
+<p><img src="/images/60fps/10.png" alt="img"></p>
+<p>开始有效果了，FPS 变得有规律了，此外，动画变得更流畅了。</p>
+<p>FPS 开始优化，并且更加稳定，动画也更流畅。</p>
+<h3 id="使用-GPU-执行动画"><a href="#使用-GPU-执行动画" class="headerlink" title="使用 GPU 执行动画"></a>使用 GPU 执行动画</h3><p>百尺竿头更进一步。为了让动画“如丝般顺滑”，我们接下来使用 GPU 来渲染。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><div class="line"><span class="selector-class">.app-menu</span> &#123;</div><div class="line">  <span class="attribute">-webkit-transform</span>: <span class="built_in">translateX</span>(-100%);</div><div class="line">          <span class="attribute">transform</span>: <span class="built_in">translateX</span>(-100%);</div><div class="line">  <span class="attribute">transition</span>: transform <span class="number">300ms</span> linear;</div><div class="line">  <span class="attribute">will-change</span>: transform;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>虽然一些浏览器仍然需要 translateZ() 或 translate3d() 作为备选方案，will-change 被广泛支持已经是势不可挡了。它的功能是把元素提升到另一个层中，这样浏览器就不必关心布局渲染或者绘制了。</p>
+<p><img src="/images/11.gif" alt="img"></p>
+<p>这样动画能流畅到什么程度？看时间轴：</p>
+<p><img src="/images/12.png" alt="img"></p>
+<p>动画的 FPS 更稳定了，渲染也更快了。但是有一帧仍然渲染得很久。在开始处还有一点点瓶颈。</p>
+<p>记住刚开始创建的 HTML 结构吗？我们用 JavaScript 控制 app-menu div。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">toggleClassMenu</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> layout = <span class="built_in">document</span>.querySelector(<span class="string">".layout"</span>);</div><div class="line">  <span class="keyword">if</span>(!layout.classList.contains(<span class="string">"app-menu-open"</span>)) &#123;</div><div class="line">    layout.classList.add(<span class="string">"app-menu-open"</span>);</div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">    layout.classList.remove(<span class="string">"app-menu-open"</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> oppMenu = <span class="built_in">document</span>.querySelector(<span class="string">".menu-icon"</span>);</div><div class="line"></div><div class="line">oppMenu.addEventListener(<span class="string">"click"</span>, toggleClassMenu, <span class="literal">false</span>);</div></pre></td></tr></table></figure>
+<p>问题出在对 layout 元素增加类名上，我们使浏览器计算了不止一次样式 —— 这影响了渲染效果。</p>
+<h3 id="如丝般顺滑的-60-帧-FPS"><a href="#如丝般顺滑的-60-帧-FPS" class="headerlink" title="如丝般顺滑的 60 帧 FPS"></a>如丝般顺滑的 60 帧 FPS</h3><p>如果我们在视窗之外创建菜单会如何？这种分离化的区域能够保证只有需要做动画的元素才会被影响。</p>
+<p>因此，我们改进下面的 HTML 结构：</p>
+<figure class="highlight"><table><tr><td class="code"><pre><div class="line">&lt;div class="menu"&gt;</div><div class="line">    &lt;div class="app-menu"&gt;&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div><div class="line"></div><div class="line">&lt;div class="layout"&gt;</div><div class="line">    &lt;div class="header"&gt;&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<p>此外你也可以通过一种略有不同的方式去控制菜单的状态。我们通过 JavaScript 的transitionend 方法，在监控到动画结束时移除这个控制动画的 CSS 类。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">toggleClassMenu</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  myMenu.classList.add(<span class="string">"menu--animatable"</span>);</div><div class="line">  myMenu.classList.add(<span class="string">"menu--visible"</span>);</div><div class="line">  myMenu.addEventListener(<span class="string">"transitionend"</span>, </div><div class="line">  OnTransitionEnd, <span class="literal">false</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">OnTransitionEnd</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  myMenu.classList.remove(<span class="string">"menu--animatable"</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">var</span> myMenu = <span class="built_in">document</span>.querySelector(<span class="string">".menu"</span>);</div><div class="line"></div><div class="line"><span class="keyword">var</span> oppMenu = <span class="built_in">document</span>.querySelector(<span class="string">".menu-icon"</span>);</div><div class="line"></div><div class="line">oppMenu.addEventListener(<span class="string">"click"</span>, toggleClassMenu, <span class="literal">false</span>);</div></pre></td></tr></table></figure>
+<p>现在把它们放到一起，然后看效果。</p>
+<p>下面是完全正确的使用 CSS3 实现动画的例子：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><div class="line"><span class="selector-class">.menu</span> &#123;</div><div class="line">  <span class="attribute">position</span>: fixed;</div><div class="line">  <span class="attribute">left</span>: <span class="number">0</span>;</div><div class="line">  <span class="attribute">top</span>: <span class="number">0</span>;</div><div class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</div><div class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</div><div class="line">  <span class="attribute">overflow</span>: hidden;</div><div class="line">  <span class="attribute">pointer-events</span>: none;</div><div class="line">  <span class="attribute">z-index</span>: <span class="number">150</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.menu</span>—<span class="selector-tag">visible</span> &#123;</div><div class="line">  <span class="attribute">pointer-events</span>: auto;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.app-menu</span> &#123;</div><div class="line">  <span class="attribute">background-color</span>: <span class="number">#fff</span>;</div><div class="line">  <span class="attribute">color</span>: <span class="number">#fff</span>;</div><div class="line">  <span class="attribute">position</span>: relative;</div><div class="line">  <span class="attribute">max-width</span>: <span class="number">400px</span>;</div><div class="line">  <span class="attribute">width</span>: <span class="number">90%</span>;</div><div class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</div><div class="line">  <span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">2px</span> <span class="number">6px</span> <span class="built_in">rgba</span>(0, 0, 0, 0.5);</div><div class="line">  <span class="attribute">-webkit-transform</span>: <span class="built_in">translateX</span>(-103%);</div><div class="line">  <span class="attribute">transform</span>: <span class="built_in">translateX</span>(-103%);</div><div class="line">  <span class="attribute">display</span>: flex;</div><div class="line">  <span class="attribute">flex-direction</span>: column;</div><div class="line">  <span class="attribute">will-change</span>: transform;</div><div class="line">  <span class="attribute">z-index</span>: <span class="number">160</span>;</div><div class="line">  <span class="attribute">pointer-events</span>: auto;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.menu</span>—<span class="selector-tag">-visible</span><span class="selector-class">.app-menu</span> &#123;</div><div class="line">  <span class="attribute">-webkit-transform</span>: none;</div><div class="line">  <span class="attribute">transform</span>: none;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.menu-</span>—<span class="selector-tag">animatable</span><span class="selector-class">.app-menu</span> &#123;</div><div class="line">  <span class="attribute">transition</span>: all <span class="number">130ms</span> ease-in;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.menu--visible</span><span class="selector-class">.menu</span>—<span class="selector-tag">-animatable</span><span class="selector-class">.app-menu</span> &#123;</div><div class="line">  <span class="attribute">transition</span>: all <span class="number">330ms</span> ease-out;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.menu</span><span class="selector-pseudo">:after</span> &#123;</div><div class="line">  <span class="attribute">content</span>: ‘’;</div><div class="line">  <span class="attribute">display</span>: block;</div><div class="line">  <span class="attribute">position</span>: absolute;</div><div class="line">  <span class="attribute">left</span>: <span class="number">0</span>;</div><div class="line">  <span class="attribute">top</span>: <span class="number">0</span>;</div><div class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</div><div class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</div><div class="line">  <span class="attribute">background</span>: <span class="built_in">rgba</span>(0,0,0,0.4);</div><div class="line">  <span class="attribute">opacity</span>: <span class="number">0</span>;</div><div class="line">  <span class="attribute">will-change</span>: opacity;</div><div class="line">  <span class="attribute">pointer-events</span>: none;</div><div class="line">  <span class="attribute">transition</span>: opacity <span class="number">0.3s</span> <span class="built_in">cubic-bezier</span>(0,0,0.3,1);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.menu</span><span class="selector-class">.menu--visible</span><span class="selector-pseudo">:after</span>&#123;</div><div class="line">  <span class="attribute">opacity</span>: <span class="number">1</span>;</div><div class="line">  <span class="attribute">pointer-events</span>: auto;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="/images/60pfs/13.gif" alt="img"></p>
+<p>时间轴是怎么样的？</p>
+<p><img src="/images/60pfs/14.png" alt="img"></p>
+<p>如丝般地顺滑，是吧？</p>
+<p><strong>Note</strong>: 我跟着做了一遍,demo Git地址: <a href="https://www.yichewx.com/gogs/wanglinzhizhi/high-performance-css3" target="_blank" rel="external">https://www.yichewx.com/gogs/wanglinzhizhi/high-performance-css3</a></p>
+
+	
+	
+	
+	
+</div>
+				
+				
+
+                <!-- Post Comments -->
+                
+                    
+
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    
+    <!-- Prev Nav -->
+    
+        <a href="/2017/01/23/深入浅出Node/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/01/21/javascript动态改变css3的animation/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+        </div>
+    </div>
+
+				
+				
+					<!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay "></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored  sidebar-fixed-left" role="navigation">
+	<div id="sidebar-main">
+	    <!-- Sidebar Header -->
+		<div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+    <i class="material-icons">clear_all</i>
+    <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/me.jpeg" alt="wanglinzhizhi's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        wanglinzhizhi@hotmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+		<!-- Sidebar Navigation  -->
+		<ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+			
+                <li>
+                    <a href="#" target="_blank" title="Email Me">
+						<i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    <li id="sidebar-first-li">
+        <a href="/" target="_self">
+            <i class="material-icons sidebar-material-icons">home</i>
+             主页
+        </a>
+    </li>
+
+    <!-- I'm Feeling Lucky -->
+<!--
+    <li class="dropdown">
+        <a href="" target="_self">
+            <i class="material-icons sidebar-material-icons">explore</i>
+             sidebar.imlucky
+        </a>
+    </li>
+-->
+
+	
+    <!-- Archives  -->
+    <li class="dropdown">
+        <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+            <i class="material-icons sidebar-material-icons">inbox</i>
+             归档
+            <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+            <a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">74</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/02/">February 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/01/">January 2016<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/12/">December 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/08/">August 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/06/">June 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/04/">April 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/03/">March 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/01/">January 2015<span class="sidebar_archives-count">1</span></a>
+        </ul>
+    </li>
+
+    <!-- Divider -->
+    <li class="divider"></li>
+
+
+    <!-- Pages  -->
+	
+		<li>
+			<a href="/tags" title="Tags">
+				Tags
+			</a>
+		</li>
+	
+		<li>
+			<a href="/gallery" title="Gallery">
+				Gallery
+			</a>
+		</li>
+	
+		<li>
+			<a href="/about" title="About">
+				About
+			</a>
+		</li>
+	
+
+    <!-- Article Numebr  -->
+    <li>
+        <a href="/archives">
+             文章总数
+             <span class="sidebar-badge">92</span>
+        </a>
+    </li>
+</ul>
+
+		<!-- Sidebar Divider -->
+		<div class="sidebar-divider"></div>
+
+		<!-- Sidebar Footer -->
+		<!-- 
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持。 :) 
+-->
+
+<!-- Theme Material -->
+<a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
+	<div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+		主题 - Material
+		<span class="sidebar-badge badge-circle">i</span>
+	</div>
+</a>
+
+<!-- Help & Support -->
+<!--
+<a href="mailto:hiviosey@gmail.com" class="sidebar-footer-text-a">
+    <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+		sidebar.help
+		<span class="mdl-button__ripple-container">
+			<span class="mdl-ripple"></span>
+		</span>
+	</div>
+</a>
+-->
+
+<!-- Feedback -->
+<!--
+<a href="https://github.com/viosey/hexo-theme-material/issues" target="_blank" class="sidebar-footer-text-a">
+    <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+         sidebar.feedback
+                    <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></div>
+</a>
+-->
+
+<!-- Abount Theme -->
+<!--
+<a href="https://blog.viosey.com/index.php/Material.html" target="_blank" class="sidebar-footer-text-a">
+    <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+         sidebar.about_theme
+        <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></div>
+</a>-->
+
+	</div>
+    
+    <!-- Sidebar Sponsor -->
+    
+
+
+</aside>
+
+				
+				
+				
+					<!-- Footer Top Button -->
+					<div class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+				
+				
+				<!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+	
+	
+		<!-- Paradox Footer Left Section -->
+		<div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+    
+    
+    <!-- Facebook -->
+    
+    
+    
+    <!-- Google + -->
+    
+    
+    
+    <!-- Weibo -->
+    
+    
+    
+    <!-- Instagram -->
+    
+    
+    
+    <!-- Tumblr -->
+    
+    
+    
+    <!-- Github -->
+    
+    <a href="https://github.com/wagnlinzh" target="view_window"><button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-github.png);">
+        <span class="visuallyhidden">Github</span>
+    </button></a>
+    
+</div>
+
+
+		<!--Copyright-->
+		<div id="copyright">Copyright&nbsp;©&nbsp;<script type="text/javascript">var fd = new Date();document.write(fd.getFullYear());</script>&nbsp;wanglinzhizhi</div>
+
+		<!-- Paradox Footer Right Section -->
+
+		<!-- 
+		I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+		It will not impact the appearance and can give developers a lot of support :)
+
+		很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+		它不会影响美观并可以给开发者很大的支持。 :) 
+		-->
+
+		<div class="mdl-mini-footer--right-section">
+			<div>
+				<div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+				<div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+			</div>
+		</div>
+	
+    
+</footer>
+                
+				<!-- Import File -->
+<script src="/js/highlight.min.js"></script>
+<script src="/js/js.min.js"></script>
+<script src="/js/nprogress.js"></script>
+
+<script type="text/javascript">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    
+    $('#nprogress .bar').css({
+        'background': '#2196F3'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #2196F3, 0 0 15px #2196F3'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#2196F3',
+        'border-left-color': '#2196F3'
+    });
+    
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+	<script src="/js/smoothscroll.js"></script>
+
+
+
+    <!-- Leancloud -->
+	<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+	<script>
+		AV.initialize("EObBAbqpQfNFLuV5SjbVgoxq-gzGzoHsz", "qPdmjfSU3DDmPPH9ui0cUW4z");
+	</script>
+    <script>
+	function showTime(Counter) {
+		var query = new AV.Query(Counter);
+		$(".leancloud-views_num").each(function() {
+			var url = $(this).attr("id").trim();
+			query.equalTo("url", url);
+			query.find({
+				success: function(results) {
+					if (results.length == 0) {
+						var content = '0 ' + $(document.getElementById(url)).text();
+						$(document.getElementById(url)).text(content);
+						return;
+					}
+					for (var i = 0; i < results.length; i++) {
+						var object = results[i];
+						var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
+						$(document.getElementById(url)).text(content);
+					}
+				},
+				error: function(object, error) {
+					console.log("Error: " + error.code + " " + error.message);
+				}
+			});
+
+		});
+	}
+
+	function addCount(Counter) {
+		var Counter = AV.Object.extend("Counter");
+		url = $(".leancloud-views_num").attr('id').trim();
+		title = $(".leancloud-views_num").attr('data-flag-title').trim();
+		var query = new AV.Query(Counter);
+		query.equalTo("url", url);
+		query.find({
+			success: function(results) {
+				if (results.length > 0) {
+					var counter = results[0];
+					counter.fetchWhenSave(true);
+					counter.increment("time");
+					counter.save(null, {
+						success: function(counter) {
+							var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
+							$(document.getElementById(url)).text(content);
+						},
+						error: function(counter, error) {
+							console.log('Failed to save Visitor num, with error message: ' + error.message);
+						}
+					});
+				} else {
+					var newcounter = new Counter();
+					newcounter.set("title", title);
+					newcounter.set("url", url);
+					newcounter.set("time", 1);
+					newcounter.save(null, {
+						success: function(newcounter) {
+							console.log("newcounter.get('time')="+newcounter.get('time'));
+							var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
+							$(document.getElementById(url)).text(content);
+						},
+						error: function(newcounter, error) {
+							console.log('Failed to create');
+						}
+					});
+				}
+			},
+			error: function(error) {
+				console.log('Error:' + error.code + " " + error.message);
+			}
+		});
+	}
+	$(function() {
+		var Counter = AV.Object.extend("Counter");
+		if ($('.leancloud-views_num').length == 1) {
+			addCount(Counter);
+		} else if ($('.post-title-link').length > 1) {
+			showTime(Counter);
+		}
+	}); 
+</script>
+
+
+
+
+
+
+
+
+<!-- Swiftye -->
+
+
+<!-- Local Search-->
+
+	<script>
+	var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var str='<ul class=\"search-result-list\">';                
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length <= 0) {
+                    return;
+                }
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        str += "<li><a href='"+ data_url +"' class='search-result-title' target='_blank'>"+ data_title;
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out characters
+                            var start = first_occur - 6;
+                            var end = first_occur + 6;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 10;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substr(start, end); 
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<em class=\"search-keyword\">"+keyword+"</em>");
+                            })
+                            str += "<p class=\"search-result\">" + match_content +"...</p>" +"</a>";
+                        }
+                    }
+                })
+                $resultContent.innerHTML = str;
+            })
+        }
+    })
+}
+</script>
+
+	<script>
+        var inputArea = document.querySelector("#search");
+        var getSearchFile = function(){
+            var path = "search.xml";
+            searchFunc(path, 'search', 'local-search-result');
+        }
+
+        inputArea.onfocus = function(){ getSearchFile() }
+	</script>
+
+
+<!-- Window Load-->
+<script>
+    $(window).load(function() {
+        // Post_Toc parent position fixed
+        $(".post-toc-wrap").parent(".mdl-menu__container").css("position", "fixed");
+    });
+</script>
+
+<!-- MathJax Load-->
+
+            </main>
+        </div>
+		
+    </body>
+		
+	
+</html>

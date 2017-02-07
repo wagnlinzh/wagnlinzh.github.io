@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <!-- Title -->
+    
+    <title>
+        DOM 基础 [字符串|数组|DOM操作] | wanglinzhizhi
+    </title>
+    
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+    
+    <!-- Meta & INfo -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0D47A1">
+    <meta name="author" content="wanglinzhizhi">
+    <meta name="description" content="游走在上下文无关文法间">
+    <meta name="keywords" content="null">
+    
+    <!--iOS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+    
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="wanglinzhizhi">
+    
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://www.wanglinzhizhi.me">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="DOM 基础 [字符串|数组|DOM操作] | wanglinzhizhi">
+    <meta property="og:description" content="游走在上下文无关文法间">
+    
+     <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+        
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+    
+    <!-- Import CSS -->
+    <link rel="stylesheet" href="/css/material.min.css">
+    <link rel="stylesheet" href="/css/style.min.css">
+    <!-- Config CSS -->
+
+
+<!-- Other Styles -->
+<style>
+	body, html{
+		font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+	}
+	
+    a{
+        color: #2196F3
+    }
+    
+    .mdl-card__media,
+    #search-label,
+    #search-form-label:after,
+    #scheme-Paradox .hot_tags-count,
+    #scheme-Paradox .sidebar_archives-count,
+    #scheme-Paradox .sidebar-colored .sidebar-header,
+    #scheme-Paradox .sidebar-colored .sidebar-badge{
+        background-color: #1565C0 !important
+    }
+    
+	/* Sidebar User Drop Down Menu Text Color */
+	#scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+    #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus{
+        color: #1565C0 !important
+    }
+    
+    #post_entry-right-info,
+    .sidebar-colored .sidebar-nav li:hover > a,
+    .sidebar-colored .sidebar-nav li:hover > a i,
+    .sidebar-colored .sidebar-nav li > a:hover,
+    .sidebar-colored .sidebar-nav li > a:hover i,
+    .sidebar-colored .sidebar-nav li > a:focus i,
+    .sidebar-colored .sidebar-nav > .open > a,
+    .sidebar-colored .sidebar-nav > .open > a:hover,
+    .sidebar-colored .sidebar-nav > .open > a:focus,
+    #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a{
+        color: #1565C0 !important
+    }
+    
+    .toTop{
+        background: #757575 !important
+    }
+		
+	.material-layout .material-post>.material-nav,
+	.material-layout .material-index>.material-nav,
+	.material-nav a{
+		color: #757575;
+	}
+		
+	#scheme-Paradox .MD-burger-layer {
+		background-color: #757575;
+	}
+
+	#scheme-Paradox #post-toc-trigger-btn{
+		color: #757575;
+	}
+	
+	.post-toc a:hover{
+		color: #2196F3;
+		text-decoration: underline;
+	}
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+        body{
+            background-color: #F5F5F5
+        }
+		
+		/* blog_info bottom background */
+        #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+            background-color: #fff;
+        }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+        .fade {
+            transition: all 800ms linear;
+            -webkit-transform: translate3d(0,0,0);
+            -moz-transform: translate3d(0,0,0);
+            -ms-transform: translate3d(0,0,0);
+            -o-transform: translate3d(0,0,0);
+            transform: translate3d(0,0,0);
+            opacity: 1;
+        }
+
+        .fade.out{
+            opacity: 0;
+        }
+    </style>
+
+	<script src="/js/jquery.min.js"></script>
+	
+	<link rel="stylesheet" href="/css/highlight/atom-one-dark.css">
+	
+	<!-- UC Browser Compatible-->
+	<script>
+		var agent = navigator.userAgent.toLowerCase();
+		if(agent.indexOf('ucbrowser')>0) {
+			document.write('<link rel="stylesheet" href="/css/uc.css">');
+		   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+		}
+	</script>
+    
+    <!-- Custom Head -->
+    
+</head>
+	
+	
+
+    <body id="scheme-Paradox">
+
+		
+        <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+				
+			
+			
+            <!-- Main Container -->
+            <main class="material-layout__content" id="main">
+				
+                <!-- Top Anchor -->
+                <div id="top"></div>
+				
+				
+                <!-- Hamburger Button -->
+                <button class="MD-burger-icon sidebar-toggle">
+                    <span class="MD-burger-layer"></span>
+                </button>
+				
+				
+                <!-- Post TOC -->
+
+    
+	<!-- Back Button -->
+<!--
+	<div class="material-back" id="backhome-div" tabindex="0">
+		<a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" href="#" onclick="window.history.back();return false;" target="_self" role="button" data-upgraded=",MaterialButton,MaterialRipple">
+			<i class="material-icons" role="presentation">arrow_back</i>
+			<span class="mdl-button__ripple-container">
+				<span class="mdl-ripple"></span>
+			</span>
+		</a>
+	</div>			
+-->
+	<!-- Left aligned menu below button -->
+	<button id="post-toc-trigger-btn"
+			class="mdl-button mdl-js-button mdl-button--icon">
+	  <i class="material-icons">format_list_numbered</i>
+	</button>
+
+	<ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
+		for="post-toc-trigger-btn">
+			
+			<ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#JavaScript-Note"><span class="post-toc-number">1.</span> <span class="post-toc-text">JavaScript Note</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#字符串"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">字符串</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#字符串分割split"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">字符串分割split()</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#提取字符串substring"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">提取字符串substring()</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#提取指定数目的字符substr"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">提取指定数目的字符substr()</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#数组"><span class="post-toc-number">1.1.4.</span> <span class="post-toc-text">数组</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#数组连接concat"><span class="post-toc-number">1.1.5.</span> <span class="post-toc-text">数组连接concat()</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#指定分隔符连接数组元素join"><span class="post-toc-number">1.1.6.</span> <span class="post-toc-text">指定分隔符连接数组元素join()</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#颠倒数组元素顺序reverse"><span class="post-toc-number">1.1.7.</span> <span class="post-toc-text">颠倒数组元素顺序reverse()</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#选定元素slice"><span class="post-toc-number">1.1.8.</span> <span class="post-toc-text">选定元素slice()</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#数组排序sort"><span class="post-toc-number">1.1.9.</span> <span class="post-toc-text">数组排序sort()</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#History-对象"><span class="post-toc-number">1.1.10.</span> <span class="post-toc-text">History 对象</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#History-对象方法"><span class="post-toc-number">1.1.11.</span> <span class="post-toc-text">History 对象方法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#返回前一个浏览的页面"><span class="post-toc-number">1.1.12.</span> <span class="post-toc-text">返回前一个浏览的页面</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#userAgent"><span class="post-toc-number">1.1.13.</span> <span class="post-toc-text">userAgent</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#getElementsByTagName-方法"><span class="post-toc-number">1.1.14.</span> <span class="post-toc-text">getElementsByTagName()方法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#区别getElementByID-getElementsByName-getElementsByTagName"><span class="post-toc-number">1.1.15.</span> <span class="post-toc-text">区别getElementByID,getElementsByName,getElementsByTagName</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#getAttribute-方法"><span class="post-toc-number">1.1.16.</span> <span class="post-toc-text">getAttribute()方法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#setAttribute-方法"><span class="post-toc-number">1.1.17.</span> <span class="post-toc-text">setAttribute()方法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#节点属性"><span class="post-toc-number">1.1.18.</span> <span class="post-toc-text">节点属性</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#浏览器窗口可视区域大小"><span class="post-toc-number">1.1.19.</span> <span class="post-toc-text">浏览器窗口可视区域大小</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#网页尺寸scrollHeight"><span class="post-toc-number">1.1.20.</span> <span class="post-toc-text">网页尺寸scrollHeight</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#网页尺寸offsetHeight"><span class="post-toc-number">1.1.21.</span> <span class="post-toc-text">网页尺寸offsetHeight</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#网页卷去的距离与偏移量"><span class="post-toc-number">1.1.22.</span> <span class="post-toc-text">网页卷去的距离与偏移量</span></a></li></ol></li></ol></li></ol>
+		
+<!--			<li class="mdl-menu__item">Some Action</li>-->
+	</ul>
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+		
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+	<!-- Paradox Post Header -->
+	
+		
+			<!-- Random Thumbnail -->
+			<div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+				<script>
+    
+    var randomNum;
+    randomNum = Math.floor(Math.random() * 5 + 1);
+    
+    $(".post_thumbnail-random").css('background-image', 'url(' + '/img/random/' + randomNum + '.png' + ')');
+    
+</script>
+
+		
+	
+        <p class="article-headline-p">
+            DOM 基础 [字符串|数组|DOM操作]
+        </p>
+    </div>
+
+	
+
+				
+				
+					<!-- Paradox Post Info -->
+					<div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+    
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/me.jpeg" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>wanglinzhizhi</strong>
+        <span>Feb 02, 2016</span>
+    </div>
+    
+    <div class="section-spacer"></div>
+	
+    <!-- Favorite -->
+<!--
+    <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+        <i class="material-icons" role="presentation">favorite</i>
+        <span class="visuallyhidden">favorites</span>
+    </button>
+-->
+    
+    <!-- Tags (bookmark) -->
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/字符串/"> 字符串</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/DOM/">DOM</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/JavaScript/">JavaScript</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/数组/">数组</a>
+    </ul>
+    
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+    
+    <!-- Leancloud Views -->
+    <a class="post_share-link" href="#">
+        <li class="mdl-menu__item">
+            <span id="/2016/02/02/2016-02-02-JavaScript 笔记/" class="leancloud-views_num" data-flag-title="DOM 基础 [字符串|数组|DOM操作]">
+     &nbsp;浏览量
+</span>
+        </li>
+    </a>
+    
+    
+    
+    
+    <!-- Share Twitter -->
+    <a class="post_share-link" href="https://twitter.com/intent/tweet?text=DOM 基础 [字符串|数组|DOM操作]&url=http://www.wanglinzhizhi.me//2016/02/02/2016-02-02-JavaScript 笔记/index.html&via=wanglinzhizhi" target="_blank">
+        <li class="mdl-menu__item">
+            分享到 Twitter
+        </li>
+    </a>
+    
+    <!-- Share Google+ -->
+    <a class="post_share-link" href="https://plus.google.com/share?url=http://www.wanglinzhizhi.me//2016/02/02/2016-02-02-JavaScript 笔记/index.html" target="_blank">
+        <li class="mdl-menu__item">
+            分享到 Google+
+        </li>
+    </a>
+    
+    <!-- Share Weibo -->
+    <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=DOM 基础 [字符串|数组|DOM操作]&url=http://www.wanglinzhizhi.me//2016/02/02/2016-02-02-JavaScript 笔记/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <li class="mdl-menu__item">
+            分享到微博
+        </li>
+    </a>
+</ul>
+</div>
+				
+
+                <!-- Post Content -->
+                <div id="post-content" class="markdown-Github mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+	
+		<h1 id="JavaScript-Note"><a href="#JavaScript-Note" class="headerlink" title="JavaScript Note"></a>JavaScript Note</h1><h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><p>返回指定的字符串首次出现的位置</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">indexOf() </div><div class="line"></div><div class="line">方法可返回某个指定的字符串值在字符串中首次出现的位置。</div><div class="line"></div><div class="line"></div><div class="line">语法</div><div class="line"></div><div class="line">    stringObject.indexOf(substring, startpos)</div></pre></td></tr></table></figure>
+<p>参数说明：</p>
+<p>说明：<br>1.该方法将从头到尾地检索字符串 stringObject，看它是否含有子串 substring。<br>2.可选参数，从stringObject的startpos位置开始查找substring，如果没有此参数将从stringObject的开始位置查找。<br>3.如果找到一个 substring，则返回 substring 的第一次出现的位置。stringObject 中的字符位置是从 0 开始的。<br>注意：1.indexOf() 方法区分大小写。<br>2.如果要检索的字符串值没有出现，则该方法返回 -1。</p>
+<p>例如: 对 “I love JavaScript!” 字符串内进行不同的检索：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line">  <span class="keyword">var</span> str=<span class="string">"I love JavaScript!"</span></div><div class="line">  <span class="built_in">document</span>.write(str.indexOf(<span class="string">"I"</span>) + <span class="string">"&lt;br /&gt;"</span>);</div><div class="line">  <span class="built_in">document</span>.write(str.indexOf(<span class="string">"v"</span>) + <span class="string">"&lt;br /&gt;"</span>);</div><div class="line">  <span class="built_in">document</span>.write(str.indexOf(<span class="string">"v"</span>,<span class="number">8</span>));</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"></div><div class="line">//以上代码的输出：</div><div class="line">0</div><div class="line">4</div><div class="line">9</div></pre></td></tr></table></figure>
+<p>找到第二个o出现的位置</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> mystr=<span class="string">"Hello World!"</span></div><div class="line">(mystr.indexOf(<span class="string">'o'</span>,mystr.indexOf(<span class="string">'o'</span>)+<span class="number">1</span>));<span class="comment">//用两次indexOf</span></div></pre></td></tr></table></figure>
+<h3 id="字符串分割split"><a href="#字符串分割split" class="headerlink" title="字符串分割split()"></a>字符串分割split()</h3><p>split() 方法将字符串分割为字符串数组，并返回此数组。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"></div><div class="line">​	stringObject.split(separator,limit)</div></pre></td></tr></table></figure>
+<p>注意：如果把空字符串 (“”) 用作 separator，那么 stringObject 中的每个字符之间都会被分割。<br>我们将按照不同的方式来分割字符串：<br>使用指定符号分割字符串，代码如下:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> mystr = <span class="string">"www.imooc.com"</span>;</div><div class="line"><span class="built_in">document</span>.write(mystr.split(<span class="string">"."</span>)+<span class="string">"&lt;br&gt;"</span>);</div><div class="line"><span class="built_in">document</span>.write(mystr.split(<span class="string">"."</span>, <span class="number">2</span>)+<span class="string">"&lt;br&gt;"</span>);</div><div class="line"></div><div class="line"><span class="comment">//运行结果:</span></div><div class="line">www,imooc,com</div><div class="line">www,imooc</div><div class="line"></div><div class="line"><span class="comment">//将字符串分割为字符，代码如下：</span></div><div class="line"><span class="built_in">document</span>.write(mystr.split(<span class="string">""</span>)+<span class="string">"&lt;br&gt;"</span>);</div><div class="line"><span class="built_in">document</span>.write(mystr.split(<span class="string">""</span>, <span class="number">5</span>));</div><div class="line"><span class="comment">//运行结果:</span></div><div class="line">w,w,w,.,i,m,o,o,c,.,c,o,m</div><div class="line">w,w,w,.,i</div></pre></td></tr></table></figure>
+<h3 id="提取字符串substring"><a href="#提取字符串substring" class="headerlink" title="提取字符串substring()"></a>提取字符串substring()</h3><p>substring() 方法用于提取字符串中介于两个指定下标之间的字符。<br>语法:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">stringObject.substring(starPos,stopPos);</div></pre></td></tr></table></figure>
+<p>注意：</p>
+<ol>
+<li>返回的内容是从 start开始(包含start位置的字符)到 stop-1 处的所有字符，其长度为 stop 减start。</li>
+<li>如果参数 start 与 stop 相等，那么该方法返回的就是一个空串（即长度为 0 的字符串）。</li>
+<li><p>如果 start 比 stop 大，那么该方法在提取子串之前会先交换这两个参数。<br>使用 substring() 从字符串中提取字符串，代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"></div><div class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</div><div class="line"><span class="keyword">var</span> mystr=<span class="string">"I love JavaScript"</span>;</div><div class="line"><span class="built_in">document</span>.write(mystr.substring(<span class="number">7</span>));</div><div class="line"><span class="built_in">document</span>.write(mystr.substring(<span class="number">2</span>,<span class="number">6</span>));</div><div class="line"><span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></div><div class="line"><span class="comment">//运行结果:</span></div><div class="line">JavaScript</div><div class="line">love</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="提取指定数目的字符substr"><a href="#提取指定数目的字符substr" class="headerlink" title="提取指定数目的字符substr()"></a>提取指定数目的字符substr()</h3><p>substr() 方法从字符串中提取从 startPos位置开始的指定数目的字符串。</p>
+<p>​<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">​	stringObject.substr(startPos,length)</div></pre></td></tr></table></figure></p>
+<p>注意：如果参数startPos是负数，从字符串的尾部开始算起的位置。也就是说，-1 指字符串中最后一个字符，-2 指倒数第二个字符，以此类推。<br>如果startPos为负数且绝对值大于字符串长度，startPos为0。<br>使用 substr() 从字符串中提取一些字符，代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</div><div class="line">  <span class="keyword">var</span> mystr=<span class="string">"I love JavaScript!"</span>;</div><div class="line">  <span class="built_in">document</span>.write(mystr.substr(<span class="number">7</span>));</div><div class="line">  <span class="built_in">document</span>.write(mystr.substr(<span class="number">2</span>,<span class="number">4</span>));</div><div class="line"><span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></div><div class="line"><span class="comment">//运行结果：</span></div><div class="line">JavaScript!</div><div class="line">love</div></pre></td></tr></table></figure>
+<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><h3 id="数组连接concat"><a href="#数组连接concat" class="headerlink" title="数组连接concat()"></a>数组连接concat()</h3><p>concat() 方法用于连接两个或多个数组。此方法返回一个新数组，不改变原来的数组。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">​arrayObject.concat(array1,array2,...,arrayN)</div></pre></td></tr></table></figure>
+<h3 id="指定分隔符连接数组元素join"><a href="#指定分隔符连接数组元素join" class="headerlink" title="指定分隔符连接数组元素join()"></a>指定分隔符连接数组元素join()</h3><p>join()方法用于把数组中的所有元素放入一个字符串。元素是通过指定的分隔符进行分隔的。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">arrayObject.join(分隔符)</div></pre></td></tr></table></figure>
+<p>参数说明:</p>
+<p>注意：返回一个字符串，该字符串把数组中的各个元素串起来，用&lt;分隔符&gt;置于元素与元素之间。这个方法不影响数组原本的内容。 我们使用join（）方法，将数组的所有元素放入一个字符串中，代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"></div><div class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</div><div class="line">  <span class="keyword">var</span> myarr = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">3</span>);</div><div class="line">  myarr[<span class="number">0</span>] = <span class="string">"I"</span>;</div><div class="line">  myarr[<span class="number">1</span>] = <span class="string">"love"</span>;</div><div class="line">  myarr[<span class="number">2</span>] = <span class="string">"JavaScript"</span>;</div><div class="line">  <span class="built_in">document</span>.write(myarr.join());</div><div class="line"><span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></div><div class="line"><span class="comment">//运行结果：</span></div><div class="line">I,love,JavaScript</div></pre></td></tr></table></figure>
+<p>我们将使用分隔符来分隔数组中的元素，代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</div><div class="line">  <span class="keyword">var</span> myarr = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">3</span>)</div><div class="line">  myarr[<span class="number">0</span>] = <span class="string">"I"</span>;</div><div class="line">  myarr[<span class="number">1</span>] = <span class="string">"love"</span>;</div><div class="line">  myarr[<span class="number">2</span>] = <span class="string">"JavaScript"</span>;</div><div class="line">  <span class="built_in">document</span>.write(myarr.join(<span class="string">"."</span>));</div><div class="line"><span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></div><div class="line"><span class="comment">//运行结果：</span></div><div class="line">I.love.JavaScript</div></pre></td></tr></table></figure>
+<h3 id="颠倒数组元素顺序reverse"><a href="#颠倒数组元素顺序reverse" class="headerlink" title="颠倒数组元素顺序reverse()"></a>颠倒数组元素顺序reverse()</h3><p>reverse() 方法用于颠倒数组中元素的顺序。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">arrayObject.reverse()</div></pre></td></tr></table></figure>
+<p>注意：该方法会改变原来的数组，而不会创建新的数组。<br>定义数组myarr并赋值，然后颠倒其元素的顺序：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">  <span class="keyword">var</span> myarr = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">3</span>)</div><div class="line">  myarr[<span class="number">0</span>] = <span class="string">"1"</span></div><div class="line">  myarr[<span class="number">1</span>] = <span class="string">"2"</span></div><div class="line">  myarr[<span class="number">2</span>] = <span class="string">"3"</span></div><div class="line">  <span class="built_in">document</span>.write(myarr + <span class="string">"&lt;br /&gt;"</span>)</div><div class="line">  <span class="built_in">document</span>.write(myarr.reverse())</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//运行结果：</span></div><div class="line"><span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span></div><div class="line"><span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span></div></pre></td></tr></table></figure>
+<h3 id="选定元素slice"><a href="#选定元素slice" class="headerlink" title="选定元素slice()"></a>选定元素slice()</h3><p>slice() 方法可从已有的数组中返回选定的元素。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">arrayObject.slice(start,end)</div></pre></td></tr></table></figure>
+<p>参数说明：</p>
+<p>1.返回一个新的数组，包含从 start 到 end （不包括该元素）的 arrayObject 中的元素。</p>
+<ol>
+<li>该方法并不会修改数组，而是返回一个子数组。<br>注意：</li>
+<li>可使用负值从数组的尾部选取元素。<br>2.如果 end 未被规定，那么 slice() 方法会选取从 start 到数组结尾的所有元素。</li>
+<li>String.slice() 与 Array.slice() 相似。<br>我们将创建一个新数组，然后从其中选取的元素，代码如下：</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> myarr = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>);</div><div class="line"><span class="built_in">document</span>.write(myarr + <span class="string">"&lt;br&gt;"</span>);</div><div class="line"><span class="built_in">document</span>.write(myarr.slice(<span class="number">2</span>,<span class="number">4</span>) + <span class="string">"&lt;br&gt;"</span>);</div><div class="line"><span class="built_in">document</span>.write(myarr);</div><div class="line"></div><div class="line"><span class="comment">//   运行结果：</span></div><div class="line"><span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span></div><div class="line"><span class="number">3</span>,<span class="number">4</span></div><div class="line"><span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span></div></pre></td></tr></table></figure>
+<h3 id="数组排序sort"><a href="#数组排序sort" class="headerlink" title="数组排序sort()"></a>数组排序sort()</h3><p>sort()方法使数组中的元素按照一定的顺序排列。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">arrayObject.sort(方法函数)</div></pre></td></tr></table></figure>
+<p>参数说明：</p>
+<p>1.如果不指定&lt;方法函数&gt;，则按unicode码顺序排列。</p>
+<p>2.如果指定&lt;方法函数&gt;，则按&lt;方法函数&gt;所指定的排序方法排序。</p>
+<p>myArray.sort(sortMethod);</p>
+<p>注意: 该函数要比较两个值，然后返回一个用于说明这两个值的相对顺序的数字。比较函数应该具有两个参数 a 和 b，其返回值如下：</p>
+<ul>
+<li><p>若返回值&lt;=-1，则表示 A 在排序后的序列中出现在 B 之前。</p>
+<ul>
+<li>若返回值&gt;-1 &amp;&amp; &lt;1，则表示 A 和 B 具有相同的排序顺序。</li>
+<li>若返回值&gt;=1，则表示 A 在排序后的序列中出现在 B 之后。</li>
+</ul>
+</li>
+</ul>
+<p>1.使用sort()将数组进行排序，代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</div><div class="line">  <span class="keyword">var</span> myarr1 = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="string">"Hello"</span>,<span class="string">"John"</span>,<span class="string">"love"</span>,<span class="string">"JavaScript"</span>);</div><div class="line">  <span class="keyword">var</span> myarr2 = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="string">"80"</span>,<span class="string">"16"</span>,<span class="string">"50"</span>,<span class="string">"6"</span>,<span class="string">"100"</span>,<span class="string">"1"</span>);</div><div class="line">  <span class="built_in">document</span>.write(myarr1.sort()+<span class="string">"&lt;br&gt;"</span>);</div><div class="line">  <span class="built_in">document</span>.write(myarr2.sort());</div><div class="line"><span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></div><div class="line"></div><div class="line"><span class="comment">//运行结果：</span></div><div class="line">Hello,JavaScript,John,love</div><div class="line"><span class="number">1</span>,<span class="number">100</span>,<span class="number">16</span>,<span class="number">50</span>,<span class="number">6</span>,<span class="number">80</span></div></pre></td></tr></table></figure>
+<p>注意:上面的代码没有按照数值的大小对数字进行排序。</p>
+<p>2.如要实现这一点，就必须使用一个排序函数，代码如下：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">sortNum</span>(<span class="params">a,b</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> a - b;</div><div class="line"> <span class="comment">//升序，如降序，把“a - b”该成“b - a”</span></div><div class="line">&#125;</div><div class="line"> <span class="keyword">var</span> myarr = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="string">"80"</span>,<span class="string">"16"</span>,<span class="string">"50"</span>,<span class="string">"6"</span>,<span class="string">"100"</span>,<span class="string">"1"</span>);</div><div class="line">  <span class="built_in">document</span>.write(myarr + <span class="string">"&lt;br&gt;"</span>);</div><div class="line">  <span class="built_in">document</span>.write(myarr.sort(sortNum));</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line">//运行结果：</div><div class="line">80,16,50,6,100,1</div><div class="line">1,6,16,50,80,100</div></pre></td></tr></table></figure>
+<h3 id="History-对象"><a href="#History-对象" class="headerlink" title="History 对象"></a>History 对象</h3><p>history对象记录了用户曾经浏览过的页面(URL)，并可以实现浏览器前进与后退相似导航的功能。<br>注意:从窗口被打开的那一刻开始记录，每个浏览器窗口、每个标签页乃至每个框架，都有自己的history对象与特定的window对象关联。<br>window.history.[属性|方法]<br>注意：window可以省略。<br>History 对象属性</p>
+<h3 id="History-对象方法"><a href="#History-对象方法" class="headerlink" title="History 对象方法"></a>History 对象方法</h3><p>使用length属性，当前窗口的浏览历史总长度，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"></div><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">  var HL = window.history.length;</div><div class="line">  document.write(HL);</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<h3 id="返回前一个浏览的页面"><a href="#返回前一个浏览的页面" class="headerlink" title="返回前一个浏览的页面"></a>返回前一个浏览的页面</h3><p>back()方法，加载 history 列表中的前一个 URL。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="built_in">window</span>.history.back();</div><div class="line"></div><div class="line"></div><div class="line">比如，返回前一个浏览的页面，代码如下：</div><div class="line"><span class="built_in">window</span>.history.back();</div><div class="line">注意：等同于点击浏览器的倒退按钮。</div><div class="line">back()相当于go(<span class="number">-1</span>),代码如下:</div><div class="line"><span class="built_in">window</span>.history.go(<span class="number">-1</span>);</div></pre></td></tr></table></figure>
+<h3 id="userAgent"><a href="#userAgent" class="headerlink" title="userAgent"></a>userAgent</h3><p>返回用户代理头的字符串表示(就是包括浏览器版本信息等的字符串)<br>语法<br>navigator.userAgent<br>几种浏览的user_agent.，像360的兼容模式用的是IE、极速模式用的是chrom的内核。</p>
+<p>使用userAgent判断使用的是什么浏览器(假设使用的是IE8浏览器),代码如下:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">validB</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="keyword">var</span> u_agent = navigator.userAgent;</div><div class="line">  <span class="keyword">var</span> B_name=<span class="string">"Failed to identify the browser"</span>;</div><div class="line">  <span class="keyword">if</span>(u_agent.indexOf(<span class="string">"Firefox"</span>)&gt;<span class="number">-1</span>)&#123;</div><div class="line">  	B_name=<span class="string">"Firefox"</span>;</div><div class="line">  &#125;<span class="keyword">else</span> <span class="keyword">if</span>(u_agent.indexOf(<span class="string">"Chrome"</span>)&gt;<span class="number">-1</span>)&#123;</div><div class="line">true  B_name=<span class="string">"Chrome"</span>;</div><div class="line">  &#125;<span class="keyword">else</span> 	</div><div class="line">    <span class="keyword">if</span>(u_agent.indexOf(<span class="string">"MSIE"</span>)&gt;<span class="number">-1</span>&amp;&amp;u_agent.indexOf(<span class="string">"Trident"</span>)&gt;<span class="number">-1</span>)&#123;</div><div class="line">    B_name=<span class="string">"IE(8-10)"</span>;  </div><div class="line">  &#125;</div><div class="line"></div><div class="line">true<span class="built_in">document</span>.write(<span class="string">"B_name:"</span>+B_name+<span class="string">"&lt;br&gt;"</span>);</div><div class="line">true<span class="built_in">document</span>.write(<span class="string">"u_agent:"</span>+u_agent+<span class="string">"&lt;br&gt;"</span>);</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>HTML文档可以说由节点构成的集合，DOM节点有:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">1. 元素节点：&lt;html&gt;、&lt;body&gt;、&lt;p&gt;等元素节点，即标签。</div><div class="line">2. 文本节点: 向用户展示的内容，如&lt;li&gt;...&lt;/li&gt;中的文本。</div><div class="line">3. 属性节点: 元素属性，如&lt;a&gt;标签的链接属性href=&quot;http://www.wanglinzhizhi.me&quot;。</div></pre></td></tr></table></figure>
+<h3 id="getElementsByTagName-方法"><a href="#getElementsByTagName-方法" class="headerlink" title="getElementsByTagName()方法"></a>getElementsByTagName()方法</h3><p>返回带有<strong>指定标签名</strong>的节点对象的集合。<strong>返回元素的顺序是它们在文档中的顺序</strong>。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">语法:</div><div class="line">truetruegetElementsByTagName(Tagname)</div><div class="line">说明:</div><div class="line"></div><div class="line">1. Tagname是标签的名称，如p、a、img等标签名。</div><div class="line">2. 和数组类似也有length属性，可以和访问数组一样的方法来访问，所以从0开始。</div></pre></td></tr></table></figure>
+<h3 id="区别getElementByID-getElementsByName-getElementsByTagName"><a href="#区别getElementByID-getElementsByName-getElementsByTagName" class="headerlink" title="区别getElementByID,getElementsByName,getElementsByTagName"></a>区别getElementByID,getElementsByName,getElementsByTagName</h3><p>以人来举例说明，人有能标识身份的身份证，有姓名，有类别(大人、小孩、老人)等。</p>
+<ol>
+<li>ID 是一个人的身份证号码，是唯一的。所以通过getElementById获取的是指定的一个人。</li>
+<li>Name 是他的名字，可以重复。所以通过getElementsByName获取名字相同的人集合。</li>
+<li>TagName可看似某类，getElementsByTagName获取相同类的人集合。如获取小孩这类人，getElementsByTagName(“小孩”)。</li>
+</ol>
+<p>方法总结如下:</p>
+<p>注意：方法区分大小写<br>通过下面的例子(6个name=”hobby”的复选项，两个按钮)来区分三种方法的不同:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;input type=&quot;checkbox&quot; name=&quot;hobby&quot; id=&quot;hobby1&quot;&gt;  音乐</div><div class="line">&lt;input type=&quot;checkbox&quot; name=&quot;hobby&quot; id=&quot;hobby2&quot;&gt;  登山</div><div class="line">&lt;input type=&quot;checkbox&quot; name=&quot;hobby&quot; id=&quot;hobby3&quot;&gt;  游泳</div><div class="line">&lt;input type=&quot;checkbox&quot; name=&quot;hobby&quot; id=&quot;hobby4&quot;&gt;  阅读</div><div class="line">&lt;input type=&quot;checkbox&quot; name=&quot;hobby&quot; id=&quot;hobby5&quot;&gt;  打球</div><div class="line">&lt;input type=&quot;checkbox&quot; name=&quot;hobby&quot; id=&quot;hobby6&quot;&gt;  跑步</div><div class="line">&lt;input type=&quot;button&quot; value = &quot;全选&quot; id=&quot;button1&quot;&gt;</div><div class="line">&lt;input type=&quot;button&quot; value = &quot;全不选&quot; id=&quot;button1&quot;&gt;</div></pre></td></tr></table></figure>
+<ol>
+<li>document.getElementsByTagName(“input”)，结果为获取所有标签为input的元素，共8个。</li>
+<li>document.getElementsByName(“hobby”)，结果为获取属性name=”hobby”的元素，共6个。</li>
+<li>document.getElementById(“hobby6”)，结果为获取属性id=”hobby6”的元素，只有一个，”跑步”这个复选项。</li>
+</ol>
+<h3 id="getAttribute-方法"><a href="#getAttribute-方法" class="headerlink" title="getAttribute()方法"></a>getAttribute()方法</h3><p>通过元素节点的属性名称获取属性的值。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">elementNode.getAttribute(name)</div></pre></td></tr></table></figure>
+<p>说明:</p>
+<ol>
+<li>elementNode：使用getElementById()、getElementsByTagName()等方法，获取到的元素节点。</li>
+<li>name：要想查询的元素节点的<strong>属性</strong>名字</li>
+</ol>
+<h3 id="setAttribute-方法"><a href="#setAttribute-方法" class="headerlink" title="setAttribute()方法"></a>setAttribute()方法</h3><p>setAttribute() 方法增加一个指定名称和值的新属性，或者把一个现有的属性设定为指定的值。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">​elementNode.setAttribute(name,value)</div></pre></td></tr></table></figure>
+<p>说明：</p>
+<p>1.name: 要设置的属性名。<br>2.value: 要设置的属性值。</p>
+<p>注意：</p>
+<ol>
+<li>把指定的属性设置为指定的值。如果不存在具有指定名称的属性，该方法将创建一个新属性。</li>
+<li>类似于getAttribute()方法，setAttribute()方法只能通过元素节点对象调用的函数。</li>
+</ol>
+<h3 id="节点属性"><a href="#节点属性" class="headerlink" title="节点属性"></a>节点属性</h3><p><strong>在文档对象模型 (DOM) 中，每个节点都是一个对象</strong>。DOM 节点有三个重要的属性 ：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"></div><div class="line">1. nodeName : 节点的名称</div><div class="line">2. nodeValue ：节点的值</div><div class="line">3. nodeType ：节点的类型</div></pre></td></tr></table></figure>
+<p>一、nodeName 属性: 节点的名称，是只读的。</p>
+<ul>
+<li><p><strong>元素节点</strong>的 nodeName 与标签名相同</p>
+</li>
+<li><p><strong>属性节点</strong>的 nodeName 是属性的名称</p>
+</li>
+<li><p><strong>文本节点</strong>的 nodeName 永远是 #text</p>
+</li>
+<li><p><strong>文档节点</strong>的 nodeName 永远是 #document</p>
+</li>
+</ul>
+<p>二、nodeValue 属性：节点的值</p>
+<ul>
+<li><strong>元素节点</strong>的 nodeValue 是 undefined 或 null</li>
+<li><strong>文本节点</strong>的 nodeValue 是文本自身</li>
+<li><strong>属性节点</strong>的 nodeValue 是属性的值</li>
+</ul>
+<h3 id="浏览器窗口可视区域大小"><a href="#浏览器窗口可视区域大小" class="headerlink" title="浏览器窗口可视区域大小"></a>浏览器窗口可视区域大小</h3><p>获得浏览器窗口的尺寸（浏览器的视口，不包括工具栏和滚动条）的方法:<br>一、对于IE9+、Chrome、Firefox、Opera 以及 Safari：<br>•  window.innerHeight - 浏览器窗口的内部高度<br>•  window.innerWidth - 浏览器窗口的内部宽度</p>
+<p>二、对于 Internet Explorer 8、7、6、5：<br>•  document.documentElement.clientHeight表示HTML文档所在窗口的当前高度。<br>•  document.documentElement.clientWidth表示HTML文档所在窗口的当前宽度。<br>或者<br>Document对象的body属性对应HTML文档的<body>标签<br>•  document.body.clientHeight<br>•  document.body.clientWidth</body></p>
+<p>在不同浏览器都实用的 JavaScript 方案：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> w= <span class="built_in">document</span>.documentElement.clientWidth|| <span class="built_in">document</span>.body.clientWidth;</div><div class="line"><span class="keyword">var</span> h= <span class="built_in">document</span>.documentElement.clientHeight|| <span class="built_in">document</span>.body.clientHeight;</div></pre></td></tr></table></figure>
+<p>任务<br>在script标签内，补充右边编辑器代码，获取浏览器当前窗口大小。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><div class="line"></div><div class="line"><span class="meta">&lt;!DOCTYPE HTML&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Type"</span> <span class="attr">content</span>=<span class="string">"text/html; charset=utf-8"</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line"><span class="keyword">var</span> w= <span class="built_in">document</span>.documentElement.clientWidth||<span class="built_in">document</span>.body.clientWidth;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">var</span> h= <span class="built_in">document</span>.documentElement.clientHeight||<span class="built_in">document</span>.body.clientHeight;</div><div class="line"></div><div class="line"><span class="built_in">document</span>.write(w+<span class="string">"&lt;br /&gt;"</span>);</div><div class="line"><span class="built_in">document</span>.write(h);</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="网页尺寸scrollHeight"><a href="#网页尺寸scrollHeight" class="headerlink" title="网页尺寸scrollHeight"></a>网页尺寸scrollHeight</h3><p>scrollHeight和scrollWidth，获取网页内容高度和宽度。</p>
+<p>一、针对IE、Opera:<br>scrollHeight 是网页内容实际高度，可以小于 clientHeight。</p>
+<p>二、针对NS、FF:<br>scrollHeight 是网页内容高度，不过最小值是 clientHeight。也就是说网页内容实际高度小于 clientHeight 时，scrollHeight 返回 clientHeight 。</p>
+<p>三、浏览器兼容性</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">var w=document.documentElement.scrollWidth || document.body.scrollWidth;</div><div class="line"></div><div class="line">var h=document.documentElement.scrollHeight|| document.body.scrollHeight;</div></pre></td></tr></table></figure>
+<p>注意:<strong>区分大小写</strong><br>scrollHeight和scrollWidth还可获取Dom元素中内容实际占用的高度和宽度。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE HTML&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Type"</span> <span class="attr">content</span>=<span class="string">"text/html; charset=utf-8"</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line"></div><div class="line"><span class="keyword">var</span> w=<span class="built_in">document</span>.documentElement.scrollWidth</div><div class="line">   || <span class="built_in">document</span>.body.scrollWidth;</div><div class="line"><span class="keyword">var</span> h=<span class="built_in">document</span>.documentElement.scrollHeight</div><div class="line">   || <span class="built_in">document</span>.body.scrollHeight;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span>    </div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="网页尺寸offsetHeight"><a href="#网页尺寸offsetHeight" class="headerlink" title="网页尺寸offsetHeight"></a>网页尺寸offsetHeight</h3><p>offsetHeight和offsetWidth，获取网页内容高度和宽度(包括滚动条等边线，会随窗口的显示大小改变)。</p>
+<p>一、值<br>offsetHeight = clientHeight + 滚动条 + 边框。</p>
+<p>二、浏览器兼容性</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="keyword">var</span> w= <span class="built_in">document</span>.documentElement.offsetWidth || <span class="built_in">document</span>.body.offsetWidth;</div><div class="line">    <span class="keyword">var</span> h= <span class="built_in">document</span>.documentElement.offsetHeight|| <span class="built_in">document</span>.body.offsetHeight;</div><div class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">    <span class="meta">&lt;!DOCTYPE HTML&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Type"</span> <span class="attr">content</span>=<span class="string">"text/html; charset=utf-8"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line"></div><div class="line">    <span class="keyword">var</span> w= <span class="built_in">document</span>.documentElement.offsetWidth|| <span class="built_in">document</span>.body.offsetWidth;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> h= <span class="built_in">document</span>.documentElement.offsetHeight|| <span class="built_in">document</span>.body.offsetHeight;</div><div class="line"></div><div class="line">    <span class="built_in">document</span>.write(w);</div><div class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="网页卷去的距离与偏移量"><a href="#网页卷去的距离与偏移量" class="headerlink" title="网页卷去的距离与偏移量"></a>网页卷去的距离与偏移量</h3><ul>
+<li>scrollLeft:设置或获取位于给定对象左边界与窗口中目前可见内容的最左端之间的距离 ，即左边灰色的内容。</li>
+<li>scrollTop:设置或获取位于对象最顶端与窗口中可见内容的最顶端之间的距离 ，即上边灰色的内容。</li>
+<li>offsetLeft:获取指定对象相对于版面或由 offsetParent 属性指定的父坐标的计算左侧位置 。</li>
+<li>offsetTop:获取指定对象相对于版面或由 offsetParent 属性指定的父坐标的计算顶端位置 。</li>
+</ul>
+<p>注意:</p>
+<ol>
+<li>区分大小写</li>
+<li>offsetParent：布局中设置postion属性(Relative、Absolute、fixed)的父容器，从最近的父节点开始，一层层向上找，直到HTML的body。</li>
+</ol>
+
+	
+	
+	
+	
+</div>
+				
+				
+
+                <!-- Post Comments -->
+                
+                    
+
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    
+    <!-- Prev Nav -->
+    
+        <a href="/2016/02/08/JavaScript 数组/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2016/01/29/2016-01-29-语录/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+        </div>
+    </div>
+
+				
+				
+					<!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay "></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored  sidebar-fixed-left" role="navigation">
+	<div id="sidebar-main">
+	    <!-- Sidebar Header -->
+		<div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+    <i class="material-icons">clear_all</i>
+    <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/me.jpeg" alt="wanglinzhizhi's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        wanglinzhizhi@hotmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+		<!-- Sidebar Navigation  -->
+		<ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+			
+                <li>
+                    <a href="#" target="_blank" title="Email Me">
+						<i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    <li id="sidebar-first-li">
+        <a href="/" target="_self">
+            <i class="material-icons sidebar-material-icons">home</i>
+             主页
+        </a>
+    </li>
+
+    <!-- I'm Feeling Lucky -->
+<!--
+    <li class="dropdown">
+        <a href="" target="_self">
+            <i class="material-icons sidebar-material-icons">explore</i>
+             sidebar.imlucky
+        </a>
+    </li>
+-->
+
+	
+    <!-- Archives  -->
+    <li class="dropdown">
+        <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+            <i class="material-icons sidebar-material-icons">inbox</i>
+             归档
+            <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+            <a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">74</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/02/">February 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/01/">January 2016<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/12/">December 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/08/">August 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/06/">June 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/04/">April 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/03/">March 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/01/">January 2015<span class="sidebar_archives-count">1</span></a>
+        </ul>
+    </li>
+
+    <!-- Divider -->
+    <li class="divider"></li>
+
+
+    <!-- Pages  -->
+	
+		<li>
+			<a href="/tags" title="Tags">
+				Tags
+			</a>
+		</li>
+	
+		<li>
+			<a href="/gallery" title="Gallery">
+				Gallery
+			</a>
+		</li>
+	
+		<li>
+			<a href="/about" title="About">
+				About
+			</a>
+		</li>
+	
+
+    <!-- Article Numebr  -->
+    <li>
+        <a href="/archives">
+             文章总数
+             <span class="sidebar-badge">92</span>
+        </a>
+    </li>
+</ul>
+
+		<!-- Sidebar Divider -->
+		<div class="sidebar-divider"></div>
+
+		<!-- Sidebar Footer -->
+		<!-- 
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持。 :) 
+-->
+
+<!-- Theme Material -->
+<a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
+	<div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+		主题 - Material
+		<span class="sidebar-badge badge-circle">i</span>
+	</div>
+</a>
+
+<!-- Help & Support -->
+<!--
+<a href="mailto:hiviosey@gmail.com" class="sidebar-footer-text-a">
+    <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+		sidebar.help
+		<span class="mdl-button__ripple-container">
+			<span class="mdl-ripple"></span>
+		</span>
+	</div>
+</a>
+-->
+
+<!-- Feedback -->
+<!--
+<a href="https://github.com/viosey/hexo-theme-material/issues" target="_blank" class="sidebar-footer-text-a">
+    <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+         sidebar.feedback
+                    <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></div>
+</a>
+-->
+
+<!-- Abount Theme -->
+<!--
+<a href="https://blog.viosey.com/index.php/Material.html" target="_blank" class="sidebar-footer-text-a">
+    <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+         sidebar.about_theme
+        <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></div>
+</a>-->
+
+	</div>
+    
+    <!-- Sidebar Sponsor -->
+    
+
+
+</aside>
+
+				
+				
+				
+					<!-- Footer Top Button -->
+					<div class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+				
+				
+				<!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+	
+	
+		<!-- Paradox Footer Left Section -->
+		<div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+    
+    
+    <!-- Facebook -->
+    
+    
+    
+    <!-- Google + -->
+    
+    
+    
+    <!-- Weibo -->
+    
+    
+    
+    <!-- Instagram -->
+    
+    
+    
+    <!-- Tumblr -->
+    
+    
+    
+    <!-- Github -->
+    
+    <a href="https://github.com/wagnlinzh" target="view_window"><button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-github.png);">
+        <span class="visuallyhidden">Github</span>
+    </button></a>
+    
+</div>
+
+
+		<!--Copyright-->
+		<div id="copyright">Copyright&nbsp;©&nbsp;<script type="text/javascript">var fd = new Date();document.write(fd.getFullYear());</script>&nbsp;wanglinzhizhi</div>
+
+		<!-- Paradox Footer Right Section -->
+
+		<!-- 
+		I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+		It will not impact the appearance and can give developers a lot of support :)
+
+		很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+		它不会影响美观并可以给开发者很大的支持。 :) 
+		-->
+
+		<div class="mdl-mini-footer--right-section">
+			<div>
+				<div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+				<div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+			</div>
+		</div>
+	
+    
+</footer>
+                
+				<!-- Import File -->
+<script src="/js/highlight.min.js"></script>
+<script src="/js/js.min.js"></script>
+<script src="/js/nprogress.js"></script>
+
+<script type="text/javascript">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    
+    $('#nprogress .bar').css({
+        'background': '#2196F3'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #2196F3, 0 0 15px #2196F3'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#2196F3',
+        'border-left-color': '#2196F3'
+    });
+    
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+	<script src="/js/smoothscroll.js"></script>
+
+
+
+    <!-- Leancloud -->
+	<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+	<script>
+		AV.initialize("EObBAbqpQfNFLuV5SjbVgoxq-gzGzoHsz", "qPdmjfSU3DDmPPH9ui0cUW4z");
+	</script>
+    <script>
+	function showTime(Counter) {
+		var query = new AV.Query(Counter);
+		$(".leancloud-views_num").each(function() {
+			var url = $(this).attr("id").trim();
+			query.equalTo("url", url);
+			query.find({
+				success: function(results) {
+					if (results.length == 0) {
+						var content = '0 ' + $(document.getElementById(url)).text();
+						$(document.getElementById(url)).text(content);
+						return;
+					}
+					for (var i = 0; i < results.length; i++) {
+						var object = results[i];
+						var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
+						$(document.getElementById(url)).text(content);
+					}
+				},
+				error: function(object, error) {
+					console.log("Error: " + error.code + " " + error.message);
+				}
+			});
+
+		});
+	}
+
+	function addCount(Counter) {
+		var Counter = AV.Object.extend("Counter");
+		url = $(".leancloud-views_num").attr('id').trim();
+		title = $(".leancloud-views_num").attr('data-flag-title').trim();
+		var query = new AV.Query(Counter);
+		query.equalTo("url", url);
+		query.find({
+			success: function(results) {
+				if (results.length > 0) {
+					var counter = results[0];
+					counter.fetchWhenSave(true);
+					counter.increment("time");
+					counter.save(null, {
+						success: function(counter) {
+							var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
+							$(document.getElementById(url)).text(content);
+						},
+						error: function(counter, error) {
+							console.log('Failed to save Visitor num, with error message: ' + error.message);
+						}
+					});
+				} else {
+					var newcounter = new Counter();
+					newcounter.set("title", title);
+					newcounter.set("url", url);
+					newcounter.set("time", 1);
+					newcounter.save(null, {
+						success: function(newcounter) {
+							console.log("newcounter.get('time')="+newcounter.get('time'));
+							var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
+							$(document.getElementById(url)).text(content);
+						},
+						error: function(newcounter, error) {
+							console.log('Failed to create');
+						}
+					});
+				}
+			},
+			error: function(error) {
+				console.log('Error:' + error.code + " " + error.message);
+			}
+		});
+	}
+	$(function() {
+		var Counter = AV.Object.extend("Counter");
+		if ($('.leancloud-views_num').length == 1) {
+			addCount(Counter);
+		} else if ($('.post-title-link').length > 1) {
+			showTime(Counter);
+		}
+	}); 
+</script>
+
+
+
+
+
+
+
+
+<!-- Swiftye -->
+
+
+<!-- Local Search-->
+
+	<script>
+	var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var str='<ul class=\"search-result-list\">';                
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length <= 0) {
+                    return;
+                }
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        str += "<li><a href='"+ data_url +"' class='search-result-title' target='_blank'>"+ data_title;
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out characters
+                            var start = first_occur - 6;
+                            var end = first_occur + 6;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 10;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substr(start, end); 
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<em class=\"search-keyword\">"+keyword+"</em>");
+                            })
+                            str += "<p class=\"search-result\">" + match_content +"...</p>" +"</a>";
+                        }
+                    }
+                })
+                $resultContent.innerHTML = str;
+            })
+        }
+    })
+}
+</script>
+
+	<script>
+        var inputArea = document.querySelector("#search");
+        var getSearchFile = function(){
+            var path = "search.xml";
+            searchFunc(path, 'search', 'local-search-result');
+        }
+
+        inputArea.onfocus = function(){ getSearchFile() }
+	</script>
+
+
+<!-- Window Load-->
+<script>
+    $(window).load(function() {
+        // Post_Toc parent position fixed
+        $(".post-toc-wrap").parent(".mdl-menu__container").css("position", "fixed");
+    });
+</script>
+
+<!-- MathJax Load-->
+
+            </main>
+        </div>
+		
+    </body>
+		
+	
+</html>

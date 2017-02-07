@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <!-- Title -->
+    
+    <title>
+        构建之法 邹欣 Notes | wanglinzhizhi
+    </title>
+    
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+    
+    <!-- Meta & INfo -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0D47A1">
+    <meta name="author" content="wanglinzhizhi">
+    <meta name="description" content="游走在上下文无关文法间">
+    <meta name="keywords" content="null">
+    
+    <!--iOS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+    
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="wanglinzhizhi">
+    
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://www.wanglinzhizhi.me">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="构建之法 邹欣 Notes | wanglinzhizhi">
+    <meta property="og:description" content="游走在上下文无关文法间">
+    
+     <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+        
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+    
+    <!-- Import CSS -->
+    <link rel="stylesheet" href="/css/material.min.css">
+    <link rel="stylesheet" href="/css/style.min.css">
+    <!-- Config CSS -->
+
+
+<!-- Other Styles -->
+<style>
+	body, html{
+		font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+	}
+	
+    a{
+        color: #2196F3
+    }
+    
+    .mdl-card__media,
+    #search-label,
+    #search-form-label:after,
+    #scheme-Paradox .hot_tags-count,
+    #scheme-Paradox .sidebar_archives-count,
+    #scheme-Paradox .sidebar-colored .sidebar-header,
+    #scheme-Paradox .sidebar-colored .sidebar-badge{
+        background-color: #1565C0 !important
+    }
+    
+	/* Sidebar User Drop Down Menu Text Color */
+	#scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+    #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus{
+        color: #1565C0 !important
+    }
+    
+    #post_entry-right-info,
+    .sidebar-colored .sidebar-nav li:hover > a,
+    .sidebar-colored .sidebar-nav li:hover > a i,
+    .sidebar-colored .sidebar-nav li > a:hover,
+    .sidebar-colored .sidebar-nav li > a:hover i,
+    .sidebar-colored .sidebar-nav li > a:focus i,
+    .sidebar-colored .sidebar-nav > .open > a,
+    .sidebar-colored .sidebar-nav > .open > a:hover,
+    .sidebar-colored .sidebar-nav > .open > a:focus,
+    #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a{
+        color: #1565C0 !important
+    }
+    
+    .toTop{
+        background: #757575 !important
+    }
+		
+	.material-layout .material-post>.material-nav,
+	.material-layout .material-index>.material-nav,
+	.material-nav a{
+		color: #757575;
+	}
+		
+	#scheme-Paradox .MD-burger-layer {
+		background-color: #757575;
+	}
+
+	#scheme-Paradox #post-toc-trigger-btn{
+		color: #757575;
+	}
+	
+	.post-toc a:hover{
+		color: #2196F3;
+		text-decoration: underline;
+	}
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+        body{
+            background-color: #F5F5F5
+        }
+		
+		/* blog_info bottom background */
+        #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+            background-color: #fff;
+        }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+        .fade {
+            transition: all 800ms linear;
+            -webkit-transform: translate3d(0,0,0);
+            -moz-transform: translate3d(0,0,0);
+            -ms-transform: translate3d(0,0,0);
+            -o-transform: translate3d(0,0,0);
+            transform: translate3d(0,0,0);
+            opacity: 1;
+        }
+
+        .fade.out{
+            opacity: 0;
+        }
+    </style>
+
+	<script src="/js/jquery.min.js"></script>
+	
+	<link rel="stylesheet" href="/css/highlight/atom-one-dark.css">
+	
+	<!-- UC Browser Compatible-->
+	<script>
+		var agent = navigator.userAgent.toLowerCase();
+		if(agent.indexOf('ucbrowser')>0) {
+			document.write('<link rel="stylesheet" href="/css/uc.css">');
+		   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+		}
+	</script>
+    
+    <!-- Custom Head -->
+    
+</head>
+	
+	
+
+    <body id="scheme-Paradox">
+
+		
+        <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+				
+			
+			
+            <!-- Main Container -->
+            <main class="material-layout__content" id="main">
+				
+                <!-- Top Anchor -->
+                <div id="top"></div>
+				
+				
+                <!-- Hamburger Button -->
+                <button class="MD-burger-icon sidebar-toggle">
+                    <span class="MD-burger-layer"></span>
+                </button>
+				
+				
+                <!-- Post TOC -->
+
+    
+	<!-- Back Button -->
+<!--
+	<div class="material-back" id="backhome-div" tabindex="0">
+		<a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" href="#" onclick="window.history.back();return false;" target="_self" role="button" data-upgraded=",MaterialButton,MaterialRipple">
+			<i class="material-icons" role="presentation">arrow_back</i>
+			<span class="mdl-button__ripple-container">
+				<span class="mdl-ripple"></span>
+			</span>
+		</a>
+	</div>			
+-->
+	<!-- Left aligned menu below button -->
+	<button id="post-toc-trigger-btn"
+			class="mdl-button mdl-js-button mdl-button--icon">
+	  <i class="material-icons">format_list_numbered</i>
+	</button>
+
+	<ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
+		for="post-toc-trigger-btn">
+			
+			<ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#构建之法（第二版）-邹欣"><span class="post-toc-number">1.</span> <span class="post-toc-text">构建之法（第二版） 邹欣</span></a></li></ol>
+		
+<!--			<li class="mdl-menu__item">Some Action</li>-->
+	</ul>
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+		
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+	<!-- Paradox Post Header -->
+	
+		
+			<!-- Random Thumbnail -->
+			<div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+				<script>
+    
+    var randomNum;
+    randomNum = Math.floor(Math.random() * 5 + 1);
+    
+    $(".post_thumbnail-random").css('background-image', 'url(' + '/img/random/' + randomNum + '.png' + ')');
+    
+</script>
+
+		
+	
+        <p class="article-headline-p">
+            构建之法 邹欣 Notes
+        </p>
+    </div>
+
+	
+
+				
+				
+					<!-- Paradox Post Info -->
+					<div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+    
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/me.jpeg" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>wanglinzhizhi</strong>
+        <span>Feb 17, 2016</span>
+    </div>
+    
+    <div class="section-spacer"></div>
+	
+    <!-- Favorite -->
+<!--
+    <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+        <i class="material-icons" role="presentation">favorite</i>
+        <span class="visuallyhidden">favorites</span>
+    </button>
+-->
+    
+    <!-- Tags (bookmark) -->
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/wanglinzhizhi/">wanglinzhizhi</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/生活随笔/">生活随笔</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/读书笔记/">读书笔记</a>
+    </ul>
+    
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+    
+    <!-- Leancloud Views -->
+    <a class="post_share-link" href="#">
+        <li class="mdl-menu__item">
+            <span id="/2016/02/17/2016-02-17-构建之法(邹欣) Note/" class="leancloud-views_num" data-flag-title="构建之法 邹欣 Notes">
+     &nbsp;浏览量
+</span>
+        </li>
+    </a>
+    
+    
+    
+    
+    <!-- Share Twitter -->
+    <a class="post_share-link" href="https://twitter.com/intent/tweet?text=构建之法 邹欣 Notes&url=http://www.wanglinzhizhi.me//2016/02/17/2016-02-17-构建之法(邹欣) Note/index.html&via=wanglinzhizhi" target="_blank">
+        <li class="mdl-menu__item">
+            分享到 Twitter
+        </li>
+    </a>
+    
+    <!-- Share Google+ -->
+    <a class="post_share-link" href="https://plus.google.com/share?url=http://www.wanglinzhizhi.me//2016/02/17/2016-02-17-构建之法(邹欣) Note/index.html" target="_blank">
+        <li class="mdl-menu__item">
+            分享到 Google+
+        </li>
+    </a>
+    
+    <!-- Share Weibo -->
+    <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=构建之法 邹欣 Notes&url=http://www.wanglinzhizhi.me//2016/02/17/2016-02-17-构建之法(邹欣) Note/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <li class="mdl-menu__item">
+            分享到微博
+        </li>
+    </a>
+</ul>
+</div>
+				
+
+                <!-- Post Content -->
+                <div id="post-content" class="markdown-Github mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+	
+		<h2 id="构建之法（第二版）-邹欣"><a href="#构建之法（第二版）-邹欣" class="headerlink" title="构建之法（第二版） 邹欣"></a>构建之法（第二版） 邹欣</h2><p>第一版前言</p>
+<p>2016-02-17</p>
+<p>20世纪末，有人问软件工程专家戴维·帕纳斯（David Parnas）：将来会有什么令人兴奋的软件工程技术出现？他回答：</p>
+<p>最有用的技术不在将来，而是已经出现好些年了，只不过我们没好好用。</p>
+<p>2016-02-17</p>
+<p>这是我和本书的出版人、来自独立出版团队JUSTPUB的周筠老师合作的第三本书，她是我唯一的出版人，同时也是最好的一个。</p>
+<p>2016-02-17</p>
+<p>最后，要感谢我的家人，他们容忍我一个人在厨房里对着电脑长时间发呆，有时还给我煮绿豆汤喝！</p>
+<p>1.1　软件 = 程序 + 软件工程</p>
+<p>2016-02-17</p>
+<p>程序＝数据结构＋算法”</p>
+<p>2016-02-17</p>
+<p>我上班后，发现以前同事写的程序真是垃圾，根本看不懂，无法维护。我要推翻重写！后来一个老员工笑嘻嘻地告诉我，我们现在看到的程序，就是去年的新员工愤怒地推翻重写之后的结果，大家反映还没有以前的版本好用呢。</p>
+<p>2016-02-17</p>
+<p>程序，在这里指的是源程序，就是一行行的代码。它们是建立在数据结构上的一些算法。程序还要对数据进行操作，这些数据有些是静态的（例如软件的图标、提示信息），有些是动态的（例如程序生成的随机数字、程序通过网络下载的数据、用户的文字或语音输入等）。但是光有代码和静态数据还是不行，工程师要把它们构建为机器能懂的可执行代码。构建不仅仅是cc和link命令，一个复杂的软件不但要有合理的软件架构（Software Architecture）、软件设计与实现（Software Design, Implementation and Debug），还要有各种文件和数据来描述各个程序文件之间的依赖关系、编译参数、链接参数，等等。这些都是软件构建的过程。</p>
+<p>2016-02-17</p>
+<p>软件团队的成员每天都在修改各种源代码，怎么保证软件在修改过程中能不断提高质量，至少要维持以前的质量？有些时候，我们要为某个需求写一些特殊功能，不久后又要把这些功能再合并回主要版本。有些程序要配置不同的界面，运行在中文、英文或其他语言的操作系统上；有些程序还有32位版本、64位版本等。这是源代码管理（Source Code Control）的问题—有时候也叫配置管理（Software Configuration Management）。我们还有一系列的工具、流程和文档来保证程序的正确性，这些工具（也是软件）、流程应该达到很高的质量，才能保证开发出来的软件的质量。这就是质量保障（Quality Assurance），具体的验证过程叫做软件测试（Testing）。</p>
+<p>一个软件或者服务要有人买，就得找到顾客，顾客有各种需求，有些靠谱，有些不靠谱；有些容易做到，有些难以做到。软件团队要从需求分析（Requirement Analysis）开始，把合适的需求梳理出来，然后逐步展开后续工作，如设计（软件架构）、实现（写数据结构和算法）、测试，到最后发布软件。</p>
+<p>软件团队的人员也会流动，新的成员要尽快读懂已有的程序，了解程序的设计，这叫程序理解（Program Comprehension）。软件在运行过程中还会出这样那样的问题，也许我们要时不时给软件打一个补丁，或者维护众多的服务，团队的新老成员要一起修复各种各样的问题，这叫软件维护（Software Maintenance），或者服务运营（Service Operation）。这一系列过程就是软件的生命周期（Software Life Cycle，SLC），有人得负责软件项目的管理（Project Management）。</p>
+<p>一个好的软件，即使功能和同类软件区别不大，但却会让人感觉到非常好用。这就是软件的用户体验（User Experience）。用户体验和数据结构、算法没有直接的关系，但是很多非常成功的软件就赢在这个方面。</p>
+<p>2016-02-17</p>
+<p>当然还有在用户不知道的情况下就安装了软件，然后用户怎么也摆脱不掉。2010年，中国还出了一桩怪事：A公司要挟用户必须卸载B公司的软件，然后A公司的软件才能运行……这些软件企业的商业模式有些是合情合理也合法；有些看似合情合理，但是不怎么合法；有些做法不合理，但是还没有出台相关法律。在相关法律完善之前，软件行业还有一个行规，即应该有职业道德规范来约束IT人的行为。</p>
+<p>2016-02-17</p>
+<p>软件企业 = 软件 + 商业模式</p>
+<p>2016-02-17</p>
+<p>程序（算法、数据结构）是基本功，但是在算法和数据结构之上，软件工程决定了软件的质量；商业模式决定了一个软件企业的成败。软件从业人员和软件企业的道德操守会极大地影响软件用户的利益。</p>
+<p>2016-02-17</p>
+<p>“设计/制造纸飞机”的过程，看起来技术含量不高，但是也有很多窍门。有些小孩在放飞前，会用嘴对着纸飞机哈一口气，这里面也许有深奥的道理，也许只是迷信。在跟着这些飞机奔跑、欢呼的时候，这些小孩心里一定有“我长大了，要开飞机在天上飞”的想法。纸飞机、航模飞机和真飞机一样，都体现了某些基本的理论。图1-1　纸飞机——玩具阶段</p>
+<p>\2. 业余爱好阶段</p>
+<p>多年以后，很多人还有“在天上飞”的想法。有人居然就实现了注释2：</p>
+<p>2016-02-17</p>
+<p>肯特·柯西（Kent Couch），一位美国俄勒冈州的居民，在2007年用一百多个氦气球和一把椅子飞上了天。他说，“当你夏天躺在草地上的时候，看到白云飘过，你有没有幻想能跳到云朵上面？”所以他有一天忍不住就要实现他的梦想注释3。</p>
+<p>2016-02-17</p>
+<p>在成熟的航空工业中，一个飞机发动机从构思到最后运行，不知道要经历过多少人、多少工序、多少流程、多少相关知识的验证。我们无法想象，某个商用型号的发动机在飞行时发现问题，最初的设计师会自己爬到引擎中敲敲打打，然后钻出来说：“继续飞吧，我搞定了。”然而，在软件行业中，很多软件工程师往往以做这样的事而自豪。</p>
+<p>2016-02-17</p>
+<p>试想这样的事发生在我们的程序中，程序正在高速运行，突然发生了一个异常，我们的程序能否正常工作，安然退出，并保证用户的数据不被破坏</p>
+<p>1.2　软件工程是什么</p>
+<p>2016-02-17</p>
+<p>软件工程是把系统的、有序的、可量化的方法应用到软件的开发、运营和维护上的过程。</p>
+<p>软件工程包括下列领域：软件需求分析、软件设计、软件构建、软件测试和软件维护。</p>
+<p>软件工程和下列的学科相关：计算机科学、计算机工程、管理学、数学、项目管理学、质量管理、软件人体工学、系统工程、工业设计和用户界面设计。</p>
+<p>2016-02-17</p>
+<p>随着人类社会的发展，技术的进步，一些事情总是变得越来越容易，例如旅行，现在人们旅行的方便程度和速度是几百年前所不可想象的。另一些事情，像怀孕生小孩，几千年来的确变得比较容易了，但还是需要大约九个月的时间，生小孩的“成本”也许更大了</p>
+<p>2016-02-17</p>
+<p>. 复杂性（Complexity）</p>
+<p>软件可以说是人类创造的最复杂的系统类型。大型软件（操作系统、办公软件、搜索引擎）有超过百万行的源代码，上万个不同的文件。而软件工程师的肉眼通常一次只能看到30—80行源代码（相当于显示器的一屏），他们的智力、记忆力和常人差不多，在过去的几十年中并没有大的提高。软件的各个模块之间有各种显性或隐性的依赖关系，随着系统的成长和模块的增多，这些关系的数量往往以几何级数的速度增长。而理解运用这些复杂性的人并没有太大的变化。</p>
+<p>\2. 不可见性（Invisibility）</p>
+<p>软件工程师能直接看见源代码，但是源代码不是软件本身。软件以机器码的形式高速运行，还可能在几个CPU核上同时运行，工程师是“看”不到自己的源代码如何具体地在用户的机器上被执行的。商用软件出现了错误，工程师可以看到程序在出错的一瞬间留下的一些痕迹（错误代号、大致的目标代码位置、错误信息），但是几乎无法完整重现到底程序出现了什么问题。</p>
+<p>\3. 易变性（Changeability）</p>
+<p>软件看上去很容易修改，修改软件比修改硬件容易多了。人们自然地期待软件能在下面两种情况下“改变”：a）让软件做新的事情；b）让软件适应新的硬件。但是与此同时，正确地修改软件是一件很困难的事情。</p>
+<p>\4. 服从性（Conformity）</p>
+<p>软件不能独立存在，它总是要运行在硬件上面，它要服从系统中其他组成部分的要求，它还要服从用户的要求、行业系统的要求（例如银行利率的变化）。</p>
+<p>\5. 非连续性（Discontinuity）人们比较容易理解连续的系统：增加输入，就能看到相应输出的增加。但是许多软件系统却没有这样的特性，有时输入上很小的变化，会引起输出上极大的变化。</p>
+<p>这些特性的前四个是佛瑞德·布鲁克斯（Fred Brooks Jr.）在No Silver Bullet一文中提到的，第五个特性是瓦茨拉夫·拉里奇（Vaclav Rajlich）提到的。</p>
+<p>这些特性是由软件的本质所决定的，软件还有其他特性：</p>
+<p>有许多不同的程序设计语言、软件工具和软件开发平台</p>
+<p>存在许多不同的软件开发流程</p>
+<p>软件团队中存在许多不同的角色</p>
+<p>软件既可以存储在磁带上，也可以存储在CD/DVD上</p>
+<p>2016-02-17</p>
+<p>这些事并不能改变软件工程的根本难度，这也是著名的“没有银弹（No Silver Bullet）”论断所阐述的道理</p>
+<p>2016-02-17</p>
+<p>创造性地运用科学原理，设计和实现建筑、机器、装置或生产过程；或者是在实践中使用一个或多个上述实体；或者是实现这些实体的过程</p>
+<p>2016-02-17</p>
+<p>和数理化相比，计算机科学是一门相当年轻的学科，虽然我们可以追溯到巴贝奇（Charles Babbage，1791—1871）、埃达（Ada Lovelace，1815—1852）、图灵（Alan Turing，1912—1954）等计算机科学的先驱，但是“Computer Science”这个学科的名字是1959年才正式提出，综合维基百科中“计算机科学”的词条和微软学术搜索（Microsoft Academic Search）注释9对于计算机科学子领域的划分，计算机科学（Computer Science）这一学术领域可以分为下面这些偏理论的领域：计算理论（Theoretical Computing）</p>
+<p>信息和编码理论（Information and Coding Theory）</p>
+<p>算法和数据结构（Algorithm and Data Structure）</p>
+<p>形式化方法（Formal Methods）</p>
+<p>程序设计语言（Programming Language）</p>
+<p>以及下面这些偏实践的领域：</p>
+<p>计算机体系结构（Computer Architecture）</p>
+<p>并行计算和分布式系统（Concurrent, Parallel and Distributed System）</p>
+<p>实时系统和嵌入式系统（Real Time and Embedded System）</p>
+<p>操作系统（Operating System）</p>
+<p>计算机网络（Networking）</p>
+<p>科学计算（Scientific Computing）</p>
+<p>安全和密码学（Security and Cryptography）</p>
+<p>人工智能（Artificial Intelligence）</p>
+<p>这个领域涵盖了许多相关的领域，如模式识别（Pattern Recognition）、机器学习（Machine Learning）、数据挖掘（Data Mining）、信息提取（Information Retrieval）等。</p>
+<p>计算机图形学（Computer Graphics）、计算机视觉（Computer Vision）、多媒体（Multimedia）</p>
+<p>数据库和大规模数据处理（Database and Large Scale Data Processing）</p>
+<p>万维网（World Wide Web）</p>
+<p>自然语言处理和语音（Natural Language Processing and Speech）</p>
+<p>人机交互（Human Computer Interaction）</p>
+<p>软件工程（Software Engineering）</p>
+<p>2016-02-17</p>
+<p>可以看到，计算机科学中的理论研究部分，大多可以从形式上证明，与数学、离散数学、数理逻辑密切相关；计算机科学中与实践相关的部分，都和数据以及其他学科发生关系；软件工程则和人的行为、现实社会的需求息息相关。软件工程的研究目标（软件的开发、运营和维护）中都有“人”出现，这些“人”可以是项目需求的提供者，可以是软件的开发人员，还可以是软件的用户。</p>
+
+	
+	
+	
+	
+</div>
+				
+				
+
+                <!-- Post Comments -->
+                
+                    
+
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    
+    <!-- Prev Nav -->
+    
+        <a href="/2016/02/17/2016-03-01-正则表达式/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2016/02/16/2016-02-16-求生本能/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+        </div>
+    </div>
+
+				
+				
+					<!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay "></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored  sidebar-fixed-left" role="navigation">
+	<div id="sidebar-main">
+	    <!-- Sidebar Header -->
+		<div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+    <i class="material-icons">clear_all</i>
+    <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/me.jpeg" alt="wanglinzhizhi's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        wanglinzhizhi@hotmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+		<!-- Sidebar Navigation  -->
+		<ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+			
+                <li>
+                    <a href="#" target="_blank" title="Email Me">
+						<i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    <li id="sidebar-first-li">
+        <a href="/" target="_self">
+            <i class="material-icons sidebar-material-icons">home</i>
+             主页
+        </a>
+    </li>
+
+    <!-- I'm Feeling Lucky -->
+<!--
+    <li class="dropdown">
+        <a href="" target="_self">
+            <i class="material-icons sidebar-material-icons">explore</i>
+             sidebar.imlucky
+        </a>
+    </li>
+-->
+
+	
+    <!-- Archives  -->
+    <li class="dropdown">
+        <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+            <i class="material-icons sidebar-material-icons">inbox</i>
+             归档
+            <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+            <a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">74</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/02/">February 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/01/">January 2016<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/12/">December 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/08/">August 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/06/">June 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/04/">April 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/03/">March 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/01/">January 2015<span class="sidebar_archives-count">1</span></a>
+        </ul>
+    </li>
+
+    <!-- Divider -->
+    <li class="divider"></li>
+
+
+    <!-- Pages  -->
+	
+		<li>
+			<a href="/tags" title="Tags">
+				Tags
+			</a>
+		</li>
+	
+		<li>
+			<a href="/gallery" title="Gallery">
+				Gallery
+			</a>
+		</li>
+	
+		<li>
+			<a href="/about" title="About">
+				About
+			</a>
+		</li>
+	
+
+    <!-- Article Numebr  -->
+    <li>
+        <a href="/archives">
+             文章总数
+             <span class="sidebar-badge">92</span>
+        </a>
+    </li>
+</ul>
+
+		<!-- Sidebar Divider -->
+		<div class="sidebar-divider"></div>
+
+		<!-- Sidebar Footer -->
+		<!-- 
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持。 :) 
+-->
+
+<!-- Theme Material -->
+<a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
+	<div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+		主题 - Material
+		<span class="sidebar-badge badge-circle">i</span>
+	</div>
+</a>
+
+<!-- Help & Support -->
+<!--
+<a href="mailto:hiviosey@gmail.com" class="sidebar-footer-text-a">
+    <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+		sidebar.help
+		<span class="mdl-button__ripple-container">
+			<span class="mdl-ripple"></span>
+		</span>
+	</div>
+</a>
+-->
+
+<!-- Feedback -->
+<!--
+<a href="https://github.com/viosey/hexo-theme-material/issues" target="_blank" class="sidebar-footer-text-a">
+    <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+         sidebar.feedback
+                    <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></div>
+</a>
+-->
+
+<!-- Abount Theme -->
+<!--
+<a href="https://blog.viosey.com/index.php/Material.html" target="_blank" class="sidebar-footer-text-a">
+    <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+         sidebar.about_theme
+        <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></div>
+</a>-->
+
+	</div>
+    
+    <!-- Sidebar Sponsor -->
+    
+
+
+</aside>
+
+				
+				
+				
+					<!-- Footer Top Button -->
+					<div class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+				
+				
+				<!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+	
+	
+		<!-- Paradox Footer Left Section -->
+		<div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+    
+    
+    <!-- Facebook -->
+    
+    
+    
+    <!-- Google + -->
+    
+    
+    
+    <!-- Weibo -->
+    
+    
+    
+    <!-- Instagram -->
+    
+    
+    
+    <!-- Tumblr -->
+    
+    
+    
+    <!-- Github -->
+    
+    <a href="https://github.com/wagnlinzh" target="view_window"><button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-github.png);">
+        <span class="visuallyhidden">Github</span>
+    </button></a>
+    
+</div>
+
+
+		<!--Copyright-->
+		<div id="copyright">Copyright&nbsp;©&nbsp;<script type="text/javascript">var fd = new Date();document.write(fd.getFullYear());</script>&nbsp;wanglinzhizhi</div>
+
+		<!-- Paradox Footer Right Section -->
+
+		<!-- 
+		I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+		It will not impact the appearance and can give developers a lot of support :)
+
+		很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+		它不会影响美观并可以给开发者很大的支持。 :) 
+		-->
+
+		<div class="mdl-mini-footer--right-section">
+			<div>
+				<div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+				<div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+			</div>
+		</div>
+	
+    
+</footer>
+                
+				<!-- Import File -->
+<script src="/js/highlight.min.js"></script>
+<script src="/js/js.min.js"></script>
+<script src="/js/nprogress.js"></script>
+
+<script type="text/javascript">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    
+    $('#nprogress .bar').css({
+        'background': '#2196F3'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #2196F3, 0 0 15px #2196F3'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#2196F3',
+        'border-left-color': '#2196F3'
+    });
+    
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+	<script src="/js/smoothscroll.js"></script>
+
+
+
+    <!-- Leancloud -->
+	<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+	<script>
+		AV.initialize("EObBAbqpQfNFLuV5SjbVgoxq-gzGzoHsz", "qPdmjfSU3DDmPPH9ui0cUW4z");
+	</script>
+    <script>
+	function showTime(Counter) {
+		var query = new AV.Query(Counter);
+		$(".leancloud-views_num").each(function() {
+			var url = $(this).attr("id").trim();
+			query.equalTo("url", url);
+			query.find({
+				success: function(results) {
+					if (results.length == 0) {
+						var content = '0 ' + $(document.getElementById(url)).text();
+						$(document.getElementById(url)).text(content);
+						return;
+					}
+					for (var i = 0; i < results.length; i++) {
+						var object = results[i];
+						var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
+						$(document.getElementById(url)).text(content);
+					}
+				},
+				error: function(object, error) {
+					console.log("Error: " + error.code + " " + error.message);
+				}
+			});
+
+		});
+	}
+
+	function addCount(Counter) {
+		var Counter = AV.Object.extend("Counter");
+		url = $(".leancloud-views_num").attr('id').trim();
+		title = $(".leancloud-views_num").attr('data-flag-title').trim();
+		var query = new AV.Query(Counter);
+		query.equalTo("url", url);
+		query.find({
+			success: function(results) {
+				if (results.length > 0) {
+					var counter = results[0];
+					counter.fetchWhenSave(true);
+					counter.increment("time");
+					counter.save(null, {
+						success: function(counter) {
+							var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
+							$(document.getElementById(url)).text(content);
+						},
+						error: function(counter, error) {
+							console.log('Failed to save Visitor num, with error message: ' + error.message);
+						}
+					});
+				} else {
+					var newcounter = new Counter();
+					newcounter.set("title", title);
+					newcounter.set("url", url);
+					newcounter.set("time", 1);
+					newcounter.save(null, {
+						success: function(newcounter) {
+							console.log("newcounter.get('time')="+newcounter.get('time'));
+							var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
+							$(document.getElementById(url)).text(content);
+						},
+						error: function(newcounter, error) {
+							console.log('Failed to create');
+						}
+					});
+				}
+			},
+			error: function(error) {
+				console.log('Error:' + error.code + " " + error.message);
+			}
+		});
+	}
+	$(function() {
+		var Counter = AV.Object.extend("Counter");
+		if ($('.leancloud-views_num').length == 1) {
+			addCount(Counter);
+		} else if ($('.post-title-link').length > 1) {
+			showTime(Counter);
+		}
+	}); 
+</script>
+
+
+
+
+
+
+
+
+<!-- Swiftye -->
+
+
+<!-- Local Search-->
+
+	<script>
+	var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var str='<ul class=\"search-result-list\">';                
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length <= 0) {
+                    return;
+                }
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        str += "<li><a href='"+ data_url +"' class='search-result-title' target='_blank'>"+ data_title;
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out characters
+                            var start = first_occur - 6;
+                            var end = first_occur + 6;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 10;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substr(start, end); 
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<em class=\"search-keyword\">"+keyword+"</em>");
+                            })
+                            str += "<p class=\"search-result\">" + match_content +"...</p>" +"</a>";
+                        }
+                    }
+                })
+                $resultContent.innerHTML = str;
+            })
+        }
+    })
+}
+</script>
+
+	<script>
+        var inputArea = document.querySelector("#search");
+        var getSearchFile = function(){
+            var path = "search.xml";
+            searchFunc(path, 'search', 'local-search-result');
+        }
+
+        inputArea.onfocus = function(){ getSearchFile() }
+	</script>
+
+
+<!-- Window Load-->
+<script>
+    $(window).load(function() {
+        // Post_Toc parent position fixed
+        $(".post-toc-wrap").parent(".mdl-menu__container").css("position", "fixed");
+    });
+</script>
+
+<!-- MathJax Load-->
+
+            </main>
+        </div>
+		
+    </body>
+		
+	
+</html>

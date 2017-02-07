@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <!-- Title -->
+    
+    <title>
+        JavaScript 数组 | wanglinzhizhi
+    </title>
+    
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+    
+    <!-- Meta & INfo -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0D47A1">
+    <meta name="author" content="wanglinzhizhi">
+    <meta name="description" content="游走在上下文无关文法间">
+    <meta name="keywords" content="null">
+    
+    <!--iOS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+    
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="wanglinzhizhi">
+    
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://www.wanglinzhizhi.me">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="JavaScript 数组 | wanglinzhizhi">
+    <meta property="og:description" content="游走在上下文无关文法间">
+    
+     <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+        
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+    
+    <!-- Import CSS -->
+    <link rel="stylesheet" href="/css/material.min.css">
+    <link rel="stylesheet" href="/css/style.min.css">
+    <!-- Config CSS -->
+
+
+<!-- Other Styles -->
+<style>
+	body, html{
+		font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+	}
+	
+    a{
+        color: #2196F3
+    }
+    
+    .mdl-card__media,
+    #search-label,
+    #search-form-label:after,
+    #scheme-Paradox .hot_tags-count,
+    #scheme-Paradox .sidebar_archives-count,
+    #scheme-Paradox .sidebar-colored .sidebar-header,
+    #scheme-Paradox .sidebar-colored .sidebar-badge{
+        background-color: #1565C0 !important
+    }
+    
+	/* Sidebar User Drop Down Menu Text Color */
+	#scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+    #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus{
+        color: #1565C0 !important
+    }
+    
+    #post_entry-right-info,
+    .sidebar-colored .sidebar-nav li:hover > a,
+    .sidebar-colored .sidebar-nav li:hover > a i,
+    .sidebar-colored .sidebar-nav li > a:hover,
+    .sidebar-colored .sidebar-nav li > a:hover i,
+    .sidebar-colored .sidebar-nav li > a:focus i,
+    .sidebar-colored .sidebar-nav > .open > a,
+    .sidebar-colored .sidebar-nav > .open > a:hover,
+    .sidebar-colored .sidebar-nav > .open > a:focus,
+    #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a{
+        color: #1565C0 !important
+    }
+    
+    .toTop{
+        background: #757575 !important
+    }
+		
+	.material-layout .material-post>.material-nav,
+	.material-layout .material-index>.material-nav,
+	.material-nav a{
+		color: #757575;
+	}
+		
+	#scheme-Paradox .MD-burger-layer {
+		background-color: #757575;
+	}
+
+	#scheme-Paradox #post-toc-trigger-btn{
+		color: #757575;
+	}
+	
+	.post-toc a:hover{
+		color: #2196F3;
+		text-decoration: underline;
+	}
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+        body{
+            background-color: #F5F5F5
+        }
+		
+		/* blog_info bottom background */
+        #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+            background-color: #fff;
+        }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+        .fade {
+            transition: all 800ms linear;
+            -webkit-transform: translate3d(0,0,0);
+            -moz-transform: translate3d(0,0,0);
+            -ms-transform: translate3d(0,0,0);
+            -o-transform: translate3d(0,0,0);
+            transform: translate3d(0,0,0);
+            opacity: 1;
+        }
+
+        .fade.out{
+            opacity: 0;
+        }
+    </style>
+
+	<script src="/js/jquery.min.js"></script>
+	
+	<link rel="stylesheet" href="/css/highlight/atom-one-dark.css">
+	
+	<!-- UC Browser Compatible-->
+	<script>
+		var agent = navigator.userAgent.toLowerCase();
+		if(agent.indexOf('ucbrowser')>0) {
+			document.write('<link rel="stylesheet" href="/css/uc.css">');
+		   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+		}
+	</script>
+    
+    <!-- Custom Head -->
+    
+</head>
+	
+	
+
+    <body id="scheme-Paradox">
+
+		
+        <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+				
+			
+			
+            <!-- Main Container -->
+            <main class="material-layout__content" id="main">
+				
+                <!-- Top Anchor -->
+                <div id="top"></div>
+				
+				
+                <!-- Hamburger Button -->
+                <button class="MD-burger-icon sidebar-toggle">
+                    <span class="MD-burger-layer"></span>
+                </button>
+				
+				
+                <!-- Post TOC -->
+
+    
+	<!-- Back Button -->
+<!--
+	<div class="material-back" id="backhome-div" tabindex="0">
+		<a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" href="#" onclick="window.history.back();return false;" target="_self" role="button" data-upgraded=",MaterialButton,MaterialRipple">
+			<i class="material-icons" role="presentation">arrow_back</i>
+			<span class="mdl-button__ripple-container">
+				<span class="mdl-ripple"></span>
+			</span>
+		</a>
+	</div>			
+-->
+	<!-- Left aligned menu below button -->
+	<button id="post-toc-trigger-btn"
+			class="mdl-button mdl-js-button mdl-button--icon">
+	  <i class="material-icons">format_list_numbered</i>
+	</button>
+
+	<ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
+		for="post-toc-trigger-btn">
+			
+			<ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数组"><span class="post-toc-number">1.</span> <span class="post-toc-text">数组</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#创建数组"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">创建数组</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二维数组"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">二维数组</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#稀疏数组"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">稀疏数组</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#数组方法"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">数组方法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Array-prototype-reverse"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">Array.prototype.reverse</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Array-prototype-sort"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">Array.prototype.sort</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Array-prototype-concat"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">Array.prototype.concat</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Array-prototype-slice"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">Array.prototype.slice</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Array-prototype-forEach"><span class="post-toc-number">1.9.</span> <span class="post-toc-text">Array.prototype.forEach</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Array-prototype-map"><span class="post-toc-number">1.10.</span> <span class="post-toc-text">Array.prototype.map</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Array-prototype-filter"><span class="post-toc-number">1.11.</span> <span class="post-toc-text">Array.prototype.filter</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Array-prototype-indexOf-amp-lastIndexOf"><span class="post-toc-number">1.12.</span> <span class="post-toc-text">Array.prototype.indexOf&lastIndexOf</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Array-isArray"><span class="post-toc-number">1.13.</span> <span class="post-toc-text">Array.isArray</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#字符串和数组"><span class="post-toc-number">1.14.</span> <span class="post-toc-text">字符串和数组</span></a></li></ol></li></ol>
+		
+<!--			<li class="mdl-menu__item">Some Action</li>-->
+	</ul>
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+		
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+	<!-- Paradox Post Header -->
+	
+		
+			<!-- Random Thumbnail -->
+			<div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+				<script>
+    
+    var randomNum;
+    randomNum = Math.floor(Math.random() * 5 + 1);
+    
+    $(".post_thumbnail-random").css('background-image', 'url(' + '/img/random/' + randomNum + '.png' + ')');
+    
+</script>
+
+		
+	
+        <p class="article-headline-p">
+            JavaScript 数组
+        </p>
+    </div>
+
+	
+
+				
+				
+					<!-- Paradox Post Info -->
+					<div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+    
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/me.jpeg" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>wanglinzhizhi</strong>
+        <span>Feb 08, 2016</span>
+    </div>
+    
+    <div class="section-spacer"></div>
+	
+    <!-- Favorite -->
+<!--
+    <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+        <i class="material-icons" role="presentation">favorite</i>
+        <span class="visuallyhidden">favorites</span>
+    </button>
+-->
+    
+    <!-- Tags (bookmark) -->
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        
+    </ul>
+    
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+    
+    <!-- Leancloud Views -->
+    <a class="post_share-link" href="#">
+        <li class="mdl-menu__item">
+            <span id="/2016/02/08/JavaScript 数组/" class="leancloud-views_num" data-flag-title="JavaScript 数组">
+     &nbsp;浏览量
+</span>
+        </li>
+    </a>
+    
+    
+    
+    
+    <!-- Share Twitter -->
+    <a class="post_share-link" href="https://twitter.com/intent/tweet?text=JavaScript 数组&url=http://www.wanglinzhizhi.me//2016/02/08/JavaScript 数组/index.html&via=wanglinzhizhi" target="_blank">
+        <li class="mdl-menu__item">
+            分享到 Twitter
+        </li>
+    </a>
+    
+    <!-- Share Google+ -->
+    <a class="post_share-link" href="https://plus.google.com/share?url=http://www.wanglinzhizhi.me//2016/02/08/JavaScript 数组/index.html" target="_blank">
+        <li class="mdl-menu__item">
+            分享到 Google+
+        </li>
+    </a>
+    
+    <!-- Share Weibo -->
+    <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=JavaScript 数组&url=http://www.wanglinzhizhi.me//2016/02/08/JavaScript 数组/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <li class="mdl-menu__item">
+            分享到微博
+        </li>
+    </a>
+</ul>
+</div>
+				
+
+                <!-- Post Content -->
+                <div id="post-content" class="markdown-Github mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+	
+		<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><p>数组是值的有序集合。每个值叫做元素，每个元素在数组中都有数字位置编号，也就是索引。JS中的数组是弱类型的，数组中可以含有不同类型的元素。数组元素甚至可以是对象或其它数组。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="literal">true</span>, <span class="literal">null</span>, <span class="literal">undefined</span>, &#123;<span class="attr">x</span> : <span class="number">1</span>&#125;, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]];</div></pre></td></tr></table></figure>
+<h3 id="创建数组"><a href="#创建数组" class="headerlink" title="创建数组"></a>创建数组</h3><p>创建数组-字面量</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> BAT = [<span class="string">'Alibaba'</span>, <span class="string">'Tencent'</span>, <span class="string">'Baidu'</span>];</div><div class="line"><span class="keyword">var</span> students = [&#123;<span class="attr">name</span> : <span class="string">'Bosn'</span>, <span class="attr">age</span> : <span class="number">27</span>&#125;, &#123;<span class="attr">name</span> : <span class="string">'Nunnly'</span>, <span class="attr">age</span> : <span class="number">3</span>&#125;];</div><div class="line"><span class="keyword">var</span> arr = [<span class="string">'Nunnly'</span>, <span class="string">'is'</span>, <span class="string">'big'</span>, <span class="string">'keng'</span>, <span class="string">'B'</span>, <span class="number">123</span>, <span class="literal">true</span>, <span class="literal">null</span>];</div><div class="line"><span class="keyword">var</span> arrInArr = [[<span class="number">1</span>, <span class="number">2</span>], [<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]];</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">var</span> commasArr1 = [<span class="number">1</span>, , <span class="number">2</span>]; <span class="comment">// 1, undefined, 2</span></div><div class="line"><span class="keyword">var</span> commasArr2 = [,,]; <span class="comment">// undefined * 2</span></div></pre></td></tr></table></figure>
+<p>创建数组-new Array</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = <span class="keyword">new</span> <span class="built_in">Array</span>(); </div><div class="line"><span class="keyword">var</span> arrWithLength = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">100</span>); <span class="comment">// undefined * 100</span></div><div class="line"><span class="keyword">var</span> arrLikesLiteral = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="literal">true</span>, <span class="literal">false</span>, <span class="literal">null</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="string">"hi"</span>);</div><div class="line"><span class="comment">// 等价于[true, false, null, 1, 2, "hi"];</span></div></pre></td></tr></table></figure>
+<p>数组元素读写</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</div><div class="line">arr[<span class="number">1</span>]; <span class="comment">// 2</span></div><div class="line">arr.length; <span class="comment">// 5</span></div><div class="line"></div><div class="line"></div><div class="line">arr[<span class="number">5</span>] = <span class="number">6</span>;</div><div class="line">arr.length; <span class="comment">// 6</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">delete</span> arr[<span class="number">0</span>];</div><div class="line">arr[<span class="number">0</span>]; <span class="comment">// undefined</span></div></pre></td></tr></table></figure>
+<p>数组的增删</p>
+<p><strong>动态的,无需指定大小</strong></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [];</div><div class="line">arr[<span class="number">0</span>] = <span class="number">1</span>;</div><div class="line">arr[<span class="number">1</span>] = <span class="number">2</span>;</div><div class="line">arr.push(<span class="number">3</span>);</div><div class="line">arr; <span class="comment">// [1, 2, 3]</span></div><div class="line"></div><div class="line">arr[arr.length] = <span class="number">4</span>; <span class="comment">// equal to arr.push(4);</span></div><div class="line">arr; <span class="comment">// [1, 2, 3, 4]</span></div><div class="line"></div><div class="line">arr.unshift(<span class="number">0</span>);</div><div class="line">arr; <span class="comment">// [0, 1, 2, 3, 4];</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">delete</span> arr[<span class="number">2</span>];</div><div class="line">arr; <span class="comment">// [0, 1, undefined, 3, 4]</span></div><div class="line">arr.length; <span class="comment">// 5</span></div><div class="line"><span class="number">2</span> <span class="keyword">in</span> arr; <span class="comment">// false</span></div><div class="line"></div><div class="line">arr.length -= <span class="number">1</span>;</div><div class="line">arr; <span class="comment">// [0, 1, undefined, 3, 4],  4 is removed</span></div><div class="line"></div><div class="line">arr.pop(); <span class="comment">// 3 returned by pop</span></div><div class="line">arr; <span class="comment">// [0, 1, undefined], 3 is removed</span></div><div class="line"></div><div class="line">arr.shift(); <span class="comment">// 0 returned by shift</span></div><div class="line">arr; <span class="comment">// [1, undefined]</span></div></pre></td></tr></table></figure>
+<p>数组迭代</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> i = <span class="number">0</span>, n = <span class="number">10</span>;</div><div class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</div><div class="line"><span class="keyword">for</span> (; i &lt; n; i++) &#123;</div><div class="line">    <span class="built_in">console</span>.log(arr[i]); <span class="comment">// 1, 2, 3, 4, 5</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">for</span>(i <span class="keyword">in</span> arr) &#123;</div><div class="line">    <span class="built_in">console</span>.log(arr[i]); <span class="comment">// 1, 2, 3, 4, 5</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="built_in">Array</span>.prototype.x = <span class="string">'inherited'</span>;</div><div class="line"></div><div class="line"><span class="keyword">for</span>(i <span class="keyword">in</span> arr) &#123;</div><div class="line">    <span class="built_in">console</span>.log(arr[i]); <span class="comment">// 1, 2, 3, 4, 5, inherited</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">for</span>(i <span class="keyword">in</span> arr) &#123;</div><div class="line">    <span class="keyword">if</span> (arr.hasOwnProperty(i)) &#123;</div><div class="line">        <span class="built_in">console</span>.log(arr[i]); <span class="comment">// 1, 2, 3, 4, 5</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [[<span class="number">0</span>, <span class="number">1</span>], [<span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>]];</div><div class="line"><span class="keyword">var</span> i = <span class="number">0</span>, j = <span class="number">0</span>;</div><div class="line"><span class="keyword">var</span> row;</div><div class="line"><span class="keyword">for</span> (; i &lt; arr.length; i++) &#123;</div><div class="line">     row = arr[i];</div><div class="line">     <span class="built_in">console</span>.log(<span class="string">'row '</span> + i);</div><div class="line">     <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; row.length; j++) &#123;</div><div class="line">          <span class="built_in">console</span>.log(row[j]);</div><div class="line">     &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="稀疏数组"><a href="#稀疏数组" class="headerlink" title="稀疏数组"></a>稀疏数组</h3><p>稀疏数组并不含有从0开始的连续索引。一般length属性值比实际元素个数大。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> arr1 = [<span class="literal">undefined</span>];</div><div class="line"><span class="keyword">var</span> arr2 = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">1</span>);</div><div class="line"><span class="number">0</span> <span class="keyword">in</span> arr1; <span class="comment">// true</span></div><div class="line"><span class="number">0</span> <span class="keyword">in</span> arr2; <span class="comment">// false</span></div><div class="line">arr1.length = <span class="number">100</span>;</div><div class="line">arr1[<span class="number">99</span>] = <span class="number">123</span>;</div><div class="line"><span class="number">99</span> <span class="keyword">in</span> arr1; <span class="comment">// true</span></div><div class="line"><span class="number">98</span> <span class="keyword">in</span> arr1; <span class="comment">// false</span></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">var</span> arr = [,,];</div><div class="line"><span class="number">0</span> <span class="keyword">in</span> arr; <span class="comment">// false</span></div></pre></td></tr></table></figure>
+<h3 id="数组方法"><a href="#数组方法" class="headerlink" title="数组方法"></a>数组方法</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">&#123;&#125;   =&gt;  <span class="built_in">Object</span>.prototype</div><div class="line">[]   =&gt;  <span class="built_in">Array</span>.prototype</div></pre></td></tr></table></figure>
+<p>Array.prototype.join()   </p>
+<p><strong>将数组转化成字符串</strong></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</div><div class="line">arr.join(); <span class="comment">// "1,2,3"</span></div><div class="line">arr.join(<span class="string">"_"</span>); <span class="comment">// "1_2_3"</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">repeatString</span>(<span class="params">str, n</span>) </span>&#123;</div><div class="line">     <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Array</span>(n + <span class="number">1</span>).join(str);</div><div class="line">&#125;</div><div class="line">repeatString(<span class="string">"a"</span>, <span class="number">3</span>); <span class="comment">// "aaa"</span></div><div class="line">repeatString(<span class="string">"Hi"</span>, <span class="number">5</span>); <span class="comment">// "HiHiHiHiHi"</span></div></pre></td></tr></table></figure>
+<h3 id="Array-prototype-reverse"><a href="#Array-prototype-reverse" class="headerlink" title="Array.prototype.reverse"></a>Array.prototype.reverse</h3><h3 id="Array-prototype-sort"><a href="#Array-prototype-sort" class="headerlink" title="Array.prototype.sort"></a>Array.prototype.sort</h3><p><strong>Notes:原数组被修改</strong></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [<span class="string">"a"</span>, <span class="string">"d"</span>, <span class="string">"c"</span>, <span class="string">"b"</span>];</div><div class="line">arr.sort(); <span class="comment">// ["a", "b", "c", "d"]</span></div><div class="line"></div><div class="line">arr = [<span class="number">13</span>, <span class="number">24</span>, <span class="number">51</span>, <span class="number">3</span>];</div><div class="line">arr.sort(); <span class="comment">// [13, 24, 3, 51]</span></div><div class="line">arr; <span class="comment">// [13, 24, 3, 51]</span></div><div class="line"></div><div class="line">arr.sort(<span class="function"><span class="keyword">function</span>(<span class="params">a, b</span>) </span>&#123;</div><div class="line">     <span class="keyword">return</span> a - b;</div><div class="line">&#125;); <span class="comment">// [3, 13, 24, 51]</span></div><div class="line"></div><div class="line"></div><div class="line">arr = [&#123;<span class="attr">age</span> : <span class="number">25</span>&#125;, &#123;<span class="attr">age</span> : <span class="number">39</span>&#125;, &#123;<span class="attr">age</span> : <span class="number">99</span>&#125;];</div><div class="line">arr.sort(<span class="function"><span class="keyword">function</span>(<span class="params">a, b</span>) </span>&#123;</div><div class="line">     <span class="keyword">return</span> a.age - b.age;</div><div class="line">&#125;);</div><div class="line">arr.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>) </span>&#123;</div><div class="line">     <span class="built_in">console</span>.log(<span class="string">'age'</span>, item.age);</div><div class="line">&#125;);</div><div class="line"><span class="comment">// result:</span></div><div class="line"><span class="comment">// age 25</span></div><div class="line"><span class="comment">// age 39</span></div><div class="line"><span class="comment">// age 99</span></div></pre></td></tr></table></figure>
+<h3 id="Array-prototype-concat"><a href="#Array-prototype-concat" class="headerlink" title="Array.prototype.concat"></a>Array.prototype.concat</h3><p><strong>Notes:原数组不被修改</strong></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</div><div class="line">arr.concat(<span class="number">4</span>, <span class="number">5</span>); <span class="comment">// [1, 2, 3, 4, 5]</span></div><div class="line">arr; <span class="comment">// [1, 2, 3]</span></div><div class="line"></div><div class="line">arr.concat([<span class="number">10</span>, <span class="number">11</span>], <span class="number">13</span>); <span class="comment">// [1, 2, 3, 10, 11, 13]</span></div><div class="line"></div><div class="line">arr.concat([<span class="number">1</span>, [<span class="number">2</span>, <span class="number">3</span>]]); <span class="comment">// [1, 2, 3, 1, [2, 3]]</span></div></pre></td></tr></table></figure>
+<h3 id="Array-prototype-slice"><a href="#Array-prototype-slice" class="headerlink" title="Array.prototype.slice"></a>Array.prototype.slice</h3><p><strong>Notes:原数组未被修改</strong></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</div><div class="line">arr.slice(<span class="number">1</span>, <span class="number">3</span>); <span class="comment">// [2, 3]</span></div><div class="line">arr.slice(<span class="number">1</span>); <span class="comment">// [2, 3, 4, 5]</span></div><div class="line">arr.slice(<span class="number">1</span>, <span class="number">-1</span>); <span class="comment">// [2, 3, 4]</span></div><div class="line">arr.slice(<span class="number">-4</span>, <span class="number">-3</span>); <span class="comment">// [2]</span></div></pre></td></tr></table></figure>
+<p><strong>Notes:原数组被修改</strong></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</div><div class="line">arr.splice(<span class="number">2</span>); <span class="comment">// returns [3, 4, 5]</span></div><div class="line">arr; <span class="comment">// [1, 2];</span></div><div class="line"></div><div class="line">arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</div><div class="line">arr.splice(<span class="number">2</span>, <span class="number">2</span>); <span class="comment">// returns [3, 4]</span></div><div class="line">arr; <span class="comment">// [1, 2, 5];</span></div><div class="line"></div><div class="line">arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</div><div class="line">arr.splice(<span class="number">1</span>, <span class="number">1</span>, <span class="string">'a'</span>, <span class="string">'b'</span>); <span class="comment">// returns [2]</span></div><div class="line">arr; <span class="comment">// [1, "a", "b", 3, 4, 5]</span></div></pre></td></tr></table></figure>
+<h3 id="Array-prototype-forEach"><a href="#Array-prototype-forEach" class="headerlink" title="Array.prototype.forEach"></a>Array.prototype.forEach</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</div><div class="line">arr.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">x, index, a</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(x + <span class="string">'|'</span> + index + <span class="string">'|'</span> + (a === arr));</div><div class="line">&#125;);</div><div class="line"><span class="comment">// 1|0|true</span></div><div class="line"><span class="comment">// 2|1|true</span></div><div class="line"><span class="comment">// 3|2|true</span></div><div class="line"><span class="comment">// 4|3|true</span></div><div class="line"><span class="comment">// 5|4|true</span></div></pre></td></tr></table></figure>
+<h3 id="Array-prototype-map"><a href="#Array-prototype-map" class="headerlink" title="Array.prototype.map"></a>Array.prototype.map</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</div><div class="line">arr.map(<span class="function"><span class="keyword">function</span>(<span class="params">x</span>) </span>&#123;</div><div class="line">     <span class="keyword">return</span> x + <span class="number">10</span>;</div><div class="line">&#125;); <span class="comment">// [11, 12, 13]</span></div><div class="line">arr; <span class="comment">// [1, 2, 3]</span></div></pre></td></tr></table></figure>
+<h3 id="Array-prototype-filter"><a href="#Array-prototype-filter" class="headerlink" title="Array.prototype.filter"></a>Array.prototype.filter</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>];</div><div class="line">arr.filter(<span class="function"><span class="keyword">function</span>(<span class="params">x, index</span>) </span>&#123;</div><div class="line">     <span class="keyword">return</span> index % <span class="number">3</span> === <span class="number">0</span> || x &gt;= <span class="number">8</span>;</div><div class="line">&#125;); <span class="comment">// returns [1, 4, 7, 8, 9, 10]</span></div><div class="line">arr; <span class="comment">// [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</span></div></pre></td></tr></table></figure>
+<h3 id="Array-prototype-indexOf-amp-lastIndexOf"><a href="#Array-prototype-indexOf-amp-lastIndexOf" class="headerlink" title="Array.prototype.indexOf&amp;lastIndexOf"></a>Array.prototype.indexOf&amp;lastIndexOf</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>];</div><div class="line">arr.indexOf(<span class="number">2</span>); <span class="comment">// 1</span></div><div class="line">arr.indexOf(<span class="number">99</span>); <span class="comment">// -1</span></div><div class="line">arr.indexOf(<span class="number">1</span>, <span class="number">1</span>); <span class="comment">// 4</span></div><div class="line">arr.indexOf(<span class="number">1</span>, <span class="number">-3</span>); <span class="comment">// 4</span></div><div class="line">arr.indexOf(<span class="number">2</span>, <span class="number">-1</span>); <span class="comment">// -1</span></div><div class="line">arr.lastIndexOf(<span class="number">2</span>); <span class="comment">// 3</span></div><div class="line">arr.lastIndexOf(<span class="number">2</span>, <span class="number">-2</span>); <span class="comment">// 3</span></div><div class="line">arr.lastIndexOf(<span class="number">2</span>, <span class="number">-3</span>); <span class="comment">// 1</span></div></pre></td></tr></table></figure>
+<h3 id="Array-isArray"><a href="#Array-isArray" class="headerlink" title="Array.isArray"></a>Array.isArray</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="built_in">Array</span>.isArray([]); <span class="comment">// true</span></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">[] <span class="keyword">instanceof</span> <span class="built_in">Array</span>; <span class="comment">// true</span></div><div class="line">(&#123;&#125;).toString.apply([]) === <span class="string">'[object Array]'</span>; <span class="comment">// true</span></div><div class="line">[].constructor === <span class="built_in">Array</span>; <span class="comment">// true</span></div></pre></td></tr></table></figure>
+<h3 id="字符串和数组"><a href="#字符串和数组" class="headerlink" title="字符串和数组"></a>字符串和数组</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> str = <span class="string">"hello world"</span>;</div><div class="line">str.charAt(<span class="number">0</span>); <span class="comment">// "h"</span></div><div class="line">str[<span class="number">1</span>]; <span class="comment">// e</span></div><div class="line"></div><div class="line"><span class="built_in">Array</span>.prototype.join.call(str, <span class="string">"_"</span>);</div><div class="line"><span class="comment">// "h_e_l_l_o_ _w_o_r_l_d"</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">var</span> str = <span class="string">"hello world"</span>;</div><div class="line">str.charAt(<span class="number">0</span>); <span class="comment">// "h"</span></div><div class="line">str[<span class="number">1</span>]; <span class="comment">// e</span></div><div class="line"></div><div class="line"><span class="built_in">Array</span>.prototype.join.call(str, <span class="string">"_"</span>);</div><div class="line"><span class="comment">// "h_e_l_l_o_ _w_o_r_l_d"</span></div></pre></td></tr></table></figure>
+
+	
+	
+	
+	
+</div>
+				
+				
+
+                <!-- Post Comments -->
+                
+                    
+
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    
+    <!-- Prev Nav -->
+    
+        <a href="/2016/02/08/JavaScript 基本数据类型/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2016/02/02/2016-02-02-JavaScript 笔记/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+        </div>
+    </div>
+
+				
+				
+					<!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay "></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored  sidebar-fixed-left" role="navigation">
+	<div id="sidebar-main">
+	    <!-- Sidebar Header -->
+		<div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+    <i class="material-icons">clear_all</i>
+    <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/me.jpeg" alt="wanglinzhizhi's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        wanglinzhizhi@hotmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+		<!-- Sidebar Navigation  -->
+		<ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+			
+                <li>
+                    <a href="#" target="_blank" title="Email Me">
+						<i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    <li id="sidebar-first-li">
+        <a href="/" target="_self">
+            <i class="material-icons sidebar-material-icons">home</i>
+             主页
+        </a>
+    </li>
+
+    <!-- I'm Feeling Lucky -->
+<!--
+    <li class="dropdown">
+        <a href="" target="_self">
+            <i class="material-icons sidebar-material-icons">explore</i>
+             sidebar.imlucky
+        </a>
+    </li>
+-->
+
+	
+    <!-- Archives  -->
+    <li class="dropdown">
+        <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+            <i class="material-icons sidebar-material-icons">inbox</i>
+             归档
+            <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+            <a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">74</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/02/">February 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/01/">January 2016<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/12/">December 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/08/">August 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/06/">June 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/04/">April 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/03/">March 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/01/">January 2015<span class="sidebar_archives-count">1</span></a>
+        </ul>
+    </li>
+
+    <!-- Divider -->
+    <li class="divider"></li>
+
+
+    <!-- Pages  -->
+	
+		<li>
+			<a href="/tags" title="Tags">
+				Tags
+			</a>
+		</li>
+	
+		<li>
+			<a href="/gallery" title="Gallery">
+				Gallery
+			</a>
+		</li>
+	
+		<li>
+			<a href="/about" title="About">
+				About
+			</a>
+		</li>
+	
+
+    <!-- Article Numebr  -->
+    <li>
+        <a href="/archives">
+             文章总数
+             <span class="sidebar-badge">92</span>
+        </a>
+    </li>
+</ul>
+
+		<!-- Sidebar Divider -->
+		<div class="sidebar-divider"></div>
+
+		<!-- Sidebar Footer -->
+		<!-- 
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持。 :) 
+-->
+
+<!-- Theme Material -->
+<a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
+	<div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+		主题 - Material
+		<span class="sidebar-badge badge-circle">i</span>
+	</div>
+</a>
+
+<!-- Help & Support -->
+<!--
+<a href="mailto:hiviosey@gmail.com" class="sidebar-footer-text-a">
+    <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+		sidebar.help
+		<span class="mdl-button__ripple-container">
+			<span class="mdl-ripple"></span>
+		</span>
+	</div>
+</a>
+-->
+
+<!-- Feedback -->
+<!--
+<a href="https://github.com/viosey/hexo-theme-material/issues" target="_blank" class="sidebar-footer-text-a">
+    <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+         sidebar.feedback
+                    <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></div>
+</a>
+-->
+
+<!-- Abount Theme -->
+<!--
+<a href="https://blog.viosey.com/index.php/Material.html" target="_blank" class="sidebar-footer-text-a">
+    <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+         sidebar.about_theme
+        <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></div>
+</a>-->
+
+	</div>
+    
+    <!-- Sidebar Sponsor -->
+    
+
+
+</aside>
+
+				
+				
+				
+					<!-- Footer Top Button -->
+					<div class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+				
+				
+				<!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+	
+	
+		<!-- Paradox Footer Left Section -->
+		<div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+    
+    
+    <!-- Facebook -->
+    
+    
+    
+    <!-- Google + -->
+    
+    
+    
+    <!-- Weibo -->
+    
+    
+    
+    <!-- Instagram -->
+    
+    
+    
+    <!-- Tumblr -->
+    
+    
+    
+    <!-- Github -->
+    
+    <a href="https://github.com/wagnlinzh" target="view_window"><button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-github.png);">
+        <span class="visuallyhidden">Github</span>
+    </button></a>
+    
+</div>
+
+
+		<!--Copyright-->
+		<div id="copyright">Copyright&nbsp;©&nbsp;<script type="text/javascript">var fd = new Date();document.write(fd.getFullYear());</script>&nbsp;wanglinzhizhi</div>
+
+		<!-- Paradox Footer Right Section -->
+
+		<!-- 
+		I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+		It will not impact the appearance and can give developers a lot of support :)
+
+		很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+		它不会影响美观并可以给开发者很大的支持。 :) 
+		-->
+
+		<div class="mdl-mini-footer--right-section">
+			<div>
+				<div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+				<div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+			</div>
+		</div>
+	
+    
+</footer>
+                
+				<!-- Import File -->
+<script src="/js/highlight.min.js"></script>
+<script src="/js/js.min.js"></script>
+<script src="/js/nprogress.js"></script>
+
+<script type="text/javascript">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    
+    $('#nprogress .bar').css({
+        'background': '#2196F3'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #2196F3, 0 0 15px #2196F3'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#2196F3',
+        'border-left-color': '#2196F3'
+    });
+    
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+	<script src="/js/smoothscroll.js"></script>
+
+
+
+    <!-- Leancloud -->
+	<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+	<script>
+		AV.initialize("EObBAbqpQfNFLuV5SjbVgoxq-gzGzoHsz", "qPdmjfSU3DDmPPH9ui0cUW4z");
+	</script>
+    <script>
+	function showTime(Counter) {
+		var query = new AV.Query(Counter);
+		$(".leancloud-views_num").each(function() {
+			var url = $(this).attr("id").trim();
+			query.equalTo("url", url);
+			query.find({
+				success: function(results) {
+					if (results.length == 0) {
+						var content = '0 ' + $(document.getElementById(url)).text();
+						$(document.getElementById(url)).text(content);
+						return;
+					}
+					for (var i = 0; i < results.length; i++) {
+						var object = results[i];
+						var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
+						$(document.getElementById(url)).text(content);
+					}
+				},
+				error: function(object, error) {
+					console.log("Error: " + error.code + " " + error.message);
+				}
+			});
+
+		});
+	}
+
+	function addCount(Counter) {
+		var Counter = AV.Object.extend("Counter");
+		url = $(".leancloud-views_num").attr('id').trim();
+		title = $(".leancloud-views_num").attr('data-flag-title').trim();
+		var query = new AV.Query(Counter);
+		query.equalTo("url", url);
+		query.find({
+			success: function(results) {
+				if (results.length > 0) {
+					var counter = results[0];
+					counter.fetchWhenSave(true);
+					counter.increment("time");
+					counter.save(null, {
+						success: function(counter) {
+							var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
+							$(document.getElementById(url)).text(content);
+						},
+						error: function(counter, error) {
+							console.log('Failed to save Visitor num, with error message: ' + error.message);
+						}
+					});
+				} else {
+					var newcounter = new Counter();
+					newcounter.set("title", title);
+					newcounter.set("url", url);
+					newcounter.set("time", 1);
+					newcounter.save(null, {
+						success: function(newcounter) {
+							console.log("newcounter.get('time')="+newcounter.get('time'));
+							var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
+							$(document.getElementById(url)).text(content);
+						},
+						error: function(newcounter, error) {
+							console.log('Failed to create');
+						}
+					});
+				}
+			},
+			error: function(error) {
+				console.log('Error:' + error.code + " " + error.message);
+			}
+		});
+	}
+	$(function() {
+		var Counter = AV.Object.extend("Counter");
+		if ($('.leancloud-views_num').length == 1) {
+			addCount(Counter);
+		} else if ($('.post-title-link').length > 1) {
+			showTime(Counter);
+		}
+	}); 
+</script>
+
+
+
+
+
+
+
+
+<!-- Swiftye -->
+
+
+<!-- Local Search-->
+
+	<script>
+	var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var str='<ul class=\"search-result-list\">';                
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length <= 0) {
+                    return;
+                }
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        str += "<li><a href='"+ data_url +"' class='search-result-title' target='_blank'>"+ data_title;
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out characters
+                            var start = first_occur - 6;
+                            var end = first_occur + 6;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 10;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substr(start, end); 
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<em class=\"search-keyword\">"+keyword+"</em>");
+                            })
+                            str += "<p class=\"search-result\">" + match_content +"...</p>" +"</a>";
+                        }
+                    }
+                })
+                $resultContent.innerHTML = str;
+            })
+        }
+    })
+}
+</script>
+
+	<script>
+        var inputArea = document.querySelector("#search");
+        var getSearchFile = function(){
+            var path = "search.xml";
+            searchFunc(path, 'search', 'local-search-result');
+        }
+
+        inputArea.onfocus = function(){ getSearchFile() }
+	</script>
+
+
+<!-- Window Load-->
+<script>
+    $(window).load(function() {
+        // Post_Toc parent position fixed
+        $(".post-toc-wrap").parent(".mdl-menu__container").css("position", "fixed");
+    });
+</script>
+
+<!-- MathJax Load-->
+
+            </main>
+        </div>
+		
+    </body>
+		
+	
+</html>
