@@ -328,7 +328,7 @@
 <h3 id="6-3-1-乱码是如何产生的"><a href="#6-3-1-乱码是如何产生的" class="headerlink" title="6.3.1 乱码是如何产生的"></a>6.3.1 乱码是如何产生的</h3><p>上面的诗歌中，“月”、“是”、“望”、“低”4个字没有被正常输出，取而代之的是3个&lt;图&gt;。产生这个输出结果的原因在于文件可读流在读取时会逐个读取Buffer。这首诗的原始Buffer应存储为：</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">&lt;Buffer e5 ba <span class="number">8</span>a e5 <span class="number">89</span> <span class="number">8</span>d e6 <span class="number">98</span> <span class="number">8</span>e e6 <span class="number">9</span>c <span class="number">88</span> e5 <span class="number">85</span> <span class="number">89</span> ef bc <span class="number">8</span>c e7 <span class="number">96</span> <span class="number">91</span> e6 <span class="number">98</span></div><div class="line">af e5 <span class="number">9</span>c b0 e4 b8 <span class="number">8</span>a e9 <span class="number">9</span>c <span class="number">9</span>c ef bc <span class="number">9</span>b e4 b8 be e5 a4 b4 e6 <span class="number">9</span>c <span class="number">9</span>b e6 <span class="number">98</span> <span class="number">8</span>e e6</div><div class="line"><span class="number">9</span>c <span class="number">88</span> ...&gt;</div></pre></td></tr></table></figure>
 <p>由于我们限定了Buffer对象的长度为11，因此只读流需要读取7次才能完成完整的读取，结果是以下几个Buffer对象依次输出：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">&lt;Buffer e5 ba <span class="number">8</span>a e5 <span class="number">89</span> <span class="number">8</span>d e6 <span class="number">98</span> <span class="number">8</span>e e6 <span class="number">9</span>c&gt;&lt;Buffer 88 e5 85 89 ef bc 8c</div><div class="line">e7 96 91 e6&gt;</div><div class="line">...</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">&lt;Buffer e5 ba <span class="number">8</span>a e5 <span class="number">89</span> <span class="number">8</span>d e6 <span class="number">98</span> <span class="number">8</span>e e6 <span class="number">9</span>c&gt;<span class="xml"><span class="tag">&lt;<span class="name">Buffer</span> <span class="attr">88</span> <span class="attr">e5</span> <span class="attr">85</span> <span class="attr">89</span> <span class="attr">ef</span> <span class="attr">bc</span> <span class="attr">8c</span></span></span></div><div class="line"><span class="attr">e7</span> <span class="attr">96</span> <span class="attr">91</span> <span class="attr">e6</span>&gt;</div><div class="line">...</div></pre></td></tr></table></figure>
 <p>上文提到的<code>buf.toString()</code> 方法默认以UTF-8为编码，中文字在UTF-8下占3个字节。所以第一个Buffer对象在输出时，只能显示3个字符，Buffer中剩下的2个字节（e6 9c）将会以乱码的形式显示。第二个Buffer对象的第一个字节也不能形成文字，只能显示乱码。于是形成一些文字无法正常显示的问题。<br>在这个示例中我们构造了11这个限制，但是对于任意长度的Buffer而言，宽字节字符串都有可能存在被截断的情况，只不过Buffer的长度越大出现的概率越低而已，但该问题依然不可忽视。</p>
 <h3 id="6-3-2-setEncoding-与string-decoder"><a href="#6-3-2-setEncoding-与string-decoder" class="headerlink" title="6.3.2 setEncoding()与string_decoder()"></a>6.3.2 setEncoding()与string_decoder()</h3><p>setEncoding()与string_decoder()</p>
 <p>在看过上述的示例后，也许我们忘记了可读流还有一个设置编码的方法setEncoding()，示例如下：</p>
@@ -1462,6 +1462,125 @@
   </entry>
   
   <entry>
+    <title>轻击的时候不显示默认的atived  状态</title>
+    <link href="http://www.wanglinzhizhi.me/2017/01/21/%E8%BD%BB%E5%87%BB%E7%9A%84%E6%97%B6%E5%80%99%E4%B8%8D%E6%98%BE%E7%A4%BA%E9%BB%98%E8%AE%A4%E7%9A%84atived%20%20%E7%8A%B6%E6%80%81/"/>
+    <id>http://www.wanglinzhizhi.me/2017/01/21/轻击的时候不显示默认的atived  状态/</id>
+    <published>2017-01-21T10:51:18.000Z</published>
+    <updated>2017-02-18T07:29:16.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="轻击的时候不显示默认的atived-状态"><a href="#轻击的时候不显示默认的atived-状态" class="headerlink" title="轻击的时候不显示默认的atived  状态"></a>轻击的时候不显示默认的atived  状态</h2><p>-webkit-tap-highlight-color </p>
+<figure class="highlight css"><table><tr><td class="code"><pre><div class="line"><span class="selector-tag">-webkit-tap-highlight-color</span>: <span class="selector-tag">rgba</span>(0,0,0,0);</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;轻击的时候不显示默认的atived-状态&quot;&gt;&lt;a href=&quot;#轻击的时候不显示默认的atived-状态&quot; class=&quot;headerlink&quot; title=&quot;轻击的时候不显示默认的atived  状态&quot;&gt;&lt;/a&gt;轻击的时候不显示默认的atived  状态&lt;/h2
+    
+    </summary>
+    
+      <category term="移动Web" scheme="http://www.wanglinzhizhi.me/categories/%E7%A7%BB%E5%8A%A8Web/"/>
+    
+    
+      <category term="CSS3" scheme="http://www.wanglinzhizhi.me/tags/CSS3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>谁能介绍下web前端工程化</title>
+    <link href="http://www.wanglinzhizhi.me/2017/01/21/%E8%B0%81%E8%83%BD%E4%BB%8B%E7%BB%8D%E4%B8%8Bweb%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96%EF%BC%9F/"/>
+    <id>http://www.wanglinzhizhi.me/2017/01/21/谁能介绍下web前端工程化？/</id>
+    <published>2017-01-21T10:51:18.000Z</published>
+    <updated>2017-02-18T07:29:03.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="谁能介绍下web前端工程化？"><a href="#谁能介绍下web前端工程化？" class="headerlink" title="谁能介绍下web前端工程化？"></a><a href="https://www.zhihu.com/question/24558375" target="_blank" rel="external">谁能介绍下web前端工程化？</a></h2><p>作者：赵雨森<br>链接：<a href="https://www.zhihu.com/question/24558375/answer/139920107" target="_blank" rel="external">https://www.zhihu.com/question/24558375/answer/139920107</a><br>来源：知乎</p>
+<p>目前来说，Web业务日益复杂化和多元化，前端开发已经由以WebPage模式为主转变为以WebApp模式为主了。现在随便找个前端项目，都已经不是过去的拼个页面+搞几个jQuery插件就能完成的了。工程复杂了就会产生许多问题，比如：如何进行高效的多人协作？如何保证项目的可维护性？如何提高项目的开发质量？…</p>
+<p>前端工程化是前端架构中重要的一环，就是为了解决上述各种效率方面的问题的。而前端工程本质上是软件工程的一种，因此我们应该从软件工程的角度来研究前端工程。</p>
+<p>那么前端工程化需要考虑哪些因素？<br>我认为前端工程化主要应该从<code>模块化</code>、<code>组件化</code>、<code>规范化</code>、<code>自动化</code> 四个方面来思考，下面一一展开。</p>
+<h2 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h2><p>简单来说，模块化就是将一个大文件拆分成相互依赖的小文件，再进行统一的拼装和加载。只有这样，才有多人协作的可能。</p>
+<h3 id="JS的模块化"><a href="#JS的模块化" class="headerlink" title="JS的模块化"></a>JS的模块化</h3><p>在ES6之前，JavaScript一直没有模块系统，这对开发大型复杂的前端工程造成了巨大的障碍。对此社区制定了一些模块加载方案，如CommonJS、AMD和CMD等，某些框架也会有自己模块系统，比如Angular1.x。</p>
+<p>现在ES6已经在语言层面上规定了模块系统，完全可以取代现有的CommonJS和AMD规范，而且使用起来相当简洁，并且有静态加载的特性。</p>
+<p>规范确定了，然后就是模块的打包和加载问题：</p>
+<ol>
+<li>用Webpack+Babel将所有模块打包成一个文件同步加载；</li>
+<li>用SystemJS+Babel分模块异步加载；</li>
+<li>将两者结合在一起。</li>
+</ol>
+<h3 id="CSS的模块化"><a href="#CSS的模块化" class="headerlink" title="CSS的模块化"></a>CSS的模块化</h3><p>虽然SASS、LESS、Stylus等预处理器实现了CSS的文件拆分，但没有解决CSS模块化的一个重要问题：选择器的全局污染问题。</p>
+<p>按道理，一个模块化的文件应该要隐藏内部作用域，只暴露少量接口给使用者。而按照目前预处理器的方式，导入一个CSS模块后，已存在的样式有被覆盖的风险。虽然重写样式是CSS的一个优势，但这并不利于多人协作。</p>
+<p>为了避免全局选择器的冲突，各厂都制定了自己的CSS命名风格：<br>BEM风格；<br>Bootstrap风格；<br>Semantic UI风格；<br>我们公司的NEC风格；<br>…</p>
+<p>但这毕竟是弱约束。选择器随着项目的增长变得越多越复杂，然后项目组里再来个新人带入自己的风格，就更加混乱了。</p>
+<p>所以我很赞同这句话：<br>与其费尽心思地告诉别人要遵守某种规则，以规避某种痛苦，倒不如从工具层面就消灭这种痛苦。<br>从工具层面，社区又创造出Shadow DOM、CSS in JS和CSS Modules三种解决方案。</p>
+<p>Shadow DOM是WebComponents的标准。它能解决全局污染问题，但目前很多浏览器不兼容，对我们来说还很久远；<br>CSS in JS是彻底抛弃CSS，使用JS或JSON来写样式。这种方法很激进，不能利用现有的CSS技术，而且处理伪类等问题比较困难；<br>CSS Modules仍然使用CSS，只是让JS来管理依赖。它能够最大化地结合CSS生态和JS模块化能力，目前来看是最好的解决方案。Vue的scoped style也属于这一种。</p>
+<h2 id="组件化"><a href="#组件化" class="headerlink" title="组件化"></a>组件化</h2><p>首先，组件化≠模块化。好多人对这两个概念有些混淆。</p>
+<p>模块化只是在语言层面上，对代码的拆分；而组件化是基于模块化，在设计层面上，对UI（用户界面）的拆分。</p>
+<p>从UI拆分下来的每个包含模板(HTML)+样式(CSS)+逻辑(JS)功能完备的结构单元，我们称之为组件。</p>
+<p>其实，组件化更重要的是一种分治思想。<br>Keep Simple. Everything can be a component.<br>这句话就是说页面上所有的东西都是组件。页面是个大型组件，可以拆成若干个中型组件，然后中型组件还可以再拆，拆成若干个小型组件，小型组件也可以再拆，直到拆成DOM元素为止。DOM元素可以看成是浏览器自身的组件，作为组件的基本单元。</p>
+<p>传统前端框架/类库的思想是先组织DOM，然后把某些可复用的逻辑封装成组件来操作DOM，是DOM优先；而组件化框架/类库的思想是先来构思组件，然后用DOM这种基本单元结合相应逻辑来实现组件，是组件优先。这是两者本质的区别。</p>
+<p>其次，组件化实际上是一种按照模板(HTML)+样式(CSS)+逻辑(JS)三位一体的形式对面向对象的进一步抽象。</p>
+<p>所以我们除了封装组件本身，还要合理处理组件之间的关系，比如（逻辑）继承、（样式）扩展、（模板）嵌套和包含等，这些关系都可以归为依赖。</p>
+<p>其实组件化不是什么新鲜的东西，以前的客户端框架，像WinForm、WPF、Android等，它们从诞生的那天起就是组件化的。而前端领域发展曲折，是从展示页面为主的WebPage模式走过来的，近两年才从客户端框架经验中引入了组件化思想。其实我们很多前端工程化的问题都可以从客户端那里寻求解决方案。</p>
+<p>目前市面上的组件化框架很多，主要的有Vue、React、Angular 2、我们公司 @郑海波 的Regular、Avalon等。你感兴趣可以都研究一下，选择一套中意的。其实Vue文档中的对比其他框架一文已经讲得很详细了。</p>
+<h2 id="规范化"><a href="#规范化" class="headerlink" title="规范化"></a>规范化</h2><p>模块化和组件化确定了开发模型，而这些东西的实现就需要规范去落实。<br>规范化其实是工程化中很重要的一个部分，项目初期规范制定的好坏会直接影响到后期的开发质量。</p>
+<p>我能想到的有以下一些内容：<br>目录结构的制定<br>编码规范<br>前后端接口规范<br>文档规范<br>组件管理<br>Git分支管理<br>Commit描述规范<br>定期CodeReview<br>视觉图标规范<br>…</p>
+<p>其中编码规范最好采取ESLint和StyleLint等强制措施，因为人是靠不住的，比如可以Lint通不过不能提交代码等。<br>前后端接口管理可以了解一下我们公司出的NEI - 接口管理平台。</p>
+<h2 id="自动化"><a href="#自动化" class="headerlink" title="自动化"></a>自动化</h2><p>作了这么多年程序猿的我，一直秉持的一个理念是：<br>任何简单机械的重复劳动都应该让机器去完成。<br>所以我也认为，前端工程化的很多脏活累活都应该交给自动化工具来完成。</p>
+<h3 id="图标合并"><a href="#图标合并" class="headerlink" title="图标合并"></a>图标合并</h3><p>不要再用PS拼雪碧图了，有Gulp+SpriteSmith；<br>不要再用Icomoon了，这仍然是半自动的，有FontCustom。</p>
+<h3 id="持续集成"><a href="#持续集成" class="headerlink" title="持续集成"></a>持续集成</h3><h3 id="自动化构建"><a href="#自动化构建" class="headerlink" title="自动化构建"></a>自动化构建</h3><h3 id="自动化部署"><a href="#自动化部署" class="headerlink" title="自动化部署"></a>自动化部署</h3><h3 id="自动化测试"><a href="#自动化测试" class="headerlink" title="自动化测试"></a>自动化测试</h3><p>前端自动化测试能够提高代码质量、减少人肉测试等，这些优点是不言而喻的。<br>市面上前端测试框架有很多，选择哪个都不会有太大问题，我们用的是：<br><code>Karma</code>  + <code>Mocha</code>  + <code>Chai</code> </p>
+<h3 id="构建工具"><a href="#构建工具" class="headerlink" title="构建工具"></a>构建工具</h3><p>最后就是你的团队可能不只一个项目，如果每个项目都搭一套gulp+webpack+babel+…，维护成本比较高，而且不能保证统一性。</p>
+<p>因此基于Gulp实现一套独立于项目的构建工具是最好的解决方案。</p>
+<p>可以参考一下我们网易蜂巢的构建工具rainfore/pursuit-cli，开发者只要会用pursuit dev和pursuit online两句命令就行。</p>
+<p>下图是我们的构建工具任务流。</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>下面是我前段时间写的一篇文章《网易蜂巢的工业化前端架构》，用微信扫一扫。以网易蜂巢下的五个单页系统（SPA）为例，详细讲述了我们组前端工程化的一些细节。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;谁能介绍下web前端工程化？&quot;&gt;&lt;a href=&quot;#谁能介绍下web前端工程化？&quot; class=&quot;headerlink&quot; title=&quot;谁能介绍下web前端工程化？&quot;&gt;&lt;/a&gt;&lt;a href=&quot;https://www.zhihu.com/question/2455
+    
+    </summary>
+    
+      <category term="架构" scheme="http://www.wanglinzhizhi.me/categories/%E6%9E%B6%E6%9E%84/"/>
+    
+    
+      <category term="架构" scheme="http://www.wanglinzhizhi.me/tags/%E6%9E%B6%E6%9E%84/"/>
+    
+      <category term="体系架构" scheme="http://www.wanglinzhizhi.me/tags/%E4%BD%93%E7%B3%BB%E6%9E%B6%E6%9E%84/"/>
+    
+      <category term="Web 架构" scheme="http://www.wanglinzhizhi.me/tags/Web-%E6%9E%B6%E6%9E%84/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>结构与样式分离</title>
+    <link href="http://www.wanglinzhizhi.me/2017/01/21/%E7%BB%93%E6%9E%84%E4%B8%8E%E6%A0%B7%E5%BC%8F%E5%88%86%E7%A6%BB/"/>
+    <id>http://www.wanglinzhizhi.me/2017/01/21/结构与样式分离/</id>
+    <published>2017-01-21T10:51:18.000Z</published>
+    <updated>2017-01-21T10:51:18.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="结构与样式分离"><a href="#结构与样式分离" class="headerlink" title="结构与样式分离"></a>结构与样式分离</h2><p><strong>结构与样式分离</strong></p>
+<p><strong>结构与样式分离</strong></p>
+<p><strong>结构与样式分离</strong></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;结构与样式分离&quot;&gt;&lt;a href=&quot;#结构与样式分离&quot; class=&quot;headerlink&quot; title=&quot;结构与样式分离&quot;&gt;&lt;/a&gt;结构与样式分离&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;结构与样式分离&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;结构与样式分离&lt;/s
+    
+    </summary>
+    
+      <category term="前端架构" scheme="http://www.wanglinzhizhi.me/categories/%E5%89%8D%E7%AB%AF%E6%9E%B6%E6%9E%84/"/>
+    
+    
+      <category term="前端架构" scheme="http://www.wanglinzhizhi.me/tags/%E5%89%8D%E7%AB%AF%E6%9E%B6%E6%9E%84/"/>
+    
+      <category term="架构" scheme="http://www.wanglinzhizhi.me/tags/%E6%9E%B6%E6%9E%84/"/>
+    
+      <category term="页面结构" scheme="http://www.wanglinzhizhi.me/tags/%E9%A1%B5%E9%9D%A2%E7%BB%93%E6%9E%84/"/>
+    
+  </entry>
+  
+  <entry>
     <title>十年•杭研技术秀 | 网易蜂巢的工业化前端架构</title>
     <link href="http://www.wanglinzhizhi.me/2017/01/21/%E7%BD%91%E6%98%93%E8%9C%82%E5%B7%A2%E7%9A%84%E5%B7%A5%E4%B8%9A%E5%8C%96%E5%89%8D%E7%AB%AF%E6%9E%B6%E6%9E%84/"/>
     <id>http://www.wanglinzhizhi.me/2017/01/21/网易蜂巢的工业化前端架构/</id>
@@ -1768,95 +1887,6 @@ vendor/         # 第三方库
   </entry>
   
   <entry>
-    <title>轻击的时候不显示默认的atived  状态</title>
-    <link href="http://www.wanglinzhizhi.me/2017/01/21/%E8%BD%BB%E5%87%BB%E7%9A%84%E6%97%B6%E5%80%99%E4%B8%8D%E6%98%BE%E7%A4%BA%E9%BB%98%E8%AE%A4%E7%9A%84atived%20%20%E7%8A%B6%E6%80%81/"/>
-    <id>http://www.wanglinzhizhi.me/2017/01/21/轻击的时候不显示默认的atived  状态/</id>
-    <published>2017-01-21T10:51:18.000Z</published>
-    <updated>2017-02-18T07:29:16.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="轻击的时候不显示默认的atived-状态"><a href="#轻击的时候不显示默认的atived-状态" class="headerlink" title="轻击的时候不显示默认的atived  状态"></a>轻击的时候不显示默认的atived  状态</h2><p>-webkit-tap-highlight-color </p>
-<figure class="highlight css"><table><tr><td class="code"><pre><div class="line"><span class="selector-tag">-webkit-tap-highlight-color</span>: <span class="selector-tag">rgba</span>(0,0,0,0);</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;轻击的时候不显示默认的atived-状态&quot;&gt;&lt;a href=&quot;#轻击的时候不显示默认的atived-状态&quot; class=&quot;headerlink&quot; title=&quot;轻击的时候不显示默认的atived  状态&quot;&gt;&lt;/a&gt;轻击的时候不显示默认的atived  状态&lt;/h2
-    
-    </summary>
-    
-      <category term="移动Web" scheme="http://www.wanglinzhizhi.me/categories/%E7%A7%BB%E5%8A%A8Web/"/>
-    
-    
-      <category term="CSS3" scheme="http://www.wanglinzhizhi.me/tags/CSS3/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>谁能介绍下web前端工程化</title>
-    <link href="http://www.wanglinzhizhi.me/2017/01/21/%E8%B0%81%E8%83%BD%E4%BB%8B%E7%BB%8D%E4%B8%8Bweb%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96%EF%BC%9F/"/>
-    <id>http://www.wanglinzhizhi.me/2017/01/21/谁能介绍下web前端工程化？/</id>
-    <published>2017-01-21T10:51:18.000Z</published>
-    <updated>2017-02-18T07:29:03.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="谁能介绍下web前端工程化？"><a href="#谁能介绍下web前端工程化？" class="headerlink" title="谁能介绍下web前端工程化？"></a><a href="https://www.zhihu.com/question/24558375" target="_blank" rel="external">谁能介绍下web前端工程化？</a></h2><p>作者：赵雨森<br>链接：<a href="https://www.zhihu.com/question/24558375/answer/139920107" target="_blank" rel="external">https://www.zhihu.com/question/24558375/answer/139920107</a><br>来源：知乎</p>
-<p>目前来说，Web业务日益复杂化和多元化，前端开发已经由以WebPage模式为主转变为以WebApp模式为主了。现在随便找个前端项目，都已经不是过去的拼个页面+搞几个jQuery插件就能完成的了。工程复杂了就会产生许多问题，比如：如何进行高效的多人协作？如何保证项目的可维护性？如何提高项目的开发质量？…</p>
-<p>前端工程化是前端架构中重要的一环，就是为了解决上述各种效率方面的问题的。而前端工程本质上是软件工程的一种，因此我们应该从软件工程的角度来研究前端工程。</p>
-<p>那么前端工程化需要考虑哪些因素？<br>我认为前端工程化主要应该从<code>模块化</code>、<code>组件化</code>、<code>规范化</code>、<code>自动化</code> 四个方面来思考，下面一一展开。</p>
-<h2 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h2><p>简单来说，模块化就是将一个大文件拆分成相互依赖的小文件，再进行统一的拼装和加载。只有这样，才有多人协作的可能。</p>
-<h3 id="JS的模块化"><a href="#JS的模块化" class="headerlink" title="JS的模块化"></a>JS的模块化</h3><p>在ES6之前，JavaScript一直没有模块系统，这对开发大型复杂的前端工程造成了巨大的障碍。对此社区制定了一些模块加载方案，如CommonJS、AMD和CMD等，某些框架也会有自己模块系统，比如Angular1.x。</p>
-<p>现在ES6已经在语言层面上规定了模块系统，完全可以取代现有的CommonJS和AMD规范，而且使用起来相当简洁，并且有静态加载的特性。</p>
-<p>规范确定了，然后就是模块的打包和加载问题：</p>
-<ol>
-<li>用Webpack+Babel将所有模块打包成一个文件同步加载；</li>
-<li>用SystemJS+Babel分模块异步加载；</li>
-<li>将两者结合在一起。</li>
-</ol>
-<h3 id="CSS的模块化"><a href="#CSS的模块化" class="headerlink" title="CSS的模块化"></a>CSS的模块化</h3><p>虽然SASS、LESS、Stylus等预处理器实现了CSS的文件拆分，但没有解决CSS模块化的一个重要问题：选择器的全局污染问题。</p>
-<p>按道理，一个模块化的文件应该要隐藏内部作用域，只暴露少量接口给使用者。而按照目前预处理器的方式，导入一个CSS模块后，已存在的样式有被覆盖的风险。虽然重写样式是CSS的一个优势，但这并不利于多人协作。</p>
-<p>为了避免全局选择器的冲突，各厂都制定了自己的CSS命名风格：<br>BEM风格；<br>Bootstrap风格；<br>Semantic UI风格；<br>我们公司的NEC风格；<br>…</p>
-<p>但这毕竟是弱约束。选择器随着项目的增长变得越多越复杂，然后项目组里再来个新人带入自己的风格，就更加混乱了。</p>
-<p>所以我很赞同这句话：<br>与其费尽心思地告诉别人要遵守某种规则，以规避某种痛苦，倒不如从工具层面就消灭这种痛苦。<br>从工具层面，社区又创造出Shadow DOM、CSS in JS和CSS Modules三种解决方案。</p>
-<p>Shadow DOM是WebComponents的标准。它能解决全局污染问题，但目前很多浏览器不兼容，对我们来说还很久远；<br>CSS in JS是彻底抛弃CSS，使用JS或JSON来写样式。这种方法很激进，不能利用现有的CSS技术，而且处理伪类等问题比较困难；<br>CSS Modules仍然使用CSS，只是让JS来管理依赖。它能够最大化地结合CSS生态和JS模块化能力，目前来看是最好的解决方案。Vue的scoped style也属于这一种。</p>
-<h2 id="组件化"><a href="#组件化" class="headerlink" title="组件化"></a>组件化</h2><p>首先，组件化≠模块化。好多人对这两个概念有些混淆。</p>
-<p>模块化只是在语言层面上，对代码的拆分；而组件化是基于模块化，在设计层面上，对UI（用户界面）的拆分。</p>
-<p>从UI拆分下来的每个包含模板(HTML)+样式(CSS)+逻辑(JS)功能完备的结构单元，我们称之为组件。</p>
-<p>其实，组件化更重要的是一种分治思想。<br>Keep Simple. Everything can be a component.<br>这句话就是说页面上所有的东西都是组件。页面是个大型组件，可以拆成若干个中型组件，然后中型组件还可以再拆，拆成若干个小型组件，小型组件也可以再拆，直到拆成DOM元素为止。DOM元素可以看成是浏览器自身的组件，作为组件的基本单元。</p>
-<p>传统前端框架/类库的思想是先组织DOM，然后把某些可复用的逻辑封装成组件来操作DOM，是DOM优先；而组件化框架/类库的思想是先来构思组件，然后用DOM这种基本单元结合相应逻辑来实现组件，是组件优先。这是两者本质的区别。</p>
-<p>其次，组件化实际上是一种按照模板(HTML)+样式(CSS)+逻辑(JS)三位一体的形式对面向对象的进一步抽象。</p>
-<p>所以我们除了封装组件本身，还要合理处理组件之间的关系，比如（逻辑）继承、（样式）扩展、（模板）嵌套和包含等，这些关系都可以归为依赖。</p>
-<p>其实组件化不是什么新鲜的东西，以前的客户端框架，像WinForm、WPF、Android等，它们从诞生的那天起就是组件化的。而前端领域发展曲折，是从展示页面为主的WebPage模式走过来的，近两年才从客户端框架经验中引入了组件化思想。其实我们很多前端工程化的问题都可以从客户端那里寻求解决方案。</p>
-<p>目前市面上的组件化框架很多，主要的有Vue、React、Angular 2、我们公司 @郑海波 的Regular、Avalon等。你感兴趣可以都研究一下，选择一套中意的。其实Vue文档中的对比其他框架一文已经讲得很详细了。</p>
-<h2 id="规范化"><a href="#规范化" class="headerlink" title="规范化"></a>规范化</h2><p>模块化和组件化确定了开发模型，而这些东西的实现就需要规范去落实。<br>规范化其实是工程化中很重要的一个部分，项目初期规范制定的好坏会直接影响到后期的开发质量。</p>
-<p>我能想到的有以下一些内容：<br>目录结构的制定<br>编码规范<br>前后端接口规范<br>文档规范<br>组件管理<br>Git分支管理<br>Commit描述规范<br>定期CodeReview<br>视觉图标规范<br>…</p>
-<p>其中编码规范最好采取ESLint和StyleLint等强制措施，因为人是靠不住的，比如可以Lint通不过不能提交代码等。<br>前后端接口管理可以了解一下我们公司出的NEI - 接口管理平台。</p>
-<h2 id="自动化"><a href="#自动化" class="headerlink" title="自动化"></a>自动化</h2><p>作了这么多年程序猿的我，一直秉持的一个理念是：<br>任何简单机械的重复劳动都应该让机器去完成。<br>所以我也认为，前端工程化的很多脏活累活都应该交给自动化工具来完成。</p>
-<h3 id="图标合并"><a href="#图标合并" class="headerlink" title="图标合并"></a>图标合并</h3><p>不要再用PS拼雪碧图了，有Gulp+SpriteSmith；<br>不要再用Icomoon了，这仍然是半自动的，有FontCustom。</p>
-<h3 id="持续集成"><a href="#持续集成" class="headerlink" title="持续集成"></a>持续集成</h3><h3 id="自动化构建"><a href="#自动化构建" class="headerlink" title="自动化构建"></a>自动化构建</h3><h3 id="自动化部署"><a href="#自动化部署" class="headerlink" title="自动化部署"></a>自动化部署</h3><h3 id="自动化测试"><a href="#自动化测试" class="headerlink" title="自动化测试"></a>自动化测试</h3><p>前端自动化测试能够提高代码质量、减少人肉测试等，这些优点是不言而喻的。<br>市面上前端测试框架有很多，选择哪个都不会有太大问题，我们用的是：<br><code>Karma</code>  + <code>Mocha</code>  + <code>Chai</code> </p>
-<h3 id="构建工具"><a href="#构建工具" class="headerlink" title="构建工具"></a>构建工具</h3><p>最后就是你的团队可能不只一个项目，如果每个项目都搭一套gulp+webpack+babel+…，维护成本比较高，而且不能保证统一性。</p>
-<p>因此基于Gulp实现一套独立于项目的构建工具是最好的解决方案。</p>
-<p>可以参考一下我们网易蜂巢的构建工具rainfore/pursuit-cli，开发者只要会用pursuit dev和pursuit online两句命令就行。</p>
-<p>下图是我们的构建工具任务流。</p>
-<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>下面是我前段时间写的一篇文章《网易蜂巢的工业化前端架构》，用微信扫一扫。以网易蜂巢下的五个单页系统（SPA）为例，详细讲述了我们组前端工程化的一些细节。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;谁能介绍下web前端工程化？&quot;&gt;&lt;a href=&quot;#谁能介绍下web前端工程化？&quot; class=&quot;headerlink&quot; title=&quot;谁能介绍下web前端工程化？&quot;&gt;&lt;/a&gt;&lt;a href=&quot;https://www.zhihu.com/question/2455
-    
-    </summary>
-    
-      <category term="架构" scheme="http://www.wanglinzhizhi.me/categories/%E6%9E%B6%E6%9E%84/"/>
-    
-    
-      <category term="架构" scheme="http://www.wanglinzhizhi.me/tags/%E6%9E%B6%E6%9E%84/"/>
-    
-      <category term="体系架构" scheme="http://www.wanglinzhizhi.me/tags/%E4%BD%93%E7%B3%BB%E6%9E%B6%E6%9E%84/"/>
-    
-      <category term="Web 架构" scheme="http://www.wanglinzhizhi.me/tags/Web-%E6%9E%B6%E6%9E%84/"/>
-    
-  </entry>
-  
-  <entry>
     <title>算法：BinarySearch和FibSearch</title>
     <link href="http://www.wanglinzhizhi.me/2017/01/21/%E7%AE%97%E6%B3%95%EF%BC%9ABinarySearch%20%20%E5%92%8C%20FibSearch/"/>
     <id>http://www.wanglinzhizhi.me/2017/01/21/算法：BinarySearch  和 FibSearch/</id>
@@ -1933,36 +1963,6 @@ vendor/         # 第三方库
       <category term="查找算法" scheme="http://www.wanglinzhizhi.me/tags/%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95/"/>
     
       <category term="DSA" scheme="http://www.wanglinzhizhi.me/tags/DSA/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>结构与样式分离</title>
-    <link href="http://www.wanglinzhizhi.me/2017/01/21/%E7%BB%93%E6%9E%84%E4%B8%8E%E6%A0%B7%E5%BC%8F%E5%88%86%E7%A6%BB/"/>
-    <id>http://www.wanglinzhizhi.me/2017/01/21/结构与样式分离/</id>
-    <published>2017-01-21T10:51:18.000Z</published>
-    <updated>2017-01-21T10:51:18.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="结构与样式分离"><a href="#结构与样式分离" class="headerlink" title="结构与样式分离"></a>结构与样式分离</h2><p><strong>结构与样式分离</strong></p>
-<p><strong>结构与样式分离</strong></p>
-<p><strong>结构与样式分离</strong></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;结构与样式分离&quot;&gt;&lt;a href=&quot;#结构与样式分离&quot; class=&quot;headerlink&quot; title=&quot;结构与样式分离&quot;&gt;&lt;/a&gt;结构与样式分离&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;结构与样式分离&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;结构与样式分离&lt;/s
-    
-    </summary>
-    
-      <category term="前端架构" scheme="http://www.wanglinzhizhi.me/categories/%E5%89%8D%E7%AB%AF%E6%9E%B6%E6%9E%84/"/>
-    
-    
-      <category term="前端架构" scheme="http://www.wanglinzhizhi.me/tags/%E5%89%8D%E7%AB%AF%E6%9E%B6%E6%9E%84/"/>
-    
-      <category term="架构" scheme="http://www.wanglinzhizhi.me/tags/%E6%9E%B6%E6%9E%84/"/>
-    
-      <category term="页面结构" scheme="http://www.wanglinzhizhi.me/tags/%E9%A1%B5%E9%9D%A2%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   
@@ -2872,31 +2872,83 @@ vendor/         # 第三方库
   </entry>
   
   <entry>
-    <title>Git 的提交</title>
-    <link href="http://www.wanglinzhizhi.me/2017/01/21/Git%20%E6%8F%90%E4%BA%A4%E5%8E%9F%E5%88%99/"/>
-    <id>http://www.wanglinzhizhi.me/2017/01/21/Git 提交原则/</id>
+    <title>JS、CSS以及img对DOMContentLoaded事件的影响</title>
+    <link href="http://www.wanglinzhizhi.me/2017/01/21/DOMContent/"/>
+    <id>http://www.wanglinzhizhi.me/2017/01/21/DOMContent/</id>
     <published>2017-01-21T10:51:18.000Z</published>
-    <updated>2017-02-18T07:16:43.000Z</updated>
+    <updated>2017-01-21T10:51:18.000Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="Git-的提交"><a href="#Git-的提交" class="headerlink" title="Git 的提交"></a>Git 的提交</h2><h3 id="提交原则"><a href="#提交原则" class="headerlink" title="提交原则"></a>提交原则</h3><p><strong>频繁提交代码 -&gt; 事务性提交.</strong> </p>
-<ul>
-<li><strong>提交代码的频率与合并带来的工作量成反比</strong></li>
-<li><strong>尽早提交代码有利于别人把你的代码集成进去,加快项目的进展</strong> </li>
-</ul>
+    <content type="html"><![CDATA[<h2 id="JS、CSS以及img对DOMContentLoaded事件的影响"><a href="#JS、CSS以及img对DOMContentLoaded事件的影响" class="headerlink" title="JS、CSS以及img对DOMContentLoaded事件的影响"></a>JS、CSS以及img对DOMContentLoaded事件的影响</h2><p>In <a href="http://www.alloyteam.com/webdevelop/web-%e5%89%8d%e7%ab%af%e4%bc%98%e5%8c%96/" target="_blank" rel="external">Web 前端优化</a>,<a href="http://www.alloyteam.com/webdevelop/" target="_blank" rel="external">Web开发</a> </p>
+<p>on 2014年03月03日 by <a href="http://www.alloyteam.com/author/kerry95/" target="_blank" rel="external">TAT.kerry95</a> view: 17,634<a href="http://www.alloyteam.com/2014/03/effect-js-css-and-img-event-of-domcontentloaded/#comments" target="_blank" rel="external">12</a></p>
+<p>最近在做性能有关的数据上报，发现了两个非常有意思的东西：Chrome开发者工具的Timeline分析面板，以及DOMContentLoaded事件。一个是强大的令人发指的性能分析工具，一个是重要的性能指标，于是就用Timeline对DOMContentLoaded事件进行了一番研究。</p>
+<h2 id="前端的纯技术就是对规范的认知"><a href="#前端的纯技术就是对规范的认知" class="headerlink" title="前端的纯技术就是对规范的认知"></a>前端的纯技术就是对规范的认知</h2><p>什么是DOMContentLoaded事件？</p>
+<p>首先想到的是查看<a href="http://www.w3.org/TR/html5/syntax.html#the-end" target="_blank" rel="external">W3C的HTML5规范</a>，DOMContentLoaded事件在什么时候触发：</p>
+<blockquote>
+<p>Once the user agent stops parsing the document, the user agent must run the following steps:<br>\1. Set the current document readiness to “interactive” and the insertion point to undefined.<br>Pop all the nodes off the stack of open elements.<br>\2. If the list of scripts that will execute when the document has finished parsing is not empty, run these substeps:<br>2.1 Spin the event loop until the first script in the list of scripts that will execute when the document has finished parsing has its “ready to be parser-executed” flag set and the parser’s Document has no style sheet that is blocking scripts.<br>2.2 Execute the first script in the list of scripts that will execute when the document has finished parsing.<br>2.3 Remove the first script element from the list of scripts that will execute when the document has finished parsing (i.e. shift out the first entry in the list).<br>2.4 If the list of scripts that will execute when the document has finished parsing is still not empty, repeat these substeps again from substep 1.<br>\3. Queue a task to fire a simple event that bubbles named <strong>DOMContentLoaded</strong> at the Document.</p>
+</blockquote>
+<p>规范总是那么的晦涩，但至少有一点是可以明确了的，就是在JS（不包括动态插入的JS）执行完之后，才会触发DOMContentLoaded事件。</p>
+<p>接下来看看<a href="https://developer.mozilla.org/en-US/docs/Web/Reference/Events/DOMContentLoaded" target="_blank" rel="external">MDN上有关DOMContentLoaded事件的文档</a>：</p>
+<blockquote>
+<p>The DOMContentLoaded event is fired when the document has been completely loaded and parsed, without waiting for stylesheets, images, and subframes to finish loading<br>Note: Stylesheet loads block script execution, so if you have a <code>after a</code>, the page will not finish parsing – and DOMContentLoaded will not fire – until the stylesheet is loaded.</p>
+</blockquote>
+<p>这么看来，至少可以得出这么一个理论：DOMContentLoaded事件本身不会等待CSS文件、图片、iframe加载完成。<br>它的触发时机是：加载完页面，解析完所有标签（不包括执行CSS和JS），并如规范中所说的设置<code>interactive</code> 和执行每个静态的script标签中的JS，然后触发。<br>而JS的执行，需要等待位于它前面的CSS加载（如果是外联的话）、执行完成，因为JS可能会依赖位于它前面的CSS计算出来的样式。</p>
+<h2 id="实践是检验真理的唯一标准"><a href="#实践是检验真理的唯一标准" class="headerlink" title="实践是检验真理的唯一标准"></a>实践是检验真理的唯一标准</h2><h3 id="实验1：DOMContentLoaded事件不直接等待CSS文件、图片的加载完成"><a href="#实验1：DOMContentLoaded事件不直接等待CSS文件、图片的加载完成" class="headerlink" title="实验1：DOMContentLoaded事件不直接等待CSS文件、图片的加载完成"></a>实验1：DOMContentLoaded事件不直接等待CSS文件、图片的加载完成</h3><p>index.html:</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"zh-CN"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">type</span>=<span class="string">"text/css"</span> <span class="attr">href</span>=<span class="string">"./css/main.css"</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Content<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"./img/chrome-girl.jpg"</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><a href="http://cdn.alloyteam.com/wp-content/uploads/2014/03/71fca778-a249-11e3-8824-2aae4440c857.png" target="_blank" rel="external"><img src="http://cdn.alloyteam.com/wp-content/uploads/2014/03/71fca778-a249-11e3-8824-2aae4440c857.png" alt="71fca778-a249-11e3-8824-2aae4440c857"></a><br>图一</p>
+<p>如果页面中没有script标签，DOMContentLoaded事件并没有等待CSS文件、图片加载完成。</p>
+<p>Chrome开发者工具的Timeline面板可以帮我们记录下浏览器的一举一动。图一中红色小方框中的蓝线，表示DOMContentLoaded事件，它右边的红线和绿线分别表示load事件和First paint，鼠标hover在这些线露出灰色方框下面的一小部分时就会出现带有说明文字的tips（这交互够反人类的对吧！）。</p>
+<h3 id="实验2：DOMContentLoaded事件需要等待JS执行完才触发"><a href="#实验2：DOMContentLoaded事件需要等待JS执行完才触发" class="headerlink" title="实验2：DOMContentLoaded事件需要等待JS执行完才触发"></a>实验2：DOMContentLoaded事件需要等待JS执行完才触发</h3><p>index.html:<br><figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"zh-CN"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line">        <span class="built_in">console</span>.timeStamp(<span class="string">'Inline script before link in head'</span>);</div><div class="line">        <span class="built_in">window</span>.addEventListener(<span class="string">'DOMContentLoaded'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">            <span class="built_in">console</span>.timeStamp(<span class="string">'DOMContentLoaded event'</span>);</div><div class="line">        &#125;);</div><div class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">type</span>=<span class="string">"text/css"</span> <span class="attr">href</span>=<span class="string">"./css/main.css"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line">        <span class="built_in">console</span>.timeStamp(<span class="string">'Inline script after link in head'</span>);</div><div class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Content<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"./img/chrome-girl.jpg"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"./js/main.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>main.js:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="built_in">console</span>.timeStamp(<span class="string">'External script after link in body'</span>);</div></pre></td></tr></table></figure>
+<p><a href="http://cdn.alloyteam.com/wp-content/uploads/2014/03/dcf399e8-a252-11e3-92c1-c3dbad820909.png" target="_blank" rel="external"><img src="http://cdn.alloyteam.com/wp-content/uploads/2014/03/dcf399e8-a252-11e3-92c1-c3dbad820909.png" alt="dcf399e8-a252-11e3-92c1-c3dbad820909"></a></p>
+<p>图二</p>
+<p>如果页面中静态的写有script标签，DOMContentLoaded事件需要等待JS执行完才触发。<br>而script标签中的JS需要等待位于其前面的CSS的加载完成。</p>
+<p><code>console.timeStamp()</code> 可以向Timeline中添加一条记录，并对应上方的一条黄线。</p>
+<p>从图二中可以看出，在CSS之前的JS立刻得到了执行，而在CSS之后的JS，需要等待CSS加载完后才执行，比较明显的是main.js早就加载完了，但还是要等main.css加载完才能执行。而DOMContentLoaded事件，则是在JS执行完后才触发。滑动Timeline面板中表示展示区域的滑块，如图三，放大后即可看到表示DOMContentLoaded事件的蓝线（之前跟黄线和绿线靠的太近了），当然，通过<code>console.timeStamp()</code> 向TimeLine中添加的记录也可证明其触发时间。</p>
+<p><a href="http://cdn.alloyteam.com/wp-content/uploads/2014/03/910b5c2c-a253-11e3-995d-e19fb254cf4e.png" target="_blank" rel="external"><img src="http://cdn.alloyteam.com/wp-content/uploads/2014/03/910b5c2c-a253-11e3-995d-e19fb254cf4e.png" alt="910b5c2c-a253-11e3-995d-e19fb254cf4e"></a><br>图三</p>
+<p>现代浏览器会并发的预加载CSS, JS，也就是一开始就并发的请求这些资源，但是，执行CSS和JS的顺序还是按原来的依赖顺序（JS的执行要等待位于其前面的CSS和JS加载、执行完）。先加载完成的资源，如果其依赖还没加载、执行完，就只能等着。</p>
+<h3 id="实验3：img何时开始解码、绘制？"><a href="#实验3：img何时开始解码、绘制？" class="headerlink" title="实验3：img何时开始解码、绘制？"></a>实验3：img何时开始解码、绘制？</h3><p>从图三中我们可以发现一个有趣的地方：img的请求老早就发出了，但延迟了一段时间才开始解码。如图二、图三中的红框所示，截图中只框出了一部分表示解码的记录，而实际上这些表示解码的记录一直持续到img加载结束，如图四所示，img是一边加载一边解码的：</p>
+<p><a href="http://cdn.alloyteam.com/wp-content/uploads/2014/03/7384a57a-a256-11e3-9c4a-b857956eaeed.png" target="_blank" rel="external"><img src="http://cdn.alloyteam.com/wp-content/uploads/2014/03/7384a57a-a256-11e3-9c4a-b857956eaeed.png" alt="7384a57a-a256-11e3-9c4a-b857956eaeed"></a><br>图四</p>
+<p>抱着“猜想——验证”的想法，我猜想这是因为img这个资源是否需要展现出来，需要等 <strong>所有的JS和CSS的执行完</strong> 才知道，因为main.js可能会执行某些DOM操作，比如删除这个img元素，或者修改其src属性，而CSS可能会将其 <code>display: none</code> 。</p>
+<p><a href="http://cdn.alloyteam.com/wp-content/uploads/auto_save_image/2014/03/084830tW2.jpg" target="_blank" rel="external"><img src="http://cdn.alloyteam.com/wp-content/uploads/auto_save_image/2014/03/084830tW2.jpg" alt="image"></a></p>
+<p>图五</p>
+<p><a href="http://cdn.alloyteam.com/wp-content/uploads/auto_save_image/2014/03/084831TR6.jpg" target="_blank" rel="external"><img src="http://cdn.alloyteam.com/wp-content/uploads/auto_save_image/2014/03/084831TR6.jpg" alt="image"></a></p>
+<p>图六</p>
+<p><a href="http://cdn.alloyteam.com/wp-content/uploads/auto_save_image/2014/03/084832Sa1.jpg" target="_blank" rel="external"><img src="http://cdn.alloyteam.com/wp-content/uploads/auto_save_image/2014/03/084832Sa1.jpg" alt="image"></a><br>图七</p>
+<p>图五中没有JS和CSS，img的数据一接收到就马上开始解码了。<br>图六中没有JS，但img要等到CSS加载完才开始解码。<br>图七的代码跟图六的代码唯一的区别是CSS把img给 <code>display: none;</code> ，这使得img虽然请求了，但根本没有进行解码。<br>这说明，img是否需要解码、绘图（paint）出来，确实需要等CSS加载、执行完才能知道。也就是说，CSS会阻塞img的展现！那么JS呢？</p>
+<p><a href="http://cdn.alloyteam.com/wp-content/uploads/auto_save_image/2014/03/084833Gpg.jpg" target="_blank" rel="external"><img src="http://cdn.alloyteam.com/wp-content/uploads/auto_save_image/2014/03/084833Gpg.jpg" alt="image"></a><br>图八</p>
+<p>图八对应的代码：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"zh-CN"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line">        <span class="built_in">console</span>.timeStamp(<span class="string">'Inline script in head'</span>);</div><div class="line">        <span class="built_in">window</span>.addEventListener(<span class="string">'DOMContentLoaded'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">            <span class="built_in">console</span>.timeStamp(<span class="string">'DOMContentLoaded event'</span>);</div><div class="line">        &#125;);</div><div class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Content<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"./img/chrome-girl.jpg"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"./js/main.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>非常令人惊讶，在有JS而没有CSS的页面中，img居然能够在收到数据后就立刻开始解码、绘图（paint)，也就是说，JS并没有阻塞img的展现！这跟我们以前理解的JS会阻塞img资源的传统观念不太一样，看来Chrome对img的加载和展现做了新的优化。</p>
+<p>##</p>
+<p>我们常用的jQuery的 <code>$(document).ready()</code> 方法，就是对DOMContentLoaded事件的监听（当然，其内部还会通过模拟DOMContentLoaded事件和监听onload事件来提供降级方案）。通常推荐在DOMContentLoaded事件触发的时候为DOM元素注册事件。所以尽快的让DOMContentLoaded事件触发，就意味着能够尽快让页面可交互：</p>
+<ol>
+<li>减小CSS文件体积，把单个CSS文件分成几个文件以并行加载，减少CSS对JS的阻塞时间</li>
+<li>次要的JS文件，通过动态插入script标签来加载（动态插入的script标签不阻塞DOMContentLoaded事件的触发）</li>
+<li>CSS中使用的精灵图，可以利用对img的预加载，放在html中跟CSS文件一起加载</li>
+</ol>
+<p>在做实验的过程中，感觉Chrome开发者工具的Timeline面板非常强大，浏览器的一举一动都记录下来。以前我们前端开发要想理解、探索浏览器的内部行为，或者摸着石头过河的做黑盒测试，或者事倍功半的研究浏览器源码，唯一高效点的做法就是学习别人的研究经验，看老外的文章，但浏览器的发展日新月异（比如这次实验发现的JS不阻塞img的展现），别人的经验始终不是最新、最适合的，关键是要结合自己的业务、需求场景，有针对性的做分析和优化。</p>
+<p>##</p>
+<p>PS.</p>
+<p>以上测试环境为windows/chrome，并用Fiddler模拟慢速网络</p>
+<p>原创文章转载请注明：</p>
+<p>转载自AlloyTeam：<a href="http://www.alloyteam.com/2014/03/effect-js-css-and-img-event-of-domcontentloaded/" target="_blank" rel="external">http://www.alloyteam.com/2014/03/effect-js-css-and-img-event-of-domcontentloaded/</a></p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;Git-的提交&quot;&gt;&lt;a href=&quot;#Git-的提交&quot; class=&quot;headerlink&quot; title=&quot;Git 的提交&quot;&gt;&lt;/a&gt;Git 的提交&lt;/h2&gt;&lt;h3 id=&quot;提交原则&quot;&gt;&lt;a href=&quot;#提交原则&quot; class=&quot;headerlink&quot; titl
+      &lt;h2 id=&quot;JS、CSS以及img对DOMContentLoaded事件的影响&quot;&gt;&lt;a href=&quot;#JS、CSS以及img对DOMContentLoaded事件的影响&quot; class=&quot;headerlink&quot; title=&quot;JS、CSS以及img对DOMContentLoad
     
     </summary>
     
-      <category term="Git" scheme="http://www.wanglinzhizhi.me/categories/Git/"/>
+      <category term="Web" scheme="http://www.wanglinzhizhi.me/categories/Web/"/>
     
     
-      <category term="Git" scheme="http://www.wanglinzhizhi.me/tags/Git/"/>
+      <category term="DOMContentLoaded" scheme="http://www.wanglinzhizhi.me/tags/DOMContentLoaded/"/>
     
-      <category term="Git 使用" scheme="http://www.wanglinzhizhi.me/tags/Git-%E4%BD%BF%E7%94%A8/"/>
+      <category term="浏览器内核" scheme="http://www.wanglinzhizhi.me/tags/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85%E6%A0%B8/"/>
+    
+      <category term="Web" scheme="http://www.wanglinzhizhi.me/tags/Web/"/>
     
   </entry>
   
