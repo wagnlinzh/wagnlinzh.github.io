@@ -1967,6 +1967,132 @@ vendor/         # 第三方库
   </entry>
   
   <entry>
+    <title>-webkit-backface-visibility</title>
+    <link href="http://www.wanglinzhizhi.me/2017/01/21/-webkit-backface-visibility/"/>
+    <id>http://www.wanglinzhizhi.me/2017/01/21/-webkit-backface-visibility/</id>
+    <published>2017-01-21T10:51:18.000Z</published>
+    <updated>2017-01-21T10:51:18.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="webkit-backface-visibility"><a href="#webkit-backface-visibility" class="headerlink" title="-webkit-backface-visibility"></a>-webkit-backface-visibility</h2><figure class="highlight css"><table><tr><td class="code"><pre><div class="line"><span class="selector-tag">-webkit-backface-visibility</span><span class="selector-pseudo">:hidden</span></div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;webkit-backface-visibility&quot;&gt;&lt;a href=&quot;#webkit-backface-visibility&quot; class=&quot;headerlink&quot; title=&quot;-webkit-backface-visibility&quot;&gt;&lt;/a&gt;-webkit
+    
+    </summary>
+    
+      <category term="web" scheme="http://www.wanglinzhizhi.me/categories/web/"/>
+    
+    
+      <category term="CSS3" scheme="http://www.wanglinzhizhi.me/tags/CSS3/"/>
+    
+      <category term="Web 3D" scheme="http://www.wanglinzhizhi.me/tags/Web-3D/"/>
+    
+      <category term="移动Web" scheme="http://www.wanglinzhizhi.me/tags/%E7%A7%BB%E5%8A%A8Web/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>移动性能</title>
+    <link href="http://www.wanglinzhizhi.me/2017/01/21/%E7%A7%BB%E5%8A%A8web%20%E6%80%A7%E8%83%BD/"/>
+    <id>http://www.wanglinzhizhi.me/2017/01/21/移动web 性能/</id>
+    <published>2017-01-21T10:51:18.000Z</published>
+    <updated>2017-01-21T10:51:18.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="移动性能"><a href="#移动性能" class="headerlink" title="移动性能"></a>移动性能</h2><h3 id="要考虑Android低端机与2G网络场景下性能-注意！"><a href="#要考虑Android低端机与2G网络场景下性能-注意！" class="headerlink" title="要考虑Android低端机与2G网络场景下性能 注意！"></a>要考虑<code>Android</code>低端机与<code>2G</code>网络场景下性能 注意！</h3><p>发布前必要检查项</p>
+<ul>
+<li>所有图片必须有进行过压缩</li>
+<li>考虑适度的有损压缩，如转化为80%质量的jpg图片</li>
+<li>考虑把大图切成多张小图，常见在banner图过大的场景</li>
+</ul>
+<p>加载性能优化, 达到打开足够快</p>
+<ul>
+<li>数据离线化，考虑将数据缓存在 localStorage</li>
+<li>初始请求资源数 <code>&lt; 4</code> 注意！</li>
+<li>图片使用CSS Sprites 或 DataURI</li>
+<li>外链 CSS 中避免 @import 引入</li>
+<li>考虑内嵌小型的静态资源内容</li>
+<li>初始请求资源gzip后总体积 <code>&lt; 50kb</code></li>
+<li>静态资源(HTML/CSS/JS/Image)是否优化压缩？</li>
+<li>避免打包大型类库</li>
+<li>确保接入层已开启Gzip压缩（考虑提升Gzip级别，使用CPU开销换取加载时间） 注意！</li>
+<li>尽量使用CSS3代替图片</li>
+<li>初始首屏之外的静态资源（JS/CSS）延迟加载 注意！</li>
+<li>初始首屏之外的图片资源按需加载（判断可视区域） 注意！</li>
+<li>单页面应用(SPA)考虑延迟加载非首屏业务模块</li>
+<li>开启Keep-Alive链路复用</li>
+</ul>
+<p>运行性能优化, 达到操作足够流畅</p>
+<ul>
+<li>避免 iOS 300+ms 点击延时问题 注意！</li>
+<li>缓存 DOM 选择与计算</li>
+<li>避免触发页面重绘的操作</li>
+<li>Debounce连续触发的事件(scroll / resize / touchmove等)，避免高频繁触发执行 注意！</li>
+<li>尽可能使用事件代理，避免批量绑定事件</li>
+<li>使用CSS3动画代替JS动画</li>
+<li>避免在低端机上使用大量CSS3渐变阴影效果，可考虑降级效果来提升流畅度</li>
+<li>HTML结构层级保持足够简单</li>
+<li>尽能少的使用CSS高级选择器与通配选择器</li>
+<li>Keep it simple</li>
+</ul>
+<p>在线性能检测评定工具使用指南</p>
+<ul>
+<li>访问 <a href="http://developers.google.com/speed/pagespeed/insights/" target="_blank" rel="external">Google PageSpeed</a> 在线评定网站</li>
+<li>在地址栏输入目标URL地址，点击分析按钮开始检测</li>
+<li>按 PageSpeed 分析出的建议进行优化，优先解决红色类别的问题</li>
+</ul>
+<p>推荐阅读</p>
+<ul>
+<li><a href="http://www.webperformancetoday.com/tag/mobile-web-performance/" target="_blank" rel="external">移动WEB性能</a></li>
+<li><a href="https://developers.google.com/speed/docs/best-practices/caching" target="_blank" rel="external">优化WEB缓存</a></li>
+<li><a href="https://developers.google.com/speed/docs/best-practices/rtt" target="_blank" rel="external">最小化RTT次数</a></li>
+<li><a href="https://developers.google.com/speed/docs/best-practices/payload" target="_blank" rel="external">最小化请求负载</a></li>
+<li><a href="https://developers.google.com/speed/docs/best-practices/rendering" target="_blank" rel="external">优化浏览器渲染</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;移动性能&quot;&gt;&lt;a href=&quot;#移动性能&quot; class=&quot;headerlink&quot; title=&quot;移动性能&quot;&gt;&lt;/a&gt;移动性能&lt;/h2&gt;&lt;h3 id=&quot;要考虑Android低端机与2G网络场景下性能-注意！&quot;&gt;&lt;a href=&quot;#要考虑Android低端机与2G网络
+    
+    </summary>
+    
+      <category term="前端架构" scheme="http://www.wanglinzhizhi.me/categories/%E5%89%8D%E7%AB%AF%E6%9E%B6%E6%9E%84/"/>
+    
+    
+      <category term="移动性能" scheme="http://www.wanglinzhizhi.me/tags/%E7%A7%BB%E5%8A%A8%E6%80%A7%E8%83%BD/"/>
+    
+      <category term="性能分析" scheme="http://www.wanglinzhizhi.me/tags/%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>取消双击上滑 </title>
+    <link href="http://www.wanglinzhizhi.me/2017/01/21/%E7%A6%81%E6%AD%A2IOS%E5%8F%8C%E5%87%BB%E4%B8%8A%E6%BB%91/"/>
+    <id>http://www.wanglinzhizhi.me/2017/01/21/禁止IOS双击上滑/</id>
+    <published>2017-01-21T10:51:18.000Z</published>
+    <updated>2017-01-21T10:51:18.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="取消双击上滑"><a href="#取消双击上滑" class="headerlink" title="取消双击上滑"></a>取消双击上滑</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> agent = navigator.userAgent.toLowerCase();</div><div class="line"><span class="keyword">var</span> iLastTouch = <span class="literal">null</span>;</div><div class="line"><span class="keyword">if</span> (agent.indexOf(<span class="string">"iphone"</span>) &gt;= <span class="number">0</span> || agent.indexOf(<span class="string">"ipad"</span>) &gt;= <span class="number">0</span>) &#123;</div><div class="line">    <span class="built_in">document</span>.body.addEventListener(<span class="string">"touchend"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> a = <span class="keyword">new</span> <span class="built_in">Date</span>().getTime();</div><div class="line">        iLastTouch = iLastTouch || a + <span class="number">1</span>;</div><div class="line">        <span class="keyword">var</span> c = a - iLastTouch;</div><div class="line">        <span class="keyword">if</span> (c &lt; <span class="number">500</span> &amp;&amp; c &gt; <span class="number">0</span>) &#123;</div><div class="line">            event.preventDefault();</div><div class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">        &#125;</div><div class="line">        iLastTouch = a</div><div class="line">    &#125;, <span class="literal">false</span>);</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;取消双击上滑&quot;&gt;&lt;a href=&quot;#取消双击上滑&quot; class=&quot;headerlink&quot; title=&quot;取消双击上滑&quot;&gt;&lt;/a&gt;取消双击上滑&lt;/h2&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class
+    
+    </summary>
+    
+      <category term="移动Web" scheme="http://www.wanglinzhizhi.me/categories/%E7%A7%BB%E5%8A%A8Web/"/>
+    
+    
+      <category term="HTML5" scheme="http://www.wanglinzhizhi.me/tags/HTML5/"/>
+    
+      <category term="iOS" scheme="http://www.wanglinzhizhi.me/tags/iOS/"/>
+    
+  </entry>
+  
+  <entry>
     <title>火星救援 读书笔记</title>
     <link href="http://www.wanglinzhizhi.me/2017/01/21/%E7%81%AB%E6%98%9F%E6%95%91%E6%8F%B4/"/>
     <id>http://www.wanglinzhizhi.me/2017/01/21/火星救援/</id>
@@ -2355,132 +2481,6 @@ vendor/         # 第三方库
       <category term="科幻" scheme="http://www.wanglinzhizhi.me/tags/%E7%A7%91%E5%B9%BB/"/>
     
       <category term="书籍" scheme="http://www.wanglinzhizhi.me/tags/%E4%B9%A6%E7%B1%8D/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>-webkit-backface-visibility</title>
-    <link href="http://www.wanglinzhizhi.me/2017/01/21/-webkit-backface-visibility/"/>
-    <id>http://www.wanglinzhizhi.me/2017/01/21/-webkit-backface-visibility/</id>
-    <published>2017-01-21T10:51:18.000Z</published>
-    <updated>2017-01-21T10:51:18.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="webkit-backface-visibility"><a href="#webkit-backface-visibility" class="headerlink" title="-webkit-backface-visibility"></a>-webkit-backface-visibility</h2><figure class="highlight css"><table><tr><td class="code"><pre><div class="line"><span class="selector-tag">-webkit-backface-visibility</span><span class="selector-pseudo">:hidden</span></div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;webkit-backface-visibility&quot;&gt;&lt;a href=&quot;#webkit-backface-visibility&quot; class=&quot;headerlink&quot; title=&quot;-webkit-backface-visibility&quot;&gt;&lt;/a&gt;-webkit
-    
-    </summary>
-    
-      <category term="web" scheme="http://www.wanglinzhizhi.me/categories/web/"/>
-    
-    
-      <category term="CSS3" scheme="http://www.wanglinzhizhi.me/tags/CSS3/"/>
-    
-      <category term="Web 3D" scheme="http://www.wanglinzhizhi.me/tags/Web-3D/"/>
-    
-      <category term="移动Web" scheme="http://www.wanglinzhizhi.me/tags/%E7%A7%BB%E5%8A%A8Web/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>移动性能</title>
-    <link href="http://www.wanglinzhizhi.me/2017/01/21/%E7%A7%BB%E5%8A%A8web%20%E6%80%A7%E8%83%BD/"/>
-    <id>http://www.wanglinzhizhi.me/2017/01/21/移动web 性能/</id>
-    <published>2017-01-21T10:51:18.000Z</published>
-    <updated>2017-01-21T10:51:18.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="移动性能"><a href="#移动性能" class="headerlink" title="移动性能"></a>移动性能</h2><h3 id="要考虑Android低端机与2G网络场景下性能-注意！"><a href="#要考虑Android低端机与2G网络场景下性能-注意！" class="headerlink" title="要考虑Android低端机与2G网络场景下性能 注意！"></a>要考虑<code>Android</code>低端机与<code>2G</code>网络场景下性能 注意！</h3><p>发布前必要检查项</p>
-<ul>
-<li>所有图片必须有进行过压缩</li>
-<li>考虑适度的有损压缩，如转化为80%质量的jpg图片</li>
-<li>考虑把大图切成多张小图，常见在banner图过大的场景</li>
-</ul>
-<p>加载性能优化, 达到打开足够快</p>
-<ul>
-<li>数据离线化，考虑将数据缓存在 localStorage</li>
-<li>初始请求资源数 <code>&lt; 4</code> 注意！</li>
-<li>图片使用CSS Sprites 或 DataURI</li>
-<li>外链 CSS 中避免 @import 引入</li>
-<li>考虑内嵌小型的静态资源内容</li>
-<li>初始请求资源gzip后总体积 <code>&lt; 50kb</code></li>
-<li>静态资源(HTML/CSS/JS/Image)是否优化压缩？</li>
-<li>避免打包大型类库</li>
-<li>确保接入层已开启Gzip压缩（考虑提升Gzip级别，使用CPU开销换取加载时间） 注意！</li>
-<li>尽量使用CSS3代替图片</li>
-<li>初始首屏之外的静态资源（JS/CSS）延迟加载 注意！</li>
-<li>初始首屏之外的图片资源按需加载（判断可视区域） 注意！</li>
-<li>单页面应用(SPA)考虑延迟加载非首屏业务模块</li>
-<li>开启Keep-Alive链路复用</li>
-</ul>
-<p>运行性能优化, 达到操作足够流畅</p>
-<ul>
-<li>避免 iOS 300+ms 点击延时问题 注意！</li>
-<li>缓存 DOM 选择与计算</li>
-<li>避免触发页面重绘的操作</li>
-<li>Debounce连续触发的事件(scroll / resize / touchmove等)，避免高频繁触发执行 注意！</li>
-<li>尽可能使用事件代理，避免批量绑定事件</li>
-<li>使用CSS3动画代替JS动画</li>
-<li>避免在低端机上使用大量CSS3渐变阴影效果，可考虑降级效果来提升流畅度</li>
-<li>HTML结构层级保持足够简单</li>
-<li>尽能少的使用CSS高级选择器与通配选择器</li>
-<li>Keep it simple</li>
-</ul>
-<p>在线性能检测评定工具使用指南</p>
-<ul>
-<li>访问 <a href="http://developers.google.com/speed/pagespeed/insights/" target="_blank" rel="external">Google PageSpeed</a> 在线评定网站</li>
-<li>在地址栏输入目标URL地址，点击分析按钮开始检测</li>
-<li>按 PageSpeed 分析出的建议进行优化，优先解决红色类别的问题</li>
-</ul>
-<p>推荐阅读</p>
-<ul>
-<li><a href="http://www.webperformancetoday.com/tag/mobile-web-performance/" target="_blank" rel="external">移动WEB性能</a></li>
-<li><a href="https://developers.google.com/speed/docs/best-practices/caching" target="_blank" rel="external">优化WEB缓存</a></li>
-<li><a href="https://developers.google.com/speed/docs/best-practices/rtt" target="_blank" rel="external">最小化RTT次数</a></li>
-<li><a href="https://developers.google.com/speed/docs/best-practices/payload" target="_blank" rel="external">最小化请求负载</a></li>
-<li><a href="https://developers.google.com/speed/docs/best-practices/rendering" target="_blank" rel="external">优化浏览器渲染</a></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;移动性能&quot;&gt;&lt;a href=&quot;#移动性能&quot; class=&quot;headerlink&quot; title=&quot;移动性能&quot;&gt;&lt;/a&gt;移动性能&lt;/h2&gt;&lt;h3 id=&quot;要考虑Android低端机与2G网络场景下性能-注意！&quot;&gt;&lt;a href=&quot;#要考虑Android低端机与2G网络
-    
-    </summary>
-    
-      <category term="前端架构" scheme="http://www.wanglinzhizhi.me/categories/%E5%89%8D%E7%AB%AF%E6%9E%B6%E6%9E%84/"/>
-    
-    
-      <category term="移动性能" scheme="http://www.wanglinzhizhi.me/tags/%E7%A7%BB%E5%8A%A8%E6%80%A7%E8%83%BD/"/>
-    
-      <category term="性能分析" scheme="http://www.wanglinzhizhi.me/tags/%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>取消双击上滑 </title>
-    <link href="http://www.wanglinzhizhi.me/2017/01/21/%E7%A6%81%E6%AD%A2IOS%E5%8F%8C%E5%87%BB%E4%B8%8A%E6%BB%91/"/>
-    <id>http://www.wanglinzhizhi.me/2017/01/21/禁止IOS双击上滑/</id>
-    <published>2017-01-21T10:51:18.000Z</published>
-    <updated>2017-01-21T10:51:18.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="取消双击上滑"><a href="#取消双击上滑" class="headerlink" title="取消双击上滑"></a>取消双击上滑</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> agent = navigator.userAgent.toLowerCase();</div><div class="line"><span class="keyword">var</span> iLastTouch = <span class="literal">null</span>;</div><div class="line"><span class="keyword">if</span> (agent.indexOf(<span class="string">"iphone"</span>) &gt;= <span class="number">0</span> || agent.indexOf(<span class="string">"ipad"</span>) &gt;= <span class="number">0</span>) &#123;</div><div class="line">    <span class="built_in">document</span>.body.addEventListener(<span class="string">"touchend"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> a = <span class="keyword">new</span> <span class="built_in">Date</span>().getTime();</div><div class="line">        iLastTouch = iLastTouch || a + <span class="number">1</span>;</div><div class="line">        <span class="keyword">var</span> c = a - iLastTouch;</div><div class="line">        <span class="keyword">if</span> (c &lt; <span class="number">500</span> &amp;&amp; c &gt; <span class="number">0</span>) &#123;</div><div class="line">            event.preventDefault();</div><div class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">        &#125;</div><div class="line">        iLastTouch = a</div><div class="line">    &#125;, <span class="literal">false</span>);</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;取消双击上滑&quot;&gt;&lt;a href=&quot;#取消双击上滑&quot; class=&quot;headerlink&quot; title=&quot;取消双击上滑&quot;&gt;&lt;/a&gt;取消双击上滑&lt;/h2&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class
-    
-    </summary>
-    
-      <category term="移动Web" scheme="http://www.wanglinzhizhi.me/categories/%E7%A7%BB%E5%8A%A8Web/"/>
-    
-    
-      <category term="HTML5" scheme="http://www.wanglinzhizhi.me/tags/HTML5/"/>
-    
-      <category term="iOS" scheme="http://www.wanglinzhizhi.me/tags/iOS/"/>
     
   </entry>
   
