@@ -344,7 +344,7 @@
 <p>参数说明：</p>
 <p>说明：<br>1.该方法将从头到尾地检索字符串 stringObject，看它是否含有子串 substring。<br>2.可选参数，从stringObject的startpos位置开始查找substring，如果没有此参数将从stringObject的开始位置查找。<br>3.如果找到一个 substring，则返回 substring 的第一次出现的位置。stringObject 中的字符位置是从 0 开始的。<br>注意：1.indexOf() 方法区分大小写。<br>2.如果要检索的字符串值没有出现，则该方法返回 -1。</p>
 <p>例如: 对 “I love JavaScript!” 字符串内进行不同的检索：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line">  <span class="keyword">var</span> str=<span class="string">"I love JavaScript!"</span></div><div class="line">  <span class="built_in">document</span>.write(str.indexOf(<span class="string">"I"</span>) + <span class="string">"&lt;br /&gt;"</span>);</div><div class="line">  <span class="built_in">document</span>.write(str.indexOf(<span class="string">"v"</span>) + <span class="string">"&lt;br /&gt;"</span>);</div><div class="line">  <span class="built_in">document</span>.write(str.indexOf(<span class="string">"v"</span>,<span class="number">8</span>));</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"></div><div class="line">//以上代码的输出：</div><div class="line">0</div><div class="line">4</div><div class="line">9</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="xml"></span></div><div class="line">  var str="I love JavaScript!"</div><div class="line">  document.write(str.indexOf("I") + "<span class="tag">&lt;<span class="name">br</span> /&gt;</span>");</div><div class="line">  document.write(str.indexOf("v") + "<span class="tag">&lt;<span class="name">br</span> /&gt;</span>");</div><div class="line">  document.write(str.indexOf("v",8));</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"></div><div class="line">//以上代码的输出：</div><div class="line">0</div><div class="line">4</div><div class="line">9</div></pre></td></tr></table></figure>
 <p>找到第二个o出现的位置</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> mystr=<span class="string">"Hello World!"</span></div><div class="line">(mystr.indexOf(<span class="string">'o'</span>,mystr.indexOf(<span class="string">'o'</span>)+<span class="number">1</span>));<span class="comment">//用两次indexOf</span></div></pre></td></tr></table></figure>
 <h3 id="字符串分割split"><a href="#字符串分割split" class="headerlink" title="字符串分割split()"></a>字符串分割split()</h3><p>split() 方法将字符串分割为字符串数组，并返回此数组。</p>
@@ -519,7 +519,7 @@
     
     <!-- Prev Nav -->
     
-        <a href="/2016/02/08/2016-02-08-一次HTTP请求过程/" id="post_nav-newer" class="prev-content">
+        <a href="/2016/02/08/JavaScript 数组/" id="post_nav-newer" class="prev-content">
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
                 <i class="material-icons">arrow_back</i>
             </button>

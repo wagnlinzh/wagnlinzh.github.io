@@ -4,7 +4,7 @@
     <!-- Title -->
     
     <title>
-        标签: Web 架构 | wanglinzhizhi
+        小算法|关于对象的深复制 | wanglinzhizhi
     </title>
     
     <!-- Favicons -->
@@ -40,7 +40,7 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="http://www.wanglinzhizhi.me">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="标签: Web 架构 | wanglinzhizhi">
+    <meta property="og:title" content="小算法|关于对象的深复制 | wanglinzhizhi">
     <meta property="og:description" content="游走在上下文无关文法间">
     
      <!--[if lte IE 9]>
@@ -194,150 +194,199 @@
                 </button>
 				
 				
-                <!-- Index Module -->
-<div class="material-index mdl-grid">
-	
-    <div class="locate-thumbnail-symbol"></div>
+                <!-- Post TOC -->
+
     
-    
+	<!-- Back Button -->
+<!--
+	<div class="material-back" id="backhome-div" tabindex="0">
+		<a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" href="#" onclick="window.history.back();return false;" target="_self" role="button" data-upgraded=",MaterialButton,MaterialRipple">
+			<i class="material-icons" role="presentation">arrow_back</i>
+			<span class="mdl-button__ripple-container">
+				<span class="mdl-ripple"></span>
+			</span>
+		</a>
+	</div>			
+-->
+	<!-- Left aligned menu below button -->
+	<button id="post-toc-trigger-btn"
+			class="mdl-button mdl-js-button mdl-button--icon">
+	  <i class="material-icons">format_list_numbered</i>
+	</button>
+
+	<ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
+		for="post-toc-trigger-btn">
+			
+			<ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#小算法-关于对象深复制"><span class="post-toc-number">1.</span> <span class="post-toc-text">小算法 | 关于对象深复制</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#way2-gt-Object-create"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">way2 -> Object.create()</span></a></li></ol></li></ol>
 		
-			<!-- Paradox Thumbnail -->
-        	<div class="post_entry-module mdl-card mdl-cell mdl-cell--12-col fade out">
-    
-    <!-- Post Thumbnail -->
+<!--			<li class="mdl-menu__item">Some Action</li>-->
+	</ul>
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+		
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+	<!-- Paradox Post Header -->
 	
 		
 			<!-- Random Thumbnail -->
 			<div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-		
-	
-				
-		<!-- Post Title -->
-		<p class="article-headline-p"><a href="/2017/01/21/网易蜂巢的工业化前端架构/">十年•杭研技术秀 | 网易蜂巢的工业化前端架构</a></p>
-	</div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2017/01/21/网易蜂巢的工业化前端架构/" target="_self">继续阅读</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/me.jpeg" width="44px" height="44px" alt="wanglinzhizhi's avatar">
-            </div>
-            <div>
-                <strong>wanglinzhizhi</strong>
-                <span>Jan 21, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/架构/">架构</a>
-            </span>
-            
-            
-            
-            <!-- Post Views -->
-            <span class="post_entry-views">
-                
-            </span>
-        </div>
-    </div>
-            
-</div>
-
-		
-		
-    
-		
-			<!-- Paradox Thumbnail -->
-        	<div class="post_entry-module mdl-card mdl-cell mdl-cell--12-col fade out">
-    
-    <!-- Post Thumbnail -->
-	
-		
-			<!-- Random Thumbnail -->
-			<div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-		
-	
-				
-		<!-- Post Title -->
-		<p class="article-headline-p"><a href="/2017/01/21/谁能介绍下web前端工程化？/">谁能介绍下web前端工程化</a></p>
-	</div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2017/01/21/谁能介绍下web前端工程化？/" target="_self">继续阅读</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/me.jpeg" width="44px" height="44px" alt="wanglinzhizhi's avatar">
-            </div>
-            <div>
-                <strong>wanglinzhizhi</strong>
-                <span>Jan 21, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/架构/">架构</a>
-            </span>
-            
-            
-            
-            <!-- Post Views -->
-            <span class="post_entry-views">
-                
-            </span>
-        </div>
-    </div>
-            
-</div>
-
-		
-		
-    
-    
-	
-		<script>
+				<script>
     
     var randomNum;
+    randomNum = Math.floor(Math.random() * 5 + 1);
     
-    var locatePost = $(".locate-thumbnail-symbol").next();
-    for(var i=0; i < 10; i++){
-        
-        randomNum = Math.floor(Math.random() * 5 + 1);
-        
-        locatePost.children(".post_thumbnail-random").attr('id', 'random_thumbnail-'+randomNum);
-        locatePost.children(".post_thumbnail-random").css('background-image', 'url(' + '/img/random/' + randomNum + '.png' + ')')
-        
-        locatePost = locatePost.next();
-    }
+    $(".post_thumbnail-random").css('background-image', 'url(' + '/img/random/' + randomNum + '.png' + ')');
     
 </script>
 
+		
+	
+        <p class="article-headline-p">
+            小算法|关于对象的深复制
+        </p>
+    </div>
+
 	
 
+				
+				
+					<!-- Paradox Post Info -->
+					<div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+    
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/me.jpeg" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>wanglinzhizhi</strong>
+        <span>Feb 19, 2017</span>
+    </div>
+    
+    <div class="section-spacer"></div>
+	
+    <!-- Favorite -->
+<!--
+    <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+        <i class="material-icons" role="presentation">favorite</i>
+        <span class="visuallyhidden">favorites</span>
+    </button>
+-->
+    
+    <!-- Tags (bookmark) -->
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/JavaScrip/">JavaScrip</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/算法/">算法</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/编程/">编程</a>
+    </ul>
+    
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+    
+    <!-- Leancloud Views -->
+    <a class="post_share-link" href="#">
+        <li class="mdl-menu__item">
+            <span id="/2017/02/19/小算法-关于对象的深复制/" class="leancloud-views_num" data-flag-title="小算法|关于对象的深复制">
+     &nbsp;浏览量
+</span>
+        </li>
+    </a>
+    
+    
+    
+    
+    <!-- Share Twitter -->
+    <a class="post_share-link" href="https://twitter.com/intent/tweet?text=小算法|关于对象的深复制&url=http://www.wanglinzhizhi.me//2017/02/19/小算法-关于对象的深复制/index.html&via=wanglinzhizhi" target="_blank">
+        <li class="mdl-menu__item">
+            分享到 Twitter
+        </li>
+    </a>
+    
+    <!-- Share Google+ -->
+    <a class="post_share-link" href="https://plus.google.com/share?url=http://www.wanglinzhizhi.me//2017/02/19/小算法-关于对象的深复制/index.html" target="_blank">
+        <li class="mdl-menu__item">
+            分享到 Google+
+        </li>
+    </a>
+    
+    <!-- Share Weibo -->
+    <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=小算法|关于对象的深复制&url=http://www.wanglinzhizhi.me//2017/02/19/小算法-关于对象的深复制/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <li class="mdl-menu__item">
+            分享到微博
+        </li>
+    </a>
+</ul>
 </div>
+				
+
+                <!-- Post Content -->
+                <div id="post-content" class="markdown-Github mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+	
+		<h2 id="小算法-关于对象深复制"><a href="#小算法-关于对象深复制" class="headerlink" title="小算法 | 关于对象深复制"></a>小算法 | 关于对象深复制</h2><ul>
+<li>way1</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">copyObj</span>(<span class="params">obj</span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> copyObj=&#123;&#125;;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">of</span> <span class="built_in">Object</span>.keys(obj)) &#123;</div><div class="line">            <span class="comment">//引用类型</span></div><div class="line">            <span class="keyword">if</span> (obj[key] <span class="keyword">instanceof</span> <span class="built_in">Object</span>) &#123;</div><div class="line">              </div><div class="line"></div><div class="line">                <span class="comment">/**递归调用</span></div><div class="line">                 * </div><div class="line">                 * copyObj(obj[key])</div><div class="line">                 * </div><div class="line">                 * 再或者</div><div class="line">                 * arguments.callee(obj[key]);</div><div class="line">                 * </div><div class="line">                 **/</div><div class="line">                <span class="built_in">arguments</span>.callee(obj[key]);</div><div class="line"></div><div class="line">            &#125;</div><div class="line">            copyObj[key]=obj[key];</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> copyObj;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> wanglinzhizhiskillstack = &#123;</div><div class="line">        <span class="attr">name</span>: <span class="string">"wanglinzhizhi"</span>,</div><div class="line">        <span class="attr">sayHello</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="built_in">console</span>.log(<span class="string">"hi , I'm "</span> + <span class="keyword">this</span>.name)</div><div class="line">        &#125;,</div><div class="line">        <span class="attr">fullstack</span>: &#123;</div><div class="line">            <span class="attr">ES6</span>: &#123;</div><div class="line">                <span class="attr">JavaScrip</span>: <span class="string">"80%"</span>,</div><div class="line">                <span class="attr">ES6</span>: <span class="string">"80%"</span></div><div class="line">            &#125;,</div><div class="line">            <span class="attr">HTML</span>: &#123;</div><div class="line">                <span class="attr">HTML5</span>: <span class="string">'90%'</span>,</div><div class="line">                <span class="attr">HTML</span>: <span class="string">'80%'</span></div><div class="line">            &#125;,</div><div class="line">            <span class="attr">CSS</span>: &#123;</div><div class="line">                <span class="attr">CSS3</span>: <span class="string">'90%'</span>,</div><div class="line">                <span class="attr">CSS</span>: <span class="string">'80%'</span></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> wanglinzhizhiCopy = copyObj(wanglinzhizhiskillstack)</div><div class="line">&#125;)()</div></pre></td></tr></table></figure>
+<p><strong>Notes</strong> : 有个需要留一点 地方是 ,对象的属性可能 也是引用类型的,需要判断下,若是引用类型,则需要递归调用 copyObj 方法.</p>
+<p><br><br><br><br><br></p>
+<h3 id="way2-gt-Object-create"><a href="#way2-gt-Object-create" class="headerlink" title="way2 -&gt; Object.create()"></a>way2 -&gt; Object.create()</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">copyObj</span>(<span class="params">obj</span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> copyObj=&#123;&#125;;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">of</span> <span class="built_in">Object</span>.keys(obj)) &#123;</div><div class="line">            <span class="comment">//引用类型</span></div><div class="line">            <span class="keyword">if</span> (obj[key] <span class="keyword">instanceof</span> <span class="built_in">Object</span>) &#123;</div><div class="line">              </div><div class="line"></div><div class="line">                <span class="comment">/**递归调用</span></div><div class="line">                 * </div><div class="line">                 * copyObj(obj[key])</div><div class="line">                 * </div><div class="line">                 * 再或者</div><div class="line">                 * arguments.callee(obj[key]);</div><div class="line">                 * </div><div class="line">                 **/</div><div class="line">                <span class="built_in">arguments</span>.callee(obj[key]);</div><div class="line"></div><div class="line">            &#125;</div><div class="line">            <span class="comment">// copyObj[key]=obj[key];</span></div><div class="line">            copyObj=<span class="built_in">Object</span>.create(obj)</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> copyObj;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> wanglinzhizhiskillstack = &#123;</div><div class="line">        <span class="attr">name</span>: <span class="string">"wanglinzhizhi"</span>,</div><div class="line">        <span class="attr">sayHello</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="built_in">console</span>.log(<span class="string">"hi , I'm "</span> + <span class="keyword">this</span>.name)</div><div class="line">        &#125;,</div><div class="line">        <span class="attr">fullstack</span>: &#123;</div><div class="line">            <span class="attr">ES6</span>: &#123;</div><div class="line">                <span class="attr">JavaScrip</span>: <span class="string">"80%"</span>,</div><div class="line">                <span class="attr">ES6</span>: <span class="string">"80%"</span></div><div class="line">            &#125;,</div><div class="line">            <span class="attr">HTML</span>: &#123;</div><div class="line">                <span class="attr">HTML5</span>: <span class="string">'90%'</span>,</div><div class="line">                <span class="attr">HTML</span>: <span class="string">'80%'</span></div><div class="line">            &#125;,</div><div class="line">            <span class="attr">CSS</span>: &#123;</div><div class="line">                <span class="attr">CSS3</span>: <span class="string">'90%'</span>,</div><div class="line">                <span class="attr">CSS</span>: <span class="string">'80%'</span></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> wanglinzhizhiCopy = copyObj(wanglinzhizhiskillstack)</div><div class="line">&#125;)()</div></pre></td></tr></table></figure>
+<p><br><br><br><br><br></p>
+<p>by wanglinzhizhi</p>
+
+	
+	
+	
+	
+</div>
+				
+				
+
+                <!-- Post Comments -->
+                
+                    
+
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    
+    <!-- Prev Nav -->
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/02/19/算法-排序-class-实现/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+        </div>
+    </div>
 
 				
 				
@@ -466,6 +515,13 @@
 
 				
 				
+				
+					<!-- Footer Top Button -->
+					<div class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
 				
 				
 				<!--Footer-->
