@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wanglinzhizhi.me/"/>
-  <updated>2017-02-22T04:19:54.000Z</updated>
+  <updated>2017-03-02T18:20:25.000Z</updated>
   <id>http://www.wanglinzhizhi.me/</id>
   
   <author>
@@ -16,11 +16,34 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>JS 与 CSS3.md</title>
+    <link href="http://www.wanglinzhizhi.me/2017/03/03/JS-%E4%B8%8E-CSS3-md/"/>
+    <id>http://www.wanglinzhizhi.me/2017/03/03/JS-与-CSS3-md/</id>
+    <published>2017-03-02T18:20:25.000Z</published>
+    <updated>2017-03-02T18:20:25.000Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;div class=&quot;scale&quot;&gt;&lt;/div&gt;</div><div class="line">&lt;input type=&quot;text&quot; name=&quot;&quot; id=&quot;&quot;&gt;</div><div class="line"></div><div class="line"></div><div class="line">&lt;style&gt;</div><div class="line">    .scale &#123;</div><div class="line">        width: 100px;</div><div class="line">        height: 100px;</div><div class="line">        background: #DDD;</div><div class="line">        animation: ani 1s infinite;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    input &#123;</div><div class="line">        width: 400px;</div><div class="line">        height: 20px;</div><div class="line">        background: #13e;</div><div class="line">        margin-top: 137px;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    @keyframes ani &#123;</div><div class="line">        0% &#123;</div><div class="line">            transform: scale(2);</div><div class="line">        &#125;</div><div class="line">        100% &#123;</div><div class="line">            transform: scale(3);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&lt;/style&gt;</div><div class="line"></div><div class="line">&lt;script&gt;</div><div class="line">    setTimeout(function () &#123;</div><div class="line">        while(true)&#123;</div><div class="line">            console.log(&quot;hello world&quot;);</div><div class="line">        &#125;</div><div class="line">    &#125;, 3000)</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;div class=&amp;quot;scale&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;&lt;/div&gt;&lt;div
+    
+    </summary>
+    
+    
+      <category term="JavaScript" scheme="http://www.wanglinzhizhi.me/tags/JavaScript/"/>
+    
+      <category term="CSS3" scheme="http://www.wanglinzhizhi.me/tags/CSS3/"/>
+    
+  </entry>
+  
+  <entry>
     <title>小算法|关于对象的深复制</title>
     <link href="http://www.wanglinzhizhi.me/2017/02/19/%E5%B0%8F%E7%AE%97%E6%B3%95-%E5%85%B3%E4%BA%8E%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%B7%B1%E5%A4%8D%E5%88%B6/"/>
     <id>http://www.wanglinzhizhi.me/2017/02/19/小算法-关于对象的深复制/</id>
     <published>2017-02-19T09:33:28.000Z</published>
-    <updated>2017-02-22T04:19:54.000Z</updated>
+    <updated>2017-02-22T04:25:20.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="小算法-关于对象深复制"><a href="#小算法-关于对象深复制" class="headerlink" title="小算法 | 关于对象深复制"></a>小算法 | 关于对象深复制</h2><h3 id="way1"><a href="#way1" class="headerlink" title="way1"></a>way1</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">copyObj</span>(<span class="params">obj</span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> copyObj = &#123;&#125;;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">of</span> <span class="built_in">Object</span>.keys(obj)) &#123;</div><div class="line">            <span class="comment">//引用类型</span></div><div class="line">            <span class="keyword">if</span> (obj[key] <span class="keyword">instanceof</span> <span class="built_in">Object</span>) &#123;</div><div class="line"></div><div class="line">                <span class="keyword">let</span> toString = <span class="built_in">Object</span>.prototype.toString;</div><div class="line">                <span class="keyword">let</span> objtype = toString.call(obj[key])</div><div class="line">                <span class="keyword">let</span> objvalue = obj[key].toString();</div><div class="line"></div><div class="line">                <span class="comment">/***</span></div><div class="line">                 * </div><div class="line">                 * 对于几种特殊的 引用类型需要额外处理下,Date 类型, 正则类型等. </div><div class="line">                 * </div><div class="line">                 * Math 类型,不需要处理, 因为 Math 属于 global 类型的(属于设计模式中的单体模型).</div><div class="line">                 * </div><div class="line">                 * null undefined 类型可以不用处理,是因为,for...of 循环 可处理,不会像 forin,forEach 跳过.</div><div class="line">                 * </div><div class="line">                 * toString.call(new Date); // [object Date] </div><div class="line">                 * toString.call(new String); // [object String] </div><div class="line">                 * toString.call(Math); // [object Math] //Since JavaScript 1.8.5 </div><div class="line">                 * toString.call(undefined); // [object Undefined] </div><div class="line">                 * toString.call(null); // [object Null]</div><div class="line">                 * </div><div class="line">                 */</div><div class="line"></div><div class="line"></div><div class="line">                <span class="keyword">if</span> (objtype.indexOf(<span class="string">"Date"</span>) &gt; <span class="number">-1</span>) &#123;</div><div class="line">                    copyObj[key] = <span class="keyword">new</span> <span class="built_in">Date</span>(objvalue);</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">if</span> (objtype.indexOf(<span class="string">"String"</span>) &gt; <span class="number">-1</span>) &#123;</div><div class="line">                    copyObj[key] = <span class="keyword">new</span> <span class="built_in">String</span>(objvalue);</div><div class="line">                &#125;</div><div class="line"></div><div class="line">                <span class="keyword">if</span> (objtype.indexOf(<span class="string">"RegExp"</span>)) &#123;</div><div class="line">                    copyObj[key] = <span class="keyword">new</span> <span class="built_in">RegExp</span>(objvalue);</div><div class="line">                &#125;</div><div class="line"></div><div class="line">                <span class="comment">/***</span></div><div class="line">                 * Math 是单体方法,静态方法.设计模式中的单利模型.只能直接调引用.</div><div class="line">                 * 其实可以不用在这里单独列出来,下面也会处理:)</div><div class="line">                 * */</div><div class="line">                <span class="keyword">if</span> (objtype.indexOf(<span class="string">"Math"</span>) &gt; <span class="number">-1</span>) &#123;</div><div class="line">                    copyObj[key] = obj[key];</div><div class="line">                &#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">                <span class="comment">/**递归调用</span></div><div class="line">                 * </div><div class="line">                 * copyObj(obj[key])</div><div class="line">                 * </div><div class="line">                 * 再或者</div><div class="line">                 * arguments.callee(obj[key]);</div><div class="line">                 * </div><div class="line">                 **/</div><div class="line">                <span class="built_in">arguments</span>.callee(obj[key]);</div><div class="line"></div><div class="line">            &#125;</div><div class="line">            copyObj[key]=obj[key];</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> copyObj;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> wanglinzhizhiskillstack = &#123;</div><div class="line">        <span class="attr">name</span>: <span class="string">"wanglinzhizhi"</span>,</div><div class="line">        <span class="attr">sayHello</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="built_in">console</span>.log(<span class="string">"hi , I'm "</span> + <span class="keyword">this</span>.name)</div><div class="line">        &#125;,</div><div class="line">        <span class="attr">fullstack</span>: &#123;</div><div class="line">            <span class="attr">ES6</span>: &#123;</div><div class="line">                <span class="attr">JavaScrip</span>: <span class="string">"80%"</span>,</div><div class="line">                <span class="attr">ES6</span>: <span class="string">"80%"</span></div><div class="line">            &#125;,</div><div class="line">            <span class="attr">HTML</span>: &#123;</div><div class="line">                <span class="attr">HTML5</span>: <span class="string">'90%'</span>,</div><div class="line">                <span class="attr">HTML</span>: <span class="string">'80%'</span></div><div class="line">            &#125;,</div><div class="line">            <span class="attr">CSS</span>: &#123;</div><div class="line">                <span class="attr">CSS3</span>: <span class="string">'90%'</span>,</div><div class="line">                <span class="attr">CSS</span>: <span class="string">'80%'</span></div><div class="line">            &#125;</div><div class="line">        &#125;,</div><div class="line">        <span class="attr">birthday</span>: <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">"1991/02/08"</span>),</div><div class="line">        <span class="attr">emailFilter</span>: <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"/^(\w+[_|\.|\_]?)*(\w)+@(\w+[_|\.|\_])*(\w)+\.[a-zA-z]&#123;2,4&#125;$/"</span>,<span class="string">"gi"</span>)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> wanglinzhizhiCopy = copyObj(wanglinzhizhiskillstack)</div><div class="line">    wanglinzhizhiCopy.birthday=<span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">"2019/12/12"</span>)</div><div class="line">    wanglinzhizhiCopy.emailFilter=<span class="regexp">/\w$/gi</span>;</div><div class="line">    <span class="built_in">console</span>.log(wanglinzhizhiCopy.birthday)</div><div class="line">    <span class="built_in">console</span>.log(wanglinzhizhiskillstack.birthday)</div><div class="line">    <span class="built_in">console</span>.log(wanglinzhizhiskillstack.emailFilter);</div><div class="line">    <span class="built_in">console</span>.log(wanglinzhizhiCopy.emailFilter);</div><div class="line">&#125;)()</div></pre></td></tr></table></figure>
 <p><strong>Notes</strong> : 有个需要留意地方是 ,对象的属性可能 也是引用类型的,需要判断下,若是引用类型,则需要递归调用 copyObj 方法.</p>
@@ -1551,36 +1574,6 @@
   </entry>
   
   <entry>
-    <title>结构与样式分离</title>
-    <link href="http://www.wanglinzhizhi.me/2017/01/21/%E7%BB%93%E6%9E%84%E4%B8%8E%E6%A0%B7%E5%BC%8F%E5%88%86%E7%A6%BB/"/>
-    <id>http://www.wanglinzhizhi.me/2017/01/21/结构与样式分离/</id>
-    <published>2017-01-21T10:51:18.000Z</published>
-    <updated>2017-01-21T10:51:18.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="结构与样式分离"><a href="#结构与样式分离" class="headerlink" title="结构与样式分离"></a>结构与样式分离</h2><p><strong>结构与样式分离</strong></p>
-<p><strong>结构与样式分离</strong></p>
-<p><strong>结构与样式分离</strong></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;结构与样式分离&quot;&gt;&lt;a href=&quot;#结构与样式分离&quot; class=&quot;headerlink&quot; title=&quot;结构与样式分离&quot;&gt;&lt;/a&gt;结构与样式分离&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;结构与样式分离&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;结构与样式分离&lt;/s
-    
-    </summary>
-    
-      <category term="前端架构" scheme="http://www.wanglinzhizhi.me/categories/%E5%89%8D%E7%AB%AF%E6%9E%B6%E6%9E%84/"/>
-    
-    
-      <category term="架构" scheme="http://www.wanglinzhizhi.me/tags/%E6%9E%B6%E6%9E%84/"/>
-    
-      <category term="前端架构" scheme="http://www.wanglinzhizhi.me/tags/%E5%89%8D%E7%AB%AF%E6%9E%B6%E6%9E%84/"/>
-    
-      <category term="页面结构" scheme="http://www.wanglinzhizhi.me/tags/%E9%A1%B5%E9%9D%A2%E7%BB%93%E6%9E%84/"/>
-    
-  </entry>
-  
-  <entry>
     <title>算法：BinarySearch和FibSearch</title>
     <link href="http://www.wanglinzhizhi.me/2017/01/21/%E7%AE%97%E6%B3%95%EF%BC%9ABinarySearch%20%20%E5%92%8C%20FibSearch/"/>
     <id>http://www.wanglinzhizhi.me/2017/01/21/算法：BinarySearch  和 FibSearch/</id>
@@ -1684,80 +1677,6 @@
       <category term="Web 3D" scheme="http://www.wanglinzhizhi.me/tags/Web-3D/"/>
     
       <category term="移动Web" scheme="http://www.wanglinzhizhi.me/tags/%E7%A7%BB%E5%8A%A8Web/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>移动性能</title>
-    <link href="http://www.wanglinzhizhi.me/2017/01/21/%E7%A7%BB%E5%8A%A8web%20%E6%80%A7%E8%83%BD/"/>
-    <id>http://www.wanglinzhizhi.me/2017/01/21/移动web 性能/</id>
-    <published>2017-01-21T10:51:18.000Z</published>
-    <updated>2017-01-21T10:51:18.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="移动性能"><a href="#移动性能" class="headerlink" title="移动性能"></a>移动性能</h2><h3 id="要考虑Android低端机与2G网络场景下性能-注意！"><a href="#要考虑Android低端机与2G网络场景下性能-注意！" class="headerlink" title="要考虑Android低端机与2G网络场景下性能 注意！"></a>要考虑<code>Android</code>低端机与<code>2G</code>网络场景下性能 注意！</h3><p>发布前必要检查项</p>
-<ul>
-<li>所有图片必须有进行过压缩</li>
-<li>考虑适度的有损压缩，如转化为80%质量的jpg图片</li>
-<li>考虑把大图切成多张小图，常见在banner图过大的场景</li>
-</ul>
-<p>加载性能优化, 达到打开足够快</p>
-<ul>
-<li>数据离线化，考虑将数据缓存在 localStorage</li>
-<li>初始请求资源数 <code>&lt; 4</code> 注意！</li>
-<li>图片使用CSS Sprites 或 DataURI</li>
-<li>外链 CSS 中避免 @import 引入</li>
-<li>考虑内嵌小型的静态资源内容</li>
-<li>初始请求资源gzip后总体积 <code>&lt; 50kb</code></li>
-<li>静态资源(HTML/CSS/JS/Image)是否优化压缩？</li>
-<li>避免打包大型类库</li>
-<li>确保接入层已开启Gzip压缩（考虑提升Gzip级别，使用CPU开销换取加载时间） 注意！</li>
-<li>尽量使用CSS3代替图片</li>
-<li>初始首屏之外的静态资源（JS/CSS）延迟加载 注意！</li>
-<li>初始首屏之外的图片资源按需加载（判断可视区域） 注意！</li>
-<li>单页面应用(SPA)考虑延迟加载非首屏业务模块</li>
-<li>开启Keep-Alive链路复用</li>
-</ul>
-<p>运行性能优化, 达到操作足够流畅</p>
-<ul>
-<li>避免 iOS 300+ms 点击延时问题 注意！</li>
-<li>缓存 DOM 选择与计算</li>
-<li>避免触发页面重绘的操作</li>
-<li>Debounce连续触发的事件(scroll / resize / touchmove等)，避免高频繁触发执行 注意！</li>
-<li>尽可能使用事件代理，避免批量绑定事件</li>
-<li>使用CSS3动画代替JS动画</li>
-<li>避免在低端机上使用大量CSS3渐变阴影效果，可考虑降级效果来提升流畅度</li>
-<li>HTML结构层级保持足够简单</li>
-<li>尽能少的使用CSS高级选择器与通配选择器</li>
-<li>Keep it simple</li>
-</ul>
-<p>在线性能检测评定工具使用指南</p>
-<ul>
-<li>访问 <a href="http://developers.google.com/speed/pagespeed/insights/" target="_blank" rel="external">Google PageSpeed</a> 在线评定网站</li>
-<li>在地址栏输入目标URL地址，点击分析按钮开始检测</li>
-<li>按 PageSpeed 分析出的建议进行优化，优先解决红色类别的问题</li>
-</ul>
-<p>推荐阅读</p>
-<ul>
-<li><a href="http://www.webperformancetoday.com/tag/mobile-web-performance/" target="_blank" rel="external">移动WEB性能</a></li>
-<li><a href="https://developers.google.com/speed/docs/best-practices/caching" target="_blank" rel="external">优化WEB缓存</a></li>
-<li><a href="https://developers.google.com/speed/docs/best-practices/rtt" target="_blank" rel="external">最小化RTT次数</a></li>
-<li><a href="https://developers.google.com/speed/docs/best-practices/payload" target="_blank" rel="external">最小化请求负载</a></li>
-<li><a href="https://developers.google.com/speed/docs/best-practices/rendering" target="_blank" rel="external">优化浏览器渲染</a></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;移动性能&quot;&gt;&lt;a href=&quot;#移动性能&quot; class=&quot;headerlink&quot; title=&quot;移动性能&quot;&gt;&lt;/a&gt;移动性能&lt;/h2&gt;&lt;h3 id=&quot;要考虑Android低端机与2G网络场景下性能-注意！&quot;&gt;&lt;a href=&quot;#要考虑Android低端机与2G网络
-    
-    </summary>
-    
-      <category term="前端架构" scheme="http://www.wanglinzhizhi.me/categories/%E5%89%8D%E7%AB%AF%E6%9E%B6%E6%9E%84/"/>
-    
-    
-      <category term="移动性能" scheme="http://www.wanglinzhizhi.me/tags/%E7%A7%BB%E5%8A%A8%E6%80%A7%E8%83%BD/"/>
-    
-      <category term="性能分析" scheme="http://www.wanglinzhizhi.me/tags/%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90/"/>
     
   </entry>
   
@@ -2415,6 +2334,80 @@
       <category term="XXS" scheme="http://www.wanglinzhizhi.me/tags/XXS/"/>
     
       <category term="CSRF" scheme="http://www.wanglinzhizhi.me/tags/CSRF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>移动性能</title>
+    <link href="http://www.wanglinzhizhi.me/2017/01/21/%E7%A7%BB%E5%8A%A8web%20%E6%80%A7%E8%83%BD/"/>
+    <id>http://www.wanglinzhizhi.me/2017/01/21/移动web 性能/</id>
+    <published>2017-01-21T10:51:18.000Z</published>
+    <updated>2017-01-21T10:51:18.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="移动性能"><a href="#移动性能" class="headerlink" title="移动性能"></a>移动性能</h2><h3 id="要考虑Android低端机与2G网络场景下性能-注意！"><a href="#要考虑Android低端机与2G网络场景下性能-注意！" class="headerlink" title="要考虑Android低端机与2G网络场景下性能 注意！"></a>要考虑<code>Android</code>低端机与<code>2G</code>网络场景下性能 注意！</h3><p>发布前必要检查项</p>
+<ul>
+<li>所有图片必须有进行过压缩</li>
+<li>考虑适度的有损压缩，如转化为80%质量的jpg图片</li>
+<li>考虑把大图切成多张小图，常见在banner图过大的场景</li>
+</ul>
+<p>加载性能优化, 达到打开足够快</p>
+<ul>
+<li>数据离线化，考虑将数据缓存在 localStorage</li>
+<li>初始请求资源数 <code>&lt; 4</code> 注意！</li>
+<li>图片使用CSS Sprites 或 DataURI</li>
+<li>外链 CSS 中避免 @import 引入</li>
+<li>考虑内嵌小型的静态资源内容</li>
+<li>初始请求资源gzip后总体积 <code>&lt; 50kb</code></li>
+<li>静态资源(HTML/CSS/JS/Image)是否优化压缩？</li>
+<li>避免打包大型类库</li>
+<li>确保接入层已开启Gzip压缩（考虑提升Gzip级别，使用CPU开销换取加载时间） 注意！</li>
+<li>尽量使用CSS3代替图片</li>
+<li>初始首屏之外的静态资源（JS/CSS）延迟加载 注意！</li>
+<li>初始首屏之外的图片资源按需加载（判断可视区域） 注意！</li>
+<li>单页面应用(SPA)考虑延迟加载非首屏业务模块</li>
+<li>开启Keep-Alive链路复用</li>
+</ul>
+<p>运行性能优化, 达到操作足够流畅</p>
+<ul>
+<li>避免 iOS 300+ms 点击延时问题 注意！</li>
+<li>缓存 DOM 选择与计算</li>
+<li>避免触发页面重绘的操作</li>
+<li>Debounce连续触发的事件(scroll / resize / touchmove等)，避免高频繁触发执行 注意！</li>
+<li>尽可能使用事件代理，避免批量绑定事件</li>
+<li>使用CSS3动画代替JS动画</li>
+<li>避免在低端机上使用大量CSS3渐变阴影效果，可考虑降级效果来提升流畅度</li>
+<li>HTML结构层级保持足够简单</li>
+<li>尽能少的使用CSS高级选择器与通配选择器</li>
+<li>Keep it simple</li>
+</ul>
+<p>在线性能检测评定工具使用指南</p>
+<ul>
+<li>访问 <a href="http://developers.google.com/speed/pagespeed/insights/" target="_blank" rel="external">Google PageSpeed</a> 在线评定网站</li>
+<li>在地址栏输入目标URL地址，点击分析按钮开始检测</li>
+<li>按 PageSpeed 分析出的建议进行优化，优先解决红色类别的问题</li>
+</ul>
+<p>推荐阅读</p>
+<ul>
+<li><a href="http://www.webperformancetoday.com/tag/mobile-web-performance/" target="_blank" rel="external">移动WEB性能</a></li>
+<li><a href="https://developers.google.com/speed/docs/best-practices/caching" target="_blank" rel="external">优化WEB缓存</a></li>
+<li><a href="https://developers.google.com/speed/docs/best-practices/rtt" target="_blank" rel="external">最小化RTT次数</a></li>
+<li><a href="https://developers.google.com/speed/docs/best-practices/payload" target="_blank" rel="external">最小化请求负载</a></li>
+<li><a href="https://developers.google.com/speed/docs/best-practices/rendering" target="_blank" rel="external">优化浏览器渲染</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;移动性能&quot;&gt;&lt;a href=&quot;#移动性能&quot; class=&quot;headerlink&quot; title=&quot;移动性能&quot;&gt;&lt;/a&gt;移动性能&lt;/h2&gt;&lt;h3 id=&quot;要考虑Android低端机与2G网络场景下性能-注意！&quot;&gt;&lt;a href=&quot;#要考虑Android低端机与2G网络
+    
+    </summary>
+    
+      <category term="前端架构" scheme="http://www.wanglinzhizhi.me/categories/%E5%89%8D%E7%AB%AF%E6%9E%B6%E6%9E%84/"/>
+    
+    
+      <category term="移动性能" scheme="http://www.wanglinzhizhi.me/tags/%E7%A7%BB%E5%8A%A8%E6%80%A7%E8%83%BD/"/>
+    
+      <category term="性能分析" scheme="http://www.wanglinzhizhi.me/tags/%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90/"/>
     
   </entry>
   
