@@ -393,19 +393,19 @@
 <h4 id="有人先初始化好中央仓库"><a href="#有人先初始化好中央仓库" class="headerlink" title="有人先初始化好中央仓库"></a>有人先初始化好中央仓库</h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-svn-initialize.png&amp;objectId=1190000002918123&amp;token=87ea7a312eea3ac60744ef5997f686c7" alt=""></p>
 <p>第一步，有人在服务器上创建好中央仓库。如果是新项目，你可以初始化一个空仓库；否则你要导入已有的<code>Git</code>或<code>SVN</code>仓库。</p>
 <p>中央仓库应该是个裸仓库（<code>bare repository</code>），即没有工作目录（<code>working directory</code>）的仓库。可以用下面的命令创建：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">ssh user@host</div><div class="line">git init --bare /path/to/repo.git</div></pre></td></tr></table></figure>
+<figure class="highlight autoit"><table><tr><td class="code"><pre><div class="line">ssh user<span class="symbol">@host</span></div><div class="line">git init --bare /path/<span class="keyword">to</span>/repo.git</div></pre></td></tr></table></figure>
 <p>确保写上有效的<code>user</code>（<code>SSH</code>的用户名），<code>host</code>（服务器的域名或IP地址），<code>/path/to/repo.git</code>（你想存放仓库的位置）。</p>
 <p>注意，为了表示是一个裸仓库，按照约定加上<code>.git</code>扩展名到仓库名上。</p>
 <h4 id="所有人克隆中央仓库"><a href="#所有人克隆中央仓库" class="headerlink" title="所有人克隆中央仓库"></a>所有人克隆中央仓库</h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-svn-clone.png&amp;objectId=1190000002918123&amp;token=74230960454bff61cc38e28016dde2c4" alt=""></p>
 <p>下一步，各个开发者创建整个项目的本地拷贝。通过<a href="https://www.atlassian.com/git/tutorial/git-basics#!clone" target="_blank" rel="external"><code>git clone</code></a>命令完成：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git clone ssh://user@host/path/to/repo.git</div></pre></td></tr></table></figure>
+<figure class="highlight crmsh"><table><tr><td class="code"><pre><div class="line">git <span class="keyword">clone</span> <span class="title">ssh</span>://user@host/path/to/repo.git</div></pre></td></tr></table></figure>
 <p>基于你后续会持续和克隆的仓库做交互的假设，克隆仓库时<code>Git</code>会自动添加远程别名<code>origin</code>指回『父』仓库。</p>
 <p><br><br><br><br><br><br></p>
 <h4 id="小明开发功能"><a href="#小明开发功能" class="headerlink" title="小明开发功能"></a>小明开发功能</h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-svn-1.png&amp;objectId=1190000002918123&amp;token=318dfc4b7192333b4d04457a8dd58de3" alt=""></p>
 <p>在小明的本地仓库中，他使用标准的<code>Git</code>过程开发功能：编辑、暂存（<code>Stage</code>）和提交。</p>
 <p>如果你不熟悉暂存区（<code>Staging Area</code>），这里说明一下：<strong>暂存区</strong>的用来准备一个提交，但可以不用把工作目录中所有的修改内容都包含进来。</p>
 <p>这样你可以创建一个高度聚焦的提交，尽管你本地修改很多内容。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git status # 查看本地仓库的修改状态</div><div class="line">git add # 暂存文件</div><div class="line">git commit # 提交文件</div></pre></td></tr></table></figure>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><div class="line">git status <span class="comment"># 查看本地仓库的修改状态</span></div><div class="line">git <span class="keyword">add</span><span class="bash"> <span class="comment"># 暂存文件</span></span></div><div class="line">git commit <span class="comment"># 提交文件</span></div></pre></td></tr></table></figure>
 <p>请记住，因为这些命令生成的是本地提交，小明可以按自己需求反复操作多次，而不用担心中央仓库上有了什么操作。</p>
 <p>对需要多个更简单更原子分块的大功能，这个做法是很有用的。</p>
 <p><br><br><br><br><br><br></p>
@@ -414,19 +414,19 @@
 <p><br><br><br><br><br><br></p>
 <h4 id="小明发布功能"><a href="#小明发布功能" class="headerlink" title="小明发布功能"></a>小明发布功能</h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-svn-3.png&amp;objectId=1190000002918123&amp;token=093a21ecc0bdbebb13f61585151f72a7" alt=""></p>
 <p>一旦小明完成了他的功能开发，会发布他的本地提交到中央仓库中，这样其它团队成员可以看到他的修改。他可以用下面的<a href="https://www.atlassian.com/git/tutorial/remote-repositories#!push" target="_blank" rel="external"><code>git push</code>命令</a>：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git push origin master</div></pre></td></tr></table></figure>
+<figure class="highlight maxima"><table><tr><td class="code"><pre><div class="line">git <span class="built_in">push</span> <span class="built_in">origin</span> master</div></pre></td></tr></table></figure>
 <p>注意，<code>origin</code>是在小明克隆仓库时<code>Git</code>创建的远程中央仓库别名。<code>master</code>参数告诉<code>Git</code>推送的分支。<br>由于中央仓库自从小明克隆以来还没有被更新过，所以<code>push</code>操作不会有冲突，成功完成。</p>
 <p><br><br><br><br><br><br><br></p>
 <h4 id="小红试着发布功能"><a href="#小红试着发布功能" class="headerlink" title="小红试着发布功能"></a>小红试着发布功能</h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-svn-4.png&amp;objectId=1190000002918123&amp;token=ece2216852baad8d0831038362b6e3f9" alt=""></p>
 <p>一起来看看在小明发布修改后，小红<code>push</code>修改会怎么样？她使用完全一样的<code>push</code>命令：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git push origin master</div></pre></td></tr></table></figure>
+<figure class="highlight maxima"><table><tr><td class="code"><pre><div class="line">git <span class="built_in">push</span> <span class="built_in">origin</span> master</div></pre></td></tr></table></figure>
 <p>但她的本地历史已经和中央仓库有分岐了，<code>Git</code>拒绝操作并给出下面很长的出错消息：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">error: failed to push some refs to &apos;/path/to/repo.git&apos;</div><div class="line">hint: Updates were rejected because the tip of your current branch is behind</div><div class="line">hint: its remote counterpart. Merge the remote changes (e.g. &apos;git pull&apos;)</div><div class="line">hint: before pushing again.</div><div class="line">hint: See the &apos;Note about fast-forwards&apos; in &apos;git push --help&apos; for details.</div></pre></td></tr></table></figure>
+<figure class="highlight applescript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">error</span>: failed <span class="keyword">to</span> push <span class="keyword">some</span> refs <span class="keyword">to</span> '/path/<span class="keyword">to</span>/repo.git'</div><div class="line">hint: Updates were rejected because <span class="keyword">the</span> tip <span class="keyword">of</span> your current branch <span class="keyword">is</span> <span class="keyword">behind</span></div><div class="line">hint: <span class="keyword">its</span> remote counterpart. Merge <span class="keyword">the</span> remote changes (e.g. 'git pull')</div><div class="line">hint: <span class="keyword">before</span> pushing again.</div><div class="line">hint: See <span class="keyword">the</span> 'Note <span class="keyword">about</span> fast-forwards' <span class="keyword">in</span> 'git push <span class="comment">--help' for details.</span></div></pre></td></tr></table></figure>
 <p>这避免了小红覆写正式的提交。她要先<code>pull</code>小明的更新到她的本地仓库合并上她的本地修改后，再重试。</p>
 <p><br><br><br><br><br></p>
 <h4 id="小红在小明的提交之上rebase"><a href="#小红在小明的提交之上rebase" class="headerlink" title="小红在小明的提交之上rebase"></a>小红在小明的提交之上<code>rebase</code></h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-svn-5.png&amp;objectId=1190000002918123&amp;token=6430522a0e2cec6438cabb09e09b6354" alt=""></p>
 <p>小红用<a href="https://www.atlassian.com/git/tutorial/remote-repositories#!pull" target="_blank" rel="external"><code>git pull</code></a>合并上游的修改到自己的仓库中。<br>这条命令类似<code>svn update</code>——拉取所有上游提交命令到小红的本地仓库，并尝试和她的本地修改合并：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git pull --rebase origin master</div></pre></td></tr></table></figure>
+<figure class="highlight ada"><table><tr><td class="code"><pre><div class="line">git pull <span class="comment">--rebase origin master</span></div></pre></td></tr></table></figure>
 <p><code>--rebase</code>选项告诉<code>Git</code>把小红的提交移到同步了中央仓库修改后的<code>master</code>分支的顶部，如下图所示：</p>
 <p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-svn-6.png&amp;objectId=1190000002918123&amp;token=9bd72f11e19f3c1a2c9491dbff73a334" alt=""></p>
 <p>如果你忘加了这个选项，<code>pull</code>操作仍然可以完成，但每次<code>pull</code>操作要同步中央仓库中别人修改时，提交历史会以一个多余的<strong>『合并提交』</strong>结尾。</p>
@@ -436,20 +436,20 @@
 <p><code>rebase</code>操作过程是把本地提交一次一个地迁移到更新了的中央仓库<code>master</code>分支之上。<br>这意味着可能要解决在迁移某个提交时出现的合并冲突，而不是解决包含了所有提交的大型合并时所出现的冲突。</p>
 <p>这样的方式让你尽可能保持每个提交的聚焦和项目历史的整洁。反过来，简化了哪里引入<code>Bug</code>的分析，如果有必要，回滚修改也可以做到对项目影响最小。</p>
 <p>如果小红和小明的功能是相关的，不大可能在<code>rebase</code>过程中有冲突。如果有，<code>Git</code>在合并有冲突的提交处暂停<code>rebase</code>过程，输出下面的信息并带上相关的指令：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">CONFLICT (content): Merge conflict in &lt;some-file&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><div class="line">CONFLICT (content): <span class="keyword">Merge</span> conflict <span class="keyword">in</span> &lt;<span class="keyword">some</span>-<span class="keyword">file</span>&gt;</div></pre></td></tr></table></figure>
 <p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-svn-8.png&amp;objectId=1190000002918123&amp;token=e9fff79b5189565698de39b45d42551d" alt=""></p>
 <p><code>Git</code>很赞的一点是，任何人可以解决他自己的冲突。在这个例子中，小红可以简单的运行<a href="https://www.atlassian.com/git/tutorial/git-basics#!status" target="_blank" rel="external"><code>git status</code></a>命令来查看哪里有问题。</p>
 <p>冲突文件列在<code>Unmerged paths</code>（未合并路径）一节中：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># Unmerged paths:</div><div class="line"># (use &quot;git reset HEAD &lt;some-file&gt;...&quot; to unstage)</div><div class="line"># (use &quot;git add/rm &lt;some-file&gt;...&quot; as appropriate to mark resolution)</div><div class="line">#</div><div class="line"># both modified: &lt;some-file&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight vala"><table><tr><td class="code"><pre><div class="line"><span class="meta"># Unmerged paths:</span></div><div class="line"><span class="meta"># (use "git reset HEAD &lt;some-file&gt;..." to unstage)</span></div><div class="line"><span class="meta"># (use "git add/rm &lt;some-file&gt;..." as appropriate to mark resolution)</span></div><div class="line"><span class="meta">#</span></div><div class="line"><span class="meta"># both modified: &lt;some-file&gt;</span></div></pre></td></tr></table></figure>
 <p>接着小红编辑这些文件。修改完成后，用老套路暂存这些文件，并让<a href="https://www.atlassian.com/git/tutorial/rewriting-git-history#!rebase" target="_blank" rel="external"><code>git rebase</code></a>完成剩下的事：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git add &lt;some-file&gt;</div><div class="line">git rebase --continue</div></pre></td></tr></table></figure>
+<figure class="highlight applescript"><table><tr><td class="code"><pre><div class="line">git add &lt;<span class="keyword">some</span>-<span class="built_in">file</span>&gt;</div><div class="line">git rebase <span class="comment">--continue</span></div></pre></td></tr></table></figure>
 <p>要做的就这些了。<code>Git</code>会继续一个一个地合并后面的提交，如其它的提交有冲突就重复这个过程。</p>
 <p>如果你碰到了冲突，但发现搞不定，不要惊慌。只要执行下面这条命令，就可以回到你执行<a href="https://www.atlassian.com/git/tutorial/remote-repositories#!pull" target="_blank" rel="external"><code>git pull --rebase</code></a>命令前的样子：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git rebase --abort</div></pre></td></tr></table></figure>
+<figure class="highlight ada"><table><tr><td class="code"><pre><div class="line">git rebase <span class="comment">--abort</span></div></pre></td></tr></table></figure>
 <p><br><br><br><br><br><br><br></p>
 <h4 id="小红成功发布功能"><a href="#小红成功发布功能" class="headerlink" title="小红成功发布功能"></a>小红成功发布功能</h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-svn-9.png&amp;objectId=1190000002918123&amp;token=9a2d1f5f27647dac4ad8d929832e93f6" alt=""></p>
 <p>小红完成和中央仓库的同步后，就能成功发布她的修改了：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git push origin master</div></pre></td></tr></table></figure>
+<figure class="highlight maxima"><table><tr><td class="code"><pre><div class="line">git <span class="built_in">push</span> <span class="built_in">origin</span> master</div></pre></td></tr></table></figure>
 <p>如你所见，仅使用几个<code>Git</code>命令我们就可以模拟出传统<code>Subversion</code>开发环境。对于要从<code>SVN</code>迁移过来的团队来说这太好了，但没有发挥出<code>Git</code>分布式本质的优势。</p>
 <p>如果你的团队适应了集中式工作流，但想要更流畅的协作效果，绝对值得探索一下 <code>功能分支工作流</code> 的收益。<br>通过为一个功能分配一个专门的分支，能够做到一个新增功能集成到正式项目之前对新功能进行深入讨论。</p>
 <p><br><br><br><br><br><br></p>
@@ -480,20 +480,20 @@
 <p><br><br><br><br><br></p>
 <h4 id="小红开始开发一个新功能"><a href="#小红开始开发一个新功能" class="headerlink" title="小红开始开发一个新功能"></a>小红开始开发一个新功能</h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-feature-branch-2.png&amp;objectId=1190000002918123&amp;token=5fdc09357dca8116668ea17617ccefde" alt=""></p>
 <p>在开始开发功能前，小红需要一个独立的分支。使用下面的命令<a href="https://www.atlassian.com/git/tutorial/git-branches#!checkout" target="_blank" rel="external">新建一个分支</a>：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git checkout -b marys-feature master</div></pre></td></tr></table></figure>
+<figure class="highlight armasm"><table><tr><td class="code"><pre><div class="line"><span class="symbol">git</span> checkout -<span class="keyword">b </span><span class="keyword">marys-feature </span>master</div></pre></td></tr></table></figure>
 <p>这个命令检出一个基于<code>master</code>名为<code>marys-feature</code>的分支，<code>Git</code>的<code>-b</code>选项表示如果分支还不存在则新建分支。</p>
 <p>这个新分支上，小红按老套路编辑、暂存和提交修改，按需要提交以实现功能：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git status</div><div class="line">git add &lt;some-file&gt;</div><div class="line">git commit</div></pre></td></tr></table></figure>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><div class="line">git status</div><div class="line">git <span class="keyword">add</span><span class="bash"> &lt;some-file&gt;</span></div><div class="line">git commit</div></pre></td></tr></table></figure>
 <p><br><br><br><br><br></p>
 <h4 id="小红要去吃个午饭"><a href="#小红要去吃个午饭" class="headerlink" title="小红要去吃个午饭"></a>小红要去吃个午饭</h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-feature-branch-3.png&amp;objectId=1190000002918123&amp;token=4f934833032d75e4930ec888537d22f4" alt=""></p>
 <p>早上小红为新功能添加一些提交。<br>去吃午饭前，<code>push</code>功能分支到中央仓库是很好的做法，这样可以方便地备份，如果和其它开发协作，也让他们可以看到小红的提交。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git push -u origin marys-feature</div></pre></td></tr></table></figure>
+<figure class="highlight maxima"><table><tr><td class="code"><pre><div class="line">git <span class="built_in">push</span> -u <span class="built_in">origin</span> marys-<span class="built_in">feature</span></div></pre></td></tr></table></figure>
 <p>这条命令<code>push</code> <code>marys-feature</code>分支到中央仓库（<code>origin</code>），<code>-u</code>选项设置本地分支去跟踪远程对应的分支。</p>
 <p>设置好跟踪的分支后，小红就可以使用<code>git push</code>命令省去指定推送分支的参数。</p>
 <p><br><br><br><br><br><br></p>
 <h4 id="小红完成功能开发"><a href="#小红完成功能开发" class="headerlink" title="小红完成功能开发"></a>小红完成功能开发</h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-feature-branch-4.png&amp;objectId=1190000002918123&amp;token=a3906c9f4d1fbcfc7e8d1e63534702bf" alt=""></p>
 <p>小红吃完午饭回来，完成整个功能的开发。<a href="https://www.atlassian.com/git/tutorial/git-branches#!merge" target="_blank" rel="external">在合并到<code>master</code>之前</a>，<br>她发起一个<code>Pull Request</code>让团队的其它人知道功能已经完成。但首先，她要确认中央仓库中已经有她最近的提交：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git push</div></pre></td></tr></table></figure>
+<figure class="highlight avrasm"><table><tr><td class="code"><pre><div class="line">git <span class="keyword">push</span></div></pre></td></tr></table></figure>
 <p>然后，在她的<code>Git</code> <code>GUI</code>客户端中发起<code>Pull Request</code>，请求合并<code>marys-feature</code>到<code>master</code>，团队成员会自动收到通知。</p>
 <p><code>Pull Request</code>很酷的是可以在相关的提交旁边显示评注，所以你可以很对某个变更集提问。</p>
 <p><br><br><br><br><br><br></p>
@@ -506,7 +506,7 @@
 <p><br><br><br><br><br><br></p>
 <h4 id="小红发布她的功能"><a href="#小红发布她的功能" class="headerlink" title="小红发布她的功能"></a>小红发布她的功能</h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-feature-branch-7.png&amp;objectId=1190000002918123&amp;token=dd10ce3ea0b8e482c76cc46243af07f9" alt=""></p>
 <p>一旦小黑可以的接受<code>Pull Request</code>，就可以合并功能到稳定项目代码中（可以由小黑或是小红来做这个操作）：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git checkout master</div><div class="line">git pull</div><div class="line">git pull origin marys-feature</div><div class="line">git push</div></pre></td></tr></table></figure>
+<figure class="highlight crmsh"><table><tr><td class="code"><pre><div class="line">git checkout <span class="keyword">master</span></div><div class="line"><span class="title">git</span> pull</div><div class="line">git pull origin marys-feature</div><div class="line">git push</div></pre></td></tr></table></figure>
 <p>无论谁来做合并，首先要检出<code>master</code>分支并确认是它是最新的。然后执行<code>git pull origin marys-feature</code>合并<code>marys-feature</code>分支到和已经和远程一致的本地<code>master</code>分支。</p>
 <p>你可以使用简单<code>git merge marys-feature</code>命令，但前面的命令可以保证总是最新的新功能分支。</p>
 <p>无论谁来做合并，首先要检出<code>master</code>分支并确认是它是最新的。然后执行<code>git pull origin marys-feature</code>合并<code>marys-feature</code>分支到和已经和远程一致的本地<code>master</code>分支。<br>你可以使用简单<code>git merge marys-feature</code>命令，但前面的命令可以保证总是最新的新功能分支。<br>最后更新的<code>master</code>分支要重新<code>push</code>回到<code>origin</code>。</p>
@@ -547,7 +547,7 @@
 <p>使用一个用于发布准备的专门分支，使得一个团队可以在完善当前的发布版本的同时，另一个团队可以继续开发下个版本的功能。</p>
 <p>这也打造定义良好的开发阶段（比如，可以很轻松地说，『这周我们要做准备发布版本4.0』，并且在仓库的目录结构中可以实际看到）。</p>
 <p>常用的分支约定：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">用于新建发布分支的分支: develop</div><div class="line">用于合并的分支: master</div><div class="line">分支命名: release-* 或 release/*</div></pre></td></tr></table></figure>
+<figure class="highlight crmsh"><table><tr><td class="code"><pre><div class="line">用于新建发布分支的分支: develop</div><div class="line">用于合并的分支: <span class="keyword">master</span></div><div class="line"><span class="title">分支命名: release-</span>* 或 release/*</div></pre></td></tr></table></figure>
 <h3 id="2-3-5-维护分支"><a href="#2-3-5-维护分支" class="headerlink" title="2.3.5 维护分支"></a>2.3.5 维护分支</h3><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-release-cycle-4maintenance.png&amp;objectId=1190000002918123&amp;token=0e0a4f43571b068d4b141e11b4bff4de" alt=""></p>
 <p>维护分支或说是热修复（<code>hotfix</code>）分支用于生成快速给产品发布版本（<code>production releases</code>）打补丁，这是唯一可以直接从<code>master</code>分支<code>fork</code>出来的分支。</p>
 <p>修复完成，修改应该马上合并回<code>master</code>分支和<code>develop</code>分支（当前的发布分支），<code>master</code>分支应该用新的版本号打好<code>Tag</code>。</p>
@@ -556,41 +556,41 @@
 <h3 id="2-3-6-示例"><a href="#2-3-6-示例" class="headerlink" title="2.3.6 示例"></a>2.3.6 示例</h3><p>下面的示例演示本工作流如何用于管理单个发布循环。假设你已经创建了一个中央仓库。</p>
 <h4 id="创建开发分支"><a href="#创建开发分支" class="headerlink" title="创建开发分支"></a>创建开发分支</h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-release-cycle-5createdev.png&amp;objectId=1190000002918123&amp;token=0d727e83af80cdc3b5061361c8c47141" alt=""></p>
 <p>第一步为<code>master</code>分支配套一个<code>develop</code>分支。简单来做可以<a href="https://www.atlassian.com/git/tutorial/git-branches#!branch" target="_blank" rel="external">本地创建一个空的<code>develop</code>分支</a>，<code>push</code>到服务器上：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git branch develop</div><div class="line">git push -u origin develop</div></pre></td></tr></table></figure>
+<figure class="highlight armasm"><table><tr><td class="code"><pre><div class="line"><span class="symbol">git</span> <span class="keyword">branch </span>develop</div><div class="line"><span class="symbol">git</span> <span class="keyword">push </span>-u origin develop</div></pre></td></tr></table></figure>
 <p>以后这个分支将会包含了项目的全部历史，而<code>master</code>分支将只包含了部分历史。其它开发者这时应该<a href="https://www.atlassian.com/git/tutorial/git-basics#!clone" target="_blank" rel="external">克隆中央仓库</a>，建好<code>develop</code>分支的跟踪分支：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git clone ssh://user@host/path/to/repo.git</div><div class="line">git checkout -b develop origin/develop</div></pre></td></tr></table></figure>
+<figure class="highlight crmsh"><table><tr><td class="code"><pre><div class="line">git <span class="keyword">clone</span> <span class="title">ssh</span>://user@host/path/to/repo.git</div><div class="line">git checkout -b develop origin/develop</div></pre></td></tr></table></figure>
 <p>现在每个开发都有了这些历史分支的本地拷贝。</p>
 <p><br><br><br></p>
 <h4 id="小红和小明开始开发新功能"><a href="#小红和小明开始开发新功能" class="headerlink" title="小红和小明开始开发新功能"></a>小红和小明开始开发新功能</h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-release-cycle-6maryjohnbeginnew.png&amp;objectId=1190000002918123&amp;token=a9c571a2d28cb8b09e250efbb716b5e7" alt=""></p>
 <p>这个示例中，小红和小明开始各自的功能开发。他们需要为各自的功能创建相应的分支。新分支不是基于<code>master</code>分支，而是应该<a href="https://www.atlassian.com/git/tutorial/git-branches#!checkout" target="_blank" rel="external">基于<code>develop</code>分支</a>：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git checkout -b some-feature develop</div></pre></td></tr></table></figure>
+<figure class="highlight maxima"><table><tr><td class="code"><pre><div class="line">git checkout -b <span class="built_in">some</span>-<span class="built_in">feature</span> develop</div></pre></td></tr></table></figure>
 <p>他们用老套路添加提交到各自功能分支上：编辑、暂存、提交：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git status</div><div class="line">git add &lt;some-file&gt;</div><div class="line">git commit</div></pre></td></tr></table></figure>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><div class="line">git status</div><div class="line">git <span class="keyword">add</span><span class="bash"> &lt;some-file&gt;</span></div><div class="line">git commit</div></pre></td></tr></table></figure>
 <p><br><br><br><br></p>
 <h4 id="小红完成功能开发-1"><a href="#小红完成功能开发-1" class="headerlink" title="小红完成功能开发"></a>小红完成功能开发</h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-release-cycle-7maryfinishes.png&amp;objectId=1190000002918123&amp;token=6334dcdb5bbc763352524ff8ebce1272" alt=""></p>
 <p>添加了提交后，小红觉得她的功能OK了。如果团队使用<code>Pull Requests</code>，这时候可以发起一个用于合并到<code>develop</code>分支。<br>否则她可以直接合并到她本地的<code>develop</code>分支后<code>push</code>到中央仓库：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git pull origin develop</div><div class="line">git checkout develop</div><div class="line">git merge some-feature</div><div class="line">git push</div><div class="line">git branch -d some-feature</div></pre></td></tr></table></figure>
+<figure class="highlight maxima"><table><tr><td class="code"><pre><div class="line">git pull <span class="built_in">origin</span> develop</div><div class="line">git checkout develop</div><div class="line">git merge <span class="built_in">some</span>-<span class="built_in">feature</span></div><div class="line">git <span class="built_in">push</span></div><div class="line">git branch -d <span class="built_in">some</span>-<span class="built_in">feature</span></div></pre></td></tr></table></figure>
 <p>第一条命令在合并功能前确保<code>develop</code>分支是最新的。注意，功能决不应该直接合并到<code>master</code>分支。<br>冲突解决方法和<a href="undefined">集中式工作流</a>一样。</p>
 <p><br><br><br><br></p>
 <h4 id="小红开始准备发布"><a href="#小红开始准备发布" class="headerlink" title="小红开始准备发布"></a>小红开始准备发布</h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-release-cycle-8maryprepsrelease.png&amp;objectId=1190000002918123&amp;token=3d2d488b25945d09bb417e489a552894" alt=""></p>
 <p>这个时候小明正在实现他的功能，小红开始准备她的第一个项目正式发布。</p>
 <p>像功能开发一样，她用一个新的分支来做发布准备。这一步也确定了发布的版本号：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git checkout -b release-0.1 develop</div></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><div class="line">git checkout -<span class="selector-tag">b</span> release-<span class="number">0.1</span> develop</div></pre></td></tr></table></figure>
 <p>这个分支是清理发布、执行所有测试、更新文档和其它为下个发布做准备操作的地方，像是一个专门用于改善发布的功能分支。</p>
 <p>只要小红创建这个分支并<code>push</code>到中央仓库，这个发布就是功能冻结的。任何不在<code>develop</code>分支中的新功能都推到下个发布循环中。</p>
 <p><br><br><br><br></p>
 <h4 id="小红完成发布"><a href="#小红完成发布" class="headerlink" title="小红完成发布"></a>小红完成发布</h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-release-cycle-9maryfinishes.png&amp;objectId=1190000002918123&amp;token=7be55b4e28cefa367a5775ea46b357ca" alt=""></p>
 <p>一旦准备好了对外发布，小红合并修改到<code>master</code>分支和<code>develop</code>分支上，删除发布分支。合并回<code>develop</code>分支很重要，因为在发布分支中已经提交的更新需要在后面的新功能中也要是可用的。<br>另外，如果小红的团队要求<code>Code Review</code>，这是一个发起<code>Pull Request</code>的理想时机。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git checkout master</div><div class="line">git merge release-0.1</div><div class="line">git push</div><div class="line">git checkout develop</div><div class="line">git merge release-0.1</div><div class="line">git push</div><div class="line">git branch -d release-0.1</div></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><div class="line">git checkout master</div><div class="line">git <span class="keyword">merge</span> <span class="keyword">release</span><span class="number">-0.1</span></div><div class="line">git push</div><div class="line">git checkout develop</div><div class="line">git <span class="keyword">merge</span> <span class="keyword">release</span><span class="number">-0.1</span></div><div class="line">git push</div><div class="line">git branch -d <span class="keyword">release</span><span class="number">-0.1</span></div></pre></td></tr></table></figure>
 <p>发布分支是作为功能开发（<code>develop</code>分支）和对外发布（<code>master</code>分支）间的缓冲。只要有合并到<code>master</code>分支，就应该打好<code>Tag</code>以方便跟踪。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git tag -a 0.1 -m &quot;Initial public release&quot; master</div><div class="line">git push --tags</div></pre></td></tr></table></figure>
+<figure class="highlight crmsh"><table><tr><td class="code"><pre><div class="line">git <span class="keyword">tag</span> <span class="title">-a</span> <span class="number">0.1</span> -m <span class="string">"Initial public release"</span> <span class="keyword">master</span></div><div class="line"><span class="title">git</span> push --tags</div></pre></td></tr></table></figure>
 <p><code>Git</code>有提供各种勾子（<code>hook</code>），即仓库有事件发生时触发执行的脚本。<br>可以配置一个勾子，在你<code>push</code>中央仓库的<code>master</code>分支时，自动构建好对外发布。</p>
 <p><br><br><br><br></p>
 <h4 id="最终用户发现Bug"><a href="#最终用户发现Bug" class="headerlink" title="最终用户发现Bug"></a>最终用户发现<code>Bug</code></h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflow-gitflow-enduserbug.png&amp;objectId=1190000002918123&amp;token=09a92134b7303b6506c624e17e7e767b" alt=""></p>
 <p>对外发布后，小红回去和小明一起做下个发布的新功能开发，直到有最终用户开了一个<code>Ticket</code>抱怨当前版本的一个<code>Bug</code>。<br>为了处理<code>Bug</code>，小红（或小明）从<code>master</code>分支上拉出了一个维护分支，提交修改以解决问题，然后直接合并回<code>master</code>分支：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git checkout -b issue-#001 master</div><div class="line"># Fix the bug</div><div class="line">git checkout master</div><div class="line">git merge issue-#001</div><div class="line">git push</div></pre></td></tr></table></figure>
+<figure class="highlight crmsh"><table><tr><td class="code"><pre><div class="line">git checkout -b issue-<span class="comment">#001 master</span></div><div class="line"><span class="comment"># Fix the bug</span></div><div class="line">git checkout <span class="keyword">master</span></div><div class="line"><span class="title">git</span> merge issue-<span class="comment">#001</span></div><div class="line">git push</div></pre></td></tr></table></figure>
 <p>就像发布分支，维护分支中新加这些重要修改需要包含到<code>develop</code>分支中，所以小红要执行一个合并操作。然后就可以安全地<a href="https://www.atlassian.com/git/tutorial/git-branches#!branch" target="_blank" rel="external">删除这个分支</a>了：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git checkout develop</div><div class="line">git merge issue-#001</div><div class="line">git push</div><div class="line">git branch -d issue-#001</div></pre></td></tr></table></figure>
+<figure class="highlight avrasm"><table><tr><td class="code"><pre><div class="line">git checkout develop</div><div class="line">git merge issue-<span class="meta">#001</span></div><div class="line">git <span class="keyword">push</span></div><div class="line">git branch -d issue-<span class="meta">#001</span></div></pre></td></tr></table></figure>
 <p>到了这里，但愿你对<a href="undefined">集中式工作流</a>、<a href="undefined">功能分支工作流</a>和<code>Gitflow</code>工作流已经感觉很舒适了。<br>你应该也牢固的掌握了本地仓库的潜能，<code>push</code>/<code>pull</code>模式和<code>Git</code>健壮的分支和合并模型。</p>
 <p>记住，这里演示的工作流只是可能用法的例子，而不是在实际工作中使用<code>Git</code>不可违逆的条例。<br>所以不要畏惧按自己需要对工作流的用法做取舍。不变的目标就是让<code>Git</code>为你所用。</p>
 <p><br><br><br><br><br></p>
@@ -621,7 +621,7 @@
 <p>通常这个仓库也会作为项目维护者的公开仓库。</p>
 <p><a href="https://www.atlassian.com/git/tutorial/git-basics#!init" target="_blank" rel="external">公开仓库应该是裸仓库</a>，不管是不是正式代码库。</p>
 <p>所以项目维护者会运行像下面的命令来搭建正式仓库：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">ssh user@host</div><div class="line">git init --bare /path/to/repo.git</div></pre></td></tr></table></figure>
+<figure class="highlight autoit"><table><tr><td class="code"><pre><div class="line">ssh user<span class="symbol">@host</span></div><div class="line">git init --bare /path/<span class="keyword">to</span>/repo.git</div></pre></td></tr></table></figure>
 <p><code>Bitbucket</code>和<code>Stash</code>提供了一个方便的<code>GUI</code>客户端以完成上面命令行做的事。<br>这个搭建中央仓库的过程和前面提到的工作流完全一样。<br>如果有现存的代码库，维护者也要<code>push</code>到这个仓库中。</p>
 <p><br><br><br><br><br><br></p>
 <h4 id="开发者fork正式仓库"><a href="#开发者fork正式仓库" class="headerlink" title="开发者fork正式仓库"></a>开发者<code>fork</code>正式仓库</h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflows-forking-2.png&amp;objectId=1190000002918123&amp;token=eed10ddbe6eb3f0908588591db17d242" alt=""></p>
@@ -632,22 +632,22 @@
 <p>下一步，各个开发者要克隆自己的公开仓库，用熟悉的<code>git clone</code>命令。</p>
 <p>在这个示例中，假定用<code>Bitbucket</code>托管了仓库。记住，如果这样的话各个开发者需要有各自的<code>Bitbucket</code>账号，</p>
 <p>使用下面命令克隆服务端自己的仓库：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git clone https://user@bitbucket.org/user/repo.git</div></pre></td></tr></table></figure>
+<figure class="highlight crmsh"><table><tr><td class="code"><pre><div class="line">git <span class="keyword">clone</span> <span class="title">https</span>://user@bitbucket.org/user/repo.git</div></pre></td></tr></table></figure>
 <p>相比前面介绍的工作流只用了一个<code>origin</code>远程别名指向中央仓库，<code>Forking</code>工作流需要2个远程别名 ——<br>一个指向正式仓库，另一个指向开发者自己的服务端仓库。别名的名字可以任意命名，常见的约定是使用<code>origin</code>作为远程克隆的仓库的别名<br>（这个别名会在运行<code>git clone</code>自动创建），<code>upstream</code>（上游）作为正式仓库的别名。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git remote add upstream https://bitbucket.org/maintainer/repo</div></pre></td></tr></table></figure>
+<figure class="highlight avrasm"><table><tr><td class="code"><pre><div class="line">git remote <span class="keyword">add</span> upstream https://bitbucket<span class="meta">.org</span>/maintainer/repo</div></pre></td></tr></table></figure>
 <p>需要自己用上面的命令创建<code>upstream</code>别名。这样可以简单地保持本地仓库和正式仓库的同步更新。<br>注意，如果上游仓库需要认证（比如不是开源的），你需要提供用户：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git remote add upstream https://user@bitbucket.org/maintainer/repo.git</div></pre></td></tr></table></figure>
+<figure class="highlight avrasm"><table><tr><td class="code"><pre><div class="line">git remote <span class="keyword">add</span> upstream https://user@bitbucket<span class="meta">.org</span>/maintainer/repo.git</div></pre></td></tr></table></figure>
 <p>这时在克隆和<code>pull</code>正式仓库时，需要提供用户的密码。</p>
 <h4 id="开发者开发自己的功能"><a href="#开发者开发自己的功能" class="headerlink" title="开发者开发自己的功能"></a>开发者开发自己的功能</h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflows-forking-4.png&amp;objectId=1190000002918123&amp;token=c6966e41d7f459fd41e619b2d8dc7f78" alt=""></p>
 <p>在刚克隆的本地仓库中，开发者可以像其它工作流一样的编辑代码、<a href="https://www.atlassian.com/git/tutorial/git-basics#!commit" target="_blank" rel="external">提交修改</a>和<a href="https://www.atlassian.com/git/tutorial/git-branches#!branch" target="_blank" rel="external">新建分支</a>：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git checkout -b some-feature</div><div class="line"># Edit some code</div><div class="line">git commit -a -m &quot;Add first draft of some feature&quot;</div></pre></td></tr></table></figure>
+<figure class="highlight maxima"><table><tr><td class="code"><pre><div class="line">git checkout -b <span class="built_in">some</span>-<span class="built_in">feature</span></div><div class="line"># Edit <span class="built_in">some</span> code</div><div class="line">git commit -a -m <span class="string">"Add first draft of some feature"</span></div></pre></td></tr></table></figure>
 <p>所有的修改都是私有的直到<code>push</code>到自己公开仓库中。如果正式项目已经往前走了，可以用<a href="https://www.atlassian.com/git/tutorial/remote-repositories#!pull" target="_blank" rel="external"><code>git pull</code>命令</a>获得新的提交：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git pull upstream master</div></pre></td></tr></table></figure>
+<figure class="highlight crmsh"><table><tr><td class="code"><pre><div class="line">git pull upstream <span class="literal">master</span></div></pre></td></tr></table></figure>
 <p>由于开发者应该都在专门的功能分支上工作，<code>pull</code>操作结果会都是<a href="https://www.atlassian.com/git/tutorial/git-branches#!merge" target="_blank" rel="external">快进合并</a>。</p>
 <p><br><br><br><br><br><br><br></p>
 <h4 id="开发者发布自己的功能"><a href="#开发者发布自己的功能" class="headerlink" title="开发者发布自己的功能"></a>开发者发布自己的功能</h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflows-forking-5.png&amp;objectId=1190000002918123&amp;token=85f5a0317c7e84e0af40e413fb35feb7" alt=""></p>
 <p>一旦开发者准备好了分享新功能，需要做二件事。<br>首先，通过<code>push</code>他的贡献代码到自己的公开仓库中，让其它的开发者都可以访问到。<br>他的<code>origin</code>远程别名应该已经有了，所以要做的就是：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git push origin feature-branch</div></pre></td></tr></table></figure>
+<figure class="highlight maxima"><table><tr><td class="code"><pre><div class="line">git <span class="built_in">push</span> <span class="built_in">origin</span> <span class="built_in">feature</span>-branch</div></pre></td></tr></table></figure>
 <p>这里和之前的工作流的差异是，<code>origin</code>远程别名指向开发者自己的服务端仓库，而不是正式仓库。</p>
 <p>第二件事，开发者要通知项目维护者，想要合并他的新功能到正式库中。<br><code>Bitbucket</code>和<code>Stash</code>提供了<a href="https://confluence.atlassian.com/display/STASH/Using+pull+requests+in+Stash" target="_blank" rel="external"><code>Pull Request</code></a>按钮，弹出表单让你指定哪个分支要合并到正式仓库。<br>一般你会想集成你的功能分支到上游远程仓库的<code>master</code>分支中。</p>
 <p><br><br><br><br><br><br><br><br></p>
@@ -658,14 +658,14 @@
 <li><code>pull</code>代码到他自己的本地仓库，再手动合并</li>
 </ol>
 <p>第一种做法更简单，维护者可以在<code>GUI</code>中查看变更的差异，做评注和执行合并。<br>但如果出现了合并冲突，需要第二种做法来解决。这种情况下，维护者需要从开发者的服务端仓库中<a href="https://www.atlassian.com/git/tutorial/remote-repositories#!fetch" target="_blank" rel="external"><code>fetch</code></a>功能分支，<br>合并到他本地的<code>master</code>分支，解决冲突：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git fetch https://bitbucket.org/user/repo feature-branch</div><div class="line"># 查看变更</div><div class="line">git checkout master</div><div class="line">git merge FETCH_HEAD</div></pre></td></tr></table></figure>
+<figure class="highlight crmsh"><table><tr><td class="code"><pre><div class="line">git fetch https://bitbucket.org/user/repo feature-branch</div><div class="line"><span class="comment"># 查看变更</span></div><div class="line">git checkout <span class="keyword">master</span></div><div class="line"><span class="title">git</span> merge FETCH_HEAD</div></pre></td></tr></table></figure>
 <p>变更集成到本地的<code>master</code>分支后，维护者要<code>push</code>变更到服务器上的正式仓库，这样其它的开发者都能访问到：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git push origin master</div></pre></td></tr></table></figure>
+<figure class="highlight maxima"><table><tr><td class="code"><pre><div class="line">git <span class="built_in">push</span> <span class="built_in">origin</span> master</div></pre></td></tr></table></figure>
 <p>注意，维护者的<code>origin</code>是指向他自己公开仓库的，即是项目的正式代码库。到此，开发者的贡献完全集成到了项目中。</p>
 <p><br><br><br><br><br><br></p>
 <h4 id="开发者和正式仓库做同步"><a href="#开发者和正式仓库做同步" class="headerlink" title="开发者和正式仓库做同步"></a>开发者和正式仓库做同步</h4><p><img src="https://segmentfault.com/image?src=http://static.ixirong.com/pic/gitflow/git-workflows-forking-7.png&amp;objectId=1190000002918123&amp;token=3e4105286ad5d431c50846ffbeb5ff3a" alt=""></p>
 <p>由于正式代码库往前走了，其它的开发需要和正式仓库做同步：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git pull upstream master</div></pre></td></tr></table></figure>
+<figure class="highlight crmsh"><table><tr><td class="code"><pre><div class="line">git pull upstream <span class="literal">master</span></div></pre></td></tr></table></figure>
 <p>如果你之前是使用<code>SVN</code>，<code>Forking</code>工作流可能看起来像是一个激进的范式切换（paradigm shift）。<br>但不要害怕，这个工作流实际上就是在<a href="undefined">功能分支工作流</a>之上引入另一个抽象层。<br>不是直接通过单个中央仓库来分享分支，而是把贡献代码发布到开发者自己的服务端仓库中。</p>
 <p>示例中解释了，一个贡献如何从一个开发者流到正式的<code>master</code>分支中，但同样的方法可以把贡献集成到任一个仓库中。</p>
 <p>比如，如果团队的几个人协作实现一个功能，可以在开发之间用相同的方法分享变更，完全不涉及正式仓库。</p>
@@ -745,7 +745,7 @@
     
     <!-- Prev Nav -->
     
-        <a href="/2017/01/21/网易蜂巢的工业化前端架构/" id="post_nav-newer" class="prev-content">
+        <a href="/2017/01/21/Git使用简明/" id="post_nav-newer" class="prev-content">
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
                 <i class="material-icons">arrow_back</i>
             </button>
@@ -759,7 +759,7 @@
 
     <!-- Next Nav -->
     
-        <a href="/2017/01/21/JS基础算法/" id="post_nav-older" class="next-content">
+        <a href="/2017/01/21/Google Material UI 动画的贝叶斯曲线/" id="post_nav-older" class="next-content">
             旧篇
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">

@@ -346,7 +346,7 @@
 <p>用javascript 操作DOM,实现动态局部刷新</p>
 <hr>
 
-<h2 id="XMLHttpRequest-对象创建"><a href="#XMLHttpRequest-对象创建" class="headerlink" title="XMLHttpRequest 对象创建"></a>XMLHttpRequest 对象创建</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">var request=new XMLHttpRequest();</div></pre></td></tr></table></figure>
+<h2 id="XMLHttpRequest-对象创建"><a href="#XMLHttpRequest-对象创建" class="headerlink" title="XMLHttpRequest 对象创建"></a>XMLHttpRequest 对象创建</h2><figure class="highlight haxe"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> request=<span class="keyword">new</span> <span class="type">XMLHttpRequest</span>();</div></pre></td></tr></table></figure>
 <hr>
 
 <h2 id="HTTP请求"><a href="#HTTP请求" class="headerlink" title="HTTP请求"></a>HTTP请求</h2><p>无状态协议</p>
@@ -382,20 +382,20 @@
 <li>sent(string)</li>
 </ul>
 <p><strong>demo</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">request.open(&quot;POST&quot;,&quot;create.php&quot;,true);</div><div class="line">request.setRequestHeader(&quot;Content-type&quot;,&quot;application/x-www-form-urlencoded&quot;);</div><div class="line">request.send(&quot;name=wanglinzhizhi&amp;sex=male&quot;);</div></pre></td></tr></table></figure>
+<figure class="highlight accesslog"><table><tr><td class="code"><pre><div class="line">request.open(<span class="string">"<span class="keyword">POST</span>"</span>,<span class="string">"create.php"</span>,true);</div><div class="line">request.setRequestHeader(<span class="string">"Content-type"</span>,<span class="string">"application/x-www-form-urlencoded"</span>);</div><div class="line">request.send(<span class="string">"name=wanglinzhizhi&amp;sex=male"</span>);</div></pre></td></tr></table></figure>
 <p>Notes:request.setRequestHeader 这个必须要加,渲染方式</p>
 <hr>
 
 <h2 id="JSON的解析"><a href="#JSON的解析" class="headerlink" title="JSON的解析"></a>JSON的解析</h2><p>方法一 eval()方法</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">var jsondata=&apos;&#123;&quot;staff&quot;:[&#123;&quot;name&quot;:&quot;洪七&quot;,&quot;age&quot;:70&#125;,&#123;&quot;name&quot;:&quot;郭靖&quot;,&quot;age&quot;:30&#125;,&#123;&quot;name&quot;:&quot;黄蓉&quot;,&quot;age&quot;:35&#125;]&#125;&apos;;</div><div class="line">var jsonobj=eval(&apos;(&apos;+jsondata+&apos;)&apos;);</div><div class="line">alert(jsonobj.staff[0].name);</div></pre></td></tr></table></figure>
+<figure class="highlight maxima"><table><tr><td class="code"><pre><div class="line"><span class="built_in">var</span> jsondata='&#123;<span class="string">"staff"</span>:[&#123;<span class="string">"name"</span>:<span class="string">"洪七"</span>,<span class="string">"age"</span>:<span class="number">70</span>&#125;,&#123;<span class="string">"name"</span>:<span class="string">"郭靖"</span>,<span class="string">"age"</span>:<span class="number">30</span>&#125;,&#123;<span class="string">"name"</span>:<span class="string">"黄蓉"</span>,<span class="string">"age"</span>:<span class="number">35</span>&#125;]&#125;';</div><div class="line"><span class="built_in">var</span> jsonobj=<span class="built_in">eval</span>('('+jsondata+')');</div><div class="line">alert(jsonobj.staff[<span class="number">0</span>].name);</div></pre></td></tr></table></figure>
 <p>方法二(JSON.parse)</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">var jsondata=&apos;&#123;&quot;staff&quot;:[&#123;&quot;name&quot;:&quot;洪七&quot;,&quot;age&quot;:70&#125;,&#123;&quot;name&quot;:&quot;郭靖&quot;,&quot;age&quot;:30&#125;,&#123;&quot;name&quot;:&quot;黄蓉&quot;,&quot;age&quot;:35&#125;]&#125;&apos;;</div><div class="line">var jsonobj=JSON.parse(jsondata);</div><div class="line">alert(jsonobj.staff[0].name);</div></pre></td></tr></table></figure>
+<figure class="highlight q"><table><tr><td class="code"><pre><div class="line"><span class="built_in">var</span> jsondata='&#123;<span class="string">"staff"</span>:[&#123;<span class="string">"name"</span>:<span class="string">"洪七"</span>,<span class="string">"age"</span>:<span class="number">70</span>&#125;,&#123;<span class="string">"name"</span>:<span class="string">"郭靖"</span>,<span class="string">"age"</span>:<span class="number">30</span>&#125;,&#123;<span class="string">"name"</span>:<span class="string">"黄蓉"</span>,<span class="string">"age"</span>:<span class="number">35</span>&#125;]&#125;';</div><div class="line"><span class="built_in">var</span> jsonobj=JSON.<span class="built_in">parse</span>(jsondata);</div><div class="line">alert(jsonobj.staff[<span class="number">0</span>].name);</div></pre></td></tr></table></figure>
 <p>推荐使用第二种方法</p>
 <p>Note: <strong>无论何时使用eval时是非常危险的.</strong></p>
 <p>JSON校验</p>
 <p><a href="http://jsonlint.com/" target="_blank" rel="external">http://jsonlint.com/</a></p>
 <p>Notes:CND加速的jquery库</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;script src=&quot;http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js&quot;&gt;&lt;/script&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>// 使用了CDN加速,调用很快.</p>
 <hr>
 
@@ -406,16 +406,16 @@
 <li><strong>代理</strong><br>通过在同域名下的web服务器端创建一个代理：<br>北京服务器(域名:www.beijing.com)<br>上海服务器(域名：www.shanghai.com)<br>比如在北京的web服务器的后台(www.beijing.com/proxy-shanghaiservice.php)来调用上海服务器(www.shanghai.com/services.php)的服务，然后再把访问结果返回给前端，这样前端调用北京同域名的服务就和调用上海的服务效果相同了。<br>​</li>
 <li><strong>JSONP(只支持GET请求)：</strong></li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;script src=&quot;http://www.bbb.com/jsonp.js&quot;&gt;&lt;/script&gt;</div><div class="line">在www.aaa.com页面中</div><div class="line">&lt;script&gt;</div><div class="line">function jsonp(json)&#123;</div><div class="line">alert(json[&quot;name&quot;]);</div><div class="line">&#125;</div><div class="line">&lt;/script&gt;</div><div class="line">在www.bbb.com页面中:</div><div class="line">jsonp(&#123;&quot;name&quot;:&quot;洪七公&quot;,&apos;age&apos;:24&#125;);</div><div class="line">jsonp只能对get请求起作用,不能对post请求起作用(不支持post请求)</div></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"http://www.bbb.com/jsonp.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">在www.aaa.com页面中</div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="actionscript"></span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">jsonp</span><span class="params">(json)</span></span>&#123;</div><div class="line">alert(json[<span class="string">"name"</span>]);</div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">在www.bbb.com页面中:</div><div class="line">jsonp(&#123;"name":"洪七公",'age':24&#125;);</div><div class="line">jsonp只能对get请求起作用,不能对post请求起作用(不支持post请求)</div></pre></td></tr></table></figure>
 <p>JSONP可用于解决主流浏览器的跨域数据访问的问题。<br>在www.aaa.com页面中：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;script&gt;</div><div class="line"> function jsonp(json)&#123;</div><div class="line">      alert(json[&quot;name&quot;]);</div><div class="line">  &#125;</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;script src=&quot;http;//www.bbb.com/jsonp.js&quot;&gt;&lt;/script&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="actionscript"></span></div><div class="line"> <span class="function"><span class="keyword">function</span> <span class="title">jsonp</span><span class="params">(json)</span></span>&#123;</div><div class="line">      alert(json[<span class="string">"name"</span>]);</div><div class="line">  &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"http;//www.bbb.com/jsonp.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>在www.bbb.com页面中：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">jsonp(&#123;&apos;name&apos;:&apos;xx&apos;,&apos;age&apos;:24&#125;)</div></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="title">jsonp</span><span class="params">(&#123;<span class="string">'name'</span>:<span class="string">'xx'</span>,<span class="string">'age'</span>:<span class="number">24</span>&#125;)</span></span></div></pre></td></tr></table></figure>
 <p>这样就可以实现在www.aaa.com客户端访问获取www.bbb.com所在服务器中的文件或数据,从而实现跨域</p>
 <p><strong>3.XHR2</strong></p>
 <p>HTML5 提供的XMLHttpRequest Level2已经实现了跨域访问以及其他一些新功能:</p>
 <p>对于解决跨域问题,只需要对<strong>服务端</strong>做较小的改变, 客户端不需要做改变</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">header(&quot;Content-Type:application/json;charset=utf-8&quot;);</div><div class="line"></div><div class="line">header(&quot;Access-Control-Allow-Origin:*&quot;);</div><div class="line"></div><div class="line">header(&quot;Access-Control-Allow-Methods:POST,GET&quot;);</div></pre></td></tr></table></figure>
+<figure class="highlight abnf"><table><tr><td class="code"><pre><div class="line">header(<span class="string">"Content-Type:application/json;charset=utf-8"</span>)<span class="comment">;</span></div><div class="line"></div><div class="line">header(<span class="string">"Access-Control-Allow-Origin:*"</span>)<span class="comment">;</span></div><div class="line"></div><div class="line">header(<span class="string">"Access-Control-Allow-Methods:POST,GET"</span>)<span class="comment">;</span></div></pre></td></tr></table></figure>
 <p>Notes:</p>
 <ol>
 <li>HTML5提供的XMLHttpRequest Level2已经实现了跨域访问以及其他的一些新功能</li>
@@ -423,7 +423,7 @@
 <li>在服务器端</li>
 </ol>
 <p><strong>总结:</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">跨域处理，三种方法：</div><div class="line">1、处理跨域方法一 代理</div><div class="line"></div><div class="line">2、处理跨域方式二——</div><div class="line"></div><div class="line">3、处理跨域的方法三——XHR2：</div><div class="line"></div><div class="line">header(&apos;Access-Control-Allow-Origin:*&apos;);</div><div class="line">header(&apos;Access-Control-Allow-Methods:POST,GET&apos;);</div></pre></td></tr></table></figure>
+<figure class="highlight lasso"><table><tr><td class="code"><pre><div class="line">跨域处理，三种方法：</div><div class="line"><span class="number">1</span>、处理跨域方法一 代理</div><div class="line"></div><div class="line"><span class="number">2</span>、处理跨域方式二——</div><div class="line"></div><div class="line"><span class="number">3</span>、处理跨域的方法三——XHR2：</div><div class="line"></div><div class="line"><span class="keyword">header</span>(<span class="string">'Access-Control-Allow-Origin:*'</span>);</div><div class="line"><span class="keyword">header</span>(<span class="string">'Access-Control-Allow-Methods:POST,GET'</span>);</div></pre></td></tr></table></figure>
 <hr>
 
 <h2 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h2><p>JavaScript原生版实现demo,这里只给出了ajax需要部分的代码,后端的 json已经前端的样式等内容都未写出来(因为太多了…)</p>
@@ -453,7 +453,7 @@
     
     <!-- Prev Nav -->
     
-        <a href="/2017/01/21/白马将军/" id="post_nav-newer" class="prev-content">
+        <a href="/2017/01/21/火星救援/" id="post_nav-newer" class="prev-content">
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
                 <i class="material-icons">arrow_back</i>
             </button>
@@ -467,7 +467,7 @@
 
     <!-- Next Nav -->
     
-        <a href="/2017/01/21/CSS vertical-align 垂直方向多行文本的居中 /" id="post_nav-older" class="next-content">
+        <a href="/2017/01/21/禁止IOS双击上滑/" id="post_nav-older" class="next-content">
             旧篇
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">

@@ -349,9 +349,9 @@
 <h2 id="生成公钥秘钥-并绑定到gogs-代码管理中心上"><a href="#生成公钥秘钥-并绑定到gogs-代码管理中心上" class="headerlink" title="生成公钥秘钥,并绑定到gogs 代码管理中心上."></a>生成公钥秘钥,并绑定到<code>gogs</code> 代码管理中心上.</h2><p>在初次使用git的时候需要做的一件事,之后使用过程中不需要这么做了.</p>
 <p><br><br></p>
 <p>可以把这个过程认为是一个认证过程.我以我的理解讲解一下.详细的可以参考</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">https://help.github.com/articles/generating-an-ssh-key/</div></pre></td></tr></table></figure>
+<figure class="highlight dts"><table><tr><td class="code"><pre><div class="line"><span class="symbol">https:</span><span class="comment">//help.github.com/articles/generating-an-ssh-key/</span></div></pre></td></tr></table></figure>
 <p> 简单的说,2个步骤</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">1. 生成秘钥.公钥</div><div class="line">truessh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;</div><div class="line">trueEnter a file in which to save the key (/Users/you/.ssh/id_rsa): [Press enter]</div><div class="line">trueEnter passphrase (empty for no passphrase): [Type a passphrase]</div><div class="line">trueEnter same passphrase again: [Type passphrase again]</div><div class="line"></div><div class="line">2. 绑定到 代码托管中心服务器中 .在个人页面 -&gt; 用户设置 -&gt;管理SSH密钥-&gt; 增加密钥</div><div class="line">   将生成的id_rsa.pub(这个文件所在的目录是C:/users/XXX/.ssh/id_sra.pub) 拷贝到 密钥内容部分.</div><div class="line"></div><div class="line"></div><div class="line">至此,绑定完成.</div></pre></td></tr></table></figure>
+<figure class="highlight livescript"><table><tr><td class="code"><pre><div class="line"><span class="number">1.</span> 生成秘钥.公钥</div><div class="line">truessh-keygen -t rsa -b <span class="number">4096</span> -C <span class="string">"your_email@example.com"</span></div><div class="line">trueEnter a file <span class="keyword">in</span> which <span class="keyword">to</span> save the key (<span class="regexp">/Users/you/</span>.ssh/id_rsa): [Press enter]</div><div class="line">trueEnter passphrase (empty <span class="keyword">for</span> <span class="literal">no</span> passphrase): [Type a passphrase]</div><div class="line">trueEnter same passphrase again: [Type passphrase again]</div><div class="line"></div><div class="line"><span class="number">2.</span> 绑定到 代码托管中心服务器中 .在个人页面<span class="function"> -&gt;</span> 用户设置<span class="function"> -&gt;</span>管理SSH密钥<span class="function">-&gt;</span> 增加密钥</div><div class="line">   将生成的id_rsa.pub(这个文件所在的目录是C:<span class="regexp">/users/XXX/</span>.ssh/id_sra.pub) 拷贝到 密钥内容部分.</div><div class="line"></div><div class="line"></div><div class="line">至此,绑定完成.</div></pre></td></tr></table></figure>
 <p>在以后的使用中,你的每一次提交,每一次clone,每一次push,每一pull,都是这个账号的, 如果你注册了两个git账号,想push操作的话,可以吗? 如果不修改 <code>.gitconfig</code> 文件中的配置, 很有可能因权限问题报错. 在使用中,这一点常常被我们所忽略.</p>
 <p><br><br></p>
 <p>这是一个服务器log的截图</p>
@@ -362,16 +362,16 @@
 <p>主要命令有以下四条.</p>
 <p><strong>首先</strong>,我们通过浏览器在服务器上建立一个仓库.(<strong>最好不要把readme勾选</strong> ). 在你想放该文件的文件夹下面,右键-&gt;打开git bash.  执行以下命令</p>
 <p>标准做法如下:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git remote add origin http://172.20.17.20:3001/wanglinzhizhi/XXXX.git</div></pre></td></tr></table></figure>
+<figure class="highlight x86asm"><table><tr><td class="code"><pre><div class="line">git remote <span class="keyword">add</span> origin http://<span class="number">172.20</span><span class="meta">.17</span><span class="meta">.20</span>:<span class="number">3001</span>/wanglinzhizhi/XXXX.git</div></pre></td></tr></table></figure>
 <p>就是<strong>建立关联的过程</strong> .</p>
 <p><br><br></p>
 <p><strong>然后</strong>,当你写好代码(文档,更新内容)后,为说明方面,我们假设完成的文件叫<code>index.html</code>, 放到这个仓库(文件夹下面) , 然后执行命令.</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git add index.html</div></pre></td></tr></table></figure>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><div class="line">git <span class="keyword">add</span><span class="bash"> index.html</span></div></pre></td></tr></table></figure>
 <p><strong>再然后</strong> , 执行</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git commit -m &apos;这是我的一次测试性的更新说明,我更新了index.html文件.对结构进行了优化.&apos;</div></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><div class="line"><span class="attribute">git</span> commit -m <span class="string">'这是我的一次测试性的更新说明,我更新了index.html文件.对结构进行了优化.'</span></div></pre></td></tr></table></figure>
 <p><strong>Notes</strong>: 执行完<code>git add XX</code> 和 <code>git commit &#39;blablabla&#39;</code> 之后 至此本地仓库的commit以及版本已经建立完成. 下一步,我们是将本地的仓库 push到服务器中.让代码保存在服务器中.</p>
 <p><strong>最后</strong>  ,依然在<code>git bash</code>中执行命令</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git push</div></pre></td></tr></table></figure>
+<figure class="highlight avrasm"><table><tr><td class="code"><pre><div class="line">git <span class="keyword">push</span></div></pre></td></tr></table></figure>
 <p>然后输入你的gogs的邮箱和密码. 直到显示 <code>...done</code> 表示提交完成. 至此,我们完成了将本地仓库push到远端仓库. 可以再浏览器中再次打开你刚才<code>创建</code> ,并且<code>clone</code> ,并且<code>push</code>的仓库了.</p>
 <p>:)</p>
 <p><strong>Notes</strong>　： 在使用中非常重要也非常基本的一个命令是, <code>git status</code> .通过这个命令, 我们可以知道当前的状况.在什么情况下使用呢?  恩, 在不知道当前什么状况的情况下使用.</p>
@@ -381,12 +381,12 @@
 <p><br><br></p>
 <p>总结一下,</p>
 <p>远端和本地端的绑定需执行一行代码:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git remote add origin http://172.20.17.20:3001/wanglinzhizhi/XXXX.git</div></pre></td></tr></table></figure>
+<figure class="highlight x86asm"><table><tr><td class="code"><pre><div class="line">git remote <span class="keyword">add</span> origin http://<span class="number">172.20</span><span class="meta">.17</span><span class="meta">.20</span>:<span class="number">3001</span>/wanglinzhizhi/XXXX.git</div></pre></td></tr></table></figure>
 <p><br></p>
 <p><br></p>
 <p><br></p>
 <p>每次git 提交到服务器有三个步骤</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git add (你想add的文件.)</div><div class="line">git commit -m &apos;xxxx&apos;</div><div class="line">git push</div></pre></td></tr></table></figure>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><div class="line">git <span class="keyword">add</span><span class="bash"> (你想add的文件.)</span></div><div class="line">git commit -m <span class="string">'xxxx'</span></div><div class="line">git push</div></pre></td></tr></table></figure>
 <p><br></p>
 <p><br></p>
 <p><br></p>
@@ -401,28 +401,28 @@
 <p><br></p>
 <h2 id="一个接近实际中的项目上传实例"><a href="#一个接近实际中的项目上传实例" class="headerlink" title="一个接近实际中的项目上传实例"></a>一个接近实际中的项目上传实例</h2><p><br><br></p>
 <p>我本地有个t6multivan_m(1)M的项目. 我现在要将其传到远端git服务器怎么做呢? 这里是真是用到</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git remote add origin XXX</div><div class="line">git push -u origin master(Mac)</div><div class="line"></div><div class="line">  git push --set-upstream origin master(windows)</div></pre></td></tr></table></figure>
+<figure class="highlight maxima"><table><tr><td class="code"><pre><div class="line">git remote add <span class="built_in">origin</span> XXX</div><div class="line">git <span class="built_in">push</span> -u <span class="built_in">origin</span> master(Mac)</div><div class="line"></div><div class="line">  git <span class="built_in">push</span> --set-upstream <span class="built_in">origin</span> master(windows)</div></pre></td></tr></table></figure>
 <p>的地方.</p>
 <p>具体如下:</p>
 <p>首先进入到对应项目文件夹 ,然后空白处右键鼠标-&gt;git bash</p>
 <p>执行命令</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git init</div></pre></td></tr></table></figure>
+<figure class="highlight ebnf"><table><tr><td class="code"><pre><div class="line"><span class="attribute">git init</span></div></pre></td></tr></table></figure>
 <p><br><br></p>
 <p>我们在本地仓库中先提交项目.操作过程是上面的提交过程</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">// git status</div><div class="line">git add -A</div><div class="line"></div><div class="line">//git status</div><div class="line">git commit -m &apos;这是一个接近真实环境的项目上传操作&apos;</div></pre></td></tr></table></figure>
+<figure class="highlight cs"><table><tr><td class="code"><pre><div class="line"><span class="comment">// git status</span></div><div class="line">git <span class="keyword">add</span> -A</div><div class="line"></div><div class="line"><span class="comment">//git status</span></div><div class="line">git commit -m <span class="string">'这是一个接近真实环境的项目上传操作'</span></div></pre></td></tr></table></figure>
 <p>到这里,本地的仓库已经完成,现在我们将其push到远端服务器上的仓库中.</p>
 <ol>
 <li><p>为了上传到远端的服务器中,我需要先用浏览器,在远端仓库中创建一个仓库.(<strong>建议写成同名的</strong>)</p>
 <p>然后将远端的仓库和本地的仓库关联起来.</p>
 <p>在本地git bash中执行以下命令:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git remote add origin http://192.168.15.75:3141/wanglinzhizhi/t6multivanM.git</div></pre></td></tr></table></figure>
+<figure class="highlight x86asm"><table><tr><td class="code"><pre><div class="line">git remote <span class="keyword">add</span> origin http://<span class="number">192.168</span><span class="meta">.15</span><span class="meta">.75</span>:<span class="number">3141</span>/wanglinzhizhi/t6multivanM.git</div></pre></td></tr></table></figure>
 <p>这条命令使本地端和远端建立关联.</p>
 </li>
 <li><p>最后一步,</p>
 <p>Mac上</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git push -u origin master</div></pre></td></tr></table></figure>
+<figure class="highlight maxima"><table><tr><td class="code"><pre><div class="line">git <span class="built_in">push</span> -u <span class="built_in">origin</span> master</div></pre></td></tr></table></figure>
 <p>Windows上</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git push --set-upstream origin master</div></pre></td></tr></table></figure>
+<figure class="highlight avrasm"><table><tr><td class="code"><pre><div class="line">git <span class="keyword">push</span> --<span class="keyword">set</span>-upstream origin master</div></pre></td></tr></table></figure>
 </li>
 </ol>
 <p><br><br><br><br></p>
@@ -453,7 +453,7 @@
 <p><strong>Tip:</strong> You need Git <strong>1.7.10</strong> or newer to use the credential helper.</p>
 <p>The credential helper is included with GitHub Desktop. The app also provides a Git shell so you won’t ever need to install and configure Git manually. For more information, see “<a href="https://help.github.com/desktop/guides/getting-started/" target="_blank" rel="external">Getting Started with GitHub Desktop</a>.”</p>
 <p>If you prefer working with the command line, you can also install a native Git shell, such as <a href="https://git-for-windows.github.io/" target="_blank" rel="external">Git for Windows</a>. With Git for Windows, running the following in the command line will store your credentials:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git config --global credential.helper wincred</div></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><div class="line">git config --global credential<span class="selector-class">.helper</span> wincred</div></pre></td></tr></table></figure>
 <p>这是从GitHub 上粘过来的 一段 . 作用是 自动保存密码,不用每次push的时候都输入一遍账号密码,神烦.只需要 在git bash中输入 上面的一行代码, 然后再 输入一次账号密码,以后就再也不需要输入了.(^_ ^)</p>
 <p><br><br></p>
 <p><br><br><br><br></p>
@@ -474,15 +474,15 @@
 <h2 id="branch-and-merge-分支与合并操作"><a href="#branch-and-merge-分支与合并操作" class="headerlink" title="- branch and merge (分支与合并操作)"></a>- branch and merge (分支与合并操作)</h2><p><strong>branch 顾名思义就是 建立分支的意思.</strong></p>
 <p><br><br></p>
 <p>在使用branch的功能的时候,我们主要会用到的命令有</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git branch</div></pre></td></tr></table></figure>
+<figure class="highlight ebnf"><table><tr><td class="code"><pre><div class="line"><span class="attribute">git branch</span></div></pre></td></tr></table></figure>
 <p><code>git branch</code> 命令的功能是将分支的名字以列表的形式显示出来.同时可以确定当前所在的分支(* 号表示我们现在所在的分支) .</p>
 <p><br></p>
 <p>下面2条命令如下: 作用是在当前的基础上,创建一个新的分支.并把分支命名为AnewBranchDemo</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git branch AnewBranchDemo</div><div class="line">git checkout AnewBranchDemo</div></pre></td></tr></table></figure>
+<figure class="highlight armasm"><table><tr><td class="code"><pre><div class="line"><span class="symbol">git</span> <span class="keyword">branch </span>AnewBranchDemo</div><div class="line"><span class="symbol">git</span> checkout AnewBranchDemo</div></pre></td></tr></table></figure>
 <p>第一句的意思是创建<code>AnewBranchDemo</code> 这个分支,第二句的 意思是 是当前分支为 <code>AnewBranchDemo</code> 这个分支上.(由此我们可以知道,如果我们想切换回<code>master</code> 分支,我们需要做的就是执行<code>git checkout master</code> 即可.)</p>
 <p><br><br></p>
 <p>这两条命令可以简化为1条命令,如下.</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git checkout -b AnewBranchDemo</div></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><div class="line">git checkout -<span class="selector-tag">b</span> AnewBranchDemo</div></pre></td></tr></table></figure>
 <p>但是个人建议最开始使用的时候还是用上面2条命令比较好. 语义上更加容易理解.</p>
 <p><br><br><br></p>
 <p><strong>分支是一种很好的东西.</strong> 当我们在实现某个功能的时候, 我们需要大面积修改源代码.但是有不想破坏已经修改好的 部分,,如果这里的修改改坏了,改动得太多,连自己都忘了那些地方改了的,那些没改,想回溯就将是已将痛苦不堪的事情了…….</p>
@@ -502,16 +502,16 @@
 <h1 id="-1"><a href="#-1" class="headerlink" title=" "></a> </h1><p>合并操作中,我们主要用到的命令如下:</p>
 <p><br><br><br><br></p>
 <p><strong>首先</strong>,  我们要确定我们要把谁合并到谁上. 假设我们完成了feature-Test 的功能. 我们希望把feature-Test合并到 master中. 那么我们首先需要切换到master上</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git checkout master</div></pre></td></tr></table></figure>
+<figure class="highlight crmsh"><table><tr><td class="code"><pre><div class="line">git checkout <span class="literal">master</span></div></pre></td></tr></table></figure>
 <p><strong>然后</strong> 合并<code>featrue-Test</code>分支 执行:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git merge --no-ff featrue-Test</div></pre></td></tr></table></figure>
+<figure class="highlight stata"><table><tr><td class="code"><pre><div class="line">git <span class="keyword">merge</span> --<span class="keyword">no</span>-ff featrue-<span class="keyword">Test</span></div></pre></td></tr></table></figure>
 <p>Notes: <strong>–no-ff 参数的目的是为了在历史记录中明确的记录下本次合并</strong>.</p>
 <p><br><br></p>
 <p><strong>done.</strong></p>
 <p>创建分支,并且 合并分支就完成了.</p>
 <p><br><br></p>
 <p>总结一下分支和合并过程.</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">//创建分支</div><div class="line">git branch feature-Test // 创建新的分支feature-Test</div><div class="line">git checkout feature-Test //从master上切换到 feature-Test</div><div class="line"></div><div class="line">//合并分支</div><div class="line">git checkout master //切换到主干分支</div><div class="line">git merge --no-ff featrure-true // 合并到主分支.</div></pre></td></tr></table></figure>
+<figure class="highlight stata"><table><tr><td class="code"><pre><div class="line"><span class="comment">//创建分支</span></div><div class="line">git branch feature-<span class="keyword">Test</span> <span class="comment">// 创建新的分支feature-Test</span></div><div class="line">git checkout feature-<span class="keyword">Test</span> <span class="comment">//从master上切换到 feature-Test</span></div><div class="line"></div><div class="line"><span class="comment">//合并分支</span></div><div class="line">git checkout master <span class="comment">//切换到主干分支</span></div><div class="line">git <span class="keyword">merge</span> --<span class="keyword">no</span>-ff featrure-true <span class="comment">// 合并到主分支.</span></div></pre></td></tr></table></figure>
 <p><br><br><br><br></p>
 <p>现在你可以去看看master中是不是多了你刚才写在feature-Test的那段代码.(废话…)</p>
 <p><br><br></p>
@@ -520,7 +520,7 @@
 <p>:)</p>
 <p><br><br><br><br></p>
 <p>最后,别忘了合并会主干之后,<code>git push</code>到远端 服务器. 用一种拉风的说法,这叫 <code>云备胎(备份)</code> .</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">至此,到了这一步,</div><div class="line">如果想把版本弄错,或者想改错版本, 提交错版本 将是一件非常困难并且复杂的事情.</div><div class="line"></div><div class="line">:)</div></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="code"><pre><div class="line">至此,到了这一步,</div><div class="line">如果想把版本弄错,或者想改错版本, 提交错版本 将是一件非常困难并且复杂的事情.</div><div class="line"></div><div class="line"><span class="selector-pseudo">:)</span></div></pre></td></tr></table></figure>
 <p><br><br><br><br></p>
 <p> <strong>代码管理中,如果发生了错误的commit ,或者错误的merge 怎么办呢?</strong></p>
 <p>答: <strong>回滚</strong></p>
@@ -530,15 +530,15 @@
 <p><img src="/images/git/f.png" alt=""></p>
 <p>对于错误的commit 我们需要做的就是<strong>回滚</strong>到对应的<strong>上一个正确的版本</strong></p>
 <p>需执行的代码.</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git reset --hard c23efd0806f0a117122fdc118f43f6a33905895e</div></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><div class="line">git <span class="keyword">reset</span> <span class="comment">--hard c23efd0806f0a117122fdc118f43f6a33905895e</span></div></pre></td></tr></table></figure>
 <p>执行上述 reset 回滚操作,我们就回到了对应的版本的代码.</p>
 <p>一键还原.</p>
 <p><br><br><br></p>
 <p>问题来了,那么对于,merge操作导致 的错误呢? 一样的,也是使用</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git reset --hard XXXXcommit对应的版本号XXX</div></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><div class="line">git <span class="keyword">reset</span> <span class="comment">--hard XXXXcommit对应的版本号XXX</span></div></pre></td></tr></table></figure>
 <p>git其实还有一些非常常用的功能,</p>
 <p>比如</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git diff</div></pre></td></tr></table></figure>
+<figure class="highlight ebnf"><table><tr><td class="code"><pre><div class="line"><span class="attribute">git diff</span></div></pre></td></tr></table></figure>
 <p>等</p>
 <p>另外一方面,我这里主要在讲解git命令行的使用, 我这里没有提到或者很少提到浏览器中打开的效果.其实浏览器中的效果是十分惊艳的. 截图如下.</p>
 <p><img src="/images/git/g.png" alt=""></p>
@@ -604,7 +604,7 @@
 
     <!-- Next Nav -->
     
-        <a href="/2017/01/21/Google Material UI 动画的贝叶斯曲线/" id="post_nav-older" class="next-content">
+        <a href="/2017/01/21/GitFlow/" id="post_nav-older" class="next-content">
             旧篇
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
