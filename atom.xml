@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wanglinzhizhi.me/"/>
-  <updated>2017-07-16T11:55:46.000Z</updated>
+  <updated>2017-07-16T12:16:38.000Z</updated>
   <id>http://www.wanglinzhizhi.me/</id>
   
   <author>
@@ -14,6 +14,57 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>异步组件</title>
+    <link href="http://www.wanglinzhizhi.me/2017/07/16/%E5%BC%82%E6%AD%A5%E7%BB%84%E4%BB%B7/"/>
+    <id>http://www.wanglinzhizhi.me/2017/07/16/异步组价/</id>
+    <published>2017-07-16T11:59:58.000Z</published>
+    <updated>2017-07-16T12:16:38.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="异步组件与代码分割"><a href="#异步组件与代码分割" class="headerlink" title="异步组件与代码分割"></a>异步组件与代码分割</h2><p>代码分割的作用,这里借用 webpack 官网的一段话: </p>
+<blockquote>
+<p>Code splitting is one of the most compelling features of webpack. This feature allows you to split your code into various bundles which can then be loaded on demand or in parallel. It can be used to achieve smaller bundles and control resource load prioritization which, if used correctly, can have a major impact on load time.</p>
+</blockquote>
+<p>至于异步组件 </p>
+<blockquote>
+<p>Lazy, or “on demand”, loading is a great way to optimize your site or application. This practice essentially involves splitting your code at logical breakpoints, and then loading it once the user has done something that requires, or will require, a new block of code. This speeds up the initial load of the application and makes the lightens its overall weight as some blocks may never even be loaded.</p>
+</blockquote>
+<p>根本原理是,将分割的代码通过动态加载script 的 src 方法 将js 代码在之后注入到页面.</p>
+<p>好消息是, Webpack 帮我们做了这一步,我们只需要用 ES7 的 <code>import()</code> 方法即可做到. </p>
+<p>需要注意的是, 结合动态组件一起使用.</p>
+<p>主要的方法是通过 <code>import()</code>结合动态组件</p>
+<p>code demo</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"app-content"</span> @<span class="attr">click</span>=<span class="string">"getAsyncComponent"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">component</span> <span class="attr">:is</span>=<span class="string">"placeholder"</span>&gt;</span><span class="tag">&lt;/<span class="name">component</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line"><span class="keyword">import</span> LoadComp <span class="keyword">from</span> <span class="string">'./loading-comp'</span></div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">  data () &#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">      <span class="attr">placeholder</span>: LoadComp</div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">methods</span>: &#123;</div><div class="line">    getAsyncComponent () &#123;</div><div class="line">      <span class="keyword">if</span> (<span class="keyword">this</span>.placeholder === LoadComp) &#123;</div><div class="line">        <span class="keyword">if</span> (!<span class="keyword">this</span>.ImgContent) &#123;</div><div class="line">          <span class="keyword">this</span>.ImgContent = <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'./img-content.vue'</span>)</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">this</span>.ImgContent().then(<span class="function">(<span class="params">theComponent</span>) =&gt;</span> &#123;</div><div class="line">          <span class="keyword">this</span>.placeholder = theComponent.default</div><div class="line">        &#125;)</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><br><br><br><br><br></p>
+<blockquote>
+<p>code source: <a href="https://github.com/wagnlinzh/async-component" target="_blank" rel="external">https://github.com/wagnlinzh/async-component</a></p>
+</blockquote>
+<p><br><br><br><br><br></p>
+<blockquote>
+<p>by wanglinzhizhi</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;异步组件与代码分割&quot;&gt;&lt;a href=&quot;#异步组件与代码分割&quot; class=&quot;headerlink&quot; title=&quot;异步组件与代码分割&quot;&gt;&lt;/a&gt;异步组件与代码分割&lt;/h2&gt;&lt;p&gt;代码分割的作用,这里借用 webpack 官网的一段话: &lt;/p&gt;
+&lt;blockqu
+    
+    </summary>
+    
+      <category term="Vue" scheme="http://www.wanglinzhizhi.me/categories/Vue/"/>
+    
+    
+      <category term="vue2" scheme="http://www.wanglinzhizhi.me/tags/vue2/"/>
+    
+      <category term="async-component" scheme="http://www.wanglinzhizhi.me/tags/async-component/"/>
+    
+      <category term="code-spilt" scheme="http://www.wanglinzhizhi.me/tags/code-spilt/"/>
+    
+      <category term="动态组件" scheme="http://www.wanglinzhizhi.me/tags/%E5%8A%A8%E6%80%81%E7%BB%84%E4%BB%B6/"/>
+    
+  </entry>
   
   <entry>
     <title>navigation-timing</title>
@@ -1766,30 +1817,6 @@
       <category term="CSS3" scheme="http://www.wanglinzhizhi.me/tags/CSS3/"/>
     
       <category term="移动Web" scheme="http://www.wanglinzhizhi.me/tags/%E7%A7%BB%E5%8A%A8Web/"/>
-    
-  </entry>
-  
-  <entry>
-    <title> PC 修改表单的highlight </title>
-    <link href="http://www.wanglinzhizhi.me/2017/01/21/input%20%E8%A1%A8%E5%8D%95%E7%9B%B8%E5%85%B3/"/>
-    <id>http://www.wanglinzhizhi.me/2017/01/21/input 表单相关/</id>
-    <published>2017-01-21T10:51:18.000Z</published>
-    <updated>2017-02-18T07:17:17.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="PC-修改表单的highlight"><a href="#PC-修改表单的highlight" class="headerlink" title="PC 修改表单的highlight"></a>PC 修改表单的highlight</h2><figure class="highlight css"><table><tr><td class="code"><pre><div class="line"><span class="selector-tag">input</span><span class="selector-attr">[type="text"]</span> &#123;</div><div class="line">    <span class="attribute">border-radius</span>: <span class="number">20px</span>;</div><div class="line">    <span class="attribute">border</span>:<span class="number">1px</span> solid;</div><div class="line">    <span class="attribute">outline</span>: none;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="selector-tag">input</span><span class="selector-class">.input-add</span><span class="selector-pseudo">:active</span> &#123;</div><div class="line">    <span class="attribute">border-radius</span>: <span class="number">20px</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-tag">input</span><span class="selector-class">.input-add</span><span class="selector-pseudo">:focus</span> &#123;</div><div class="line">    <span class="attribute">border-radius</span>: <span class="number">20px</span>;</div><div class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#3F51B5</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-tag">input</span><span class="selector-class">.input-add</span> &#123;</div><div class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid red;</div><div class="line">    <span class="attribute">border-radius</span>: <span class="number">20px</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight css"><table><tr><td class="code"><pre><div class="line"><span class="selector-tag">outline</span><span class="selector-pseudo">:none</span></div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;PC-修改表单的highlight&quot;&gt;&lt;a href=&quot;#PC-修改表单的highlight&quot; class=&quot;headerlink&quot; title=&quot;PC 修改表单的highlight&quot;&gt;&lt;/a&gt;PC 修改表单的highlight&lt;/h2&gt;&lt;figure class
-    
-    </summary>
-    
-      <category term="Web" scheme="http://www.wanglinzhizhi.me/categories/Web/"/>
-    
-    
-      <category term="CSS" scheme="http://www.wanglinzhizhi.me/tags/CSS/"/>
     
   </entry>
   
