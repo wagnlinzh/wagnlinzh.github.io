@@ -120,6 +120,29 @@
   </entry>
   
   <entry>
+    <title>milestone</title>
+    <link href="http://www.wanglinzhizhi.me/2017/07/16/%E7%BA%AA%E5%BF%B5/"/>
+    <id>http://www.wanglinzhizhi.me/2017/07/16/纪念/</id>
+    <published>2017-07-16T11:36:28.000Z</published>
+    <updated>2017-09-01T18:27:42.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Milestone"><a href="#Milestone" class="headerlink" title="Milestone"></a>Milestone</h2><p><img src="/images/milestone/milestone.png" alt="img"></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Milestone&quot;&gt;&lt;a href=&quot;#Milestone&quot; class=&quot;headerlink&quot; title=&quot;Milestone&quot;&gt;&lt;/a&gt;Milestone&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;/images/milestone/milestone.png&quot;
+    
+    </summary>
+    
+      <category term="milestone" scheme="http://www.wanglinzhizhi.me/categories/milestone/"/>
+    
+    
+      <category term="milestone" scheme="http://www.wanglinzhizhi.me/tags/milestone/"/>
+    
+  </entry>
+  
+  <entry>
     <title>一个Div元素的属性</title>
     <link href="http://www.wanglinzhizhi.me/2017/03/26/%E4%B8%80%E4%B8%AADiv%E5%85%83%E7%B4%A0%E7%9A%84%E5%B1%9E%E6%80%A7/"/>
     <id>http://www.wanglinzhizhi.me/2017/03/26/一个Div元素的属性/</id>
@@ -1817,125 +1840,6 @@
       <category term="CSS3" scheme="http://www.wanglinzhizhi.me/tags/CSS3/"/>
     
       <category term="移动Web" scheme="http://www.wanglinzhizhi.me/tags/%E7%A7%BB%E5%8A%A8Web/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Web前端: Ajax Notes</title>
-    <link href="http://www.wanglinzhizhi.me/2017/01/21/Ajax%20Notes/"/>
-    <id>http://www.wanglinzhizhi.me/2017/01/21/Ajax Notes/</id>
-    <published>2017-01-21T10:51:18.000Z</published>
-    <updated>2017-02-18T07:15:23.000Z</updated>
-    
-    <content type="html"><![CDATA[<hr>
-
-<h1 id="Ajax-Notes"><a href="#Ajax-Notes" class="headerlink" title="Ajax Notes"></a>Ajax Notes</h1><p>HTML和CSS 来实现页面，表达信息</p>
-<p>运用XMLHttpRequest和web服务器进行数据的异步交换</p>
-<p>用javascript 操作DOM,实现动态局部刷新</p>
-<hr>
-
-<h2 id="XMLHttpRequest-对象创建"><a href="#XMLHttpRequest-对象创建" class="headerlink" title="XMLHttpRequest 对象创建"></a>XMLHttpRequest 对象创建</h2><figure class="highlight haxe"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> request=<span class="keyword">new</span> <span class="type">XMLHttpRequest</span>();</div></pre></td></tr></table></figure>
-<hr>
-
-<h2 id="HTTP请求"><a href="#HTTP请求" class="headerlink" title="HTTP请求"></a>HTTP请求</h2><p>无状态协议</p>
-<p>Get请求:</p>
-<ul>
-<li>一般用于获取信息(一般用于查询信息)</li>
-</ul>
-<ul>
-<li>使用URL传递参数</li>
-</ul>
-<ul>
-<li>对所发送信息的数量也有限制,一般在2000个字符以内.</li>
-</ul>
-<p>Notes：GET请求是 幂等</p>
-<p>POST请求(相对安全):</p>
-<ul>
-<li>一般用于修改服务器上 的资源</li>
-</ul>
-<ul>
-<li>对所发送信息的数量无限制</li>
-</ul>
-<p>HTTP响应:</p>
-<ol>
-<li>数字和文字,状态码</li>
-<li>响应头.和请求头一样包含许多有用的信息,服务器类型,日期时间,内容类型和长度等</li>
-<li>响应体</li>
-</ol>
-<p>XMLHttpRequest发送请求</p>
-<ul>
-<li>open(method,url,async)</li>
-</ul>
-<ul>
-<li>sent(string)</li>
-</ul>
-<p><strong>demo</strong></p>
-<figure class="highlight accesslog"><table><tr><td class="code"><pre><div class="line">request.open(<span class="string">"<span class="keyword">POST</span>"</span>,<span class="string">"create.php"</span>,true);</div><div class="line">request.setRequestHeader(<span class="string">"Content-type"</span>,<span class="string">"application/x-www-form-urlencoded"</span>);</div><div class="line">request.send(<span class="string">"name=wanglinzhizhi&amp;sex=male"</span>);</div></pre></td></tr></table></figure>
-<p>Notes:request.setRequestHeader 这个必须要加,渲染方式</p>
-<hr>
-
-<h2 id="JSON的解析"><a href="#JSON的解析" class="headerlink" title="JSON的解析"></a>JSON的解析</h2><p>方法一 eval()方法</p>
-<figure class="highlight maxima"><table><tr><td class="code"><pre><div class="line"><span class="built_in">var</span> jsondata='&#123;<span class="string">"staff"</span>:[&#123;<span class="string">"name"</span>:<span class="string">"洪七"</span>,<span class="string">"age"</span>:<span class="number">70</span>&#125;,&#123;<span class="string">"name"</span>:<span class="string">"郭靖"</span>,<span class="string">"age"</span>:<span class="number">30</span>&#125;,&#123;<span class="string">"name"</span>:<span class="string">"黄蓉"</span>,<span class="string">"age"</span>:<span class="number">35</span>&#125;]&#125;';</div><div class="line"><span class="built_in">var</span> jsonobj=<span class="built_in">eval</span>('('+jsondata+')');</div><div class="line">alert(jsonobj.staff[<span class="number">0</span>].name);</div></pre></td></tr></table></figure>
-<p>方法二(JSON.parse)</p>
-<figure class="highlight q"><table><tr><td class="code"><pre><div class="line"><span class="built_in">var</span> jsondata='&#123;<span class="string">"staff"</span>:[&#123;<span class="string">"name"</span>:<span class="string">"洪七"</span>,<span class="string">"age"</span>:<span class="number">70</span>&#125;,&#123;<span class="string">"name"</span>:<span class="string">"郭靖"</span>,<span class="string">"age"</span>:<span class="number">30</span>&#125;,&#123;<span class="string">"name"</span>:<span class="string">"黄蓉"</span>,<span class="string">"age"</span>:<span class="number">35</span>&#125;]&#125;';</div><div class="line"><span class="built_in">var</span> jsonobj=JSON.<span class="built_in">parse</span>(jsondata);</div><div class="line">alert(jsonobj.staff[<span class="number">0</span>].name);</div></pre></td></tr></table></figure>
-<p>推荐使用第二种方法</p>
-<p>Note: <strong>无论何时使用eval时是非常危险的.</strong></p>
-<p>JSON校验</p>
-<p><a href="http://jsonlint.com/" target="_blank" rel="external">http://jsonlint.com/</a></p>
-<p>Notes:CND加速的jquery库</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>// 使用了CDN加速,调用很快.</p>
-<hr>
-
-<h2 id="跨域问题"><a href="#跨域问题" class="headerlink" title="跨域问题"></a>跨域问题</h2><p>javascript出于安全方面的考虑，不允许跨域调用其他页面的对象。</p>
-<p>什么是跨域呢？简单地理解就是因为javascript同源策略的限制，a.com域名下的js无法操作b.com或是c.a.com域名下的对象。</p>
-<p>解决跨域问题的方法</p>
-<ol>
-<li><strong>代理</strong><br>通过在同域名下的web服务器端创建一个代理：<br>北京服务器(域名:www.beijing.com)<br>上海服务器(域名：www.shanghai.com)<br>比如在北京的web服务器的后台(www.beijing.com/proxy-shanghaiservice.php)来调用上海服务器(www.shanghai.com/services.php)的服务，然后再把访问结果返回给前端，这样前端调用北京同域名的服务就和调用上海的服务效果相同了。<br>​</li>
-<li><strong>JSONP(只支持GET请求)：</strong></li>
-</ol>
-<figure class="highlight xml"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"http://www.bbb.com/jsonp.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">在www.aaa.com页面中</div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="actionscript"></span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">jsonp</span><span class="params">(json)</span></span>&#123;</div><div class="line">alert(json[<span class="string">"name"</span>]);</div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">在www.bbb.com页面中:</div><div class="line">jsonp(&#123;"name":"洪七公",'age':24&#125;);</div><div class="line">jsonp只能对get请求起作用,不能对post请求起作用(不支持post请求)</div></pre></td></tr></table></figure>
-<p>JSONP可用于解决主流浏览器的跨域数据访问的问题。<br>在www.aaa.com页面中：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="actionscript"></span></div><div class="line"> <span class="function"><span class="keyword">function</span> <span class="title">jsonp</span><span class="params">(json)</span></span>&#123;</div><div class="line">      alert(json[<span class="string">"name"</span>]);</div><div class="line">  &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"http;//www.bbb.com/jsonp.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>在www.bbb.com页面中：</p>
-<figure class="highlight stylus"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="title">jsonp</span><span class="params">(&#123;<span class="string">'name'</span>:<span class="string">'xx'</span>,<span class="string">'age'</span>:<span class="number">24</span>&#125;)</span></span></div></pre></td></tr></table></figure>
-<p>这样就可以实现在www.aaa.com客户端访问获取www.bbb.com所在服务器中的文件或数据,从而实现跨域</p>
-<p><strong>3.XHR2</strong></p>
-<p>HTML5 提供的XMLHttpRequest Level2已经实现了跨域访问以及其他一些新功能:</p>
-<p>对于解决跨域问题,只需要对<strong>服务端</strong>做较小的改变, 客户端不需要做改变</p>
-<figure class="highlight abnf"><table><tr><td class="code"><pre><div class="line">header(<span class="string">"Content-Type:application/json;charset=utf-8"</span>)<span class="comment">;</span></div><div class="line"></div><div class="line">header(<span class="string">"Access-Control-Allow-Origin:*"</span>)<span class="comment">;</span></div><div class="line"></div><div class="line">header(<span class="string">"Access-Control-Allow-Methods:POST,GET"</span>)<span class="comment">;</span></div></pre></td></tr></table></figure>
-<p>Notes:</p>
-<ol>
-<li>HTML5提供的XMLHttpRequest Level2已经实现了跨域访问以及其他的一些新功能</li>
-<li>IE10以下的版本都不支持</li>
-<li>在服务器端</li>
-</ol>
-<p><strong>总结:</strong></p>
-<figure class="highlight lasso"><table><tr><td class="code"><pre><div class="line">跨域处理，三种方法：</div><div class="line"><span class="number">1</span>、处理跨域方法一 代理</div><div class="line"></div><div class="line"><span class="number">2</span>、处理跨域方式二——</div><div class="line"></div><div class="line"><span class="number">3</span>、处理跨域的方法三——XHR2：</div><div class="line"></div><div class="line"><span class="keyword">header</span>(<span class="string">'Access-Control-Allow-Origin:*'</span>);</div><div class="line"><span class="keyword">header</span>(<span class="string">'Access-Control-Allow-Methods:POST,GET'</span>);</div></pre></td></tr></table></figure>
-<hr>
-
-<h2 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h2><p>JavaScript原生版实现demo,这里只给出了ajax需要部分的代码,后端的 json已经前端的样式等内容都未写出来(因为太多了…)</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"></div><div class="line"><span class="built_in">document</span>.getElementById(<span class="string">"search"</span>).onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> request = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">  request.open(<span class="string">"GET"</span>, <span class="string">"serverjson.php?number="</span> + 	<span class="built_in">document</span>.getElementById(<span class="string">"keyword"</span>).value);</div><div class="line">  request.send();</div><div class="line"></div><div class="line">  request.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (request.readyState===<span class="number">4</span>) &#123;</div><div class="line">      <span class="keyword">if</span> (request.status===<span class="number">200</span>) &#123;</div><div class="line">        <span class="keyword">var</span> data = <span class="built_in">JSON</span>.parse(request.responseText);</div><div class="line">        <span class="keyword">if</span> (data.success) &#123;</div><div class="line">          <span class="built_in">document</span>.getElementById(<span class="string">"searchResult"</span>).innerHTML = data.msg;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">          <span class="built_in">document</span>.getElementById(<span class="string">"searchResult"</span>).innerHTML = <span class="string">"出现错误："</span> + data.msg;</div><div class="line">        &#125;</div><div class="line">      &#125; <span class="keyword">else</span> &#123;</div><div class="line">        alert(<span class="string">"发生错误："</span> + request.status);</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"><span class="built_in">document</span>.getElementById(<span class="string">"save"</span>).onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> request = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">  request.open(<span class="string">"POST"</span>, <span class="string">"serverjson.php"</span>);</div><div class="line">  <span class="keyword">var</span> data = <span class="string">"name="</span> + <span class="built_in">document</span>.getElementById(<span class="string">"staffName"</span>).value</div><div class="line">  + <span class="string">"&amp;number="</span> + <span class="built_in">document</span>.getElementById(<span class="string">"staffNumber"</span>).value</div><div class="line">  + <span class="string">"&amp;sex="</span> + <span class="built_in">document</span>.getElementById(<span class="string">"staffSex"</span>).value</div><div class="line">  + <span class="string">"&amp;job="</span> + <span class="built_in">document</span>.getElementById(<span class="string">"staffJob"</span>).value;</div><div class="line">  request.setRequestHeader(<span class="string">"Content-type"</span>,<span class="string">"application/x-www-form-urlencoded"</span>);</div><div class="line">  request.send(data);</div><div class="line">  request.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (request.readyState===<span class="number">4</span>) &#123;</div><div class="line">      <span class="keyword">if</span> (request.status===<span class="number">200</span>) &#123;</div><div class="line">        <span class="keyword">var</span> data = <span class="built_in">JSON</span>.parse(request.responseText);</div><div class="line">        <span class="keyword">if</span> (data.success) &#123;</div><div class="line">          <span class="built_in">document</span>.getElementById(<span class="string">"createResult"</span>).innerHTML = data.msg;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">          <span class="built_in">document</span>.getElementById(<span class="string">"createResult"</span>).innerHTML = <span class="string">"出现错误："</span> + data.msg;</div><div class="line">        &#125;</div><div class="line">      &#125; <span class="keyword">else</span> &#123;</div><div class="line">        alert(<span class="string">"发生错误："</span> + request.status);</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>jQuery版的实现</p>
-<p>jQuery中封装了request.setRequestHeader(“Content-type”… 故不需要额外添加句代码</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"></div><div class="line">$(<span class="built_in">document</span>).ready(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  $(<span class="string">"#search"</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    $.ajax(&#123;</div><div class="line">      <span class="attr">type</span>: <span class="string">"GET"</span>, 	</div><div class="line">      <span class="attr">url</span>: <span class="string">"http://127.0.0.1:8000/ajaxdemo/serverjsonp.php?number="</span> + $(<span class="string">"#keyword"</span>).val(),</div><div class="line">      <span class="attr">dataType</span>: <span class="string">"jsonp"</span>,</div><div class="line">      <span class="attr">jsonp</span>: <span class="string">"callback"</span>,</div><div class="line">      <span class="attr">success</span>: <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span> (data.success) &#123;</div><div class="line">          $(<span class="string">"#searchResult"</span>).html(data.msg);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">          $(<span class="string">"#searchResult"</span>).html(<span class="string">"出现错误："</span> + data.msg);</div><div class="line">        &#125;  </div><div class="line">      &#125;,</div><div class="line">      <span class="attr">error</span>: <span class="function"><span class="keyword">function</span>(<span class="params">jqXHR</span>)</span>&#123;     </div><div class="line">        alert(<span class="string">"发生错误："</span> + jqXHR.status);  </div><div class="line">      &#125;,     </div><div class="line">    &#125;);</div><div class="line">  &#125;);</div><div class="line"></div><div class="line">  $(<span class="string">"#save"</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    $.ajax(&#123;</div><div class="line">      <span class="attr">type</span>: <span class="string">"POST"</span>, 	</div><div class="line">      <span class="attr">url</span>: <span class="string">"http://127.0.0.1:8000/ajaxdemo/serverjsonp.php"</span>,</div><div class="line">      <span class="attr">data</span>: &#123;</div><div class="line">        <span class="attr">name</span>: $(<span class="string">"#staffName"</span>).val(),</div><div class="line">        <span class="attr">number</span>: $(<span class="string">"#staffNumber"</span>).val(),</div><div class="line">        <span class="attr">sex</span>: $(<span class="string">"#staffSex"</span>).val(),</div><div class="line">        <span class="attr">job</span>: $(<span class="string">"#staffJob"</span>).val()</div><div class="line">      &#125;,</div><div class="line">      <span class="attr">dataType</span>: <span class="string">"json"</span>,</div><div class="line">      <span class="attr">success</span>: <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">        <span class="keyword">if</span> (data.success) &#123;</div><div class="line">          $(<span class="string">"#createResult"</span>).html(data.msg);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">          $(<span class="string">"#createResult"</span>).html(<span class="string">"出现错误："</span> + data.msg);</div><div class="line">        &#125;  </div><div class="line">      &#125;,</div><div class="line">      <span class="attr">error</span>: <span class="function"><span class="keyword">function</span>(<span class="params">jqXHR</span>)</span>&#123;     </div><div class="line">        alert(<span class="string">"发生错误："</span> + jqXHR.status);  </div><div class="line">      &#125;,     </div><div class="line">    &#125;);</div><div class="line">  &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;hr&gt;
-
-&lt;h1 id=&quot;Ajax-Notes&quot;&gt;&lt;a href=&quot;#Ajax-Notes&quot; class=&quot;headerlink&quot; title=&quot;Ajax Notes&quot;&gt;&lt;/a&gt;Ajax Notes&lt;/h1&gt;&lt;p&gt;HTML和CSS 来实现页面，表达信息&lt;/p&gt;
-&lt;p&gt;运用XML
-    
-    </summary>
-    
-      <category term="JavaScript" scheme="http://www.wanglinzhizhi.me/categories/JavaScript/"/>
-    
-    
-      <category term="JavaScript" scheme="http://www.wanglinzhizhi.me/tags/JavaScript/"/>
-    
-      <category term="Ajax" scheme="http://www.wanglinzhizhi.me/tags/Ajax/"/>
     
   </entry>
   
